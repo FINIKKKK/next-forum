@@ -1,0 +1,76 @@
+<div class="answer">
+  <div class="review">
+    <svg class='arrow' width="20" height="20">
+      <use xlink:href="./img/icons/icons.svg#arrow-up" />
+    </svg>
+    <div class="number">10</div>
+    <svg class='arrow' width="20" height="20">
+      <use xlink:href="./img/icons/icons.svg#arrow-down" />
+    </svg>
+  </div>
+  <div class="answer__content">
+    <svg class='options' width="20" height="20">
+      <use xlink:href="./img/icons/icons.svg#options" />
+    </svg>
+
+    <div class="answer__header">
+      <div class="userInfo">
+        <a href="#">
+          <img src="./img/avatar.png" alt="avatar" class="avatar">
+        </a>
+        <div class="box">
+          <a href="#">
+            <h6 class="name">Dmitriy Bozhko</h6>
+          </a>
+          <div class="date">3 часа назад</div>
+        </div>
+      </div>
+      <div class="isAnswer">
+        <p>Ответ</p>
+        <svg width="20" height="20">
+          <use xlink:href="./img/icons/icons.svg#check" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="ques__content">
+      <p class="text">
+        В строке <b>myStructure* dataBase;</b> вы определили указатель, но не сказали куда ему ссылаться. Далее в методе <b>NewDataBase</b> вы обращаетесь к элементу массива: <b>dataBase[index].ExamName = EnterExamName();</b> , а так как указатель ссылается "в никуда" - при выполнении этого участка получаете ошибку. Чтобы этого избежать необходимо предварительно выделить память:
+      </p>
+
+      <div class="code">
+        <div class="code__inner">
+          ... <br>
+          dataBaseSize = EnterSize(); <br>
+          dataBase = new myStructure[dataBaseSize];<br>
+          ...<br>
+        </div>
+      </div>
+
+      <p class="text">
+        Может быть, это какая-то проблема со string?
+        <br><br>
+        Так как память выделяется вами, вами же она и должна быть возвращена, для этого необходимо добавить delete[] dataBase; в нужном вам месте, учитывая вашу архитектуру приложения - лучше всего в деструкторе класса. Хотя архитектуру приложения тоже лучше пересмотреть.
+        <br><br>
+        P.S. ваши циклы do...while лучше заменить на обычные while (в первом случае) и for (во втором).
+      </p>
+    </div>
+
+    <div class="answer__footer">
+      <button class="btn">Ответить</button>
+      <div class="comments__box">
+        <button class="comments__btn">Комментарии (2)</button>
+        <div class="comments">
+          <p class="comment">
+            <b>Dmitriy Bozhko</b> -
+            Если коротко - то в базе данных.
+          </p>
+          <p class="comment">
+            <b>Dmitriy Bozhko</b> -
+            Если коротко - то в базе данных.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

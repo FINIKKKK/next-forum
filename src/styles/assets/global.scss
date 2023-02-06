@@ -1,0 +1,141 @@
+// ---- Global-Tags ----
+html {
+  overflow-x: hidden;
+  box-sizing: border-box;
+  &.fixed {
+    overflow-y: hidden;
+  }
+}
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+body {
+  position: relative;
+  overflow-x: hidden;
+  min-width: 320px;
+  font-family: $font;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: $white;
+  background: $bg-gradient;
+}
+a {
+  color: $white;
+  transition: 0.2s;
+}
+svg {
+  fill: $white;
+  transition: 0.2s;
+  height: auto;
+}
+
+// ---- Global-Classes ----
+.container {
+  margin: 0 auto;
+  padding: 0 15px;
+  max-width: 1170px;
+}
+
+.btn {
+  padding: 5px 27px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 700;
+  color: $bg;
+  background: $main;
+  border-radius: 40px;
+  transition: 0.2s;
+  &:hover {
+    box-shadow: 0px 0px 8px rgba($main, 0.25);
+    transform: translateY(-3px);
+  }
+}
+
+.block {
+  background-color: $purple;
+  box-shadow: 0px 4px 8px #2e2443;
+  border-radius: 38px;
+  transition: 0.2s;
+  &.hover {
+    &:hover {
+      box-shadow: 0px 4px 12px #271e3a;
+      transform: translateY(-3px);
+    }
+  }
+}
+
+.hover {
+  transition: 0.2s;
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.tagList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  .tag {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 700;
+    background-color: $main;
+    padding: 4px 5px;
+    white-space: nowrap;
+    border-radius: 3px;
+    text-transform: uppercase;
+    transition: 0.2s;
+    a {
+      color: $bg;
+    }
+  }
+  .tag:not(:last-child) {
+    margin-right: 12px;
+  }
+}
+
+.input {
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  input {
+    width: 100%;
+    font-family: $font;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+    color: $white;
+    &::placeholder {
+      color: $white;
+    }
+  }
+  svg {
+    fill: $white;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  }
+}
+
+// ScrollBar
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $main;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-track {
+  background-color: $bg;
+}
+
+// Selection
+::selection {
+  background: rgba($bg, 0.35) !important;
+}

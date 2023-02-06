@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+@@include('./blocks/main/head.html', {
+"title": "Главная",
+})
+
+<body>
+
+  @@include('./blocks/header.html')
+
+
+  <main class="main">
+    <div class="container">
+
+      <div class="main__inner">
+        @@include('./blocks/sidebar.html')
+
+        <div class="ques block rightSide">
+          <div class="ques__inner">
+            <svg class='options' width="20" height="20">
+              <use xlink:href="./img/icons/icons.svg#options" />
+            </svg>
+
+            <div class="userInfo">
+              <a href="#">
+                <img src="./img/avatar.png" alt="avatar" class="avatar">
+              </a>
+              <div class="box">
+                <a href="#">
+                  <h6 class="name">Dmitriy Bozhko</h6>
+                </a>
+                <div class="date">3 часа назад</div>
+              </div>
+            </div>
+
+            <h1 class="title">string, класс, структуры C++</h1>
+
+            <ul class="tagList">
+              <li class="tag hover">
+                <a href="#">POSTGRES</a>
+              </li>
+              <li class="tag hover">
+                <a href="#">PYthon</a>
+              </li>
+              <li class="tag hover">
+                <a href="#">C++</a>
+              </li>
+              <li class="tag hover">
+                <a href="#">HTML</a>
+              </li>
+              <li class="tag hover">
+                <a href="#">Css</a>
+              </li>
+              <li class="tag hover">
+                <a href="#">scss</a>
+              </li>
+            </ul>
+
+            <div class="ques__content">
+              <p class="text">
+                Всем привет!
+                <br><br>
+                Помогите, пожалуйста, найти ошибку в коде. Прошу прощения заранее, если мой вопрос кажется вам глупым, я только изучаю с++ и никак не могу понять, что делаю не так.
+                <br><br>
+                Я писала лабораторную для института, суть: создать базу данных на основе структуры, а также управлять этими структурами, используя методы класса. Вывод на экран разных сообщений обязательно должен быть где-то вне класса (в классе не может быть cin, cout).
+                <br><br>
+                С проблемой я столкнулась уже в процессе создания базы данных (поэтому других функций пока нет). Я могу ввести название экзамена, и выполнение программы останавливается, хотя по задумке она должна попросить ввести еще дату, фамилию (и так всего 3 раза, т.е. мы должны заполнить 3 структуры, потому что введенный размер базы данных = 3).
+                <br><br>
+                Вот код:
+              </p>
+
+              <div class="code">
+                <div class="code__inner">
+                  #include <iostream><br>
+                    #include <windows.h><br>
+                      #include <string><br>
+                        <br>
+                        using namespace std;<br>
+                        <br>
+                        void Message (int, int);<br>
+                        int EnterSize();<br>
+                        void AllFunctions();<br>
+                        int EnterNumberOfFunction();<br>
+                        string EnterExamName();<br>
+                        string EnterExamDate();<br>
+                        string EnterProfessorLastName();<br>
+                        <br>
+                        struct myStructure {<br>
+                        string ExamName;<br>
+                        string ExamDate;<br>
+                        string ProfessorLastname;<br>
+                        bool isEmpty = true;<br>
+                        };
+                </div>
+              </div>
+
+              <img src="./img/test-img.png" alt="img" class="img">
+
+              <p class="text">
+                Может быть, это какая-то проблема со string?
+                <br><br>
+                (если есть замечания по поводу стиля, логичности\нелогичности, с радостью выслушаю!)
+                <br><br>
+                Благодарю за внимание!
+              </p>
+            </div>
+
+            <div class="ques__footer">
+              <div class="item">120 просмотров</div>
+              <div class="item">3 ответа</div>
+            </div>
+
+          </div>
+
+          <div class="answers">
+            <h2 class="answer__title">Ответы</h2>
+
+            @@include('./blocks/answer.html')
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+
+
+
+
+  @@include('./blocks/footer.html')
+
+
+  <!-- Scripts -->
+  @@include('./blocks/main/js.html')
+
+</body>
+
+</html>
