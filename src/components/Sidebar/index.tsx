@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 import ss from "./Sidebar.module.scss";
@@ -7,9 +8,9 @@ interface SidebarProps {}
 export const Sidebar: React.FC<SidebarProps> = ({}) => {
   return (
     <aside className="sidebar">
-      <a href="#" className="btn">
+      <Link href="/create" className="btn">
         Задать вопрос
-      </a>
+      </Link>
       <div className="box">
         <h5>Меню</h5>
         <ul className="nav">

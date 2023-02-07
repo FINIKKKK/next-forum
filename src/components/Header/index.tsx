@@ -29,7 +29,7 @@ export const Header: React.FC<HeaderProps> = ({}) => {
               </li>
             </ul>
           </div>
-          <Link href="/register" className="btn">
+          <Link href="/login" className="btn">
             Войти
           </Link>
         </nav>

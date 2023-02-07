@@ -1,3 +1,4 @@
+import { Answer } from "@/components";
 import { ForumLayout } from "@/layouts/ForumLayout";
 import { NextPage } from "next";
 
@@ -9,12 +10,12 @@ const QuestionPage: NextPage<QuestionPageProps> = ({}) => {
       <div className="ques block rightSide">
         <div className="ques__inner">
           <svg className="options" width="20" height="20">
-            <use xlinkHref="./img/icons/icons.svg#options" />
+            <use xlinkHref="../img/icons/icons.svg#options" />
           </svg>
 
           <div className="userInfo">
             <a href="#">
-              <img src="./img/avatar.png" alt="avatar" className="avatar" />
+              <img src="../img/avatar.png" alt="avatar" className="avatar" />
             </a>
             <div className="box">
               <a href="#">
@@ -76,30 +77,19 @@ const QuestionPage: NextPage<QuestionPageProps> = ({}) => {
 
             <div className="code">
               <div className="code__inner">
-                {/* #include <iostream><br/>
-              #include <windows.h><br/>
-                #include <string><br/>
-                  <br/>
-                  using namespace std;<br/>
-                  <br/>
-                  void Message (int, int);<br/>
-                  int EnterSize();<br/>
-                  void AllFunctions();<br/>
-                  int EnterNumberOfFunction();<br/>
-                  string EnterExamName();<br/>
-                  string EnterExamDate();<br/>
-                  string EnterProfessorLastName();<br/>
-                  <br/>
-                  struct myStructure {<br/>
-                  string ExamName;<br/>
-                  string ExamDate;<br/>
-                  string ProfessorLastname;<br/>
-                  bool isEmpty = true;<br/>
-                  }; */}
+                struct myStructure <br />
+                string ExamName;
+                <br />
+                string ExamDate;
+                <br />
+                string ProfessorLastname;
+                <br />
+                bool isEmpty = true;
+                <br />
               </div>
             </div>
 
-            <img src="./img/test-img.png" alt="img" className="img" />
+            <img src="../img/test-img.png" alt="img" className="img" />
 
             <p className="text">
               Может быть, это какая-то проблема со string?
@@ -121,8 +111,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({}) => {
 
         <div className="answers">
           <h2 className="answer__title">Ответы</h2>
-
-          {/* @@include('./blocks/answer.html') */}
+          <Answer />
         </div>
       </div>
     </ForumLayout>
