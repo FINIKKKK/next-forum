@@ -1,12 +1,15 @@
 import React from "react";
+import { useFormContext } from "react-hook-form";
 
 interface AuthInputProps {
+  name: string;
   icon: string;
   label: string;
   isPassword?: boolean;
 }
 
 export const AuthInput: React.FC<AuthInputProps> = ({
+  name,
   icon,
   label,
   isPassword,
@@ -15,49 +18,59 @@ export const AuthInput: React.FC<AuthInputProps> = ({
   const [value, setValue] = React.useState("");
   const [showPassword, setShowPassword] = React.useState(false);
 
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+
   return (
-    <div
-      className={`input formInput ${focus ? "focus" : ""} ${
-        !focus && value ? "value" : ""
-      } ${isPassword ? "password" : ""}`}
-    >
-      <svg width="20" height="20">
-        <use xlinkHref={`../img/icons/icons.svg#${icon}`} />
-      </svg>
-      <label>{label}</label>
-      <input
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
-        type={isPassword && !showPassword ? "password" : "text"}
-      />
-      {focus && value && (
-        <>
-          <svg
-            onClick={() => setValue("")}
-            className="close"
-            width="20"
-            height="20"
-          >
-            <use xlinkHref="../img/icons/icons.svg#close" />
-          </svg>
-          {isPassword && (
+    <>
+      <div
+        className={`input formInput ${focus ? "focus" : ""} ${
+          !focus && value ? "value" : ""
+        } ${isPassword ? "password" : ""}`}
+      >
+        <svg width="20" height="20">
+          <use xlinkHref={`../img/icons/icons.svg#${icon}`} />
+        </svg>
+        <label>{label}</label>
+        <input
+          {...register(name)}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onFocus={() => setFocus(true)}
+          // onBlur={() => setFocus(false)}
+          name={name}
+          type={isPassword && !showPassword ? "password" : "text"}
+        />
+        {focus && value && (
+          <>
             <svg
-              onClick={() => setShowPassword(!showPassword)}
-              className="eye"
+              onClick={() => setValue("")}
+              className="close"
               width="20"
               height="20"
             >
-              <use
-                xlinkHref={`../img/icons/icons.svg#${
-                  !showPassword ? "eye" : "fire"
-                }`}
-              />
+              <use xlinkHref="../img/icons/icons.svg#close" />
             </svg>
-          )}
-        </>
-      )}
-    </div>
+            {isPassword && (
+              <svg
+                onClick={() => setShowPassword(!showPassword)}
+                className="eye"
+                width="20"
+                height="20"
+              >
+                <use
+                  xlinkHref={`../img/icons/icons.svg#${
+                    !showPassword ? "eye" : "fire"
+                  }`}
+                />
+              </svg>
+            )}
+          </>
+        )}
+      </div>
+      <div className="error">{errors[name]?.message}</div>
+    </>
   );
 };

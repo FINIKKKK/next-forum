@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.10",
     "@next/font": "13.1.6",
     "@reduxjs/toolkit": "^1.9.2",
     "@types/node": "18.11.19",

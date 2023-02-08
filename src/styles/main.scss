@@ -413,7 +413,7 @@
   align-items: center;
   justify-content: center;
   .inner {
-    width: 35%;
+    width: 55%;
     padding: 44px 85px 24px;
     background-color: $bg;
     .back {
@@ -463,7 +463,24 @@
     .text {
       font-weight: 700;
       color: $gray;
-      margin-bottom: 50px;
+    }
+    .errorMessage {
+      margin-top: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 18px;
+    }
+    .error {
+      margin-left: 15px;
+      margin-top: 3px;
+      margin-bottom: 5px;
+      font-size: 10px;
+      line-height: 14px;
+      display: block;
+      width: 100%;
+    }
+    .inputs {
+      margin-top: 50px;
     }
     .input {
       height: 56px;
@@ -480,8 +497,16 @@
       }
       input {
         transition: 0.3s;
+        background-clip: content-box;
+        color-scheme: dark;
       }
-      .close, .eye {
+      input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 30px $purple inset !important;
+        -webkit-text-fill-color: inherit !important;
+      }
+
+      .close,
+      .eye {
         position: absolute;
         right: 0px;
         width: 13px;
@@ -561,7 +586,6 @@
       a {
         color: $main;
       }
-
     }
   }
 }

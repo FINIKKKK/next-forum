@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { GetServerSidePropsContext, NextPageContext } from 'next';
 import Cookies, { parseCookies } from 'nookies';
+import { AuthApi } from './auth';
 
 export type ApiReturnTypes = {
-  Auth: ReturnType<typeof AuthApi>;
+  auth: ReturnType<typeof AuthApi>;
 };
 
 export const Api = (ctx?: NextPageContext | GetServerSidePropsContext) => {
@@ -13,11 +14,11 @@ export const Api = (ctx?: NextPageContext | GetServerSidePropsContext) => {
   const instance = axios.create({
     baseURL: 'http://localhost:7777/',
     headers: {
-      Authorization: `Bearer token`,
+      Authorization: `Bearer ${token}`,
     },
   });
 
   return {
-    Auth: AuthApi(instance),
+    auth: AuthApi(instance),
   };
 };
