@@ -2,9 +2,10 @@ import axios from 'axios';
 import { GetServerSidePropsContext, NextPageContext } from 'next';
 import Cookies, { parseCookies } from 'nookies';
 import { AuthApi } from './auth';
+import { UserApi } from './user';
 
 export type ApiReturnTypes = {
-  auth: ReturnType<typeof AuthApi>;
+  user: ReturnType<typeof UserApi>;
 };
 
 export const Api = (ctx?: NextPageContext | GetServerSidePropsContext) => {
@@ -20,5 +21,6 @@ export const Api = (ctx?: NextPageContext | GetServerSidePropsContext) => {
 
   return {
     auth: AuthApi(instance),
+    user: UserApi(instance),
   };
 };
