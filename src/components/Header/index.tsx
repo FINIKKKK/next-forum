@@ -1,5 +1,8 @@
+import { useActions } from "@/hooks/useActions";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 import { useSelectors } from "@/hooks/useSelectors";
 import Link from "next/link";
+import { setCookie } from "nookies";
 import React from "react";
 
 import ss from "./Header.module.scss";
@@ -10,9 +13,16 @@ export const Header: React.FC<HeaderProps> = ({}) => {
   const { data: userData } = useSelectors((state) => state.user);
   const [showPopup, setShowPopup] = React.useState(false);
   const popupRef = React.useRef<HTMLDivElement>(null);
+  const { setUserData } = useActions();
 
+  useOutsideClick(popupRef, setShowPopup);
 
-  const onLogout = () => {};
+  const onLogout = () => {
+    if (window.confirm("Вы точно хотите выйти с аккаунта?")) {
+      setUserData(null);
+      setCookie(null, "token", "", { maxAge: 0 });
+    }
+  };
 
   return (
     <header className="header">
@@ -37,13 +47,17 @@ export const Header: React.FC<HeaderProps> = ({}) => {
               </li>
             </ul>
           </div>
-          {userData?.user?.data ? (
-            <div
-              ref={popupRef}
-              onClick={() => setShowPopup(!showPopup)}
-              className="toProfile"
-            >
-              <img src={userData?.user?.data.avatar !== null ? `http://localhost:7777/img/${userData?.user?.data.avatar}` : "../img/avatar.png"} alt="avatar" />
+          {userData ? (
+            <div ref={popupRef} className="toProfile">
+              <img
+                onClick={() => setShowPopup(!showPopup)}
+                src={
+                  userData.avatar !== null
+                    ? `http://localhost:7777/img/${userData.avatar}`
+                    : "../img/avatar.png"
+                }
+                alt="avatar"
+              />
               {showPopup && (
                 <div className="popup block">
                   <Link className="popup__item" href={`/profile/${1}`}>

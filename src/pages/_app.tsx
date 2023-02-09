@@ -33,7 +33,7 @@ App.getInitialProps = wrapper.getInitialAppProps(
         const userData = await Api(ctx).user.getProfile();
         store.dispatch(setUserData(userData));
       } catch (err) {
-        console.warn(err);
+        console.log("Error Authorization");
       }
 
       return {

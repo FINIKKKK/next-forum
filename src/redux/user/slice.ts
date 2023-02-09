@@ -11,13 +11,13 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUserData(state, { payload }: PayloadAction<TUser>) {
+    setUserData(state, { payload }: PayloadAction<TUser  | null>) {
       state.data = payload;
     },
   },
   extraReducers: {
     [HYDRATE]: (state, { payload }: PayloadAction<TUser>) => {
-      state.data = payload;
+      state.data = payload?.user?.data;
     },
   },
 });
