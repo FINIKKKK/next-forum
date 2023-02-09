@@ -1,3 +1,5 @@
+import { OutputBlockData } from "@editorjs/editorjs";
+
 export type LoginUserDto = {
   email: string;
   password: string;
@@ -20,4 +22,22 @@ export type TUser = {
   createdAt: string;
   updatedAt: string;
   token: string;
+};
+
+export type QuestionDto = {
+  title: string;
+  body: OutputBlockData[];
+  // author: TUser;
+  // tags?: string[];
+};
+
+export type TQuestion = {
+  id: number;
+  title: string;
+  body: OutputBlockData[];
+  author: TUser;
+  tags?: string[];
+  views: number;
+  createdAt: string;
+  updatedAt: string;
 };

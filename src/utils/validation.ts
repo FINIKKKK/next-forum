@@ -20,8 +20,4 @@ export const LoginScheme = yup.object().shape({
     .string()
     .email("Некорректный email")
     .required("Поле является обязательным"),
-  password: yup
-    .string()
-    .min(9, "Пароль должен состоять минимум из 9 символов")
-    .required("Поле является обязательным"),
 });

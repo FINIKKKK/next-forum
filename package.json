@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.26.5",
+    "@editorjs/header": "^2.7.0",
+    "@editorjs/list": "^1.8.0",
     "@hookform/resolvers": "^2.9.10",
     "@next/font": "13.1.6",
     "@reduxjs/toolkit": "^1.9.2",
@@ -26,5 +29,8 @@
     "sass": "^1.58.0",
     "typescript": "4.9.5",
     "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/editorjs__header": "^2.6.0"
   }
 }

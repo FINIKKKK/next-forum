@@ -52,6 +52,10 @@ svg {
     box-shadow: 0px 0px 8px rgba($main, 0.25);
     transform: translateY(-3px);
   }
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 
 .block {

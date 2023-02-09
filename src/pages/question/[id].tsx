@@ -1,10 +1,15 @@
 import { Answer } from "@/components";
 import { ForumLayout } from "@/layouts/ForumLayout";
+import { Api } from "@/utils/api";
+import { TQuestion } from "@/utils/api/types";
 import { NextPage } from "next";
+import React from "react";
 
-interface QuestionPageProps {}
+interface QuestionPageProps {
+  question: TQuestion;
+}
 
-const QuestionPage: NextPage<QuestionPageProps> = ({}) => {
+const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
   return (
     <ForumLayout>
       <div className="ques block rightSide">
@@ -117,5 +122,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({}) => {
     </ForumLayout>
   );
 };
+
+
 
 export default QuestionPage;
