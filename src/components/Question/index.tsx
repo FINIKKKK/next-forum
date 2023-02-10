@@ -3,14 +3,18 @@ import React from "react";
 
 import ss from "./Question.module.scss";
 
-interface QuestionProps {}
+interface QuestionProps {
+  id: number;
+  title: string;
+  views: number;
+}
 
-export const Question: React.FC<QuestionProps> = ({}) => {
+export const Question: React.FC<QuestionProps> = ({ id, title, views }) => {
   return (
     <div className="question block hover">
       <div className="left">
-        <Link href={`/question/${1}`} className="question__title">
-          <h3>string, класс, структуры C++</h3>
+        <Link href={`/questions/${id}`} className="question__title">
+          <h3>{title}</h3>
         </Link>
         <ul className="tagList">
           <li className="tag hover">
@@ -32,7 +36,7 @@ export const Question: React.FC<QuestionProps> = ({}) => {
           <svg width="20" height="20">
             <use xlinkHref="./img/icons/icons.svg#eye" />
           </svg>
-          <p>120</p>
+          <p>{views}</p>
         </div>
         <div className="item">
           <svg width="20" height="20">

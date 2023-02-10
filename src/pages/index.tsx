@@ -2,8 +2,25 @@ import Head from "next/head";
 
 import { ForumLayout } from "@/layouts/ForumLayout";
 import { Question } from "@/components";
+import React from "react";
+import { Api } from "@/utils/api";
+import { TQuestion } from "@/utils/api/types";
 
 export default function Home() {
+  const [questions, setQuestions] = React.useState<TQuestion[]>([]);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const questions = await Api().question.getAll();
+        setQuestions(questions);
+      } catch (err) {
+        console.warn(err);
+        alert("Ошибка при получении вопросов");
+      }
+    })();
+  }, []);
+
   return (
     <ForumLayout>
       <div className="content block">
@@ -41,11 +58,9 @@ export default function Home() {
         </div>
 
         <div className="questions">
-          <Question />
-          <Question />
-          <Question />
-          <Question />
-          <Question />
+          {questions.map((obj: TQuestion) => (
+            <Question key={obj.id} {...obj} />
+          ))}
         </div>
 
         <div className="pagination"></div>

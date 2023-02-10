@@ -2,7 +2,8 @@ import { Answer } from "@/components";
 import { ForumLayout } from "@/layouts/ForumLayout";
 import { Api } from "@/utils/api";
 import { TQuestion } from "@/utils/api/types";
-import { NextPage } from "next";
+import classNames from "classnames";
+import { GetServerSideProps, NextPage } from "next";
 import React from "react";
 
 interface QuestionPageProps {
@@ -14,9 +15,33 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
     <ForumLayout>
       <div className="ques block rightSide">
         <div className="ques__inner">
+          <div className="ques__header">
+            <div className="item">3 часа назад</div>
+            <div className="item">
+              <svg width="20" height="20">
+                <use xlinkHref="../img/icons/icons.svg#eye" />
+              </svg>
+              <p>{question.views}</p>
+            </div>
+            <div className="item">
+              <svg width="20" height="20">
+                <use xlinkHref="../img/icons/icons.svg#answers" />
+              </svg>
+              <p>3</p>
+            </div>
+            <div className="item">
+              <svg width="20" height="20">
+                <use xlinkHref="../img/icons/icons.svg#answers" />
+              </svg>
+              <p>0</p>
+            </div>
+          </div>
+
           <svg className="options" width="20" height="20">
             <use xlinkHref="../img/icons/icons.svg#options" />
           </svg>
+
+          <h1 className="title">{question.title}</h1>
 
           <div className="userInfo">
             <a href="#">
@@ -24,13 +49,11 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
             </a>
             <div className="box">
               <a href="#">
+                <h6 className="username">@dmitriy</h6>
                 <h6 className="name">Dmitriy Bozhko</h6>
               </a>
-              <div className="date">3 часа назад</div>
             </div>
           </div>
-
-          <h1 className="title">string, класс, структуры C++</h1>
 
           <ul className="tagList">
             <li className="tag hover">
@@ -53,7 +76,65 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
             </li>
           </ul>
 
-          <div className="ques__content">
+          <div className="body">
+            {question.body.map((obj) =>
+              obj.type === "paragraph" ? (
+                <p
+                  className="text el"
+                  dangerouslySetInnerHTML={{
+                    __html: obj.data.text,
+                  }}
+                />
+              ) : obj.type === "list" ? (
+                <ul
+                  className={classNames("list el", {
+                    ordered: obj.data.style === "ordered",
+                  })}
+                >
+                  {obj.data.items.map((item: string) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              ) : obj.type === "delimiter" ? (
+                <div className="delimeter el">***</div>
+              ) : obj.type === "header" ? (
+                obj.data.level === 6 ? (
+                  <h6 className="header">{obj.data.text}</h6>
+                ) : obj.data.level === 5 ? (
+                  <h5 className="header">{obj.data.text}</h5>
+                ) : obj.data.level === 4 ? (
+                  <h4 className="header">{obj.data.text}</h4>
+                ) : obj.data.level === 3 ? (
+                  <h3 className="header">{obj.data.text}</h3>
+                ) : obj.data.level === 2 ? (
+                  <h2 className="header">{obj.data.text}</h2>
+                ) : obj.data.level === 1 ? (
+                  <h1 className="header">{obj.data.text}</h1>
+                ) : null
+              ) : obj.type === "codeBox" ? (
+                <div className="code el">
+                  <div className="code__lg">{obj.data.language}</div>
+                  <code
+                    dangerouslySetInnerHTML={{
+                      __html: obj.data.code,
+                    }}
+                  />
+                </div>
+              ) : obj.type === "quote" ? (
+                <div className="quote el">
+                  <svg width="20" height="20">
+                    <use xlinkHref="../img/icons/icons.svg#answers"/>
+                  </svg>
+                  <div className="quote__content">
+                    <h3>{obj.data.caption}</h3>
+                    <p>{obj.data.text}</p>
+                  </div>
+                </div>
+              ) : null
+            )}
+          </div>
+
+          {/* <div className="ques__content">
             <p className="text">
               Всем привет!
               <br />
@@ -106,12 +187,9 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
               <br />
               Благодарю за внимание!
             </p>
-          </div>
+          </div> */}
 
-          <div className="ques__footer">
-            <div className="item">120 просмотров</div>
-            <div className="item">3 ответа</div>
-          </div>
+          <div className="ques__footer"></div>
         </div>
 
         <div className="answers">
@@ -123,6 +201,23 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
   );
 };
 
-
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  try {
+    const id = ctx?.params?.id;
+    console.log(id);
+    const question = await Api().question.getOne(id);
+    return {
+      props: {
+        question,
+      },
+    };
+  } catch (err) {
+    console.warn(err);
+    alert("Ошибка при получении вопроса");
+    return {
+      props: {},
+    };
+  }
+};
 
 export default QuestionPage;

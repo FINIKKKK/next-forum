@@ -1,8 +1,16 @@
 import React from "react";
 import EditorJS, { OutputData } from "@editorjs/editorjs";
 
-import Header from "@editorjs/header";
+import CodeBox from "@bomdi/codebox";
+import Delimiter from "@editorjs/delimiter";
+import Embed from "@editorjs/embed";
+import Image from "@editorjs/image";
+import InlineCode from "@editorjs/inline-code";
+import LinkTool from "@editorjs/link";
 import List from "@editorjs/list";
+import Quote from "@editorjs/quote";
+// import SimpleImage from "@editorjs/simple-image";
+import Header from "@editorjs/header";
 
 import ss from "./Editor.module.scss";
 
@@ -27,8 +35,16 @@ const Editor: React.FC<EditorProps> = ({ initialValue, onChange }) => {
           onChange(blocks);
         },
         tools: {
+          // embed: Embed,
+          image: Image,
           header: Header,
           list: List,
+          codeBox: CodeBox,
+          linkTool: LinkTool,
+          quote: Quote,
+          delimiter: Delimiter,
+          // inlineCode: InlineCode,
+          // simpleImage: SimpleImage,
         },
       });
 
