@@ -39,7 +39,6 @@ const Editor: React.FC<EditorProps> = ({ initialValue, onChange }) => {
         data: {
           blocks: initialValue ? initialValue : [],
         },
-        placeholder: "Введите текст вашей статьи",
         async onChange() {
           const { blocks } = await editor.save();
           onChange(blocks);

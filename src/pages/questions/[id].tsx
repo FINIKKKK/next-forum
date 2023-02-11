@@ -96,7 +96,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
                   ))}
                 </ul>
               ) : obj.type === "delimiter" ? (
-                <div className="delimeter el">...</div>
+                <div className="delimeter el">***</div>
               ) : obj.type === "header" ? (
                 obj.data.level === 6 ? (
                   <h6 className="title">{obj.data.text}</h6>
