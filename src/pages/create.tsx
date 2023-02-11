@@ -1,4 +1,4 @@
-import { ForumLayout } from "@/layouts/ForumLayout";
+import { MainLayout } from "@/layouts/MainLayout";
 import { Api } from "@/utils/api";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
@@ -35,67 +35,49 @@ const Page: NextPage<PageProps> = ({}) => {
   };
 
   return (
-    <ForumLayout>
-      <div className="rightSide edit block">
-        <div className="inputBlock input__title">
-          <input
-            value={titleValue}
-            onChange={(e) => setTitleValue(e.target.value)}
-            type="text"
-            placeholder="Заголовок"
-          />
-        </div>
-        {/* 
-        <div className="inputBlock input__text">
-          <div className="buttons">
-            <svg className="item" width="20" height="20">
-              <use xlinkHref="./img/icons/icons.svg#b" />
-            </svg>
-            <svg className="item" width="20" height="20">
-              <use xlinkHref="./img/icons/icons.svg#i" />
-            </svg>
-            <svg className="item" width="20" height="20">
-              <use xlinkHref="./img/icons/icons.svg#code" />
-            </svg>
-            <svg className="item" width="20" height="20">
-              <use xlinkHref="./img/icons/icons.svg#list" />
-            </svg>
-            <svg className="item" width="20" height="20">
-              <use xlinkHref="./img/icons/icons.svg#image" />
-            </svg>
-            <svg className="item" width="20" height="20">
-              <use xlinkHref="./img/icons/icons.svg#link" />
-            </svg>
+    <MainLayout>
+      <div className="container">
+        <div className="rightSide edit block create__wrapper">
+          <div className="create">
+            <h2 className="title">Задать вопрос</h2>
+
+            <div className="inputBlock input__title">
+              <input
+                value={titleValue}
+                onChange={(e) => setTitleValue(e.target.value)}
+                type="text"
+                placeholder="Заголовок"
+              />
+            </div>
+
+            <div className="inputBlock input__tags">
+              <ul className="tagList">
+                <li className="tag">
+                  <a href="#">POSTGRES</a>
+                </li>
+                <li className="tag">
+                  <a href="#">PYthon</a>
+                </li>
+              </ul>
+              <button className="add">+</button>
+              <input type="text" />
+            </div>
+
+            <Editor
+              initialValue={bodyValue}
+              onChange={(blocks) => setBodyValue(blocks)}
+            />
+
+            <button
+              onClick={onSubmit}
+              className={`btn submit ${isLoading ? "disabled" : ""}`}
+            >
+              Создать
+            </button>
           </div>
-          <textarea></textarea>
-        </div> */}
-
-        <Editor
-          initialValue={bodyValue}
-          onChange={(blocks) => setBodyValue(blocks)}
-        />
-
-        <div className="inputBlock input__tags">
-          <ul className="tagList">
-            <li className="tag">
-              <a href="#">POSTGRES</a>
-            </li>
-            <li className="tag">
-              <a href="#">PYthon</a>
-            </li>
-          </ul>
-          <button className="add">+</button>
-          <input type="text" />
         </div>
-
-        <button
-          onClick={onSubmit}
-          className={`btn submit ${isLoading ? "disabled" : ""}`}
-        >
-          Задать вопрос
-        </button>
       </div>
-    </ForumLayout>
+    </MainLayout>
   );
 };
 

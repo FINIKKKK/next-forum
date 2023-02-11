@@ -78,8 +78,32 @@
   }
   .btn {
   }
-  .toProfile {
+  .user {
     position: relative;
+    display: flex;
+    align-items: center;
+    .notices {
+      position: relative;
+      .icon {
+        width: 20px;
+        margin-right: 30px;
+      }
+      .number {
+        position: absolute;
+        bottom: -4px;
+        right: 23px;
+        font-size: 10px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $main;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        color: $bg;
+      }
+    }
     img {
       cursor: pointer;
       width: 45px;
@@ -429,9 +453,6 @@
     .tag {
       margin-right: 15px;
       margin-bottom: 15px;
-      font-size: 14px;
-      line-height: 14px;
-      padding: 5px 7px;
     }
   }
 }
@@ -731,6 +752,22 @@
   }
 }
 
+// --------- create ----------
+.create {
+  padding: 70px 0;
+  width: 70%;
+  margin: 0 auto;
+  #editor {
+    background-color: $purple;
+    border-radius: 10px;
+    padding: 25px 15px;
+    margin-bottom: 25px;
+  }
+}
+.create__wrapper {
+  margin: 100px 0;
+}
+
 // --------- body ----------
 .body {
   font-size: 18px;
@@ -743,6 +780,13 @@
   }
   i {
     font-style: italic;
+  }
+  code {
+    background-color: $purple;
+    color: $gray;
+    padding: 15px 10px !important;
+    width: 100%;
+    display: block;
   }
   .list {
     counter-reset: list;
@@ -785,30 +829,30 @@
     // height: 1px;
     // background-color: $gray;
   }
-  .header {
+  .title {
     font-weight: 700;
   }
-  h1.header {
-    font-size: 40px;
+  h1.title {
+    font-size: 45px;
     line-height: 50px;
   }
-  h2.header {
-    font-size: 32px;
+  h2.title {
+    font-size: 38px;
     line-height: 42px;
   }
-  h3.header {
-    font-size: 26px;
+  h3.title {
+    font-size: 32px;
     line-height: 36px;
   }
-  h4.header {
-    font-size: 22px;
+  h4.title {
+    font-size: 26px;
     line-height: 32px;
   }
-  h5.header {
-    font-size: 18px;
+  h5.title {
+    font-size: 20px;
     line-height: 28px;
   }
-  h6.header {
+  h6.title {
     font-size: 16px;
     line-height: 26px;
   }
@@ -818,6 +862,10 @@
     padding: 55px 15px 15px;
     position: relative;
     overflow: hidden;
+    code {
+      padding: 0 !important;
+      padding-bottom: 15px !important;
+    }
     code div {
       background-color: $purple !important;
     }
@@ -853,6 +901,42 @@
       text-align: right;
     }
   }
+  .img {
+    width: 100%;
+    img {
+      max-width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+    }
+  }
+  code {
+    overflow: auto !important;
+    &::-webkit-scrollbar {
+      display: block !important;
+      height: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #2e2542;
+      border-radius: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+  }
+  table,
+  td {
+    * {
+      cursor: default !important;
+    }
+    padding: 0 !important;
+    background-color: transparent !important;
+    font-size: 14px !important;
+    line-height: 16px !important;
+  }
+}
+
+.image-tool__caption {
+  display: none;
 }
 
 // --------- question__content ----------
@@ -1116,11 +1200,17 @@
 // --------- edit ----------
 .edit {
   background-color: $purple2;
+  .title {
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 700;
+    margin-bottom: 25px;
+  }
   .inputBlock {
     background-color: $purple;
     border-radius: 10px;
     padding: 15px;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
   }
   .input__title {
     font-weight: 700;

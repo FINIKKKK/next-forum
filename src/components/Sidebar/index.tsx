@@ -14,7 +14,15 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
       <div className="box">
         <h5>Меню</h5>
         <ul className="nav">
-          <li className="item hover active">
+        <li className="item hover active">
+            <a href="#">
+              <svg width="20" height="20">
+                <use xlinkHref="../img/icons/icons.svg#fire" />
+              </svg>
+              <p>Все вопросы</p>
+            </a>
+          </li>
+          <li className="item hover">
             <a href="#">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#fire" />
@@ -25,17 +33,17 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
           <li className="item hover">
             <a href="#">
               <svg width="20" height="20">
-                <use xlinkHref="../img/icons/icons.svg#favorite" />
+                <use xlinkHref="../img/icons/icons.svg#questions" />
               </svg>
-              <p>Мое избранное</p>
+              <p>Мои вопросы</p>
             </a>
           </li>
           <li className="item hover">
             <a href="#">
               <svg width="20" height="20">
-                <use xlinkHref="../img/icons/icons.svg#questions" />
+                <use xlinkHref="../img/icons/icons.svg#favorite" />
               </svg>
-              <p>Мои вопросы</p>
+              <p>Мое избранное</p>
             </a>
           </li>
           <li className="item hover">

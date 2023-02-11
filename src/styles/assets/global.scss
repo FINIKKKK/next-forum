@@ -88,12 +88,12 @@ svg {
     line-height: 14px;
     font-weight: 700;
     background-color: $main;
-    padding: 5px 7px;
     white-space: nowrap;
     border-radius: 3px;
     text-transform: uppercase;
     transition: 0.2s;
     a {
+      padding: 5px 7px;
       color: $bg;
     }
   }

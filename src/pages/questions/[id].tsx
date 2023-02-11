@@ -15,7 +15,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
     <ForumLayout>
       <div className="ques block rightSide">
         <div className="ques__inner">
-          <div className="ques__header">
+          <div className="ques__title">
             <div className="item">3 часа назад</div>
             <div className="item">
               <svg width="20" height="20">
@@ -96,20 +96,20 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
                   ))}
                 </ul>
               ) : obj.type === "delimiter" ? (
-                <div className="delimeter el">***</div>
+                <div className="delimeter el">...</div>
               ) : obj.type === "header" ? (
                 obj.data.level === 6 ? (
-                  <h6 className="header">{obj.data.text}</h6>
+                  <h6 className="title">{obj.data.text}</h6>
                 ) : obj.data.level === 5 ? (
-                  <h5 className="header">{obj.data.text}</h5>
+                  <h5 className="title">{obj.data.text}</h5>
                 ) : obj.data.level === 4 ? (
-                  <h4 className="header">{obj.data.text}</h4>
+                  <h4 className="title">{obj.data.text}</h4>
                 ) : obj.data.level === 3 ? (
-                  <h3 className="header">{obj.data.text}</h3>
+                  <h3 className="title">{obj.data.text}</h3>
                 ) : obj.data.level === 2 ? (
-                  <h2 className="header">{obj.data.text}</h2>
+                  <h2 className="title">{obj.data.text}</h2>
                 ) : obj.data.level === 1 ? (
-                  <h1 className="header">{obj.data.text}</h1>
+                  <h1 className="title">{obj.data.text}</h1>
                 ) : null
               ) : obj.type === "codeBox" ? (
                 <div className="code el">
@@ -123,12 +123,16 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
               ) : obj.type === "quote" ? (
                 <div className="quote el">
                   <svg width="20" height="20">
-                    <use xlinkHref="../img/icons/icons.svg#answers"/>
+                    <use xlinkHref="../img/icons/icons.svg#answers" />
                   </svg>
                   <div className="quote__content">
-                    <h3>{obj.data.caption}</h3>
-                    <p>{obj.data.text}</p>
+                    <h3>{obj.data.text}</h3>
+                    <p>{obj.data.caption}</p>
                   </div>
+                </div>
+              ) : obj.type === "image" ? (
+                <div className="img el">
+                  <img src={obj.data.file.url} alt="img" />
                 </div>
               ) : null
             )}

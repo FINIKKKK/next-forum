@@ -48,12 +48,18 @@ export const Header: React.FC<HeaderProps> = ({}) => {
             </ul>
           </div>
           {userData ? (
-            <div ref={popupRef} className="toProfile">
+            <div ref={popupRef} className="user">
+              <div className="notices">
+                <svg className="icon" width="20" height="20">
+                  <use xlinkHref="./img/icons/icons.svg#fire" />
+                </svg>
+                <span className="number">13</span>
+              </div>
               <img
                 onClick={() => setShowPopup(!showPopup)}
                 src={
                   userData.avatar !== null
-                    ? `http://localhost:7777/img/${userData.avatar}`
+                    ? `../img/avatar.png`
                     : "../img/avatar.png"
                 }
                 alt="avatar"

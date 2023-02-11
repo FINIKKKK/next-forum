@@ -20,6 +20,7 @@
     "@editorjs/link": "^2.5.0",
     "@editorjs/list": "^1.8.0",
     "@editorjs/quote": "^2.5.0",
+    "@editorjs/simple-image": "^1.5.1",
     "@hookform/resolvers": "^2.9.10",
     "@next/font": "13.1.6",
     "@reduxjs/toolkit": "^1.9.2",
