@@ -1,5 +1,7 @@
+import moment from "moment";
 import Link from "next/link";
 import React from "react";
+import ruLocale from "moment/locale/ru";
 
 import ss from "./Question.module.scss";
 
@@ -7,9 +9,18 @@ interface QuestionProps {
   id: number;
   title: string;
   views: number;
+  createdAt: string;
 }
 
-export const Question: React.FC<QuestionProps> = ({ id, title, views }) => {
+export const Question: React.FC<QuestionProps> = ({
+  id,
+  title,
+  views,
+  createdAt,
+}) => {
+  moment.locale("ru", [ruLocale]);
+  const date = moment(createdAt).fromNow();
+
   return (
     <div className="question block hover">
       <div className="left">
@@ -28,7 +39,7 @@ export const Question: React.FC<QuestionProps> = ({ id, title, views }) => {
           </li>
           <li className="more">+3 ЕЩЕ</li>
         </ul>
-        <div className="date">3 часа назад</div>
+        <div className="date">{date}</div>
       </div>
 
       <div className="right">

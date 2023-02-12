@@ -59,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({}) => {
                 onClick={() => setShowPopup(!showPopup)}
                 src={
                   userData.avatar !== null
-                    ? `../img/avatar.png`
+                    ? `http://localhost:7777/img/avatars/${userData.avatar}`
                     : "../img/avatar.png"
                 }
                 alt="avatar"

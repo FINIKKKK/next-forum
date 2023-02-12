@@ -35,7 +35,7 @@ export type TQuestion = {
   id: number;
   title: string;
   body: OutputBlockData[];
-  author: TUser;
+  user: TUser;
   tags?: string[];
   views: number;
   createdAt: string;

@@ -5,18 +5,23 @@ import { TQuestion } from "@/utils/api/types";
 import classNames from "classnames";
 import { GetServerSideProps, NextPage } from "next";
 import React from "react";
+import moment from "moment";
+import ruLocale from "moment/locale/ru";
 
 interface QuestionPageProps {
   question: TQuestion;
 }
 
 const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
+  moment.locale("ru", [ruLocale]);
+  const date = moment(question.createdAt).fromNow();
+
   return (
     <ForumLayout>
       <div className="ques block rightSide">
         <div className="ques__inner">
           <div className="ques__title">
-            <div className="item">3 часа назад</div>
+            <div className="item">{date}</div>
             <div className="item">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#eye" />
@@ -45,12 +50,22 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
 
           <div className="userInfo">
             <a href="#">
-              <img src="../img/avatar.png" alt="avatar" className="avatar" />
+              <img
+                src={
+                  question.user.avatar !== null
+                    ? `http://localhost:7777/img/avatars/${question.user.avatar}`
+                    : "../img/avatar.png"
+                }
+                alt="avatar"
+                className="avatar"
+              />
             </a>
             <div className="box">
               <a href="#">
-                <h6 className="username">@dmitriy</h6>
-                <h6 className="name">Dmitriy Bozhko</h6>
+                <h6 className="username">@{question.user.login}</h6>
+                <h6 className="name">
+                  {question.user.firstName} {question.user.lastName}
+                </h6>
               </a>
             </div>
           </div>

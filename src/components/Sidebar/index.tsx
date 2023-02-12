@@ -49,6 +49,14 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
           <li className="item hover">
             <a href="#">
               <svg width="20" height="20">
+                <use xlinkHref="../img/icons/icons.svg#favorite" />
+              </svg>
+              <p>Отслеживаемое</p>
+            </a>
+          </li>
+          <li className="item hover">
+            <a href="#">
+              <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#tags" />
               </svg>
               <p>Все метки</p>
