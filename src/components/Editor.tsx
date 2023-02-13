@@ -36,6 +36,7 @@ const Editor: React.FC<EditorProps> = ({ initialValue, onChange }) => {
     if (!isReady.current) {
       const editor = new EditorJS({
         holder: "editor",
+        placeholder: "Текст",
         data: {
           blocks: initialValue ? initialValue : [],
         },

@@ -1,6 +1,7 @@
 import { MainLayout } from "@/layouts/MainLayout";
 import { Api } from "@/utils/api";
 import { TTag } from "@/utils/api/types";
+import { QuestionScheme } from "@/utils/validation";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -21,18 +22,33 @@ const Page: NextPage<PageProps> = ({}) => {
   const [tagsValue, setTagsValue] = React.useState("");
   const [tags, setTags] = React.useState<TTag[]>([]);
   const [selectedTags, setSelectedTags] = React.useState([]);
+  const [errorMessages, setErrorMessages] = React.useState([]);
 
   const onSubmit = async () => {
     try {
-      setIsLoading(true);
-      const dto = {
-        title: titleValue,
-        body: bodyValue,
-        tags: selectedTags
-      };
-      const question = await Api().question.create(dto);
-      console.log(question);
-      await router.push(`/questions/${question.id}`);
+      QuestionScheme.validate(
+        { title: titleValue, tags: selectedTags, body: bodyValue },
+        { abortEarly: false }
+      )
+        .then(() => {
+          (async () => {
+            setIsLoading(true);
+            const dto = {
+              title: titleValue,
+              body: bodyValue,
+              tags: selectedTags,
+            };
+            const question = await Api().question.create(dto);
+            await router.push(`/questions/${question.id}`);
+          })();
+        })
+        .catch((errors) => {
+          const errorData = errors.inner.reduce((acc, curr) => {
+            acc[curr.path] = curr.message;
+            return acc;
+          }, {});
+          setErrorMessages(errorData);
+        });
     } catch (err) {
       console.warn(err);
       alert("Ошибка при создании вопроса");
@@ -66,6 +82,18 @@ const Page: NextPage<PageProps> = ({}) => {
 
   const onAddTag = (obj: TTag) => {
     setSelectedTags([...selectedTags, obj]);
+    setTagsValue("");
+  };
+
+  const onRemoveTag = (obj: TTag) => {
+    setSelectedTags(selectedTags.filter((item) => item.id !== obj.id));
+  };
+
+  const handleKeyPress = (e: any) => {
+    console.log(e.key);
+    if (e.key === "Enter") {
+      e.preventDefault();
+    }
   };
 
   return (
@@ -83,56 +111,58 @@ const Page: NextPage<PageProps> = ({}) => {
                 placeholder="Заголовок"
                 maxLength={200}
                 rows={1}
+                onKeyPress={handleKeyPress}
               />
-              {titleValue.length <= 30 && (
-                <div className="error">
-                  Минимальный размер заголовка должен состовлять 30 символов
-                </div>
-              )}
-              {titleValue.length >= 200 && (
-                <div className="error">
-                  Максимальная размер заголовка должен состовлять 350 символов
-                </div>
+              {errorMessages.title && (
+                <div className="error">{errorMessages.title}</div>
               )}
             </div>
 
             <div className="inputBlock input__tags">
               <div className="inner">
-                <ul className="tagList">
-                  {selectedTags.map((obj: TTag) => (
-                    <li key={obj.id} className="tag">
-                      <a href="#">{obj.name}</a>
-                    </li>
-                  ))}
-                </ul>
+                {selectedTags.length > 0 && (
+                  <ul className="tagList">
+                    {selectedTags.map((obj: TTag) => (
+                      <li
+                        key={obj.id}
+                        className="tag"
+                        onClick={() => onRemoveTag(obj)}
+                      >
+                        <p>{obj.name}</p>
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <input
                   value={tagsValue}
                   onChange={(e) => setTagsValue(e.target.value)}
-                  placeholder="Введите название метки"
+                  placeholder="Метки"
                   type="text"
                 />
               </div>
-              {tags.length && (
+              {tagsValue && (
                 <div className="popup">
                   {tags
-                    .filter((obj) => !selectedTags.includes(obj))
+                    .filter(
+                      (obj) => !selectedTags.some((obj2) => obj2.id === obj.id)
+                    )
                     .map((obj: TTag) => (
-                      <div
-                        onClick={() => onAddTag(obj)}
-                        key={obj.id}
-                        className="tag__item"
-                      >
-                        <h5 className="name">{obj.name}</h5>
-                        <p>{obj.description}</p>
+                      <div className="tag__item-wrapper">
+                        <div
+                          onClick={() => onAddTag(obj)}
+                          key={obj.id}
+                          className="tag__item"
+                        >
+                          <h5 className="name">{obj.name}</h5>
+                          <p>{obj.description}</p>
+                        </div>
                       </div>
                     ))}
                 </div>
               )}
-              {/* {titleValue.length >= 200 && (
-                <div className="error">
-                  Максимальная размер заголовка 350 символов
-                </div>
-              )} */}
+              {errorMessages.tags && (
+                <div className="error">{errorMessages.tags}</div>
+              )}
             </div>
 
             <div className="editor inputBlock">
@@ -142,18 +172,14 @@ const Page: NextPage<PageProps> = ({}) => {
                   onChange={(blocks) => setBodyValue(blocks)}
                 />
               </div>
-              {bodyValue.length <= 0 && (
-                <div className="error">Вы должны хоть что-то написать</div>
+              {errorMessages.body && (
+                <div className="error">{errorMessages.body}</div>
               )}
             </div>
 
             <button
               onClick={onSubmit}
-              className={`btn submit ${
-                isLoading || bodyValue.length <= 0 || titleValue.length <= 30
-                  ? "disabled"
-                  : ""
-              }`}
+              className={`btn submit ${isLoading ? "disabled" : ""}`}
             >
               Создать
             </button>

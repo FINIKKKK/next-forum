@@ -15,9 +15,14 @@ export const RegisterScheme = yup.object().shape({
     .required("Поле является обязательным"),
 });
 
-export const LoginScheme = yup.object().shape({
-  email: yup
+export const QuestionScheme = yup.object().shape({
+  title: yup
     .string()
-    .email("Некорректный email")
-    .required("Поле является обязательным"),
+    .min(20, "Заголовок должен состоять минимум из 20 символов")
+    .max(200, "Заголовок должен состоять максимум из 200 символов"),
+  tags: yup
+    .array()
+    .min(1, "Вопрос должен иметь минимум 1 метку")
+    .max(6, "Вопрос должен иметь максимум 6 меток"),
+  body: yup.array().min(1, "Вы должны хоть что-то написать"),
 });

@@ -51,7 +51,7 @@ export const Header: React.FC<HeaderProps> = ({}) => {
             <div ref={popupRef} className="user">
               <div className="notices">
                 <svg className="icon" width="20" height="20">
-                  <use xlinkHref="./img/icons/icons.svg#fire" />
+                  <use xlinkHref="../img/icons/icons.svg#fire" />
                 </svg>
                 <span className="number">13</span>
               </div>
