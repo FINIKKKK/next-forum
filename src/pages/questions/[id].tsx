@@ -71,24 +71,11 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
           </div>
 
           <ul className="tagList">
-            <li className="tag hover">
-              <a href="#">POSTGRES</a>
-            </li>
-            <li className="tag hover">
-              <a href="#">PYthon</a>
-            </li>
-            <li className="tag hover">
-              <a href="#">C++</a>
-            </li>
-            <li className="tag hover">
-              <a href="#">HTML</a>
-            </li>
-            <li className="tag hover">
-              <a href="#">Css</a>
-            </li>
-            <li className="tag hover">
-              <a href="#">scss</a>
-            </li>
+            {question.tags.map((obj) => (
+              <li key={obj.id} className="tag hover">
+                <a href="#">{obj.name}</a>
+              </li>
+            ))}
           </ul>
 
           <div className="body">

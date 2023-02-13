@@ -27,8 +27,7 @@ export type TUser = {
 export type QuestionDto = {
   title: string;
   body: OutputBlockData[];
-  // author: TUser;
-  // tags?: string[];
+  tags: TTag[];
 };
 
 export type TQuestion = {
@@ -36,8 +35,21 @@ export type TQuestion = {
   title: string;
   body: OutputBlockData[];
   user: TUser;
-  tags?: string[];
+  tags: TTag[];
   views: number;
   createdAt: string;
   updatedAt: string;
+};
+
+export type TTag = {
+  id: number;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type TagDto = {
+  name: string;
+  description: string;
 };

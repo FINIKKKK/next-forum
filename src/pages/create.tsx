@@ -1,5 +1,6 @@
 import { MainLayout } from "@/layouts/MainLayout";
 import { Api } from "@/utils/api";
+import { TTag } from "@/utils/api/types";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -17,6 +18,9 @@ const Page: NextPage<PageProps> = ({}) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
   const refTextarea = React.useRef<HTMLTextAreaElement>(null);
+  const [tagsValue, setTagsValue] = React.useState("");
+  const [tags, setTags] = React.useState<TTag[]>([]);
+  const [selectedTags, setSelectedTags] = React.useState([]);
 
   const onSubmit = async () => {
     try {
@@ -24,8 +28,10 @@ const Page: NextPage<PageProps> = ({}) => {
       const dto = {
         title: titleValue,
         body: bodyValue,
+        tags: selectedTags
       };
       const question = await Api().question.create(dto);
+      console.log(question);
       await router.push(`/questions/${question.id}`);
     } catch (err) {
       console.warn(err);
@@ -42,6 +48,25 @@ const Page: NextPage<PageProps> = ({}) => {
         refTextarea.current.scrollHeight + 3 + "px";
     }
   }, [titleValue]);
+
+  React.useEffect(() => {
+    (async () => {
+      if (tagsValue.length) {
+        try {
+          const tags = await Api().tag.search(tagsValue);
+          console.log(tags);
+          setTags(tags?.items);
+        } catch (err) {
+          console.warn(err);
+          alert("Ошибка при получении меток");
+        }
+      }
+    })();
+  }, [tagsValue]);
+
+  const onAddTag = (obj: TTag) => {
+    setSelectedTags([...selectedTags, obj]);
+  };
 
   return (
     <MainLayout>
@@ -74,16 +99,35 @@ const Page: NextPage<PageProps> = ({}) => {
             <div className="inputBlock input__tags">
               <div className="inner">
                 <ul className="tagList">
-                  <li className="tag">
-                    <a href="#">POSTGRES</a>
-                  </li>
-                  <li className="tag">
-                    <a href="#">PYthon</a>
-                  </li>
+                  {selectedTags.map((obj: TTag) => (
+                    <li key={obj.id} className="tag">
+                      <a href="#">{obj.name}</a>
+                    </li>
+                  ))}
                 </ul>
-                <button className="add">+</button>
-                <input type="text" />
+                <input
+                  value={tagsValue}
+                  onChange={(e) => setTagsValue(e.target.value)}
+                  placeholder="Введите название метки"
+                  type="text"
+                />
               </div>
+              {tags.length && (
+                <div className="popup">
+                  {tags
+                    .filter((obj) => !selectedTags.includes(obj))
+                    .map((obj: TTag) => (
+                      <div
+                        onClick={() => onAddTag(obj)}
+                        key={obj.id}
+                        className="tag__item"
+                      >
+                        <h5 className="name">{obj.name}</h5>
+                        <p>{obj.description}</p>
+                      </div>
+                    ))}
+                </div>
+              )}
               {/* {titleValue.length >= 200 && (
                 <div className="error">
                   Максимальная размер заголовка 350 символов
@@ -99,9 +143,7 @@ const Page: NextPage<PageProps> = ({}) => {
                 />
               </div>
               {bodyValue.length <= 0 && (
-                <div className="error">
-                  Вы должны хоть что-то написать
-                </div>
+                <div className="error">Вы должны хоть что-то написать</div>
               )}
             </div>
 

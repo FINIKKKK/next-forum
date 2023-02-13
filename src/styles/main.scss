@@ -457,6 +457,45 @@
   }
 }
 
+.input__tags {
+  position: relative;
+  .popup {
+    position: absolute;
+    left: 0;
+    top: 95%;
+    width: 100%;
+    background-color: #2b243a;
+    padding: 20px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-right: -25px;
+  }
+  .tag__item {
+    width: 30%;
+    margin-right: 25px;
+    h5 {
+      background-color: $main;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: $bg;
+      padding: 2px 7px;
+      border-radius: 3px;
+      font-size: 14px;
+      line-height: 16px;
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+    p {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow-y: hidden;
+    }
+  }
+}
+
 // --------- login ----------
 .login {
   width: 100%;
