@@ -6,11 +6,11 @@ interface FooterProps {}
 
 export const Footer: React.FC<FooterProps> = ({}) => {
   return (
-    <footer className="footer">
+    <footer className={ss.footer}>
       <div className="container">
-        <div className="footer__inner"></div>
+        <div className={ss.inner}></div>
       </div>
-      <div className="copy">
+      <div className={ss.copy}>
         <p>Создатель макета Dmitriy Bozhko</p>
       </div>
     </footer>

@@ -43,6 +43,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@types/editorjs__header": "^2.6.0"
+    "@types/editorjs__header": "^2.6.0",
+    "@types/moment": "^2.13.0"
   }
 }

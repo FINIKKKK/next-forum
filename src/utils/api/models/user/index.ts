@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { RegisterUserDto, TUser } from "../types";
+import { TUser } from "./types";
 
 export const UserApi = (instance: AxiosInstance) => ({
   async getProfile() {

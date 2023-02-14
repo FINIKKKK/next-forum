@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { TQuestion, QuestionDto } from "../types";
+import { TQuestion, QuestionDto } from "./types";
 
 export const QuestionApi = (instance: AxiosInstance) => ({
   async getAll() {

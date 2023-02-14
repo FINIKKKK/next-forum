@@ -7,14 +7,14 @@ interface SidebarProps {}
 
 export const Sidebar: React.FC<SidebarProps> = ({}) => {
   return (
-    <aside className="sidebar">
-      <Link href="/create" className="btn">
+    <aside className={`sidebar ${ss.sidebar}`}>
+      <Link href="/create" className={`btn ${ss.btn}`}>
         Задать вопрос
       </Link>
-      <div className="box">
+      <div className={ss.block}>
         <h5>Меню</h5>
-        <ul className="nav">
-        <li className="item hover active">
+        <ul className={ss.nav}>
+          <li className={`hover ${ss.item} ${ss.active}`}>
             <a href="#">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#fire" />
@@ -22,7 +22,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
               <p>Все вопросы</p>
             </a>
           </li>
-          <li className="item hover">
+          <li className={`hover ${ss.item}`}>
             <a href="#">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#fire" />
@@ -30,7 +30,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
               <p>Мои предпочтения</p>
             </a>
           </li>
-          <li className="item hover">
+          <li className={`hover ${ss.item}`}>
             <a href="#">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#questions" />
@@ -38,7 +38,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
               <p>Мои вопросы</p>
             </a>
           </li>
-          <li className="item hover">
+          <li className={`hover ${ss.item}`}>
             <a href="#">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#favorite" />
@@ -46,7 +46,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
               <p>Мое избранное</p>
             </a>
           </li>
-          <li className="item hover">
+          <li className={`hover ${ss.item}`}>
             <a href="#">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#favorite" />
@@ -54,7 +54,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
               <p>Отслеживаемое</p>
             </a>
           </li>
-          <li className="item hover">
+          <li className={`hover ${ss.item}`}>
             <a href="#">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#tags" />
@@ -62,7 +62,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
               <p>Все метки</p>
             </a>
           </li>
-          <li className="item hover">
+          <li className={`hover ${ss.item}`}>
             <a href="#">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#users" />
@@ -73,7 +73,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
         </ul>
       </div>
 
-      <div className="box">
+      <div className={ss.block}>
         <h5>Топ меток</h5>
         <ul className="tagList">
           <li className="tag hover">

@@ -1,7 +1,7 @@
-import moment from "moment";
-import Link from "next/link";
 import React from "react";
-import ruLocale from "moment/locale/ru";
+import Link from "next/link";
+import moment, { Locale } from "moment";
+import "moment/locale/ru";
 
 import ss from "./Question.module.scss";
 
@@ -18,13 +18,14 @@ export const Question: React.FC<QuestionProps> = ({
   views,
   createdAt,
 }) => {
-  moment.locale("ru", [ruLocale]);
+  const ru: Locale = moment.localeData("ru");
+  moment.locale("ru", [ru]);
   const date = moment(createdAt).fromNow();
 
   return (
-    <div className="question block hover">
-      <div className="left">
-        <Link href={`/questions/${id}`} className="question__title">
+    <div className={`block hover ${ss.question}`}>
+      <div className={ss.left}>
+        <Link href={`/questions/${id}`} className={ss.title}>
           <h3>{title}</h3>
         </Link>
         <ul className="tagList">
@@ -37,25 +38,25 @@ export const Question: React.FC<QuestionProps> = ({
           <li className="tag hover">
             <a href="#">C++</a>
           </li>
-          <li className="more">+3 ЕЩЕ</li>
+          <li className={ss.more}>+3 ЕЩЕ</li>
         </ul>
-        <div className="date">{date}</div>
+        <div className={ss.date}>{date}</div>
       </div>
 
-      <div className="right">
-        <div className="item">
+      <div className={ss.right}>
+        <div className={ss.item}>
           <svg width="20" height="20">
             <use xlinkHref="./img/icons/icons.svg#eye" />
           </svg>
           <p>{views}</p>
         </div>
-        <div className="item">
+        <div className={ss.item}>
           <svg width="20" height="20">
             <use xlinkHref="./img/icons/icons.svg#answers" />
           </svg>
           <p>3</p>
         </div>
-        <div className="item answer">
+        <div className={`${ss.item} ${ss.answer}`}>
           <svg width="20" height="20">
             <use xlinkHref="./img/icons/icons.svg#check" />
           </svg>
@@ -64,7 +65,7 @@ export const Question: React.FC<QuestionProps> = ({
       </div>
 
       <svg
-        className="favorite"
+        className={ss.favorite}
         width="64"
         height="64"
         viewBox="0 0 64 64"

@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { LoginUserDto, RegisterUserDto } from "../types";
+import { LoginUserDto, RegisterUserDto } from "./types";
 
 export const AuthApi = (instance: AxiosInstance) => ({
   async login(dto: LoginUserDto) {

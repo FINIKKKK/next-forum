@@ -1,0 +1,95 @@
+@import "../../styles/assets/variables";
+
+.question {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 24px 32px;
+  &:not(:last-child) {
+    margin-bottom: 55px;
+  }
+  .left {
+    position: relative;
+  }
+  .title {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 10px;
+  }
+  .tagList {
+    margin-bottom: 10px;
+    .more {
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 16px;
+      color: $gray;
+    }
+  }
+  .date {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    color: $gray;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  .right {
+    padding-left: 25px;
+    .item:not(:last-child) {
+      margin-bottom: 13px;
+    }
+    border-left: 2px solid rgba(242, 236, 248, 0.1);
+  }
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    svg {
+      fill: $white;
+      width: 25px;
+      height: auto;
+      margin-right: 13px;
+    }
+    p {
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }
+  .answer {
+    svg {
+      fill: $main;
+      width: 15px;
+    }
+    p {
+      color: $main;
+    }
+  }
+  .favorite {
+    position: absolute;
+    cursor: pointer;
+    top: -3px;
+    right: 135px;
+    transition: 0.2s;
+    width: 18px;
+    path {
+      transition: 0.2s;
+    }
+    path:nth-child(1) {
+      fill: transparent;
+    }
+    path:nth-child(2) {
+      fill: $gray;
+    }
+    &.active {
+      path:nth-child(1) {
+        fill: $main;
+      }
+      path:nth-child(2) {
+        fill: transparent;
+      }
+    }
+  }
+}

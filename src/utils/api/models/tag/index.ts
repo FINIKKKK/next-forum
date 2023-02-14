@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { SearchTagDto, TagDto, TTag } from "../types";
+import { SearchTagDto, TagDto, TTag } from "./types";
 
 export const TagApi = (instance: AxiosInstance) => ({
   async search(dto: SearchTagDto) {
