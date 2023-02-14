@@ -75,23 +75,23 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
 
       <div className={ss.block}>
         <h5>Топ меток</h5>
-        <ul className="tagList">
-          <li className="tag hover">
+        <ul className={`tagList ${ss.tagList}`}>
+          <li className={`hover ${ss.tag}`}>
             <a href="#">POSTGRES</a>
           </li>
-          <li className="tag hover">
+          <li className={`hover ${ss.tag}`}>
             <a href="#">PYthon</a>
           </li>
-          <li className="tag hover">
+          <li className={`hover ${ss.tag}`}>
             <a href="#">C++</a>
           </li>
-          <li className="tag hover">
+          <li className={`hover ${ss.tag}`}>
             <a href="#">Figma</a>
           </li>
-          <li className="tag hover">
+          <li className={`hover ${ss.tag}`}>
             <a href="#">NExtJS</a>
           </li>
-          <li className="tag hover">
+          <li className={`hover ${ss.tag}`}>
             <a href="#">NEstJS</a>
           </li>
         </ul>

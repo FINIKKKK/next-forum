@@ -1,3 +1,8 @@
+export type TTags = {
+  count: number;
+  items: TTag[];
+};
+
 export type TTag = {
   id: number;
   name: string;

@@ -1,10 +1,9 @@
-import Head from "next/head";
+import React from "react";
 
 import { ForumLayout } from "@/layouts/ForumLayout";
 import { Question } from "@/components";
-import React from "react";
 import { Api } from "@/utils/api";
-import { TQuestion } from "@/utils/api/types";
+import { TQuestion } from "@/utils/api/models/question/types";
 
 export default function Home() {
   const [questions, setQuestions] = React.useState<TQuestion[]>([]);
@@ -12,8 +11,8 @@ export default function Home() {
   React.useEffect(() => {
     (async () => {
       try {
-        const questions = await Api().question.getAll();
-        setQuestions(questions);
+        const { total, items } = await Api().question.getAll();
+        setQuestions(items);
       } catch (err) {
         console.warn(err);
         alert("Ошибка при получении вопросов");
@@ -62,8 +61,6 @@ export default function Home() {
             <Question key={obj.id} {...obj} />
           ))}
         </div>
-
-        <div className="pagination"></div>
       </div>
     </ForumLayout>
   );

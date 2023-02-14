@@ -1,46 +1,40 @@
 import React from "react";
 import Link from "next/link";
-import moment, { Locale } from "moment";
-import "moment/locale/ru";
 
 import ss from "./Question.module.scss";
+import { TTag } from "@/utils/api/models/tag/types";
+import { useTimeNow } from "@/hooks/useTimeNow";
 
 interface QuestionProps {
   id: number;
   title: string;
   views: number;
   createdAt: string;
+  tags: TTag[];
 }
 
 export const Question: React.FC<QuestionProps> = ({
   id,
   title,
   views,
-  createdAt,
+  createdAt: date,
+  tags,
 }) => {
-  const ru: Locale = moment.localeData("ru");
-  moment.locale("ru", [ru]);
-  const date = moment(createdAt).fromNow();
-
   return (
     <div className={`block hover ${ss.question}`}>
       <div className={ss.left}>
         <Link href={`/questions/${id}`} className={ss.title}>
           <h3>{title}</h3>
         </Link>
-        <ul className="tagList">
-          <li className="tag hover">
-            <a href="#">POSTGRES</a>
-          </li>
-          <li className="tag hover">
-            <a href="#">PYthon</a>
-          </li>
-          <li className="tag hover">
-            <a href="#">C++</a>
-          </li>
-          <li className={ss.more}>+3 ЕЩЕ</li>
+        <ul className={`tagList ${ss.tagList}`}>
+          {tags.map((obj) => (
+            <li key={obj.id} className={`hover ${ss.tag}`}>
+              <a href="#">{obj.name}</a>
+            </li>
+          ))}
+          <div className={ss.more}>+3 ЕЩЕ</div>
         </ul>
-        <div className={ss.date}>{date}</div>
+        <div className={ss.date}>{useTimeNow(date)}</div>
       </div>
 
       <div className={ss.right}>

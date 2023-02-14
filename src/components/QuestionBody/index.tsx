@@ -1,4 +1,5 @@
 import { OutputBlockData } from "@editorjs/editorjs";
+import classNames from "classnames";
 import React from "react";
 
 import ss from "./QuestionBody.module.scss";
@@ -20,9 +21,9 @@ export const QuestionBody: React.FC<QuestionBodyProps> = ({ value }) => {
           />
         ) : obj.type === "list" ? (
           <ul
-          // className={classNames({`${ss.list} ${ss.el}`}, {
-          //   ordered: obj.data.style === {ss.ordered},
-          // })}
+            className={classNames(ss.list, ss.el, {
+              [ss.ordered]: obj.data.style === "ordered",
+            })}
           >
             {obj.data.items.map((item: string) => (
               <li>{item}</li>

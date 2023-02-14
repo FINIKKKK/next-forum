@@ -1,27 +1,23 @@
+import React from "react";
+import { GetServerSideProps, NextPage } from "next";
+
 import { Answer, QuestionBody } from "@/components";
 import { ForumLayout } from "@/layouts/ForumLayout";
 import { Api } from "@/utils/api";
-import { TQuestion } from "@/utils/api/types";
-import classNames from "classnames";
-import { GetServerSideProps, NextPage } from "next";
-import React from "react";
-import moment from "moment";
-import ruLocale from "moment/locale/ru";
+import { useTimeNow } from "@/hooks/useTimeNow";
+import { TQuestion } from "@/utils/api/models/question/types";
 
 interface QuestionPageProps {
   question: TQuestion;
 }
 
 const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
-  moment.locale("ru", [ruLocale]);
-  const date = moment(question.createdAt).fromNow();
-
   return (
     <ForumLayout>
       <div className="ques block rightSide">
         <div className="ques__inner">
           <div className="ques__title">
-            <div className="item">{date}</div>
+            <div className="item">{useTimeNow(question.createdAt)}</div>
             <div className="item">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#eye" />
@@ -95,7 +91,6 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
     const id = ctx?.params?.id;
-    console.log(id);
     const question = await Api().question.getOne(id);
     return {
       props: {

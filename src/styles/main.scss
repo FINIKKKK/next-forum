@@ -156,83 +156,6 @@
   }
 }
 
-
-
-.input__tags {
-  position: relative;
-  .tagList {
-    margin-right: 15px;
-    flex-wrap: nowrap;
-  }
-  .tag {
-    color: $bg;
-    padding: 5px 10px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    &::after {
-      content: url("../../public/img/close.svg");
-      margin-left: 7px;
-    }
-  }
-  .inner {
-    position: relative;
-    z-index: 110;
-  }
-  .popup {
-    z-index: 100;
-    position: absolute;
-    left: 5px;
-    top: 85%;
-    width: 100%;
-    background-color: $purple;
-    box-shadow: 0px 7px 10px rgba($bg, 0.5);
-    padding: 25px 25px;
-    border-radius: 0px 0px 10px 10px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 0 -5px;
-  }
-  .warning {
-    font-weight: 700;
-    color: $gray;
-    font-size: 14px;
-  }
-  .tag__item-wrapper {
-    flex: 0 0 33.3%;
-    padding: 0 5px;
-  }
-  .tag__item {
-    cursor: pointer;
-    border-radius: 10px;
-    padding: 20px;
-    transition: 0.2s;
-    h5 {
-      background-color: $main;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: $bg;
-      padding: 2px 7px;
-      border-radius: 3px;
-      font-size: 14px;
-      line-height: 16px;
-      display: inline-block;
-      margin-bottom: 15px;
-    }
-    p {
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow-y: hidden;
-    }
-    &:hover {
-      background-color: $purple2;
-    }
-  }
-}
-
 // --------- login ----------
 .login {
   width: 100%;
@@ -528,224 +451,6 @@
   }
 }
 
-// --------- body ----------
-.body {
-  font-size: 18px;
-  line-height: 20px;
-  .el:not(:last-child) {
-    margin-bottom: 15px;
-  }
-  b {
-    font-weight: 700;
-  }
-  i {
-    font-style: italic;
-  }
-  a {
-    color: $main;
-    &:hover {
-      color: darken($main, 20%);
-    }
-  }
-  code {
-    background-color: $purple;
-    color: $gray;
-    padding: 15px 10px !important;
-    width: 100%;
-    display: block;
-  }
-  .list {
-    counter-reset: list;
-    li {
-      padding-left: 40px;
-      position: relative;
-      &::before {
-        content: "";
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        left: 12px;
-        top: 7.5px;
-        background-color: #fff;
-        border-radius: 50%;
-      }
-      &:not(:last-child) {
-        margin-bottom: 10px;
-      }
-    }
-    &.ordered {
-      li {
-        &::before {
-          counter-increment: list;
-          content: counter(list) ".";
-          width: auto;
-          height: auto;
-          background: none;
-          top: 1px;
-          left: 12px;
-          font-size: 16px;
-        }
-      }
-    }
-  }
-  .delimeter {
-    font-size: 40px;
-    line-height: 55px;
-    text-align: center;
-    letter-spacing: 10px;
-  }
-  .title {
-    font-weight: 700;
-  }
-  h1.title {
-    font-size: 45px;
-    line-height: 50px;
-  }
-  h2.title {
-    font-size: 38px;
-    line-height: 42px;
-  }
-  h3.title {
-    font-size: 32px;
-    line-height: 36px;
-  }
-  h4.title {
-    font-size: 26px;
-    line-height: 32px;
-  }
-  h5.title {
-    font-size: 20px;
-    line-height: 28px;
-  }
-  h6.title {
-    font-size: 16px;
-    line-height: 26px;
-  }
-  .code {
-    background-color: $purple;
-    border-radius: 10px;
-    padding: 55px 15px 10px;
-    position: relative;
-    overflow: hidden;
-    code {
-      padding: 0 !important;
-      padding-bottom: 15px !important;
-    }
-    code div {
-      background-color: $purple !important;
-    }
-    .code__lg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      padding: 5px 15px;
-      background-color: #342b48;
-      width: 100%;
-      font-size: 14px;
-    }
-  }
-  .quote {
-    background-color: $purple;
-    padding: 15px;
-    border-radius: 10px;
-    display: flex;
-    align-items: start;
-    svg {
-      fill: $gray;
-      width: 25px;
-      margin-right: 15px;
-    }
-    .quote__content {
-      width: 100%;
-    }
-    h3 {
-      font-style: italic;
-    }
-    p {
-      color: $gray;
-      text-align: right;
-    }
-  }
-  .img {
-    width: 100%;
-    img {
-      border-radius: 10px;
-      max-width: 100%;
-      max-height: 500px;
-      object-fit: cover;
-    }
-  }
-  code {
-    font-size: 14px !important;
-    overflow: auto !important;
-    border-radius: 10px;
-    padding: 10px 15px !important;
-    font-family: "Consolas";
-    &::-webkit-scrollbar {
-      display: block !important;
-      height: 5px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: #2e2542;
-      border-radius: 5px;
-    }
-    &::-webkit-scrollbar-track {
-      background-color: transparent;
-    }
-  }
-  table,
-  td {
-    * {
-      cursor: default !important;
-    }
-    padding: 0 !important;
-    background-color: transparent !important;
-    font-size: 14px !important;
-    line-height: 16px !important;
-  }
-}
-
-
-
-// --------- question__content ----------
-.ques__content {
-  *:not(:last-child) {
-    margin-bottom: 20px;
-  }
-  .text {
-    font-size: 14px;
-    line-height: 18px;
-    b {
-      font-weight: 700;
-    }
-  }
-  .code {
-    background-color: $purple;
-    padding: 16px;
-    border-radius: 12px;
-    font-family: consolas;
-    color: $gray;
-    .code__inner {
-      max-height: 300px;
-      overflow: auto;
-      &::-webkit-scrollbar {
-        width: 3px;
-      }
-      &::-webkit-scrollbar-thumb {
-        background-color: rgba(234, 231, 244, 0.13);
-        border-radius: 3px;
-      }
-      &::-webkit-scrollbar-track {
-        background-color: transparent;
-      }
-    }
-  }
-  .img {
-    max-width: 100%;
-    max-height: 300px;
-  }
-}
-
 // --------- answer ----------
 .answers {
   margin-top: 75px;
@@ -965,19 +670,15 @@
   }
 }
 
-// --------- #editor ----------
-
-
 // --------- edit ----------
 .edit {
   margin: 100px 0;
+  background-color: $purple2;
   .create {
     padding: 70px 0;
     width: 80%;
     margin: 0 auto;
   }
-
-  background-color: $purple2;
   .title {
     font-size: 30px;
     line-height: 40px;
@@ -990,34 +691,6 @@
       font-size: 12px;
       margin-top: 8px;
       margin-left: 5px;
-    }
-  }
-  .input__tags {
-    width: 100%;
-    display: block !important;
-    .inner {
-      width: 100%;
-      background-color: $purple;
-      border-radius: 10px;
-      padding: 15px;
-      display: flex;
-      align-items: center;
-    }
-  }
-  .input__title {
-    textarea {
-      font-weight: 700;
-      font-size: 18px;
-      line-height: 22px;
-      background-color: $purple;
-      border-radius: 10px;
-      padding: 15px;
-      width: 100%;
-      height: 100%;
-      color: $white;
-      &::placeholder {
-        color: $gray;
-      }
     }
   }
   .buttons {
@@ -1038,20 +711,6 @@
       width: 15px;
     }
   }
-  .input__tags {
-    display: flex;
-    align-items: center;
-    input {
-      font-size: 14px;
-      line-height: 18px;
-      font-weight: 700;
-      width: 100%;
-      color: $white;
-      &::placeholder {
-        color: $gray;
-      }
-    }
-  }
   .add {
     margin-left: 15px;
     color: $white;
@@ -1061,5 +720,17 @@
     padding: 10px 50px;
     font-size: 16px;
     line-height: 22px;
+  }
+}
+
+// --------- editor ----------
+.editor {
+  margin-bottom: 25px;
+  .inner {
+    min-height: 400px;
+    width: 100%;
+    background-color: $purple;
+    border-radius: 10px;
+    padding: 25px 15px;
   }
 }

@@ -1,23 +1,20 @@
+import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { setCookie } from "nookies";
+import { FormProvider, useForm } from "react-hook-form";
+import { NextPage } from "next";
+
 import { AuthInput } from "@/components";
 import { useActions } from "@/hooks/useActions";
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { Api } from "@/utils/api";
-import { LoginUserDto } from "@/utils/api/types";
-import { LoginScheme } from "@/utils/validation";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { NextPage } from "next";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { setCookie } from "nookies";
-import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { LoginUserDto } from "@/utils/api/models/auth/types";
 
 interface LoginPageProps {}
 
 const LoginPage: NextPage<LoginPageProps> = ({}) => {
-  const form = useForm({
-    resolver: yupResolver(LoginScheme),
-  });
+  const form = useForm();
   const [error, setError] = React.useState("");
   const { setUserData } = useActions();
   const router = useRouter();

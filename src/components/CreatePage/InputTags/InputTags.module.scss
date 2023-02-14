@@ -1,0 +1,106 @@
+@import "@/styles/assets/variables";
+
+.tags {
+  width: 100%;
+  position: relative;
+  .input {
+    width: 100%;
+    background-color: $purple;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 110;
+  }
+  input {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 700;
+    width: 100%;
+    color: $white;
+    &::placeholder {
+      color: $gray;
+    }
+  }
+
+  .list {
+    margin-right: 15px;
+    flex-wrap: nowrap;
+    display: flex;
+    align-items: center;
+  }
+  .item {
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+    background-color: $main;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $bg;
+    padding: 5px 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    &::after {
+      content: url("../../../../public/img/close.svg");
+      margin-left: 7px;
+    }
+  }
+
+  .popup {
+    z-index: 100;
+    position: absolute;
+    left: 5px;
+    top: 85%;
+    width: 100%;
+    background-color: $purple;
+    box-shadow: 0px 7px 10px rgba($bg, 0.5);
+    padding: 25px 25px;
+    border-radius: 0px 0px 10px 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 -5px;
+  }
+  .warning {
+    font-weight: 700;
+    color: $gray;
+    font-size: 14px;
+  }
+
+  .wrapper {
+    flex: 0 0 33.3%;
+    padding: 0 5px;
+  }
+  .tag {
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 20px;
+    transition: 0.2s;
+    h5 {
+      background-color: $main;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: $bg;
+      padding: 2px 7px;
+      border-radius: 3px;
+      font-size: 14px;
+      line-height: 16px;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+    p {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow-y: hidden;
+    }
+    &:hover {
+      background-color: $purple2;
+    }
+  }
+}

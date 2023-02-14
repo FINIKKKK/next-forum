@@ -1,13 +1,11 @@
-import { useActions } from "@/hooks/useActions";
-import { useOutsideClick } from "@/hooks/useOutsideClick";
-import { useSelectors } from "@/hooks/useSelectors";
-import Link from "next/link";
-import { setCookie } from "nookies";
 import React from "react";
+import Link from "next/link";
 
-import ss from "./Header.module.scss";
 import { Notices } from "./Notices";
 import { User } from "./User";
+import { useSelectors } from "@/hooks/useSelectors";
+
+import ss from "./Header.module.scss";
 
 interface HeaderProps {}
 

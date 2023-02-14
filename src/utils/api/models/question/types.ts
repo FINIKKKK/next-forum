@@ -8,6 +8,11 @@ export type QuestionDto = {
   tags: TTag[];
 };
 
+export type TQuestions = {
+  total: number;
+  items: TQuestion[];
+};
+
 export type TQuestion = {
   id: number;
   title: string;

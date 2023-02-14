@@ -82,7 +82,7 @@ svg {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  .tag {
+  li {
     font-weight: 700;
     font-size: 14px;
     line-height: 14px;
@@ -97,7 +97,7 @@ svg {
       color: $bg;
     }
   }
-  .tag:not(:last-child) {
+  li:not(:last-child) {
     margin-right: 15px;
   }
 }

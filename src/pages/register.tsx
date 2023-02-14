@@ -1,22 +1,17 @@
 import React from "react";
 import { NextPage } from "next";
 import Link from "next/link";
-import {
-  FormProvider,
-  useController,
-  useForm,
-  useFormContext,
-} from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { setCookie } from "nookies";
+import { useRouter } from "next/router";
 
 import { AuthInput } from "@/components";
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { RegisterScheme } from "@/utils/validation";
 import { Api } from "@/utils/api";
-import { RegisterUserDto } from "@/utils/api/types";
-import { useRouter } from "next/router";
 import { useActions } from "@/hooks/useActions";
+import { RegisterUserDto } from "@/utils/api/models/auth/types";
 
 interface RegisterPageProps {}
 
@@ -24,7 +19,7 @@ const RegisterPage: NextPage<RegisterPageProps> = ({}) => {
   const form = useForm({
     resolver: yupResolver(RegisterScheme),
   });
-  const [error, setError] = React.useState('');
+  const [error, setError] = React.useState("");
   const router = useRouter();
   const { setUserData } = useActions();
 
@@ -36,10 +31,10 @@ const RegisterPage: NextPage<RegisterPageProps> = ({}) => {
         path: "/",
       });
       setUserData(user.token);
-      setError('');
+      setError("");
       router.push("/");
     } catch (err) {
-      setError(err?.response?.data?.message)
+      setError(err?.response?.data?.message);
     }
   };
 

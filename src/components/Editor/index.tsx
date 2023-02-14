@@ -4,15 +4,14 @@ import EditorJS, { OutputData } from "@editorjs/editorjs";
 import CodeBox from "@bomdi/codebox";
 import Delimiter from "@editorjs/delimiter";
 import Embed from "@editorjs/embed";
-import ImageTool from "@editorjs/image";
+import Image from "@editorjs/image";
 import InlineCode from "@editorjs/inline-code";
-import LinkTool from "@editorjs/link";
 import List from "@editorjs/list";
 import Quote from "@editorjs/quote";
-import SimpleImage from "@editorjs/simple-image";
 import Header from "@editorjs/header";
 
 import ss from "./Editor.module.scss";
+
 import { Api } from "@/utils/api";
 
 interface EditorProps {
@@ -20,11 +19,10 @@ interface EditorProps {
   onChange: (blocks: OutputData["blocks"]) => void;
 }
 
-
-class MyImageTool extends ImageTool {
+class MyImage extends Image {
   renderSettings() {
-    const div = document.createElement('div');
-    div.style.marginTop = '-6px';
+    const div = document.createElement("div");
+    div.style.marginTop = "-6px";
     return div;
   }
 }
@@ -45,32 +43,11 @@ const Editor: React.FC<EditorProps> = ({ initialValue, onChange }) => {
           onChange(blocks);
         },
         tools: {
-          // embed: Embed,
-          // image: {
-          //   class: Image,
-          //   config: {
-          //     uploader: {
-          //       async uploadByFile(file: any) {
-          //         const fileName = await Api().files.upload(file);
-          //         return fileName;
-          //       },
-          //     },
-          //   },
-          // },
           image: {
-            class: MyImageTool,
+            class: MyImage,
             config: {
               uploader: {
-                async uploadByFile(file) {
-                  // let storageRef = firebase.storage().ref();
-                  // let imagesRef = storageRef
-                  //   .child("EditorJS")
-                  //   .child("images/" + file.name);
-                  // let metadata = {
-                  //   contentType: "image/jpeg",
-                  // };
-                  // let uploadTask = await imagesRef.put(file, metadata);
-                  // const downloadURL = await uploadTask.ref.getDownloadURL();
+                async uploadByFile(file: any) {
                   const fileName = await Api().files.upload(file, "questions");
                   console.log(fileName);
                   return {
@@ -87,11 +64,9 @@ const Editor: React.FC<EditorProps> = ({ initialValue, onChange }) => {
           list: List,
           codeBox: CodeBox,
           embed: Embed,
-          // linkTool: LinkTool,
           quote: Quote,
           delimiter: Delimiter,
           inlineCode: InlineCode,
-          // simpleImage: SimpleImage,
         },
       });
 
@@ -99,7 +74,7 @@ const Editor: React.FC<EditorProps> = ({ initialValue, onChange }) => {
     }
   }, []);
 
-  return <div id="editor"></div>;
+  return <div className={ss.editor} id="editor"></div>;
 };
 
 export default Editor;

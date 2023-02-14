@@ -1,9 +1,9 @@
 import { AxiosInstance } from "axios";
-import { TQuestion, QuestionDto } from "./types";
+import { TQuestion, QuestionDto, TQuestions } from "./types";
 
 export const QuestionApi = (instance: AxiosInstance) => ({
   async getAll() {
-    const { data } = await instance.get<TQuestion[]>("/questions");
+    const { data } = await instance.get<TQuestions>("/questions");
     return data;
   },
   async getOne(id: number) {

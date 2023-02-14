@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@types/editorjs__header": "^2.6.0",
+    "@types/lodash.debounce": "^4.0.7",
     "@types/moment": "^2.13.0"
   }
 }

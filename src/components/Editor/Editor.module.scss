@@ -1,240 +1,174 @@
+@import "@/styles/assets/variables";
+
 .editor {
-  margin-bottom: 25px;
-  .inner {
-    min-height: 400px;
-    width: 100%;
-    background-color: $purple;
-    border-radius: 10px;
-    padding: 25px 15px;
-  }
-  .ce-toolbar {
-    display: block !important;
-  }
-  .ce-toolbar__settings-btn {
-    display: block !important;
-  }
-  .ce-toolbar__actions {
-    opacity: 1 !important;
-  }
-  .ce-block__content {
-    width: 100%;
-    max-width: 710px;
-  }
-  .ce-toolbar__actions {
-    margin-top: 3px;
-    right: 106%;
-  }
-  .ce-toolbar__plus,
-  .ce-toolbar__settings-btn {
-    color: #fff;
-    &:hover {
-      background-color: $purple2;
-    }
-  }
-  .cdx-search-field {
-    display: none;
-  }
-  .ce-block--selected .ce-block__content {
-    position: relative;
-    background-color: transparent;
-    &::before {
-      content: "";
-      position: absolute;
-      background-color: $purple2;
-      border-radius: 5px;
-      width: calc(100% + 16px);
-      height: 100%;
-      z-index: -1;
-      left: -8px;
-    }
-  }
-  .ce-popover__items {
-    margin-top: 0;
-  }
-  .ce-popover__item-icon {
-    box-shadow: 0 0 0 1px rgba($bg, 0.5);
-    svg path,
-    line {
-      stroke: $bg;
-    }
-    svg path {
-      fill: $bg;
-    }
-  }
-  .ce-popover__item[data-item-name="codeBox"] {
-    svg path {
-      stroke: none !important;
-      fill: $bg !important;
-    }
-  }
-  .ce-popover__item[data-item-name="image"] {
-    svg {
-      fill: none;
-    }
-    svg path:nth-child(1) {
-      stroke: none;
-      fill: $bg;
-    }
-    svg path:nth-child(2) {
-      stroke: $bg;
-      fill: none;
-    }
-    rect {
-      stroke: $bg;
-    }
-  }
-  .ce-popover__item-label {
-    color: $bg;
-  }
-  .cdx-block {
-    font-size: 18px;
-    padding: 0;
-  }
-  .ce-inline-toolbar__toggler-and-button-wrapper {
-    svg {
-      fill: none;
-    }
-    path {
-      stroke: $bg;
-    }
-  }
-  .ce-block:not(:last-child) {
-    margin-bottom: 15px;
-  }
-  .ce-block a {
-    text-decoration: none;
-    color: $main;
-  }
-  .ce-block .inline-code {
-    background-color: $purple2;
-    color: $gray;
-    font-family: "Consolas";
-    font-size: 14px !important;
-    line-height: 20px !important;
-    padding: 10px 15px !important;
-    border-radius: 10px;
-    width: 100%;
-    display: block;
-  }
-  .ce-delimiter::before {
-    font-size: 40px;
-    line-height: 55px;
-    text-align: center;
-    letter-spacing: 10px;
-  }
-  .cdx-list {
-    padding-left: 40px;
-    li {
-      padding: 0;
-    }
-  }
-  .ce-header {
-    font-weight: 700;
-    padding: 0;
-  }
-  h1.ce-header {
-    font-size: 45px;
-    line-height: 50px;
-  }
-  h2.ce-header {
-    font-size: 38px;
-    line-height: 42px;
-  }
-  h3.ce-header {
-    font-size: 32px;
-    line-height: 36px;
-  }
-  h4.ce-header {
-    font-size: 26px;
-    line-height: 32px;
-  }
-  h5.ce-header {
-    font-size: 20px;
-    line-height: 28px;
-  }
-  h6.ce-header {
-    font-size: 16px;
-    line-height: 26px;
-  }
-  .ce-popover__item-icon {
-    path {
-      fill: none !important;
-      stroke: $bg !important;
-    }
-  }
-  .ce-conversion-tool__icon {
-    path,
-    line {
-      fill: none !important;
-      stroke: $bg !important;
-    }
-  }
-  .ce-conversion-tool {
-    color: $bg;
-  }
-  .ce-popover__items {
-    &::-webkit-scrollbar {
+  :global {
+    .ce-toolbar {
       display: block !important;
-      height: 5px;
     }
-    &::-webkit-scrollbar-thumb {
-      background-color: #2e2542;
-      border-radius: 5px;
+    .ce-toolbar__settings-btn {
+      display: block !important;
     }
-    &::-webkit-scrollbar-track {
-      background-color: transparent;
+    .ce-toolbar__actions {
+      opacity: 1 !important;
     }
-  }
-  .image-tool {
-    .cdx-button {
-      background-color: $bg;
-      border: none;
-      color: #fff;
-      font-weight: 700;
-      border-radius: 10px;
-      transition: 0.3s;
+    .ce-block__content {
+      width: 100%;
+      max-width: 710px;
+    }
+    .ce-toolbar__actions {
+      margin-top: 3px;
+      right: 106%;
+    }
+    .ce-toolbar__plus,
+    .ce-toolbar__settings-btn {
+      color: $white;
       &:hover {
-        background-color: lighten($bg, 5%);
+        background-color: $purple2;
       }
+    }
+    .cdx-search-field {
+      display: none;
+    }
+    .ce-block--selected .ce-block__content {
+      position: relative;
+      background-color: transparent;
+      &::before {
+        content: "";
+        position: absolute;
+        background-color: $purple2;
+        border-radius: 5px;
+        width: calc(100% + 16px);
+        height: 100%;
+        z-index: -1;
+        left: -8px;
+      }
+    }
+    .ce-popover__items {
+      margin-top: 0;
+    }
+    .ce-popover__item-icon {
+      box-shadow: 0 0 0 1px rgba($bg, 0.5);
+      svg path,
+      line {
+        stroke: $bg;
+      }
+      svg path {
+        fill: $bg;
+      }
+    }
+    .ce-popover__item[data-item-name="codeBox"] {
+      svg path {
+        stroke: none !important;
+        fill: $bg !important;
+      }
+    }
+    .ce-popover__item[data-item-name="image"] {
       svg {
         fill: none;
       }
       svg path:nth-child(1) {
         stroke: none;
-        fill: #fff;
+        fill: $bg;
       }
       svg path:nth-child(2) {
-        stroke: #fff;
+        stroke: $bg;
         fill: none;
       }
       rect {
-        stroke: #fff;
+        stroke: $bg;
       }
     }
-    img {
-      max-height: 500px;
+    .ce-popover__item-label {
+      color: $bg;
+    }
+    .cdx-block {
+      font-size: 18px;
+      padding: 0;
+    }
+    .ce-inline-toolbar__toggler-and-button-wrapper {
+      svg {
+        fill: none;
+      }
+      path {
+        stroke: $bg;
+      }
+    }
+    .ce-block:not(:last-child) {
+      margin-bottom: 15px;
+    }
+    .ce-block a {
+      text-decoration: none;
+      color: $main;
+    }
+    .ce-block .inline-code {
+      background-color: $purple2;
+      color: $gray;
+      font-family: "Consolas";
+      font-size: 14px !important;
+      line-height: 20px !important;
+      padding: 10px 15px !important;
       border-radius: 10px;
+      width: 100%;
+      display: block;
     }
-  }
-  .cdx-quote {
-    .cdx-input {
-      border: none;
-      background-color: $bg;
-      border-radius: 10px;
-      padding: 10px 15px;
+    .ce-delimiter::before {
+      font-size: 40px;
+      line-height: 55px;
+      text-align: center;
+      letter-spacing: 10px;
     }
-    .cdx-quote__text {
-      font-style: italic;
-      line-height: 24px;
+    .cdx-list {
+      padding-left: 40px;
+      li {
+        padding: 0;
+      }
     }
-  }
-  .codeBoxHolder {
-    .hljs {
-      padding: 20px 15px;
+    .ce-header {
+      font-weight: 700;
+      padding: 0;
     }
-    .codeBoxTextArea {
+    h1.ce-header {
+      font-size: 45px;
+      line-height: 50px;
+    }
+    h2.ce-header {
+      font-size: 38px;
+      line-height: 42px;
+    }
+    h3.ce-header {
+      font-size: 32px;
+      line-height: 36px;
+    }
+    h4.ce-header {
+      font-size: 26px;
+      line-height: 32px;
+    }
+    h5.ce-header {
+      font-size: 20px;
+      line-height: 28px;
+    }
+    h6.ce-header {
+      font-size: 16px;
+      line-height: 26px;
+    }
+    .ce-popover__item-icon {
+      path {
+        fill: none !important;
+        stroke: $bg !important;
+      }
+    }
+    .ce-conversion-tool__icon {
+      path,
+      line {
+        fill: none !important;
+        stroke: $bg !important;
+      }
+    }
+    .ce-conversion-tool {
+      color: $bg;
+    }
+    .ce-popover__items {
       &::-webkit-scrollbar {
-        cursor: grab !important;
         display: block !important;
         height: 5px;
       }
@@ -246,23 +180,85 @@
         background-color: transparent;
       }
     }
-    .dark,
-    table {
-      background-color: #342b48 !important;
+    .image-tool {
+      .cdx-button {
+        background-color: $bg;
+        border: none;
+        color: $white;
+        font-weight: 700;
+        border-radius: 10px;
+        transition: 0.3s;
+        &:hover {
+          background-color: lighten($bg, 5%);
+        }
+        svg {
+          fill: none;
+        }
+        svg path:nth-child(1) {
+          stroke: none;
+          fill: $white;
+        }
+        svg path:nth-child(2) {
+          stroke: $white;
+          fill: none;
+        }
+        rect {
+          stroke: $white;
+        }
+      }
+      img {
+        max-height: 500px;
+        border-radius: 10px;
+      }
     }
-    .codeBoxTextArea div {
-      background-color: #342b48;
+    .cdx-quote {
+      .cdx-input {
+        border: none;
+        background-color: $bg;
+        border-radius: 10px;
+        padding: 10px 15px;
+      }
+      .cdx-quote__text {
+        font-style: italic;
+        line-height: 24px;
+      }
     }
-    .codeBoxSelectDropIcon {
-      top: 5px;
+    .codeBoxHolder {
+      .hljs {
+        padding: 20px 15px;
+      }
+      .codeBoxTextArea {
+        &::-webkit-scrollbar {
+          cursor: grab !important;
+          display: block !important;
+          height: 5px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: #2e2542;
+          border-radius: 5px;
+        }
+        &::-webkit-scrollbar-track {
+          background-color: transparent;
+        }
+      }
+      .dark,
+      table {
+        background-color: #342b48 !important;
+      }
+      .codeBoxTextArea div {
+        background-color: #342b48;
+      }
+      .codeBoxSelectDropIcon {
+        top: 5px;
+      }
+      .codeBoxSelectInput {
+        font-size: 14px !important;
+        font-weight: 700;
+        padding: 5px 36px;
+      }
     }
-    .codeBoxSelectInput {
-      font-size: 14px !important;
-      font-weight: 700;
-      padding: 5px 36px;
+    .image-tool__caption {
+      display: none;
     }
-  }
-  .image-tool__caption {
-    display: none;
   }
 }
