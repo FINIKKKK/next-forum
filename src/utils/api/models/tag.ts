@@ -1,10 +1,10 @@
 import { AxiosInstance } from "axios";
-import { TagDto, TTag } from "../types";
+import { SearchTagDto, TagDto, TTag } from "../types";
 
 export const TagApi = (instance: AxiosInstance) => ({
-  async search(name: string) {
-    const { data } = await instance.get<string, { data: TTag[] }>(
-      `/tags/search?name=${name}`
+  async search(dto: SearchTagDto) {
+    const { data } = await instance.get<SearchTagDto, { data: TTag[] }>(
+      `/tags/search?name=${dto.name}&limit=${dto.limit}`
     );
     return data;
   },

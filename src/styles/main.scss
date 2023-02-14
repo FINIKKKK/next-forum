@@ -461,6 +461,7 @@
   position: relative;
   .tagList {
     margin-right: 15px;
+    flex-wrap: nowrap;
   }
   .tag {
     color: $bg;
@@ -492,6 +493,11 @@
     align-items: center;
     flex-wrap: wrap;
     margin: 0 -5px;
+  }
+  .warning {
+    font-weight: 700;
+    color: $gray;
+    font-size: 14px;
   }
   .tag__item-wrapper {
     flex: 0 0 33.3%;

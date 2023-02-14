@@ -53,3 +53,8 @@ export type TagDto = {
   name: string;
   description: string;
 };
+
+export type SearchTagDto = {
+  name?: string;
+  limit?: number;
+};

@@ -6,6 +6,7 @@ import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React from "react";
+import debounce from "lodash.debounce";
 
 let Editor = dynamic(() => import("../components/Editor"), {
   ssr: false,
@@ -23,6 +24,33 @@ const Page: NextPage<PageProps> = ({}) => {
   const [tags, setTags] = React.useState<TTag[]>([]);
   const [selectedTags, setSelectedTags] = React.useState([]);
   const [errorMessages, setErrorMessages] = React.useState([]);
+  const [isFocus, setIsFocus] = React.useState(false);
+
+  const updateSearchValue = React.useCallback(
+    debounce((value: string) => {
+      (async () => {
+        try {
+          let dto = {
+            name: value,
+            limit: 3,
+          };
+          if (value !== "") {
+            const tags = await Api().tag.search(dto);
+            setTags(tags?.items);
+          }
+        } catch (err) {
+          console.warn(err);
+          alert("Ошибка при получении меток");
+        }
+      })();
+    }, 250),
+    []
+  );
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTagsValue(e.target.value);
+    updateSearchValue(e.target.value);
+  };
 
   const onSubmit = async () => {
     try {
@@ -65,20 +93,20 @@ const Page: NextPage<PageProps> = ({}) => {
     }
   }, [titleValue]);
 
-  React.useEffect(() => {
-    (async () => {
-      if (tagsValue.length) {
-        try {
-          const tags = await Api().tag.search(tagsValue);
-          console.log(tags);
-          setTags(tags?.items);
-        } catch (err) {
-          console.warn(err);
-          alert("Ошибка при получении меток");
-        }
-      }
-    })();
-  }, [tagsValue]);
+  // React.useEffect(() => {
+  //   (async () => {
+  //     if (tagsValue.length) {
+  //       try {
+  //         const tags = await Api().tag.search(tagsValue);
+  //         console.log(tags);
+  //         setTags(tags?.items);
+  //       } catch (err) {
+  //         console.warn(err);
+  //         alert("Ошибка при получении меток");
+  //       }
+  //     }
+  //   })();
+  // }, [tagsValue]);
 
   const onAddTag = (obj: TTag) => {
     setSelectedTags([...selectedTags, obj]);
@@ -133,35 +161,51 @@ const Page: NextPage<PageProps> = ({}) => {
                     ))}
                   </ul>
                 )}
-                <input
-                  value={tagsValue}
-                  onChange={(e) => setTagsValue(e.target.value)}
-                  placeholder="Метки"
-                  type="text"
-                />
+                {selectedTags.length < 5 && (
+                  <input
+                    value={tagsValue}
+                    onChange={onChangeInput}
+                    placeholder="Метки"
+                    type="text"
+                    onFocus={() => setIsFocus(true)}
+                    onBlur={() => setIsFocus(false)}
+                  />
+                )}
               </div>
-              {tagsValue && (
+              {isFocus && tagsValue && (
                 <div className="popup">
-                  {tags
-                    .filter(
-                      (obj) => !selectedTags.some((obj2) => obj2.id === obj.id)
-                    )
-                    .map((obj: TTag) => (
-                      <div className="tag__item-wrapper">
-                        <div
-                          onClick={() => onAddTag(obj)}
-                          key={obj.id}
-                          className="tag__item"
-                        >
-                          <h5 className="name">{obj.name}</h5>
-                          <p>{obj.description}</p>
+                  {tags.length > 0 ? (
+                    tags
+                      .filter(
+                        (obj) =>
+                          !selectedTags.some((obj2) => obj2.id === obj.id)
+                      )
+                      .map((obj: TTag) => (
+                        <div className="tag__item-wrapper">
+                          <div
+                            onClick={() => onAddTag(obj)}
+                            key={obj.id}
+                            className="tag__item"
+                          >
+                            <h5 className="name">{obj.name}</h5>
+                            <p>{obj.description}</p>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))
+                  ) : (
+                    <div className="warning">
+                      По вашему запросу ничего не найдено
+                    </div>
+                  )}
                 </div>
               )}
               {errorMessages.tags && (
                 <div className="error">{errorMessages.tags}</div>
+              )}
+              {selectedTags.length === 5 && (
+                <div className="error">
+                  Вопрос должен иметь максимум 5 меток
+                </div>
               )}
             </div>
 
