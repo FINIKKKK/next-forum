@@ -2,6 +2,9 @@
 
 .editor {
   :global {
+    .codex-editor__redactor {
+      padding-bottom: 100px !important;
+    }
     .ce-toolbar {
       display: block !important;
     }
@@ -228,6 +231,7 @@
         padding: 20px 15px;
       }
       .codeBoxTextArea {
+        border-radius: 10px 10px 10px 0px;
         &::-webkit-scrollbar {
           cursor: grab !important;
           display: block !important;

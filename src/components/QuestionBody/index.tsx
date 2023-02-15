@@ -57,7 +57,7 @@ export const QuestionBody: React.FC<QuestionBodyProps> = ({ value }) => {
         ) : obj.type === "quote" ? (
           <div className={`${ss.quote} ${ss.el}`}>
             <svg width="20" height="20">
-              <use xlinkHref="../img/icons/icons.svg#answers" />
+              <use xlinkHref="../img/icons/icons.svg#quote" />
             </svg>
             <div className={ss.quote__content}>
               <h3>{obj.data.text}</h3>

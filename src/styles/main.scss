@@ -351,12 +351,34 @@
 
 // --------- ques ----------
 .ques {
+  .popup {
+    z-index: 100;
+    position: absolute;
+    top: 55px;
+    right: 40px;
+    border-radius: 10px;
+    padding: 10px;
+    .popup__item {
+      cursor: pointer;
+      font-weight: 700;
+      color: $white;
+      font-size: 14px;
+      opacity: 0.75;
+      transition: 0.2s;
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
   .ques__header {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
     color: $gray;
     font-size: 16px;
+    margin-bottom: 30px;
     svg {
       fill: $gray;
       width: 25px;
@@ -371,8 +393,19 @@
         margin-right: 8px;
       }
     }
+    .eye {
+      svg {
+        width: 20px;
+      }
+    }
+    .favorite {
+      svg {
+        width: 16px;
+      }
+    }
   }
   .options {
+    z-index: 100;
     position: absolute;
     right: 45px;
     top: 35px;
@@ -449,6 +482,33 @@
       }
     }
   }
+  .ques__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .ques__btn {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
+    color: $gray;
+    display: flex;
+    align-items: center;
+    transition: 0.2s;
+    cursor: pointer;
+    &:hover {
+      color: $main;
+      svg {
+        fill: $main;
+      }
+    }
+    svg {
+      transition: 0.2s;
+      margin-right: 16px;
+      fill: $gray;
+      width: 17px;
+    }
+  }
 }
 
 // --------- answer ----------
@@ -458,6 +518,7 @@
     margin-bottom: 90px;
   }
   .answer {
+    position: relative;
     display: flex;
     justify-content: space-between;
   }

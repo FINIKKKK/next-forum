@@ -27,12 +27,14 @@ export const Question: React.FC<QuestionProps> = ({
           <h3>{title}</h3>
         </Link>
         <ul className={`tagList ${ss.tagList}`}>
-          {tags.map((obj) => (
+          {tags.slice(0, 3).map((obj) => (
             <li key={obj.id} className={`hover ${ss.tag}`}>
               <a href="#">{obj.name}</a>
             </li>
           ))}
-          <div className={ss.more}>+3 ЕЩЕ</div>
+          {tags.length > 3 && (
+            <div className={ss.more}>+{tags.length - 3} ЕЩЕ</div>
+          )}
         </ul>
         <div className={ss.date}>{useTimeNow(date)}</div>
       </div>

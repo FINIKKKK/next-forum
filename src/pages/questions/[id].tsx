@@ -6,19 +6,27 @@ import { ForumLayout } from "@/layouts/ForumLayout";
 import { Api } from "@/utils/api";
 import { useTimeNow } from "@/hooks/useTimeNow";
 import { TQuestion } from "@/utils/api/models/question/types";
+import { useSelectors } from "@/hooks/useSelectors";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 interface QuestionPageProps {
   question: TQuestion;
 }
 
 const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
+  const { data } = useSelectors((state) => state.user);
+  const [visiblePopup, setVisiblePopup] = React.useState(false);
+  const refPopup = React.useRef<HTMLDivElement>(null);
+
+  useOutsideClick(refPopup, setVisiblePopup);
+
   return (
     <ForumLayout>
       <div className="ques block rightSide">
         <div className="ques__inner">
-          <div className="ques__title">
+          <div className="ques__header">
             <div className="item">{useTimeNow(question.createdAt)}</div>
-            <div className="item">
+            <div className="item eye">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#eye" />
               </svg>
@@ -30,19 +38,48 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
               </svg>
               <p>3</p>
             </div>
-            <div className="item">
+            <div className="item favorite">
               <svg width="20" height="20">
-                <use xlinkHref="../img/icons/icons.svg#answers" />
+                <use xlinkHref="../img/icons/icons.svg#favorite2" />
               </svg>
               <p>0</p>
             </div>
           </div>
 
-          <svg className="options" width="20" height="20">
-            <use xlinkHref="../img/icons/icons.svg#options" />
-          </svg>
+          <div ref={refPopup} className="popup__wrapper">
+            <svg
+              onClick={() => setVisiblePopup(!visiblePopup)}
+              className="options"
+              width="20"
+              height="20"
+            >
+              <use xlinkHref="../img/icons/icons.svg#options" />
+            </svg>
+            {visiblePopup && (
+              <div className="popup block">
+                {data.id !== question.user.id ? (
+                  <>
+                    <div className="popup__item">Пожаловаться</div>
+                  </>
+                ) : (
+                  <>
+                    <div className="popup__item">Редактировать</div>
+                    <div className="popup__item">Удалить</div>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
 
           <h1 className="title">{question.title}</h1>
+
+          <ul className="tagList">
+            {question.tags.map((obj) => (
+              <li key={obj.id} className="tag hover">
+                <a href="#">{obj.name}</a>
+              </li>
+            ))}
+          </ul>
 
           <div className="userInfo">
             <a href="#">
@@ -66,17 +103,17 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
             </div>
           </div>
 
-          <ul className="tagList">
-            {question.tags.map((obj) => (
-              <li key={obj.id} className="tag hover">
-                <a href="#">{obj.name}</a>
-              </li>
-            ))}
-          </ul>
-
           <QuestionBody value={question.body} />
 
-          <div className="ques__footer"></div>
+          <div className="ques__footer">
+            <div className="ques__btn">Подписаться</div>
+            <div className="ques__btn">
+              <svg width="20" height="20">
+                <use xlinkHref="../img/icons/icons.svg#share" />
+              </svg>
+              <p>Поделиться</p>
+            </div>
+          </div>
         </div>
 
         <div className="answers">
