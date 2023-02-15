@@ -1,9 +1,11 @@
 import { AxiosInstance } from "axios";
-import { TQuestion, QuestionDto, TQuestions } from "./types";
+import { TQuestion, QuestionDto, TQuestions, SearchQuestionDto } from "./types";
 
 export const QuestionApi = (instance: AxiosInstance) => ({
-  async getAll() {
-    const { data } = await instance.get<TQuestions>("/questions");
+  async getAll(params: SearchQuestionDto) {
+    const { data } = await instance.get<TQuestions>(
+      `/questions?limit=${params.limit}&page=${params.page}`
+    );
     return data;
   },
   async getOne(id: number) {

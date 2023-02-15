@@ -1,0 +1,78 @@
+@import "@/styles/assets/variables";
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 70px;
+  width: 100%;
+  :global {
+    .list,
+    .skip {
+      display: flex;
+      align-items: center;
+    }
+    li {
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 23px;
+      a {
+        color: $gray;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      &:hover {
+        a {
+          color: $white;
+        }
+        svg {
+          fill: $white;
+        }
+      }
+      svg {
+        transition: 0.2s;
+        fill: $main;
+        width: 10px;
+        height: 15px;
+      }
+      &:not(:last-child) {
+        margin-right: 25px;
+      }
+      &.selected {
+        border-radius: 50%;
+        background-color: $main;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        a {
+          color: $bg;
+        }
+      }
+    }
+    .pagination__input {
+      max-width: 65px;
+      margin-right: 15px;
+      position: relative;
+      input {
+        color: $white;
+        width: 100%;
+        border-radius: 25px;
+        text-align: center;
+        padding: 5px;
+        border: 1px solid $main;
+        font-weight: 700;
+        font-size: 14px;
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+    }
+  }
+}

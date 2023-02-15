@@ -23,3 +23,8 @@ export type TQuestion = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type SearchQuestionDto = {
+  limit?: number;
+  page?: number;
+};

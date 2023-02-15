@@ -63,7 +63,9 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
                   </>
                 ) : (
                   <>
-                    <div className="popup__item">Редактировать</div>
+                    <div className="popup__item">
+                      <a href={`/create/${question.id}`}>Редактировать</a>
+                    </div>
                     <div className="popup__item">Удалить</div>
                   </>
                 )}

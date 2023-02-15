@@ -8,11 +8,11 @@ import { Api } from "@/utils/api";
 import { QuestionScheme } from "@/utils/validation";
 import { InputTags, InputTitle } from "@/components/CreatePage";
 
-let Editor = dynamic(() => import("../components/Editor"), {
+let Editor = dynamic(() => import("../../components/Editor"), {
   ssr: false,
 });
 
-interface PageProps {}
+interface CreateQuestionPageProps {}
 
 export type TError = {
   title: string;
@@ -20,7 +20,7 @@ export type TError = {
   body: string;
 };
 
-const Page: NextPage<PageProps> = ({}) => {
+const CreateQuestionPage: NextPage<CreateQuestionPageProps> = ({}) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [title, setTitle] = React.useState("");
   const [body, setBody] = React.useState([]);
@@ -103,4 +103,4 @@ const Page: NextPage<PageProps> = ({}) => {
   );
 };
 
-export default Page;
+export default CreateQuestionPage;
