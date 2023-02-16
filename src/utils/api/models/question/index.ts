@@ -4,7 +4,7 @@ import { TQuestion, QuestionDto, TQuestions, SearchQuestionDto } from "./types";
 export const QuestionApi = (instance: AxiosInstance) => ({
   async getAll(params: SearchQuestionDto) {
     const { data } = await instance.get<TQuestions>(
-      `/questions?limit=${params.limit}&page=${params.page}`
+      `/questions?limit=${params.limit}&page=${params.page}&orderBy=${params.orderBy}`
     );
     return data;
   },

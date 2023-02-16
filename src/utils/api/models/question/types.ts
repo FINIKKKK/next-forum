@@ -27,4 +27,5 @@ export type TQuestion = {
 export type SearchQuestionDto = {
   limit?: number;
   page?: number;
+  orderBy?: string;
 };

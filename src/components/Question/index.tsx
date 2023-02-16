@@ -4,6 +4,7 @@ import Link from "next/link";
 import ss from "./Question.module.scss";
 import { TTag } from "@/utils/api/models/tag/types";
 import { useTimeNow } from "@/hooks/useTimeNow";
+import classNames from "classnames";
 
 interface QuestionProps {
   id: number;
@@ -20,6 +21,8 @@ export const Question: React.FC<QuestionProps> = ({
   createdAt: date,
   tags,
 }) => {
+  const [favorite, setFavorite] = React.useState(false);
+
   return (
     <div className={`block hover ${ss.question}`}>
       <div className={ss.left}>
@@ -61,7 +64,10 @@ export const Question: React.FC<QuestionProps> = ({
       </div>
 
       <svg
-        className={ss.favorite}
+        onClick={() => setFavorite(!favorite)}
+        className={classNames(ss.favorite, {
+          [ss.active]: favorite,
+        })}
         width="64"
         height="64"
         viewBox="0 0 64 64"

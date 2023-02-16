@@ -13,13 +13,13 @@ interface UserProps {
 export const User: React.FC<UserProps> = ({ avatar }) => {
   const [showPopup, setShowPopup] = React.useState(false);
   const popupRef = React.useRef<HTMLDivElement>(null);
-  const { setUserData } = useActions();
+  // const { setUserData } = useActions();
 
   useOutsideClick(popupRef, setShowPopup);
 
   const onLogout = () => {
     if (window.confirm("Вы точно хотите выйти с аккаунта?")) {
-      setUserData(null);
+      // setUserData(null);
       setCookie(null, "token", "", { maxAge: 0 });
     }
   };

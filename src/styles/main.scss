@@ -41,20 +41,47 @@
     justify-content: space-between;
   }
   .select {
+    cursor: pointer !important;
     display: flex;
     align-items: center;
-    padding: 8px;
-    border-radius: 5px;
-    cursor: pointer;
-    p {
+    padding: 2px 8px;
+    border-radius: 10px;
+    .select__control {
+      cursor: pointer !important;
+      background: none;
+      border: none !important;
+      outline: none !important;
+      box-shadow: none;
       font-size: 16px;
       line-height: 18px;
-      margin-right: 13px;
     }
-    svg {
-      width: 12px;
-      height: auto;
-      fill: $white;
+    .select__indicator-separator {
+      display: none !important;
+    }
+    .select__single-value {
+      color: $white;
+    }
+    .select__indicator {
+      opacity: 1;
+      &:hover {
+        color: $white;
+      }
+    }
+    .select__menu {
+      background-color: $purple;
+      left: 0px;
+      box-shadow: 0px 0px 5px rgba($bg, 0.7);
+      z-index: 100;
+    }
+    .select__menu-list {
+    }
+    .select__option {
+      cursor: pointer !important;
+      background: none;
+      font-size: 14px;
+    }
+    .select__option--is-selected {
+      font-weight: 700;
     }
   }
   .chooseAnswers {
@@ -68,6 +95,8 @@
       align-items: center;
       cursor: pointer;
       transition: 0.2s;
+      font-weight: 700;
+
       p {
         font-size: 16px;
         margin-right: 13px;
@@ -82,14 +111,12 @@
     }
     .item.active {
       color: $main;
-      pointer-events: none;
       svg {
         fill: $main;
       }
     }
   }
 }
-
 
 // --------- login ----------
 .login {

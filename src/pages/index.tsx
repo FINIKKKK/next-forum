@@ -1,26 +1,38 @@
 import React from "react";
 import qs from "qs";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
+import Select from "react-select";
 
 import { ForumLayout } from "@/layouts/ForumLayout";
 import { Pagination, Question } from "@/components";
 import { Api } from "@/utils/api";
 import { TQuestion } from "@/utils/api/models/question/types";
-import { useRouter } from "next/router";
+import classNames from "classnames";
+
+export const options = [
+  { value: "date", label: "Последние" },
+  { value: "popular", label: "Популярные" },
+];
+
+export const filters = ["С ответом", "Без ответа"];
 
 export default function Home() {
+  const router = useRouter();
   const [questions, setQuestions] = React.useState<TQuestion[]>([]);
   const [total, setTotal] = React.useState(0);
-  const [limit, setLimit] = React.useState(2);
   const [page, setPage] = React.useState(1);
-  const router = useRouter();
+  const [selectedOption, setSelectedOption] = React.useState(options[0]);
+  const isMounted = React.useRef(false);
+  const limit = 2;
+  const [filterActive, setFilterActive] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     (async () => {
       try {
         const params = {
-          limit: 2,
+          limit: limit,
           page: page,
+          orderBy: selectedOption.value,
         };
         const { total, items } = await Api().question.getAll(params);
         setQuestions(items);
@@ -30,15 +42,46 @@ export default function Home() {
         alert("Ошибка при получении вопросов");
       }
     })();
-  }, [page]);
+  }, [page, selectedOption]);
 
   React.useEffect(() => {
-    const params = qs.stringify({
-      page,
-    });
+    if (isMounted.current) {
+      console.log("3");
+      const params = qs.stringify({
+        page: page,
+        orderBy: selectedOption.value,
+      });
+      router.push(`?${params}`);
+    }
+  }, [page, selectedOption]);
 
-    router.push(`?${params}`);
-  }, [page]);
+  React.useEffect(() => {
+    console.log("1");
+    const params = router.query;
+    const orderByItem = options.find((obj) => obj.value === params.orderBy);
+    console.log(params);
+    if (params.page) {
+      console.log(params.page);
+      setPage(Number(params.page));
+      console.log(page);
+    }
+    if (orderByItem) {
+      setSelectedOption(orderByItem);
+    }
+    isMounted.current = true;
+  }, []);
+
+  const onSelectOption = (value: any) => {
+    setSelectedOption(value);
+  };
+
+  const onSetFilterActive = (index: number) => {
+    if (filters[index] === filterActive) {
+      setFilterActive(null);
+    } else {
+      setFilterActive(filters[index]);
+    }
+  };
 
   return (
     <ForumLayout>
@@ -53,26 +96,29 @@ export default function Home() {
         </div>
 
         <div className="filters">
-          <div className="select block hover">
-            <p>Последние</p>
-            <svg width="20" height="20">
-              <use xlinkHref="./img/icons/icons.svg#arrow-down" />
-            </svg>
-          </div>
+          <Select
+            className="select block"
+            classNamePrefix="select"
+            value={selectedOption}
+            onChange={onSelectOption}
+            options={options}
+          />
 
           <div className="chooseAnswers">
-            <div className="item active">
-              <p>С ответом</p>
-              <svg width="20" height="20">
-                <use xlinkHref="./img/icons/icons.svg#check" />
-              </svg>
-            </div>
-            <div className="item">
-              <p>Без ответа</p>
-              <svg width="20" height="20">
-                <use xlinkHref="./img/icons/icons.svg#check" />
-              </svg>
-            </div>
+            {filters.map((label, index) => (
+              <div
+                onClick={() => onSetFilterActive(index)}
+                key={index}
+                className={classNames("item", {
+                  active: filterActive === label,
+                })}
+              >
+                <p>{label}</p>
+                <svg width="20" height="20">
+                  <use xlinkHref="./img/icons/icons.svg#check" />
+                </svg>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -82,7 +128,7 @@ export default function Home() {
           ))}
         </div>
 
-        <Pagination limit={limit} total={total} setPage={setPage} />
+        <Pagination page={page} limit={limit} total={total} setPage={setPage} />
       </div>
     </ForumLayout>
   );
