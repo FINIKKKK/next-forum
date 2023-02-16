@@ -32,7 +32,7 @@ export const Question: React.FC<QuestionProps> = ({
         <ul className={`tagList ${ss.tagList}`}>
           {tags.slice(0, 3).map((obj) => (
             <li key={obj.id} className={`hover ${ss.tag}`}>
-              <a href="#">{obj.name}</a>
+              <a href={`/?tagBy=${obj.name}`}>{obj.name}</a>
             </li>
           ))}
           {tags.length > 3 && (

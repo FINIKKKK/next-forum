@@ -40,8 +40,14 @@
     align-items: center;
     justify-content: space-between;
   }
+  .selects {
+    display: flex;
+    align-items: center;
+  }
   .select {
-    cursor: pointer !important;
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
     display: flex;
     align-items: center;
     padding: 2px 8px;
@@ -54,6 +60,22 @@
       box-shadow: none;
       font-size: 16px;
       line-height: 18px;
+    }
+    .select__control--menu-is-open {
+      .select__single-value {
+        opacity: 0.5;
+      }
+      .select__dropdown-indicator {
+        opacity: 0.5;
+      }
+    }
+    .select__single-value {
+      transition: 0.2s;
+    }
+    .select__dropdown-indicator {
+      transition: 0.2s;
+      pointer-events: none;
+      color: $white !important;
     }
     .select__indicator-separator {
       display: none !important;

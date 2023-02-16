@@ -46,7 +46,7 @@ export const InputTags: React.FC<InputTagsProps> = ({
           alert("Ошибка при получении меток");
         }
       })();
-    }, 250),
+    }, 150),
     []
   );
 

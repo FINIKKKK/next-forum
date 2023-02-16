@@ -3,10 +3,17 @@ import { TQuestion, QuestionDto, TQuestions, SearchQuestionDto } from "./types";
 
 export const QuestionApi = (instance: AxiosInstance) => ({
   async getAll(params: SearchQuestionDto) {
+    const tag = params.tagBy ? `&tagBy=${params.tagBy}` : undefined;
+    const search =
+      params.search !== "" ? `&search=${params.search}` : undefined;
+    // const user = `userId=${params.userId}` || undefined;
     const { data } = await instance.get<TQuestions>(
-      `/questions?limit=${params.limit}&page=${params.page}&orderBy=${params.orderBy}`
+      `/questions?limit=${params.limit}&page=${params.page}&orderBy=${
+        params.orderBy
+      }${tag ? tag : ""}${search ? search : ""}`
     );
     return data;
+    // &${tag ? tag : ""}&${user ? user : ""}&$
   },
   async getOne(id: number) {
     const { data } = await instance.get<TQuestion>(`/questions/${id}`);

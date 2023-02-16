@@ -28,4 +28,7 @@ export type SearchQuestionDto = {
   limit?: number;
   page?: number;
   orderBy?: string;
+  tagBy?: string;
+  userId?: number;
+  search?: string;
 };
