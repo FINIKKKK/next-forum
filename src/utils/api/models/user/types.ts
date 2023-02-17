@@ -1,3 +1,8 @@
+export type TUsers = {
+  total: number;
+  items: TUser[];
+};
+
 export type TUser = {
   id: number;
   login: string;
@@ -9,4 +14,10 @@ export type TUser = {
   createdAt: string;
   updatedAt: string;
   token: string;
+};
+
+export type ParamsUserDto = {
+  limit?: number;
+  page?: number;
+  search?: string;
 };

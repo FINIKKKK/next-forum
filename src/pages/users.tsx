@@ -3,14 +3,14 @@ import qs from "qs";
 import { useRouter } from "next/router";
 
 import { ForumLayout } from "@/layouts/ForumLayout";
-import { Pagination, Tag } from "@/components";
+import { Pagination, Tag, User } from "@/components";
 import { Api } from "@/utils/api";
 import { Search } from "@/components/PageHome";
-import { TTag } from "@/utils/api/models/tag/types";
+import { TUser } from "@/utils/api/models/user/types";
 
-export default function TagsPage() {
+export default function UsersPage() {
   const router = useRouter();
-  const [tags, setTags] = React.useState<TTag[]>([]);
+  const [users, setUsers] = React.useState<TUser[]>([]);
   const [total, setTotal] = React.useState(0);
   const [page, setPage] = React.useState(1);
   const isMounted = React.useRef(false);
@@ -26,12 +26,12 @@ export default function TagsPage() {
           page: page,
           search: searchValue2,
         };
-        const { total, items } = await Api().tag.getAll(params);
-        setTags(items);
+        const { total, items } = await Api().user.getAll(params);
+        setUsers(items);
         setTotal(total);
       } catch (err) {
         console.warn(err);
-        alert("Ошибка при получении меток");
+        alert("Ошибка при получении пользователей");
       }
     })();
   }, [page, searchValue2]);
@@ -61,7 +61,7 @@ export default function TagsPage() {
   return (
     <ForumLayout>
       <div className="content block">
-        <h1 className="title">Все метки</h1>
+        <h1 className="title">Все пользователи</h1>
 
         <Search
           value={searchValue}
@@ -70,8 +70,8 @@ export default function TagsPage() {
         />
 
         <div className="tags">
-          {tags.map((obj: TTag) => (
-            <Tag key={obj.id} {...obj} />
+          {users.map((obj: TUser) => (
+            <User key={obj.id} {...obj} />
           ))}
         </div>
 

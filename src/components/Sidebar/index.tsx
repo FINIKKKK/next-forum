@@ -1,3 +1,5 @@
+import { Api } from "@/utils/api";
+import { TTag } from "@/utils/api/models/tag/types";
 import Link from "next/link";
 import React from "react";
 
@@ -6,6 +8,25 @@ import ss from "./Sidebar.module.scss";
 interface SidebarProps {}
 
 export const Sidebar: React.FC<SidebarProps> = ({}) => {
+  const [tags, setTags] = React.useState<TTag[]>([]);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const params = {
+          limit: 16,
+          page: 1,
+        };
+        const tags = await Api().tag.getAll(params);
+        console.log(tags);
+        setTags(tags.items);
+      } catch (err) {
+        console.warn(err);
+        alert("Ошибка при получении меток");
+      }
+    })();
+  }, []);
+
   return (
     <aside className={`sidebar ${ss.sidebar}`}>
       <Link href="/create" className={`btn ${ss.btn}`}>
@@ -63,7 +84,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             </Link>
           </li>
           <li className={`hover ${ss.item}`}>
-            <a href="#">
+            <a href="/users">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#users" />
               </svg>
@@ -76,24 +97,11 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
       <div className={ss.block}>
         <h5>Топ меток</h5>
         <ul className={`tagList ${ss.tagList}`}>
-          <li className={`hover ${ss.tag}`}>
-            <a href="#">POSTGRES</a>
-          </li>
-          <li className={`hover ${ss.tag}`}>
-            <a href="#">PYthon</a>
-          </li>
-          <li className={`hover ${ss.tag}`}>
-            <a href="#">C++</a>
-          </li>
-          <li className={`hover ${ss.tag}`}>
-            <a href="#">Figma</a>
-          </li>
-          <li className={`hover ${ss.tag}`}>
-            <a href="#">NExtJS</a>
-          </li>
-          <li className={`hover ${ss.tag}`}>
-            <a href="#">NEstJS</a>
-          </li>
+          {tags.map((obj) => (
+            <li key={obj.id} className={`hover ${ss.tag}`}>
+              <a href={`/?tagBy=${obj.name}`}>{obj.name}</a>
+            </li>
+          ))}
         </ul>
       </div>
     </aside>

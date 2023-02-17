@@ -1,13 +1,20 @@
 import { AxiosInstance } from "axios";
-import { TUser } from "./types";
+import { TUser, ParamsUserDto, TUsers } from "./types";
 
 export const UserApi = (instance: AxiosInstance) => ({
   async getProfile() {
     const { data } = await instance.get<TUser>("/users/profile");
     return data;
   },
-  async getAll() {
-    const { data } = await instance.get<TUser[]>("/users");
+  async getAll(params: ParamsUserDto) {
+    const search =
+      params.search !== "" && params.search !== undefined
+        ? `&search=${params.search}`
+        : undefined;
+
+    const { data } = await instance.get<TUsers>(
+      `/users?limit=${params.limit}&page=${params.page}${search ? search : ""}`
+    );
     return data;
   },
   async getOne(id: number) {

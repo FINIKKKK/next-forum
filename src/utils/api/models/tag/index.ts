@@ -9,8 +9,9 @@ export const TagApi = (instance: AxiosInstance) => ({
     return data;
   },
   async getAll(params: ParamsTagDto) {
+    console.log("params.search", params.search);
     const search =
-      params.search !== "" ? `&search=${params.search}` : undefined;
+      params.search !== "" && params.search !== undefined ? `&search=${params.search}` : undefined;
 
     const { data } = await instance.get<TTags>(
       `/tags?limit=${params.limit}&page=${params.page}${
