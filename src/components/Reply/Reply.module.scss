@@ -1,0 +1,33 @@
+@import '@/styles/assets/variables';
+
+.reply {
+  margin-bottom: 70px;
+  .user {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .avatar {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .name {
+    margin-bottom: 5px;
+  }
+  .login {
+    color: $gray;
+    font-weight: 700;
+  }
+  .editor {
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 20px;
+  }
+}

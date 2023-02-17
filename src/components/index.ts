@@ -8,6 +8,7 @@ export * from './Answer';
 export * from './Tag';
 export * from './User';
 export * from './QuestionBody';
+export * from './Reply';
 export * from './CreatePage/InputTags';
 
 export * from './AuthInput';

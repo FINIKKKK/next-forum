@@ -1,7 +1,7 @@
 import React from "react";
 import { GetServerSideProps, NextPage } from "next";
 
-import { Answer, QuestionBody } from "@/components";
+import { Answer, QuestionBody, Reply } from "@/components";
 import { ForumLayout } from "@/layouts/ForumLayout";
 import { Api } from "@/utils/api";
 import { useTimeNow } from "@/hooks/useTimeNow";
@@ -120,6 +120,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
 
         <div className="answers">
           <h2 className="answer__title">Ответы</h2>
+          <Reply questionId={question.id} />
           <Answer />
         </div>
       </div>

@@ -1,11 +1,12 @@
-import axios from 'axios';
-import { GetServerSidePropsContext, NextPageContext } from 'next';
-import Cookies, { parseCookies } from 'nookies';
-import { AuthApi } from './models/auth';
-import { FilesApi } from './models/files';
-import { QuestionApi } from './models/question';
-import { TagApi } from './models/tag';
-import { UserApi } from './models/user';
+import axios from "axios";
+import { GetServerSidePropsContext, NextPageContext } from "next";
+import Cookies, { parseCookies } from "nookies";
+import { AnswerApi } from "./models/answer";
+import { AuthApi } from "./models/auth";
+import { FilesApi } from "./models/files";
+import { QuestionApi } from "./models/question";
+import { TagApi } from "./models/tag";
+import { UserApi } from "./models/user";
 
 export type ApiReturnTypes = {
   auth: ReturnType<typeof AuthApi>;
@@ -13,6 +14,7 @@ export type ApiReturnTypes = {
   question: ReturnType<typeof QuestionApi>;
   files: ReturnType<typeof FilesApi>;
   tag: ReturnType<typeof TagApi>;
+  answer: ReturnType<typeof AnswerApi>;
 };
 
 export const Api = (ctx?: NextPageContext | GetServerSidePropsContext) => {
@@ -20,7 +22,7 @@ export const Api = (ctx?: NextPageContext | GetServerSidePropsContext) => {
   const token = cookies.token;
 
   const instance = axios.create({
-    baseURL: 'http://localhost:7777/',
+    baseURL: "http://localhost:7777/",
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -32,5 +34,6 @@ export const Api = (ctx?: NextPageContext | GetServerSidePropsContext) => {
     question: QuestionApi(instance),
     files: FilesApi(instance),
     tag: TagApi(instance),
+    answer: AnswerApi(instance),
   };
 };

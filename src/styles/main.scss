@@ -779,7 +779,12 @@
     padding: 25px 15px;
   }
 }
-
+.editor__answer {
+  margin-left: 70px;
+  .ce-toolbar__actions {
+    right: 101.5% !important;
+  }
+}
 
 // --------- tags ----------
 .tags {
