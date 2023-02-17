@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { SearchTagDto, TagDto, TTag, TTags } from "./types";
+import { ParamsTagDto, SearchTagDto, TagDto, TTag, TTags } from "./types";
 
 export const TagApi = (instance: AxiosInstance) => ({
   async search(dto: SearchTagDto) {
@@ -8,8 +8,15 @@ export const TagApi = (instance: AxiosInstance) => ({
     );
     return data;
   },
-  async getAll() {
-    const { data } = await instance.get<TTags>("/tags");
+  async getAll(params: ParamsTagDto) {
+    const search =
+      params.search !== "" ? `&search=${params.search}` : undefined;
+
+    const { data } = await instance.get<TTags>(
+      `/tags?limit=${params.limit}&page=${params.page}${
+        search ? search : ""
+      }`
+    );
     return data;
   },
   async getOne(id: number) {

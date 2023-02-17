@@ -55,12 +55,12 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             </a>
           </li>
           <li className={`hover ${ss.item}`}>
-            <a href="#">
+            <Link href="/tags">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#tags" />
               </svg>
               <p>Все метки</p>
-            </a>
+            </Link>
           </li>
           <li className={`hover ${ss.item}`}>
             <a href="#">

@@ -1,5 +1,5 @@
 export type TTags = {
-  count: number;
+  total: number;
   items: TTag[];
 };
 
@@ -19,4 +19,10 @@ export type TagDto = {
 export type SearchTagDto = {
   name?: string;
   limit?: number;
+};
+
+export type ParamsTagDto = {
+  limit?: number;
+  page?: number;
+  search?: string;
 };

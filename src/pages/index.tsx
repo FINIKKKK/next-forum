@@ -1,40 +1,29 @@
 import React from "react";
 import qs from "qs";
 import { useRouter } from "next/router";
-import Select from "react-select";
 
 import { ForumLayout } from "@/layouts/ForumLayout";
 import { Pagination, Question } from "@/components";
 import { Api } from "@/utils/api";
 import { TQuestion } from "@/utils/api/models/question/types";
-import classNames from "classnames";
-import debounce from "lodash.debounce";
-
-export const options = [
-  { value: "date", label: "Последние" },
-  { value: "popular", label: "Популярные" },
-];
-
-export const options2 = [
-  { value: "forewer", label: "Всё время" },
-  { value: "year", label: "Год" },
-  { value: "mouth", label: "Месяц" },
-  { value: "weak", label: "Неделя" },
-  { value: "day", label: "День" },
-];
-
-export const filters = ["С ответом", "Без ответа"];
+import {
+  Filters,
+  options,
+  options2,
+  Search,
+  Selects,
+} from "@/components/PageHome";
 
 export default function Home() {
   const router = useRouter();
   const [questions, setQuestions] = React.useState<TQuestion[]>([]);
   const [total, setTotal] = React.useState(0);
   const [page, setPage] = React.useState(1);
-  const [selectedOption, setSelectedOption] = React.useState(options[0]);
-  const [selectedOption2, setSelectedOption2] = React.useState(options2[0]);
+  const [option, setOption] = React.useState(options[0]);
+  const [option2, setOption2] = React.useState(options2[0]);
   const isMounted = React.useRef(false);
   const limit = 2;
-  const [filterActive, setFilterActive] = React.useState<string | null>(null);
+  const [activeFilter, setActiveFilter] = React.useState<string | null>(null);
   const [searchValue, setSearchValue] = React.useState("");
   const [searchValue2, setSearchValue2] = React.useState("");
   const [tag, setTag] = React.useState<string | undefined>(undefined);
@@ -45,7 +34,7 @@ export default function Home() {
         const params = {
           limit: limit,
           page: page,
-          orderBy: selectedOption.value,
+          orderBy: option.value,
           tagBy: tag,
           search: searchValue2,
         };
@@ -57,19 +46,19 @@ export default function Home() {
         alert("Ошибка при получении вопросов");
       }
     })();
-  }, [page, selectedOption, tag, searchValue2]);
+  }, [page, option, tag, searchValue2]);
 
   React.useEffect(() => {
     if (isMounted.current) {
       const params = qs.stringify({
         page: page,
-        orderBy: selectedOption.value,
+        orderBy: option.value,
         tagBy: tag,
         search: searchValue2,
       });
       router.push(`?${params}`);
     }
-  }, [page, selectedOption, tag, searchValue2]);
+  }, [page, option, tag, searchValue2]);
 
   React.useEffect(() => {
     const params = router.query;
@@ -78,10 +67,11 @@ export default function Home() {
       setPage(Number(params.page));
     }
     if (orderByItem) {
-      setSelectedOption(orderByItem);
+      setOption(orderByItem);
     }
     if (params.search) {
       setSearchValue(params.search);
+      setSearchValue2(params.search);
     }
     if (params.tagBy) {
       setTag(params.tagBy);
@@ -89,80 +79,29 @@ export default function Home() {
     isMounted.current = true;
   }, []);
 
-  const onSetFilterActive = (index: number) => {
-    if (filters[index] === filterActive) {
-      setFilterActive(null);
-    } else {
-      setFilterActive(filters[index]);
-    }
-  };
-
-  const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-    setSearch(e.target.value);
-  };
-
-  const setSearch = React.useCallback(
-    debounce((value: string) => {
-      setSearchValue2(value);
-    }, 250),
-    []
-  );
-
   return (
     <ForumLayout>
       <div className="content block">
         <h1 className="title">Все вопросы</h1>
 
-        <div className="search input block hover">
-          <input
-            value={searchValue}
-            onChange={onChangeSearchInput}
-            type="text"
-            placeholder="Поиск вопросов"
-          />
-          <svg width="20" height="20">
-            <use xlinkHref="./img/icons/icons.svg#search" />
-          </svg>
-        </div>
+        <Search
+          value={searchValue}
+          setValue={setSearchValue}
+          setSearchValue={setSearchValue2}
+        />
 
         <div className="filters">
-          <div className="selects">
-            <Select
-              className="select block"
-              classNamePrefix="select"
-              value={selectedOption}
-              onChange={(value: any) => setSelectedOption(value)}
-              options={options}
-            />
+          <Selects
+            option={option}
+            setOption={setOption}
+            option2={option2}
+            setOption2={setOption2}
+          />
 
-            {selectedOption === options[1] && (
-              <Select
-                className="select block"
-                classNamePrefix="select"
-                value={selectedOption2}
-                onChange={(value: any) => setSelectedOption2(value)}
-                options={options2}
-              />
-            )}
-          </div>
-
-          <div className="chooseAnswers">
-            {filters.map((label, index) => (
-              <div
-                onClick={() => onSetFilterActive(index)}
-                key={index}
-                className={classNames("item", {
-                  active: filterActive === label,
-                })}
-              >
-                <p>{label}</p>
-                <svg width="20" height="20">
-                  <use xlinkHref="./img/icons/icons.svg#check" />
-                </svg>
-              </div>
-            ))}
-          </div>
+          <Filters
+            activeFilter={activeFilter}
+            setActiveFilter={setActiveFilter}
+          />
         </div>
 
         <div className="questions">
