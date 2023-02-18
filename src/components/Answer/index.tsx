@@ -1,10 +1,17 @@
+import { TUser } from "@/utils/api/models/user/types";
+import { OutputBlockData } from "@editorjs/editorjs";
+import Link from "next/link";
 import React from "react";
+import { QuestionBody } from "../QuestionBody";
 
 import ss from "./Answer.module.scss";
 
-interface AnswerProps {}
+interface AnswerProps {
+  body: OutputBlockData[];
+  user: TUser;
+}
 
-export const Answer: React.FC<AnswerProps> = ({}) => {
+export const Answer: React.FC<AnswerProps> = ({ body, user }) => {
   return (
     <div className="answer">
       <div className="review">
@@ -22,15 +29,28 @@ export const Answer: React.FC<AnswerProps> = ({}) => {
         </svg>
 
         <div className="answer__header">
-          <div className="userInfo">
-            <a href="#">
-              <img src="../img/avatar.png" alt="avatar" className="avatar" />
-            </a>
+          <div className={ss.user}>
+            <Link href={`/profile/${user.id}`}>
+              <img
+                src={
+                  user.avatar !== null
+                    ? `http://localhost:7777/img/avatars/${user.avatar}`
+                    : `../img/avatar.png`
+                }
+                alt="avatar"
+                className={ss.avatar}
+              />
+            </Link>
             <div className="box">
-              <a href="#">
-                <h6 className="name">Dmitriy Bozhko</h6>
-              </a>
-              <div className="date">3 часа назад</div>
+              {user.firstName !== null ||
+                (user.lastName !== null && (
+                  <div className={ss.name}>
+                    {user.firstName} {user.lastName}
+                  </div>
+                ))}
+              <Link href={`/profile/${user.id}`}>
+                <h6 className={ss.login}>@{user.login}</h6>
+              </Link>
             </div>
           </div>
           <div className="isAnswer">
@@ -41,43 +61,7 @@ export const Answer: React.FC<AnswerProps> = ({}) => {
           </div>
         </div>
 
-        <div className="ques__content">
-          <p className="text">
-            В строке <b>myStructure* dataBase;</b> вы определили указатель, но
-            не сказали куда ему ссылаться. Далее в методе <b>NewDataBase</b> вы
-            обращаетесь к элементу массива:{" "}
-            <b>dataBase[index].ExamName = EnterExamName();</b> , а так как
-            указатель ссылается "в никуда" - при выполнении этого участка
-            получаете ошибку. Чтобы этого избежать необходимо предварительно
-            выделить память:
-          </p>
-
-          <div className="code">
-            <div className="code__inner">
-              ... <br />
-              dataBaseSize = EnterSize(); <br />
-              dataBase = new myStructure[dataBaseSize];
-              <br />
-              ...
-              <br />
-            </div>
-          </div>
-
-          <p className="text">
-            Может быть, это какая-то проблема со string?
-            <br />
-            <br />
-            Так как память выделяется вами, вами же она и должна быть
-            возвращена, для этого необходимо добавить delete[] dataBase; в
-            нужном вам месте, учитывая вашу архитектуру приложения - лучше всего
-            в деструкторе класса. Хотя архитектуру приложения тоже лучше
-            пересмотреть.
-            <br />
-            <br />
-            P.S. ваши циклы do...while лучше заменить на обычные while (в первом
-            случае) и for (во втором).
-          </p>
-        </div>
+        <QuestionBody body={body} />
 
         <div className="answer__footer">
           <button className="btn">Ответить</button>

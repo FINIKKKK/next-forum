@@ -3,8 +3,6 @@ export type LoginUserDto = {
   password: string;
 };
 
-export type RegisterUserDto = {
+export type RegisterUserDto = LoginUserDto & {
   login: string;
-  email: string;
-  password: string;
 };

@@ -8,12 +8,13 @@ import { useTimeNow } from "@/hooks/useTimeNow";
 import { TQuestion } from "@/utils/api/models/question/types";
 import { useSelectors } from "@/hooks/useSelectors";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
+import { TAnswer } from "@/utils/api/models/answer/types";
 
 interface QuestionPageProps {
   question: TQuestion;
 }
 
-const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
+const QuestionPage: NextPage<QuestionPageProps> = ({ question, answers }) => {
   const { data } = useSelectors((state) => state.user);
   const [visiblePopup, setVisiblePopup] = React.useState(false);
   const refPopup = React.useRef<HTMLDivElement>(null);
@@ -105,7 +106,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
             </div>
           </div>
 
-          <QuestionBody value={question.body} />
+          <QuestionBody body={question.body} />
 
           <div className="ques__footer">
             <div className="ques__btn">Подписаться</div>
@@ -120,8 +121,10 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question }) => {
 
         <div className="answers">
           <h2 className="answer__title">Ответы</h2>
-          <Reply questionId={question.id} />
-          <Answer />
+          <Reply questionId={question.id} user={question.user} />
+          {answers.map((obj: TAnswer) => (
+            <Answer key={obj.id} {...obj} />
+          ))}
         </div>
       </div>
     </ForumLayout>
@@ -132,9 +135,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
     const id = ctx?.params?.id;
     const question = await Api().question.getOne(id);
+    const answers = await Api().answer.getAll({ questionId: question.id });
     return {
       props: {
         question,
+        answers,
       },
     };
   } catch (err) {

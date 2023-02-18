@@ -1,8 +1,8 @@
 import { AxiosInstance } from "axios";
-import { TQuestion, QuestionDto, TQuestions, SearchQuestionDto } from "./types";
+import { TQuestion, QuestionDto, TQuestions, ParamsQuestionDto } from "./types";
 
 export const QuestionApi = (instance: AxiosInstance) => ({
-  async getAll(params: SearchQuestionDto) {
+  async getAll(params: ParamsQuestionDto) {
     const tag = params.tagBy ? `&tagBy=${params.tagBy}` : undefined;
     const search =
       params.search !== "" ? `&search=${params.search}` : undefined;

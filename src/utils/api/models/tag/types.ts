@@ -1,14 +1,12 @@
-export type TTags = {
-  total: number;
+import { ParamsDto, TBase, TTotal } from "../../types";
+
+export type TTags = TTotal & {
   items: TTag[];
 };
 
-export type TTag = {
-  id: number;
+export type TTag = TBase & {
   name: string;
   description: string;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type TagDto = {
@@ -21,8 +19,6 @@ export type SearchTagDto = {
   limit?: number;
 };
 
-export type ParamsTagDto = {
-  limit?: number;
-  page?: number;
+export type ParamsTagDto = ParamsDto & {
   search?: string;
 };

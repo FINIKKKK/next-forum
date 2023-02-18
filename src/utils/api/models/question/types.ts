@@ -1,6 +1,19 @@
 import { OutputBlockData } from "@editorjs/editorjs";
+import { ParamsDto, TBase, TTotal } from "../../types";
 import { TTag } from "../tag/types";
 import { TUser } from "../user/types";
+
+export type TQuestions = TTotal & {
+  items: TQuestion[];
+};
+
+export type TQuestion = TBase & {
+  title: string;
+  body: OutputBlockData[];
+  user: TUser;
+  tags: TTag[];
+  views: number;
+};
 
 export type QuestionDto = {
   title: string;
@@ -8,25 +21,7 @@ export type QuestionDto = {
   tags: TTag[];
 };
 
-export type TQuestions = {
-  total: number;
-  items: TQuestion[];
-};
-
-export type TQuestion = {
-  id: number;
-  title: string;
-  body: OutputBlockData[];
-  user: TUser;
-  tags: TTag[];
-  views: number;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type SearchQuestionDto = {
-  limit?: number;
-  page?: number;
+export type ParamsQuestionDto = ParamsDto & {
   orderBy?: string;
   tagBy?: string;
   userId?: number;

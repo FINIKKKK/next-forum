@@ -26,3 +26,7 @@ export const QuestionScheme = yup.object().shape({
     .max(6, "Вопрос должен иметь максимум 6 меток"),
   body: yup.array().min(1, "Вы должны хоть что-то написать"),
 });
+
+export const AnswerScheme = yup.object().shape({
+  body: yup.array().min(1, "Вы должны хоть что-то написать"),
+});

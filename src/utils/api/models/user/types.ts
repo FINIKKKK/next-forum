@@ -1,23 +1,19 @@
-export type TUsers = {
-  total: number;
+import { ParamsDto, TBase, TTotal } from "../../types";
+
+export type TUsers = TTotal & {
   items: TUser[];
 };
 
-export type TUser = {
-  id: number;
+export type TUser = TBase & {
   login: string;
   email: string;
   password?: string;
   firstName?: string | null;
   lastName?: string | null;
   avatar?: string | null;
-  createdAt: string;
-  updatedAt: string;
   token: string;
 };
 
-export type ParamsUserDto = {
-  limit?: number;
-  page?: number;
+export type ParamsUserDto = ParamsDto & {
   search?: string;
 };

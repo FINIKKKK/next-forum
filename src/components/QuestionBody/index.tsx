@@ -5,13 +5,13 @@ import React from "react";
 import ss from "./QuestionBody.module.scss";
 
 interface QuestionBodyProps {
-  value: OutputBlockData[];
+  body: OutputBlockData[];
 }
 
-export const QuestionBody: React.FC<QuestionBodyProps> = ({ value }) => {
+export const QuestionBody: React.FC<QuestionBodyProps> = ({ body }) => {
   return (
     <div className={ss.body}>
-      {value.map((obj) =>
+      {body.map((obj) =>
         obj.type === "paragraph" ? (
           <p
             className={`${ss.text} ${ss.el}`}

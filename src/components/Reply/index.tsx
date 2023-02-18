@@ -1,5 +1,7 @@
 import { Api } from "@/utils/api";
+import { TUser } from "@/utils/api/models/user/types";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import React from "react";
 
 import ss from "./Reply.module.scss";
@@ -10,9 +12,10 @@ let AnswerEditor = dynamic(() => import("@/components/AnswerEditor"), {
 
 interface ReplyProps {
   questionId: number;
+  user: TUser;
 }
 
-export const Reply: React.FC<ReplyProps> = ({ questionId }) => {
+export const Reply: React.FC<ReplyProps> = ({ questionId, user }) => {
   const [body, setBody] = React.useState([]);
 
   const onSumbit = async () => {
@@ -34,14 +37,27 @@ export const Reply: React.FC<ReplyProps> = ({ questionId }) => {
       <div className={ss.answer__content}>
         <div className={ss.answer__header}>
           <div className={ss.user}>
-            <a href="#">
-              <img src="../img/avatar.png" alt="avatar" className={ss.avatar} />
-            </a>
+            <Link href={`/profile/${user.id}`}>
+              <img
+                src={
+                  user.avatar !== null
+                    ? `http://localhost:7777/img/avatars/${user.avatar}`
+                    : `../img/avatar.png`
+                }
+                alt="avatar"
+                className={ss.avatar}
+              />
+            </Link>
             <div className="box">
-              <div className={ss.name}>Dmitriy Bozhko</div>
-              <a href="#">
-                <h6 className={ss.login}>@digikrash</h6>
-              </a>
+              {user.firstName !== null ||
+                (user.lastName !== null && (
+                  <div className={ss.name}>
+                    {user.firstName} {user.lastName}
+                  </div>
+                ))}
+              <Link href={`/profile/${user.id}`}>
+                <h6 className={ss.login}>@{user.login}</h6>
+              </Link>
             </div>
           </div>
         </div>
