@@ -1,18 +1,18 @@
-export * from './Header';
-export * from './Footer';
-export * from './Sidebar';
-export * from './Pagination';
+export * from "./base/Header";
+export * from "./base/Footer";
+export * from "./base/Sidebar";
 
-export * from './Question';
-export * from './Answer';
-export * from './Tag';
-export * from './User';
-export * from './QuestionBody';
-export * from './Reply';
-export * from './CreatePage/InputTags';
+export * from "./UI/Pagination";
+export * from "./UI/Search";
+export * from "./UI/AuthInput";
+export * from "./UI/UserBox";
 
-export * from './AuthInput';
+export * from "./components/Question";
+export * from "./components/Answer";
+export * from "./components/Tag";
+export * from "./components/User";
+export * from "./components/QuestionBody";
+export * from "./components/Reply";
 
-
-
-
+export * from "./pages/PageCreate";
+export * from "./pages/PageHome";

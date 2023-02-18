@@ -1,3 +1,4 @@
+import { UserBox } from "@/components";
 import { TUser } from "@/utils/api/models/user/types";
 import { OutputBlockData } from "@editorjs/editorjs";
 import Link from "next/link";
@@ -29,30 +30,7 @@ export const Answer: React.FC<AnswerProps> = ({ body, user }) => {
         </svg>
 
         <div className="answer__header">
-          <div className={ss.user}>
-            <Link href={`/profile/${user.id}`}>
-              <img
-                src={
-                  user.avatar !== null
-                    ? `http://localhost:7777/img/avatars/${user.avatar}`
-                    : `../img/avatar.png`
-                }
-                alt="avatar"
-                className={ss.avatar}
-              />
-            </Link>
-            <div className="box">
-              {user.firstName !== null ||
-                (user.lastName !== null && (
-                  <div className={ss.name}>
-                    {user.firstName} {user.lastName}
-                  </div>
-                ))}
-              <Link href={`/profile/${user.id}`}>
-                <h6 className={ss.login}>@{user.login}</h6>
-              </Link>
-            </div>
-          </div>
+          <UserBox user={user} />
           <div className="isAnswer">
             <p>Ответ</p>
             <svg width="20" height="20">

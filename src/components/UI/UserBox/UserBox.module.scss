@@ -1,13 +1,10 @@
 @import '@/styles/assets/variables';
 
-.reply {
-  margin-bottom: 70px;
-  .user {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
+.user {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 20px;
   .avatar {
     width: 50px;
     border-radius: 50%;
@@ -24,10 +21,5 @@
   .login {
     color: $gray;
     font-weight: 700;
-  }
-  .editor {
-    border-radius: 10px;
-    margin-bottom: 15px;
-    padding: 20px;
   }
 }

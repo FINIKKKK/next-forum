@@ -10,7 +10,7 @@ export const Notices: React.FC<NoticesProps> = ({}) => {
       <svg className={ss.icon} width="20" height="20">
         <use xlinkHref="../img/icons/icons.svg#bell" />
       </svg>
-      <span className={ss.number}>13</span>
+      {/* <span className={ss.number}>13</span> */}
     </div>
   );
 };

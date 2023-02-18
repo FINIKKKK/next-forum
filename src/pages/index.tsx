@@ -3,16 +3,9 @@ import qs from "qs";
 import { useRouter } from "next/router";
 
 import { ForumLayout } from "@/layouts/ForumLayout";
-import { Pagination, Question } from "@/components";
+import { Filters, options, options2, Pagination, Question, Search, Selects } from "@/components";
 import { Api } from "@/utils/api";
 import { TQuestion } from "@/utils/api/models/question/types";
-import {
-  Filters,
-  options,
-  options2,
-  Search,
-  Selects,
-} from "@/components/PageHome";
 
 export default function Home() {
   const router = useRouter();

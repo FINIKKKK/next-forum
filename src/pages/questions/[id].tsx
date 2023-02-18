@@ -1,7 +1,7 @@
 import React from "react";
 import { GetServerSideProps, NextPage } from "next";
 
-import { Answer, QuestionBody, Reply } from "@/components";
+import { Answer, QuestionBody, Reply, UserBox } from "@/components";
 import { ForumLayout } from "@/layouts/ForumLayout";
 import { Api } from "@/utils/api";
 import { useTimeNow } from "@/hooks/useTimeNow";
@@ -84,27 +84,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question, answers }) => {
             ))}
           </ul>
 
-          <div className="userInfo">
-            <a href="#">
-              <img
-                src={
-                  question.user.avatar !== null
-                    ? `http://localhost:7777/img/avatars/${question.user.avatar}`
-                    : "../img/avatar.png"
-                }
-                alt="avatar"
-                className="avatar"
-              />
-            </a>
-            <div className="box">
-              <a href="#">
-                <h6 className="username">@{question.user.login}</h6>
-                <h6 className="name">
-                  {question.user.firstName} {question.user.lastName}
-                </h6>
-              </a>
-            </div>
-          </div>
+          <UserBox user={question.user} />
 
           <QuestionBody body={question.body} />
 
