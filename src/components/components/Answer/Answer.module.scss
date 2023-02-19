@@ -1,36 +1,49 @@
 @import "@/styles/assets/variables";
 
 .answer {
+  padding-top: 30px;
   position: relative;
   display: flex;
   justify-content: space-between;
   &:not(:last-child) {
     margin-bottom: 90px;
   }
-  .rating {
+  .side {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     margin-right: 45px;
+  }
+  .rating {
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 25px;
     .number {
-      margin: 12px 0;
+      margin: 7px 0;
     }
     .arrow {
       cursor: pointer;
-      fill: $white;
       width: 18px;
+      opacity: 0.25;
       &:hover {
-        fill: $main;
+        opacity: 1;
       }
     }
+  }
+  .content {
+    width: 100%;
   }
   .header {
     display: flex;
     align-items: center;
     margin-bottom: 25px;
+  }
+  .user {
+    margin-right: 20px;
   }
   .isAnswer {
     display: inline-flex;
@@ -43,6 +56,18 @@
       width: 12px;
     }
   }
+  .isAnswer__icon {
+    cursor: pointer;
+    opacity: 0.25;
+    transition: 0.2s;
+    &:hover {
+      opacity: 1;
+    }
+    &.active {
+      fill: $main;
+      opacity: 1;
+    }
+  }
   .footer {
     display: flex;
     align-items: flex-start;
@@ -52,6 +77,14 @@
       font-size: 12px;
       line-height: 14px;
       margin-right: 15px;
+    }
+  }
+  .popup {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    .options {
+      cursor: pointer;
     }
   }
 }

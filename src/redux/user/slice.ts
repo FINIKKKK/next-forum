@@ -1,7 +1,7 @@
 import { TUser } from "@/utils/api/models/user/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { TFilters, TUserSlice } from "./types";
+import { TUserSlice } from "./types";
 
 const initialState: TUserSlice = {
   data: null,

@@ -3,10 +3,13 @@ import dynamic from "next/dynamic";
 
 import { UserBox } from "@/components";
 import { Api } from "@/utils/api";
-import { TUser } from "@/utils/api/models/user/types";
 
 import ss from "./Reply.module.scss";
 import { TAnswer } from "@/utils/api/models/answer/types";
+import { useSelectors } from "@/hooks/useSelectors";
+import { AnswerScheme } from "@/utils/validation";
+import { TError } from "@/pages/create";
+import classNames from "classnames";
 
 let Editor = dynamic(() => import("@/components/components/Editor"), {
   ssr: false,
@@ -14,25 +17,36 @@ let Editor = dynamic(() => import("@/components/components/Editor"), {
 
 interface ReplyProps {
   questionId: number;
-  user: TUser;
   setAnswers: React.Dispatch<React.SetStateAction<TAnswer[]>>;
 }
 
-export const Reply: React.FC<ReplyProps> = ({
-  questionId,
-  user,
-  setAnswers,
-}) => {
+export const Reply: React.FC<ReplyProps> = ({ questionId, setAnswers }) => {
   const [body, setBody] = React.useState([]);
+  const { data: userData } = useSelectors((state) => state.user);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [errors, setErrors] = React.useState<TError | null>([]);
 
   const onSumbit = async () => {
     try {
-      const dto = {
-        questionId,
-        body,
-      };
-      const answer = await Api().answer.create(dto);
-      setAnswers((prev: TAnswer[]) => [...prev, answer]);
+      AnswerScheme.validate({ body: body }, { abortEarly: false })
+        .then(() => {
+          (async () => {
+            setIsLoading(true);
+            const dto = {
+              questionId,
+              body,
+            };
+            const answer = await Api().answer.create(dto);
+            setAnswers((prev: TAnswer[]) => [...prev, answer]);
+          })();
+        })
+        .catch((errors) => {
+          const errorData = errors.inner.reduce((sum: any, obj: any) => {
+            sum[obj.path] = obj.message;
+            return sum;
+          }, {});
+          setErrors(errorData);
+        });
     } catch (err) {
       console.warn(err);
       alert("Ошибка при публикации ответа");
@@ -43,20 +57,28 @@ export const Reply: React.FC<ReplyProps> = ({
     <div className={ss.reply}>
       <div className={ss.answer__content}>
         <div className={ss.answer__header}>
-          <UserBox user={user} />
+          <UserBox className={ss.user} user={userData} />
         </div>
 
-        <div className={`block ${ss.editor}`}>
-          <Editor
-            className="editor--answer"
-            initialValue={body}
-            onChange={(blocks: any) => setBody(blocks)}
-            isAnswer={true}
-            placeholder="Введите текст"
-          />
+        <div className={ss.editor}>
+          <div className={`block2 ${ss.input}`}>
+            <Editor
+              className="editor--answer"
+              initialValue={body}
+              onChange={(blocks: any) => setBody(blocks)}
+              isAnswer={true}
+              placeholder="Введите текст"
+            />
+          </div>
+          {errors?.body && <div className={ss.error}>{errors?.body}</div>}
         </div>
 
-        <button onClick={onSumbit} className={`btn ${ss.btn}`}>
+        <button
+          onClick={onSumbit}
+          className={classNames("btn", ss.btn, {
+            disabled: isLoading,
+          })}
+        >
           Опубликовать
         </button>
       </div>

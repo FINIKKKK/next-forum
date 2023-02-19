@@ -2,6 +2,7 @@ import React from "react";
 
 import { TUser } from "@/utils/api/models/user/types";
 import { FiltersLayout } from "@/layouts/FiltersLayout";
+import { User } from "@/components";
 
 export default function UsersPage() {
   const [users, setUsers] = React.useState<TUser[]>([]);

@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { TAnswer, AnswerDto, ParamsAnswerDto } from "./types";
+import { TAnswer, AnswerDto, ParamsAnswerDto, UpdateAnswerDto } from "./types";
 
 export const AnswerApi = (instance: AxiosInstance) => ({
   async getAll(params: ParamsAnswerDto) {
@@ -19,8 +19,8 @@ export const AnswerApi = (instance: AxiosInstance) => ({
     );
     return data;
   },
-  async update(id: number, dto: AnswerDto) {
-    const { data } = await instance.patch<AnswerDto, { data: TAnswer }>(
+  async update(id: number, dto: UpdateAnswerDto) {
+    const { data } = await instance.patch<UpdateAnswerDto, { data: TAnswer }>(
       `/answers/${id}`,
       dto
     );

@@ -6,11 +6,12 @@ import ss from "./UserBox.module.scss";
 
 interface UserBoxProps {
   user: TUser;
+  className: string;
 }
 
-export const UserBox: React.FC<UserBoxProps> = ({ user }) => {
+export const UserBox: React.FC<UserBoxProps> = ({ user, className }) => {
   return (
-    <div className={ss.user}>
+    <div className={`${className} ${ss.user}`}>
       <Link href={`/profile/${user.id}`}>
         <img
           src={

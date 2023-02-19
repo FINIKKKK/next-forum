@@ -25,14 +25,14 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
 
         <div className="answers">
           <h2 className="answers__title">Ответы</h2>
-          <Reply
-            questionId={question.id}
-            user={question.user}
-            setAnswers={setAnswers}
-          />
           {answers.map((obj: TAnswer) => (
             <Answer key={obj.id} {...obj} />
           ))}
+
+          <Reply
+            questionId={question.id}
+            setAnswers={setAnswers}
+          />
         </div>
       </div>
     </ForumLayout>

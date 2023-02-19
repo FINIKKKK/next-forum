@@ -1,11 +1,17 @@
-@import '@/styles/assets/variables';
+@import "@/styles/assets/variables";
 
 .reply {
   margin-bottom: 70px;
   .editor {
-    border-radius: 10px;
     margin-bottom: 15px;
-    padding: 20px;
-    min-height: 150px !important;
+    .input {
+      min-height: 150px !important;
+    }
+    .error {
+      margin-top: 5px;
+    }
+  }
+  .user {
+    margin-bottom: 20px;
   }
 }

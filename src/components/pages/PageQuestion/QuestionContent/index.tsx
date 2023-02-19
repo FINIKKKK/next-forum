@@ -77,12 +77,12 @@ export const QuestionContent: React.FC<QuestionContentProps> = ({
       <ul className={ss.tagList}>
         {question.tags.map((obj) => (
           <li key={obj.id} className={`tag hover ${ss.tag}`}>
-            <a href="#">{obj.name}</a>
+            <a href={`/?tagby${obj.name}`}>{obj.name}</a>
           </li>
         ))}
       </ul>
 
-      <UserBox user={question.user} />
+      <UserBox user={question.user} className={ss.user} />
 
       <QuestionBody body={question.body} />
 
