@@ -95,8 +95,6 @@
     line-height: 26px;
   }
   .code {
-    background-color: $purple;
-    border-radius: 10px;
     padding: 55px 15px 10px;
     position: relative;
     overflow: hidden;
@@ -118,9 +116,6 @@
     }
   }
   .quote {
-    background-color: $purple;
-    padding: 18px;
-    border-radius: 10px;
     display: flex;
     align-items: start;
     svg {

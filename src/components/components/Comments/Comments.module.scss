@@ -1,0 +1,21 @@
+@import "@/styles/assets/variables";
+
+.comments {
+  margin-top: 3px;
+  .btn {
+    color: $gray;
+    font-weight: 700;
+  }
+  .list {
+    margin-top: 15px;
+  }
+  .comment {
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+    b {
+      color: $main;
+      font-weight: 700;
+    }
+  }
+}

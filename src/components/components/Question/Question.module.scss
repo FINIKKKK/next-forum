@@ -18,7 +18,12 @@
     margin-bottom: 10px;
   }
   .tagList {
+    display: flex;
+    align-items: center;
     margin-bottom: 10px;
+    .tag:not(:last-child) {
+      margin-right: 15px;
+    }
     .more {
       font-weight: 700;
       font-size: 12px;

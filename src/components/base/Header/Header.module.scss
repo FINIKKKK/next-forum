@@ -103,28 +103,7 @@
     border-radius: 50%;
   }
   .popup {
-    position: absolute;
     top: 25px;
     right: 20px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 15px;
-    padding: 10px 15px;
-    button.popup__item {
-      color: #fff;
-      text-align: left;
-    }
-    .popup__item {
-      font-weight: 700;
-      font-size: 14px;
-      transition: 0.2s;
-      opacity: 0.65;
-      &:not(:last-child) {
-        margin-bottom: 10px;
-      }
-      &:hover {
-        opacity: 1;
-      }
-    }
   }
 }

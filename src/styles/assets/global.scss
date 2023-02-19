@@ -58,50 +58,6 @@ svg {
   }
 }
 
-.block {
-  background-color: $purple;
-  box-shadow: 0px 4px 8px #2e2443;
-  border-radius: 38px;
-  transition: 0.2s;
-  &.hover {
-    &:hover {
-      box-shadow: 0px 4px 12px #271e3a;
-      transform: translateY(-3px);
-    }
-  }
-}
-
-.hover {
-  transition: 0.2s;
-  &:hover {
-    transform: translateY(-2px);
-  }
-}
-
-.tagList {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  li {
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 14px;
-    font-weight: 700;
-    background-color: $main;
-    white-space: nowrap;
-    border-radius: 3px;
-    text-transform: uppercase;
-    transition: 0.2s;
-    a {
-      padding: 5px 7px;
-      color: $bg;
-    }
-  }
-  li:not(:last-child) {
-    margin-right: 15px;
-  }
-}
-
 .input {
   padding: 14px 24px;
   display: flex;
@@ -127,6 +83,99 @@ svg {
   }
 }
 
+.block {
+  background-color: $purple;
+  box-shadow: 0px 4px 8px #2e2443;
+  border-radius: 38px;
+  transition: 0.2s;
+  &.hover {
+    &:hover {
+      box-shadow: 0px 4px 12px #271e3a;
+      transform: translateY(-3px);
+    }
+  }
+}
+
+.block2 {
+  background-color: $purple;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.hover {
+  transition: 0.2s;
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.tag {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 700;
+  background-color: $main;
+  white-space: nowrap;
+  border-radius: 3px;
+  text-transform: uppercase;
+  transition: 0.2s;
+  a {
+    padding: 5px 7px;
+    color: $bg;
+  }
+}
+
+.bb {
+  background-color: $main;
+  padding: 5px 10px;
+  border-radius: 35px;
+  color: $bg;
+}
+
+.inline {
+  cursor: pointer;
+  color: $gray;
+  transition: 0.3s;
+  &:hover {
+    color: $main;
+  }
+}
+
+.popup {
+  z-index: 100;
+  position: absolute;
+  top: 55px;
+  right: 40px;
+  border-radius: 10px;
+  padding: 10px;
+  .popup__item {
+    cursor: pointer;
+    font-weight: 700;
+    color: $white;
+    font-size: 14px;
+    opacity: 0.75;
+    transition: 0.2s;
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: 0.2s;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
 // ScrollBar
 ::-webkit-scrollbar {
   width: 5px;
@@ -141,5 +190,5 @@ svg {
 
 // Selection
 ::selection {
-  background: rgba($bg, 0.35) !important;
+  background: rgba($main, 0.2) !important;
 }

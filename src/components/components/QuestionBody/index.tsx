@@ -46,7 +46,7 @@ export const QuestionBody: React.FC<QuestionBodyProps> = ({ body }) => {
             <h1 className={ss.title}>{obj.data.text}</h1>
           ) : null
         ) : obj.type === "codeBox" ? (
-          <div className={`${ss.code} ${ss.el}`}>
+          <div className={`block2 ${ss.code} ${ss.el}`}>
             <div className={ss.code__lg}>{obj.data.language}</div>
             <code
               dangerouslySetInnerHTML={{
@@ -55,7 +55,7 @@ export const QuestionBody: React.FC<QuestionBodyProps> = ({ body }) => {
             />
           </div>
         ) : obj.type === "quote" ? (
-          <div className={`${ss.quote} ${ss.el}`}>
+          <div className={`block2 ${ss.quote} ${ss.el}`}>
             <svg width="20" height="20">
               <use xlinkHref="../img/icons/icons.svg#quote" />
             </svg>

@@ -96,9 +96,9 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
 
       <div className={ss.block}>
         <h5>Топ меток</h5>
-        <ul className={`tagList ${ss.tagList}`}>
+        <ul className={ss.tagList}>
           {tags.map((obj) => (
-            <li key={obj.id} className={`hover ${ss.tag}`}>
+            <li key={obj.id} className={`hover tag ${ss.tag}`}>
               <a href={`/?tagBy=${obj.name}`}>{obj.name}</a>
             </li>
           ))}

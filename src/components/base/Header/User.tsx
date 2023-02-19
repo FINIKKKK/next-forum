@@ -36,14 +36,14 @@ export const User: React.FC<UserProps> = ({ avatar }) => {
         alt="avatar"
       />
       {showPopup && (
-        <div className={`block ${ss.popup}`}>
-          <Link className={ss.popup__item} href={`/profile/${1}`}>
+        <div className={`block popup ${ss.popup}`}>
+          <Link className="popup__item" href={`/profile/${1}`}>
             Профиль
           </Link>
-          <Link className={ss.popup__item} href="/options">
+          <Link className="popup__item" href="/options">
             Настройки
           </Link>
-          <button className={ss.popup__item} onClick={onLogout}>
+          <button className="popup__item" onClick={onLogout}>
             Выйти
           </button>
         </div>

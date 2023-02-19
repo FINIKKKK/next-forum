@@ -29,9 +29,9 @@ export const Question: React.FC<QuestionProps> = ({
         <Link href={`/questions/${id}`} className={ss.title}>
           <h3>{title}</h3>
         </Link>
-        <ul className={`tagList ${ss.tagList}`}>
+        <ul className={ss.tagList}>
           {tags.slice(0, 3).map((obj) => (
-            <li key={obj.id} className={`hover ${ss.tag}`}>
+            <li key={obj.id} className={`tag hover ${ss.tag}`}>
               <a href={`/?tagBy=${obj.name}`}>{obj.name}</a>
             </li>
           ))}

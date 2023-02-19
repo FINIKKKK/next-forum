@@ -13,6 +13,8 @@ export * from "./components/Tag";
 export * from "./components/User";
 export * from "./components/QuestionBody";
 export * from "./components/Reply";
+export * from "./components/Comments";
 
 export * from "./pages/PageCreate";
 export * from "./pages/PageHome";
+export * from "./pages/PageQuestion";

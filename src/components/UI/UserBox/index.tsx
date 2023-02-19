@@ -19,10 +19,10 @@ export const UserBox: React.FC<UserBoxProps> = ({ user }) => {
               : `../img/avatar.png`
           }
           alt="avatar"
-          className={ss.avatar}
+          className={`avatar ${ss.avatar}`}
         />
       </Link>
-      <div className="box">
+      <div className={ss.info}>
         {user.firstName !== null ||
           (user.lastName !== null && (
             <div className={ss.name}>
