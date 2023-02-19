@@ -17,6 +17,10 @@ import { Api } from "@/utils/api";
 interface EditorProps {
   initialValue?: OutputData["blocks"];
   onChange: (blocks: OutputData["blocks"]) => void;
+  isAnswer?: boolean;
+  placeholder: string;
+  className?: string;
+  refEditor?: any;
 }
 
 class MyImage extends Image {
@@ -27,14 +31,20 @@ class MyImage extends Image {
   }
 }
 
-const Editor: React.FC<EditorProps> = ({ initialValue, onChange }) => {
+const Editor: React.FC<EditorProps> = ({
+  initialValue,
+  onChange,
+  isAnswer,
+  placeholder,
+  className,
+}) => {
   const isReady = React.useRef(false);
 
   React.useEffect(() => {
     if (!isReady.current) {
       const editor = new EditorJS({
         holder: "editor",
-        placeholder: "Текст",
+        placeholder: placeholder,
         data: {
           blocks: initialValue ? initialValue : [],
         },
@@ -43,29 +53,34 @@ const Editor: React.FC<EditorProps> = ({ initialValue, onChange }) => {
           onChange(blocks);
         },
         tools: {
-          image: {
-            class: MyImage,
-            config: {
-              uploader: {
-                async uploadByFile(file: any) {
-                  const fileName = await Api().files.upload(file, "questions");
-                  console.log(fileName);
-                  return {
-                    success: 1,
-                    file: {
-                      url: `http://localhost:7777/img/questions/${fileName}`,
-                    },
-                  };
+          ...(!isAnswer && {
+            image: {
+              class: MyImage,
+              config: {
+                uploader: {
+                  async uploadByFile(file: any) {
+                    const fileName = await Api().files.upload(
+                      file,
+                      "questions"
+                    );
+                    console.log(fileName);
+                    return {
+                      success: 1,
+                      file: {
+                        url: `http://localhost:7777/img/questions/${fileName}`,
+                      },
+                    };
+                  },
                 },
               },
             },
-          },
-          header: Header,
+          }),
+          ...(!isAnswer && { header: Header }),
+          ...(!isAnswer && { quote: Quote }),
+          ...(!isAnswer && { delimiter: Delimiter }),
+          embed: Embed,
           list: List,
           codeBox: CodeBox,
-          embed: Embed,
-          quote: Quote,
-          delimiter: Delimiter,
           inlineCode: InlineCode,
         },
       });
@@ -74,7 +89,7 @@ const Editor: React.FC<EditorProps> = ({ initialValue, onChange }) => {
     }
   }, []);
 
-  return <div className={ss.editor} id="editor"></div>;
+  return <div className={`${className} ${ss.editor}`} id="editor"></div>;
 };
 
 export default Editor;

@@ -12,15 +12,24 @@ interface QuestionPageProps {
   answers: TAnswer[];
 }
 
-const QuestionPage: NextPage<QuestionPageProps> = ({ question, answers }) => {
+const QuestionPage: NextPage<QuestionPageProps> = ({
+  question,
+  answers: answerList,
+}) => {
+  const [answers, setAnswers] = React.useState<TAnswer[]>(answerList || []);
+
   return (
     <ForumLayout>
       <div className="ques block rightSide">
         <QuestionContent question={question} />
 
         <div className="answers">
-          <h2 className="answer__title">Ответы</h2>
-          <Reply questionId={question.id} user={question.user} />
+          <h2 className="answers__title">Ответы</h2>
+          <Reply
+            questionId={question.id}
+            user={question.user}
+            setAnswers={setAnswers}
+          />
           {answers.map((obj: TAnswer) => (
             <Answer key={obj.id} {...obj} />
           ))}

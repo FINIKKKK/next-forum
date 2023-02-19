@@ -6,9 +6,9 @@ import { useRouter } from "next/router";
 import { MainLayout } from "@/layouts/MainLayout";
 import { Api } from "@/utils/api";
 import { QuestionScheme } from "@/utils/validation";
-import { InputTags, InputTitle } from "@/components/CreatePage";
+import { InputTags, InputTitle } from "@/components";
 
-let Editor = dynamic(() => import("../../components/Editor"), {
+let Editor = dynamic(() => import("@/components/components/Editor"), {
   ssr: false,
 });
 
@@ -85,6 +85,7 @@ const CreateQuestionPage: NextPage<CreateQuestionPageProps> = ({}) => {
                 <Editor
                   initialValue={body}
                   onChange={(blocks: any) => setBody(blocks)}
+                  placeholder="Введите текст"
                 />
               </div>
               {errors?.body && <div className="error">{errors?.body}</div>}

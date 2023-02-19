@@ -1,24 +1,28 @@
+import React from "react";
+import dynamic from "next/dynamic";
+
 import { UserBox } from "@/components";
 import { Api } from "@/utils/api";
 import { TUser } from "@/utils/api/models/user/types";
-import dynamic from "next/dynamic";
-import React from "react";
 
 import ss from "./Reply.module.scss";
+import { TAnswer } from "@/utils/api/models/answer/types";
 
-let AnswerEditor = dynamic(
-  () => import("@/components/components/AnswerEditor"),
-  {
-    ssr: false,
-  }
-);
+let Editor = dynamic(() => import("@/components/components/Editor"), {
+  ssr: false,
+});
 
 interface ReplyProps {
   questionId: number;
   user: TUser;
+  setAnswers: React.Dispatch<React.SetStateAction<TAnswer[]>>;
 }
 
-export const Reply: React.FC<ReplyProps> = ({ questionId, user }) => {
+export const Reply: React.FC<ReplyProps> = ({
+  questionId,
+  user,
+  setAnswers,
+}) => {
   const [body, setBody] = React.useState([]);
 
   const onSumbit = async () => {
@@ -28,7 +32,7 @@ export const Reply: React.FC<ReplyProps> = ({ questionId, user }) => {
         body,
       };
       const answer = await Api().answer.create(dto);
-      console.log(answer);
+      setAnswers((prev: TAnswer[]) => [...prev, answer]);
     } catch (err) {
       console.warn(err);
       alert("Ошибка при публикации ответа");
@@ -43,10 +47,12 @@ export const Reply: React.FC<ReplyProps> = ({ questionId, user }) => {
         </div>
 
         <div className={`block ${ss.editor}`}>
-          <AnswerEditor
-            className="editor__answer"
+          <Editor
+            className="editor--answer"
             initialValue={body}
             onChange={(blocks: any) => setBody(blocks)}
+            isAnswer={true}
+            placeholder="Введите текст"
           />
         </div>
 

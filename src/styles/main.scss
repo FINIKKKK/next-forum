@@ -336,7 +336,11 @@
 // --------- answer ----------
 .answers {
   margin-top: 75px;
-  
+  .answers__title {
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 35px;
+  }
 }
 
 // --------- profile ----------
@@ -530,7 +534,7 @@
     padding: 25px 15px;
   }
 }
-.editor__answer {
+.editor--answer {
   margin-left: 70px;
   .ce-toolbar__actions {
     right: 101.5% !important;
