@@ -5,6 +5,7 @@
   justify-content: space-between;
   position: relative;
   padding: 24px 32px;
+  min-height: 135px;
   &:not(:last-child) {
     margin-bottom: 55px;
   }
@@ -41,6 +42,10 @@
     left: 0;
   }
   .right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     padding-left: 25px;
     .item:not(:last-child) {
       margin-bottom: 13px;

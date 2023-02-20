@@ -1,22 +1,46 @@
 import React from "react";
 import { GetServerSideProps, NextPage } from "next";
 
-import { Answer, QuestionContent, Reply } from "@/components";
+import { Answer, QuestionContent, Reply, SelectComponent } from "@/components";
 import { ForumLayout } from "@/layouts/ForumLayout";
 import { Api } from "@/utils/api";
 import { TQuestion } from "@/utils/api/models/question/types";
 import { TAnswer } from "@/utils/api/models/answer/types";
+import { useSelectors } from "@/hooks/useSelectors";
 
 interface QuestionPageProps {
   question: TQuestion;
   answers: TAnswer[];
 }
 
+const options = [
+  {
+    value: "rating",
+    label: "По рейтингу",
+  },
+  {
+    value: "date",
+    label: "По дате",
+  },
+];
+
 const QuestionPage: NextPage<QuestionPageProps> = ({
   question,
   answers: answerList,
 }) => {
   const [answers, setAnswers] = React.useState<TAnswer[]>(answerList || []);
+  const [option, setOption] = React.useState(options[0]);
+
+  React.useEffect(() => {
+    if (option.value === "rating") {
+      answers.sort((a, b) => a.rating - b.rating);
+    } else if (option.value === "date") {
+      answers.sort(
+        (a, b) =>
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      );
+    }
+  }, [option]);
 
   return (
     <ForumLayout>
@@ -24,15 +48,20 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
         <QuestionContent question={question} />
 
         <div className="answers">
-          <h2 className="answers__title">Ответы</h2>
+          <div className="answers__header">
+            <h2 className="answers__title">Ответы</h2>
+            <SelectComponent
+              className="asnwers__select"
+              value={option}
+              options={options}
+              setValue={setOption}
+            />
+          </div>
           {answers.map((obj: TAnswer) => (
-            <Answer key={obj.id} {...obj} />
+            <Answer key={obj.id} {...obj} setAnswers={setAnswers} />
           ))}
 
-          <Reply
-            questionId={question.id}
-            setAnswers={setAnswers}
-          />
+          <Reply questionId={question.id} setAnswers={setAnswers} />
         </div>
       </div>
     </ForumLayout>

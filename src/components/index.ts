@@ -6,6 +6,7 @@ export * from "./UI/Pagination";
 export * from "./UI/Search";
 export * from "./UI/AuthInput";
 export * from "./UI/UserBox";
+export * from "./UI/Select";
 
 export * from "./components/Question";
 export * from "./components/Answer";

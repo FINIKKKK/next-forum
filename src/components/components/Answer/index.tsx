@@ -17,6 +17,7 @@ interface AnswerProps {
   user: TUser;
   isAnswer: boolean;
   rating: number;
+  setAnswers: (value: any) => void;
 }
 
 export const Answer: React.FC<AnswerProps> = ({
@@ -25,6 +26,7 @@ export const Answer: React.FC<AnswerProps> = ({
   user,
   isAnswer: isAnswerProp,
   rating: ratingProp,
+  setAnswers,
 }) => {
   const refPopup = React.useRef<HTMLDivElement>(null);
   const [visiblePopup, setVisiblePopup] = React.useState(false);
@@ -37,11 +39,14 @@ export const Answer: React.FC<AnswerProps> = ({
   const [openInput, setOpenInput] = React.useState(false);
 
   const onDeleteAnswer = async () => {
-    try {
-      await Api().answer.remove(id);
-    } catch (err) {
-      console.warn(err);
-      alert("Ошибка при удалении ответа");
+    if (window.confirm("Вы действительно хотите удалить ответ?")) {
+      try {
+        await Api().answer.remove(id);
+        setAnswers((prev: any) => prev.filter((obj: any) => obj.id !== id));
+      } catch (err) {
+        console.warn(err);
+        alert("Ошибка при удалении ответа");
+      }
     }
   };
 
@@ -94,7 +99,7 @@ export const Answer: React.FC<AnswerProps> = ({
       };
       const comment = await Api().comment.create(dto);
       setOpenInput(false);
-      setComments([...comments, comment]);
+      setComments([...comments, { ...comment, user: userData }]);
     } catch (err) {
       console.warn(err);
       alert("Ошибка при создании комментария");

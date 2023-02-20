@@ -1,5 +1,5 @@
+import { SelectComponent, TOption } from "@/components";
 import React from "react";
-import Select from "react-select";
 
 import ss from "./Selects.module.scss";
 
@@ -16,11 +16,6 @@ export const options2 = [
   { value: "day", label: "День" },
 ];
 
-export type TOption = {
-  value: string;
-  label: string;
-};
-
 interface SelectsProps {
   option: TOption;
   setOption: (value: any) => void;
@@ -36,22 +31,10 @@ export const Selects: React.FC<SelectsProps> = ({
 }) => {
   return (
     <div className="selects">
-      <Select
-        className="select block"
-        classNamePrefix="select"
-        value={option}
-        onChange={(value: any) => setOption(value)}
-        options={options}
-      />
+      <SelectComponent value={option} options={options} setValue={setOption} />
 
       {option === options[1] && (
-        <Select
-          className="select block"
-          classNamePrefix="select"
-          value={option2}
-          onChange={(value: any) => setOption2(value)}
-          options={options2}
-        />
+        <SelectComponent value={option2} options={options2} setValue={setOption2} />
       )}
     </div>
   );

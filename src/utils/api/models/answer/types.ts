@@ -7,6 +7,8 @@ export type TAnswer = TBase & {
   body: OutputBlockData[];
   user: TUser;
   question: TQuestion;
+  isAnswer: boolean;
+  rating: number;
 };
 
 export type AnswerDto = {

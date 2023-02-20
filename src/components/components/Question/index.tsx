@@ -12,6 +12,7 @@ interface QuestionProps {
   views: number;
   createdAt: string;
   tags: TTag[];
+  isAnswer: boolean;
 }
 
 export const Question: React.FC<QuestionProps> = ({
@@ -20,6 +21,7 @@ export const Question: React.FC<QuestionProps> = ({
   views,
   createdAt: date,
   tags,
+  isAnswer,
 }) => {
   const [favorite, setFavorite] = React.useState(false);
 
@@ -55,12 +57,14 @@ export const Question: React.FC<QuestionProps> = ({
           </svg>
           <p>3</p>
         </div>
-        <div className={`${ss.item} ${ss.answer}`}>
-          <svg width="20" height="20">
-            <use xlinkHref="./img/icons/icons.svg#check" />
-          </svg>
-          <p>Ответ</p>
-        </div>
+        {isAnswer && (
+          <div className={`${ss.item} ${ss.answer}`}>
+            <svg width="20" height="20">
+              <use xlinkHref="./img/icons/icons.svg#check" />
+            </svg>
+            <p>Ответ</p>
+          </div>
+        )}
       </div>
 
       <svg

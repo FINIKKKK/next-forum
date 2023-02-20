@@ -43,67 +43,8 @@
   .selects {
     display: flex;
     align-items: center;
-  }
-  .select {
-    &:not(:last-child) {
+    .block:not(:last-child) {
       margin-right: 15px;
-    }
-    display: flex;
-    align-items: center;
-    padding: 2px 8px;
-    border-radius: 10px;
-    .select__control {
-      cursor: pointer !important;
-      background: none;
-      border: none !important;
-      outline: none !important;
-      box-shadow: none;
-      font-size: 16px;
-      line-height: 18px;
-    }
-    .select__control--menu-is-open {
-      .select__single-value {
-        opacity: 0.5;
-      }
-      .select__dropdown-indicator {
-        opacity: 0.5;
-      }
-    }
-    .select__single-value {
-      transition: 0.2s;
-    }
-    .select__dropdown-indicator {
-      transition: 0.2s;
-      pointer-events: none;
-      color: $white !important;
-    }
-    .select__indicator-separator {
-      display: none !important;
-    }
-    .select__single-value {
-      color: $white;
-    }
-    .select__indicator {
-      opacity: 1;
-      &:hover {
-        color: $white;
-      }
-    }
-    .select__menu {
-      background-color: $purple;
-      left: 0px;
-      box-shadow: 0px 0px 5px rgba($bg, 0.7);
-      z-index: 100;
-    }
-    .select__menu-list {
-    }
-    .select__option {
-      cursor: pointer !important;
-      background: none;
-      font-size: 14px;
-    }
-    .select__option--is-selected {
-      font-weight: 700;
     }
   }
   .chooseAnswers {
@@ -336,10 +277,28 @@
 // --------- answer ----------
 .answers {
   margin-top: 75px;
+  .answers__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 45px;
+  }
   .answers__title {
     font-weight: 700;
     font-size: 24px;
-    margin-bottom: 35px;
+  }
+  .asnwers__select {
+    .select__control {
+      min-height: 30px;
+    }
+    .select__value-container {
+      padding: 0;
+      font-size: 12px;
+      margin-right: 10px;
+    }
+    .select__indicator {
+      padding: 0;
+    }
   }
 }
 

@@ -1,5 +1,6 @@
-import { TComment } from "@/utils/api/models/comments/types";
 import React from "react";
+
+import { TComment } from "@/utils/api/models/comments/types";
 
 import ss from "./Comments.module.scss";
 

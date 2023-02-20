@@ -13,6 +13,7 @@ export type TQuestion = TBase & {
   user: TUser;
   tags: TTag[];
   views: number;
+  isAsnwer: boolean;
 };
 
 export type QuestionDto = {
