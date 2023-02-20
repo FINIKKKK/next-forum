@@ -1,6 +1,7 @@
 import { Comments, UserBox } from "@/components";
 import { useSelectors } from "@/hooks/useSelectors";
 import { Api } from "@/utils/api";
+import { TComment } from "@/utils/api/models/comments/types";
 import { TUser } from "@/utils/api/models/user/types";
 import { OutputBlockData } from "@editorjs/editorjs";
 import classNames from "classnames";
@@ -30,6 +31,10 @@ export const Answer: React.FC<AnswerProps> = ({
   const { data: userData } = useSelectors((state) => state.user);
   const [isAnswer, setIsAnswer] = React.useState(isAnswerProp);
   const [rating, setRating] = React.useState(ratingProp);
+  const [commentValue, setCommentValue] = React.useState("");
+  const [comments, setComments] = React.useState<TComment[]>([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [openInput, setOpenInput] = React.useState(false);
 
   const onDeleteAnswer = async () => {
     try {
@@ -62,6 +67,39 @@ export const Answer: React.FC<AnswerProps> = ({
     } catch (err) {
       console.warn(err);
       alert("Ошибка при изменении рейтинга");
+    }
+  };
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const params = {
+          answerId: id,
+        };
+        const comments = await Api().comment.getAll(params);
+        setComments(comments.items);
+      } catch (err) {
+        console.warn(err);
+        alert("Ошибка при получении комментариев");
+      }
+    })();
+  }, []);
+
+  const onCreateComment = async () => {
+    try {
+      setIsLoading(true);
+      const dto = {
+        text: commentValue,
+        answerId: id,
+      };
+      const comment = await Api().comment.create(dto);
+      setOpenInput(false);
+      setComments([...comments, comment]);
+    } catch (err) {
+      console.warn(err);
+      alert("Ошибка при создании комментария");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -144,9 +182,36 @@ export const Answer: React.FC<AnswerProps> = ({
         <QuestionBody body={body} />
 
         <div className={ss.footer}>
-          <button className={`btn ${ss.btn}`}>Ответить</button>
-          <Comments />
+          <button
+            onClick={() => setOpenInput(!openInput)}
+            className={`btn ${ss.btn}`}
+          >
+            {!openInput ? "Ответить" : "Закрыть"}
+          </button>
+          <Comments comments={comments} />
         </div>
+        {openInput && (
+          <div className={`input ${ss.input}`}>
+            <input
+              value={commentValue}
+              onChange={(e: any) => setCommentValue(e.target.value)}
+              type="text"
+              placeholder="Введите сообщение"
+            />
+            {commentValue && (
+              <svg
+                onClick={onCreateComment}
+                className={classNames(ss.icon, {
+                  [ss.disabled]: isLoading,
+                })}
+                width="20"
+                height="20"
+              >
+                <use xlinkHref="../img/icons/icons.svg#check" />
+              </svg>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

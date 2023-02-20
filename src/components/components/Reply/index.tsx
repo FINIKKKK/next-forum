@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 
 import { UserBox } from "@/components";
 import { Api } from "@/utils/api";
-
+1
 import ss from "./Reply.module.scss";
 import { TAnswer } from "@/utils/api/models/answer/types";
 import { useSelectors } from "@/hooks/useSelectors";
@@ -11,7 +11,7 @@ import { AnswerScheme } from "@/utils/validation";
 import { TError } from "@/pages/create";
 import classNames from "classnames";
 
-let Editor = dynamic(() => import("@/components/components/Editor"), {
+let Editor = dynamic(() => import("@/components/components/Editor"), {  
   ssr: false,
 });
 

@@ -1,25 +1,27 @@
+import { TComment } from "@/utils/api/models/comments/types";
 import React from "react";
 
 import ss from "./Comments.module.scss";
 
-interface CommentsProps {}
+interface CommentsProps {
+  comments: TComment[];
+}
 
-export const Comments: React.FC<CommentsProps> = ({}) => {
+export const Comments: React.FC<CommentsProps> = ({ comments }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <div className={ss.comments}>
       <button onClick={() => setIsOpen(!isOpen)} className={`inline ${ss.btn}`}>
-        Комментарии (2)
+        Комментарии ({comments.length})
       </button>
       {isOpen && (
         <div className={ss.comments}>
-          <p className={ss.comment}>
-            <b>Dmitriy Bozhko</b> - Если коротко - то в базе данных.
-          </p>
-          <p className={ss.comment}>
-            <b>Dmitriy Bozhko</b> - Если коротко - то в базе данных.
-          </p>
+          {comments.map((obj) => (
+            <p key={obj.id} className={ss.comment}>
+              <b>@{obj.user.login}</b> - {obj.text}
+            </p>
+          ))}
         </div>
       )}
     </div>

@@ -3,6 +3,7 @@ import { GetServerSidePropsContext, NextPageContext } from "next";
 import Cookies, { parseCookies } from "nookies";
 import { AnswerApi } from "./models/answer";
 import { AuthApi } from "./models/auth";
+import { CommentApi } from "./models/comments";
 import { FilesApi } from "./models/files";
 import { QuestionApi } from "./models/question";
 import { TagApi } from "./models/tag";
@@ -15,6 +16,7 @@ export type ApiReturnTypes = {
   files: ReturnType<typeof FilesApi>;
   tag: ReturnType<typeof TagApi>;
   answer: ReturnType<typeof AnswerApi>;
+  comment: ReturnType<typeof CommentApi>;
 };
 
 export const Api = (ctx?: NextPageContext | GetServerSidePropsContext) => {
@@ -35,5 +37,6 @@ export const Api = (ctx?: NextPageContext | GetServerSidePropsContext) => {
     files: FilesApi(instance),
     tag: TagApi(instance),
     answer: AnswerApi(instance),
+    comment: CommentApi(instance),
   };
 };
