@@ -7,6 +7,7 @@ export * from "./UI/Search";
 export * from "./UI/AuthInput";
 export * from "./UI/UserBox";
 export * from "./UI/Select";
+export * from "./UI/Textarea";
 
 export * from "./components/Question";
 export * from "./components/Answer";
@@ -15,6 +16,7 @@ export * from "./components/User";
 export * from "./components/QuestionBody";
 export * from "./components/Reply";
 export * from "./components/Comments";
+export * from "./components/Comment";
 
 export * from "./pages/PageCreate";
 export * from "./pages/PageHome";

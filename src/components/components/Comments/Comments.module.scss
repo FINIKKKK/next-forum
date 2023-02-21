@@ -5,17 +5,12 @@
   .btn {
     color: $gray;
     font-weight: 700;
+    transition: 0.2s;
+    &:hover {
+      color: $white;
+    }
   }
   .list {
     margin-top: 15px;
-  }
-  .comment {
-    &:not(:last-child) {
-      margin-bottom: 12px;
-    }
-    b {
-      color: $main;
-      font-weight: 700;
-    }
   }
 }

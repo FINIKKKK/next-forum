@@ -7,6 +7,8 @@ import { useTimeNow } from "@/hooks/useTimeNow";
 import { TQuestion } from "@/utils/api/models/question/types";
 
 import ss from "./QuestionContent.module.scss";
+import { Api } from "@/utils/api";
+import { useRouter } from "next/router";
 
 interface QuestionContentProps {
   question: TQuestion;
@@ -18,8 +20,21 @@ export const QuestionContent: React.FC<QuestionContentProps> = ({
   const { data } = useSelectors((state) => state.user);
   const [visiblePopup, setVisiblePopup] = React.useState(false);
   const refPopup = React.useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useOutsideClick(refPopup, setVisiblePopup);
+
+  const onRemoveQuestion = async () => {
+    if (window.confirm("Вы действительно хотите удалить вопрос")) {
+      try {
+        await Api().question.remove(question.id);
+        await router.push("/");
+      } catch (err) {
+        console.warn(err);
+        alert("Ошибка при удалении вопроса");
+      }
+    }
+  };
 
   return (
     <div className={ss.question}>
@@ -35,7 +50,7 @@ export const QuestionContent: React.FC<QuestionContentProps> = ({
           <svg width="20" height="20">
             <use xlinkHref="../img/icons/icons.svg#answers" />
           </svg>
-          <p>3</p>
+          <p>{question.answerCount}</p>
         </div>
         <div className={`${ss.header__item} ${ss.favorite}`}>
           <svg width="20" height="20">
@@ -65,7 +80,9 @@ export const QuestionContent: React.FC<QuestionContentProps> = ({
                 <div className="popup__item">
                   <a href={`/create/${question.id}`}>Редактировать</a>
                 </div>
-                <div className="popup__item">Удалить</div>
+                <div onClick={onRemoveQuestion} className="popup__item">
+                  Удалить
+                </div>
               </>
             )}
           </div>

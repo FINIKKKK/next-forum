@@ -3,15 +3,15 @@
 .pagination {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   margin-top: 70px;
   width: 100%;
+  .list,
+  .skip {
+    display: flex;
+    align-items: center;
+  }
   :global {
-    .list,
-    .skip {
-      display: flex;
-      align-items: center;
-    }
     li {
       cursor: pointer;
       font-weight: 700;
@@ -73,6 +73,29 @@
           margin: 0;
         }
       }
+    }
+  }
+  .skip {
+    input,
+    button {
+      border-radius: 25px;
+      padding: 5px 15px;
+      font-weight: 700;
+      width: 55px;
+    }
+    input {
+      border: 1px solid $main;
+      color: $white;
+      text-align: center;
+      margin-right: 15px;
+      transition: 0.65s;
+      &.error {
+        border: 1px solid red;
+      }
+    }
+    button {
+      text-transform: uppercase;
+      background-color: $main;
     }
   }
 }

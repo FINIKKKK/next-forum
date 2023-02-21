@@ -14,6 +14,7 @@ export type TQuestion = TBase & {
   tags: TTag[];
   views: number;
   isAsnwer: boolean;
+  answerCount: number;
 };
 
 export type QuestionDto = {

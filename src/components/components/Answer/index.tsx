@@ -1,4 +1,4 @@
-import { Comments, UserBox } from "@/components";
+import { Comments, Textarea, UserBox } from "@/components";
 import { useSelectors } from "@/hooks/useSelectors";
 import { Api } from "@/utils/api";
 import { TComment } from "@/utils/api/models/comments/types";
@@ -37,6 +37,7 @@ export const Answer: React.FC<AnswerProps> = ({
   const [comments, setComments] = React.useState<TComment[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [openInput, setOpenInput] = React.useState(false);
+  const [openComments, setOpenComments] = React.useState(false);
 
   const onDeleteAnswer = async () => {
     if (window.confirm("Вы действительно хотите удалить ответ?")) {
@@ -99,13 +100,23 @@ export const Answer: React.FC<AnswerProps> = ({
       };
       const comment = await Api().comment.create(dto);
       setOpenInput(false);
-      setComments([...comments, { ...comment, user: userData }]);
+      setComments([{ ...comment, user: userData }, ...comments]);
+      setOpenComments(true);
     } catch (err) {
       console.warn(err);
       alert("Ошибка при создании комментария");
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const onChangeComment = async (commentId: number, value: string) => {
+    setCommentValue(value);
+  };
+
+  const onOpenInput = () => {
+    setOpenInput(!openInput);
+    setCommentValue("");
   };
 
   return (
@@ -187,36 +198,26 @@ export const Answer: React.FC<AnswerProps> = ({
         <QuestionBody body={body} />
 
         <div className={ss.footer}>
-          <button
-            onClick={() => setOpenInput(!openInput)}
-            className={`btn ${ss.btn}`}
-          >
+          <button onClick={onOpenInput} className={`btn ${ss.btn}`}>
             {!openInput ? "Ответить" : "Закрыть"}
           </button>
-          <Comments comments={comments} />
-        </div>
-        {openInput && (
-          <div className={`input ${ss.input}`}>
-            <input
-              value={commentValue}
-              onChange={(e: any) => setCommentValue(e.target.value)}
-              type="text"
-              placeholder="Введите сообщение"
+          <div className={ss.comments}>
+            <Comments
+              comments={comments}
+              setComments={setComments}
+              isOpen={openComments}
+              setIsOpen={setOpenComments}
+              onChangeComment={onChangeComment}
             />
-            {commentValue && (
-              <svg
-                onClick={onCreateComment}
-                className={classNames(ss.icon, {
-                  [ss.disabled]: isLoading,
-                })}
-                width="20"
-                height="20"
-              >
-                <use xlinkHref="../img/icons/icons.svg#check" />
-              </svg>
+            {openInput && (
+              <Textarea
+                value={commentValue}
+                setValue={setCommentValue}
+                onSubmit={onCreateComment}
+              />
             )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

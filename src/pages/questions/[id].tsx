@@ -6,7 +6,6 @@ import { ForumLayout } from "@/layouts/ForumLayout";
 import { Api } from "@/utils/api";
 import { TQuestion } from "@/utils/api/models/question/types";
 import { TAnswer } from "@/utils/api/models/answer/types";
-import { useSelectors } from "@/hooks/useSelectors";
 
 interface QuestionPageProps {
   question: TQuestion;

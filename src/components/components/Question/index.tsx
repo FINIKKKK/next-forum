@@ -13,6 +13,7 @@ interface QuestionProps {
   createdAt: string;
   tags: TTag[];
   isAnswer: boolean;
+  answerCount: number;
 }
 
 export const Question: React.FC<QuestionProps> = ({
@@ -22,6 +23,7 @@ export const Question: React.FC<QuestionProps> = ({
   createdAt: date,
   tags,
   isAnswer,
+  answerCount,
 }) => {
   const [favorite, setFavorite] = React.useState(false);
 
@@ -55,7 +57,7 @@ export const Question: React.FC<QuestionProps> = ({
           <svg width="20" height="20">
             <use xlinkHref="./img/icons/icons.svg#answers" />
           </svg>
-          <p>3</p>
+          <p>{answerCount}</p>
         </div>
         {isAnswer && (
           <div className={`${ss.item} ${ss.answer}`}>

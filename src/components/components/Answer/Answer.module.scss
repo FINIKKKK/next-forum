@@ -87,33 +87,7 @@
       cursor: pointer;
     }
   }
-  .input {
-    padding: 0;
-    margin-top: 15px;
-    position: relative;
-    input {
-      font-size: 12px;
-      background-color: $purple;
-      padding: 7px 15px;
-      padding-right: 35px;
-      border-radius: 10px;
-      &::placeholder {
-        color: $gray;
-      }
-    }
-    svg {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 15px;
-      fill: $gray;
-      transition: 0.2s;
-      &:hover {
-        fill: $white;
-      }
-      &.disabled {
-        pointer-events: none;
-      }
-    }
+  .comments {
+    width: 100%;
   }
 }

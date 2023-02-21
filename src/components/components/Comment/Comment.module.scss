@@ -1,0 +1,45 @@
+@import "@/styles/assets/variables";
+
+.comment {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+  .text {
+    margin-right: 15px;
+    font-size: 14px;
+    word-break: break-all;
+    b {
+      color: $main;
+      font-weight: 700;
+    }
+  }
+  .icons {
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: 0.3s;
+    svg:not(:last-child) {
+      margin-right: 12px;
+    }
+    svg {
+      cursor: pointer;
+      width: 15px;
+      fill: $gray;
+      transition: 0.2s;
+      &:hover {
+        fill: $white;
+      }
+    }
+  }
+  .remove {
+    width: 12px !important;
+  }
+  &:hover {
+    .icons {
+      opacity: 1;
+    }
+  }
+}
