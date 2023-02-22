@@ -4,7 +4,11 @@ import { TUser } from "@/utils/api/models/user/types";
 import { FiltersLayout } from "@/layouts/FiltersLayout";
 import { User } from "@/components";
 
-export default function UsersPage() {
+import { NextPage } from "next";
+
+interface UsersPageProps {}
+
+const UsersPage: NextPage<UsersPageProps> = ({}) => {
   const [users, setUsers] = React.useState<TUser[]>([]);
 
   return (
@@ -16,4 +20,6 @@ export default function UsersPage() {
       </div>
     </FiltersLayout>
   );
-}
+};
+
+export default UsersPage;

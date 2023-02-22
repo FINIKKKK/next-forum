@@ -1,9 +1,13 @@
 import React from "react";
+import { NextPage } from "next";
 
 import { TTag } from "@/utils/api/models/tag/types";
 import { FiltersLayout } from "@/layouts/FiltersLayout";
+import { Tag } from "@/components";
 
-export default function TagsPage() {
+interface TagsPageProps {}
+
+const TagsPage: NextPage<TagsPageProps> = ({}) => {
   const [tags, setTags] = React.useState<TTag[]>([]);
 
   return (
@@ -15,4 +19,6 @@ export default function TagsPage() {
       </div>
     </FiltersLayout>
   );
-}
+};
+
+export default TagsPage;

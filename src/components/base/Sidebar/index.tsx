@@ -6,6 +6,8 @@ import { Api } from "@/utils/api";
 import { TTag } from "@/utils/api/models/tag/types";
 
 import ss from "./Sidebar.module.scss";
+import { useRouter } from "next/router";
+import classNames from "classnames";
 
 interface SidebarProps {}
 
@@ -14,6 +16,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
   const [bottomBoundary, setBottomBoundary] = React.useState<number | null>(
     null
   );
+  const router = useRouter();
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -56,13 +59,17 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
       <div className={ss.block}>
         <h5>Меню</h5>
         <ul className={ss.nav}>
-          <li className={`hover ${ss.item} ${ss.active}`}>
-            <a href="#">
+          <li
+            className={classNames("hover", ss.item, {
+              [ss.active]: router.pathname === "/",
+            })}
+          >
+            <Link href="/">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#questions2" />
               </svg>
               <p>Все вопросы</p>
-            </a>
+            </Link>
           </li>
           <li className={`hover ${ss.item}`}>
             <a href="#">
@@ -72,13 +79,17 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
               <p>Мои предпочтения</p>
             </a>
           </li>
-          <li className={`hover ${ss.item}`}>
-            <a href="#">
+          <li
+            className={classNames("hover", ss.item, {
+              [ss.active]: router.pathname === "/my",
+            })}
+          >
+            <Link href="/my">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#questions" />
               </svg>
               <p>Мои вопросы</p>
-            </a>
+            </Link>
           </li>
           <li className={`hover ${ss.item}`}>
             <a href="#">
@@ -96,7 +107,11 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
               <p>Отслеживаемое</p>
             </a>
           </li>
-          <li className={`hover ${ss.item}`}>
+          <li
+            className={classNames("hover", ss.item, {
+              [ss.active]: router.pathname === "/tags",
+            })}
+          >
             <Link href="/tags">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#tags" />
@@ -104,7 +119,11 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
               <p>Все метки</p>
             </Link>
           </li>
-          <li className={`hover ${ss.item}`}>
+          <li
+            className={classNames("hover", ss.item, {
+              [ss.active]: router.pathname === "/users",
+            })}
+          >
             <a href="/users">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#users" />

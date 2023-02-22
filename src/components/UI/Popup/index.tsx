@@ -42,23 +42,23 @@ export const Popup: React.FC<PopupProps> = ({
         <use xlinkHref="../img/icons/icons.svg#options" />
       </svg>
       {isVisible && (
-        <div className={`block ${ss.box}`}>
+        <div className={`block popup ${ss.box}`}>
           {userData?.id !== userId ? (
             <>
-              <div className={ss.item}>Пожаловаться</div>
+              <div className={`popup__item ${ss.item}`}>Пожаловаться</div>
             </>
           ) : (
             <>
               {type === "question" ? (
-                <div onClick={onChange} className={ss.item}>
+                <div onClick={onChange} className={`popup__item ${ss.item}`}>
                   <Link href={`/create/${questionId}`}>Редактировать</Link>
                 </div>
               ) : (
-                <div onClick={onChange} className={ss.item}>
+                <div onClick={onChange} className={`popup__item ${ss.item}`}>
                   Редактировать
                 </div>
               )}
-              <div onClick={onRemove} className={ss.item}>
+              <div onClick={onRemove} className={`popup__item ${ss.item}`}>
                 Удалить
               </div>
             </>

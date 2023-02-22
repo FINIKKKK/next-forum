@@ -21,6 +21,8 @@ export const User: React.FC<UserProps> = ({ avatar }) => {
     if (window.confirm("Вы точно хотите выйти с аккаунта?")) {
       setUserData(null);
       setCookie(null, "token", "", { maxAge: 0 });
+    } else {
+      setShowPopup(false);
     }
   };
 

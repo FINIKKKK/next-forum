@@ -12,6 +12,8 @@ export type TUser = TBase & {
   lastName?: string | null;
   avatar?: string | null;
   token: string;
+  questionCount: number;
+  answerCount: number;
 };
 
 export type ParamsUserDto = ParamsDto & {

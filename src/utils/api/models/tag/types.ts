@@ -7,6 +7,7 @@ export type TTags = TTotal & {
 export type TTag = TBase & {
   name: string;
   description: string;
+  questionCount: number;
 };
 
 export type TagDto = {

@@ -9,6 +9,8 @@ interface UserProps {
   avatar?: string;
   firstName?: string;
   lastName?: string;
+  questionCount: number;
+  answerCount: number;
 }
 
 export const User: React.FC<UserProps> = ({
@@ -17,27 +19,36 @@ export const User: React.FC<UserProps> = ({
   avatar,
   firstName,
   lastName,
+  questionCount,
+  answerCount,
 }) => {
   return (
     <div className={`block ${ss.user}`}>
-      <Link className={ss.avatar} href={`/profile/${id}`}>
-        <img
-          src={
-            avatar !== null
-              ? `http://localhost:7777/img/avatars/${avatar}`
-              : "../img/avatar.png"
-          }
-          alt="avatar"
-        />
-      </Link>
-      <div className={ss.info}>
-        <Link className={ss.login} href={`/profile/${id}`}>
-          @{login}
+      <div className={ss.inner}>
+        <Link className={ss.avatar} href={`/profile/${id}`}>
+          <img
+            src={
+              avatar !== null
+                ? `http://localhost:7777/img/avatars/${avatar}`
+                : "../img/avatar.png"
+            }
+            alt="avatar"
+          />
         </Link>
-        <p>
-          {firstName} {lastName}
-        </p>
+        <div className={ss.info}>
+          <p className={ss.name}>
+            {firstName} {lastName}
+            Dmitriy Bozhko
+          </p>
+          <Link className={ss.login} href={`/profile/${id}`}>
+            @{login}
+          </Link>
+        </div>
       </div>
+      <ul className={ss.results}>
+        <li>{questionCount} вопросов</li>
+        <li>{answerCount} ответов</li>
+      </ul>
     </div>
   );
 };
