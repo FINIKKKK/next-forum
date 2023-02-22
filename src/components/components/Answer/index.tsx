@@ -1,4 +1,4 @@
-import { Comments, Textarea, UserBox } from "@/components";
+import { Comments, Popup, Textarea, UserBox } from "@/components";
 import { useSelectors } from "@/hooks/useSelectors";
 import { Api } from "@/utils/api";
 import { TComment } from "@/utils/api/models/comments/types";
@@ -39,7 +39,7 @@ export const Answer: React.FC<AnswerProps> = ({
   const [openInput, setOpenInput] = React.useState(false);
   const [openComments, setOpenComments] = React.useState(false);
 
-  const onDeleteAnswer = async () => {
+  const onRemoveAnswer = async () => {
     if (window.confirm("Вы действительно хотите удалить ответ?")) {
       try {
         await Api().answer.remove(id);
@@ -48,6 +48,8 @@ export const Answer: React.FC<AnswerProps> = ({
         console.warn(err);
         alert("Ошибка при удалении ответа");
       }
+    } else {
+      setVisiblePopup(false);
     }
   };
 
@@ -141,7 +143,7 @@ export const Answer: React.FC<AnswerProps> = ({
             <use xlinkHref="../img/icons/icons.svg#arrow-down" />
           </svg>
         </div>
-        {userData?.id === user.id && (
+        {userData && userData.id === user.id && (
           <svg
             onClick={onSetIsAnswer}
             className={classNames(ss.isAnswer__icon, {
@@ -156,32 +158,13 @@ export const Answer: React.FC<AnswerProps> = ({
       </div>
 
       <div className={ss.content}>
-        <div ref={refPopup} className={`popup__wrapper ${ss.popup}`}>
-          <svg
-            onClick={() => setVisiblePopup(!visiblePopup)}
-            className={ss.options}
-            width="20"
-            height="20"
-          >
-            <use xlinkHref="../img/icons/icons.svg#options" />
-          </svg>
-          {visiblePopup && (
-            <div className="popup block">
-              {userData?.id !== user.id ? (
-                <>
-                  <div className="popup__item">Пожаловаться</div>
-                </>
-              ) : (
-                <>
-                  <div className="popup__item">Редактировать</div>
-                  <div onClick={onDeleteAnswer} className="popup__item">
-                    Удалить
-                  </div>
-                </>
-              )}
-            </div>
-          )}
-        </div>
+        <Popup
+          type="answer"
+          isVisible={visiblePopup}
+          setIsVisible={setVisiblePopup}
+          onRemove={onRemoveAnswer}
+          userId={user.id}
+        />
 
         <div className={ss.header}>
           <UserBox className={ss.user} user={user} />

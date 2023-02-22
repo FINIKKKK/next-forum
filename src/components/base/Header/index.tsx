@@ -11,6 +11,7 @@ interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = ({}) => {
   const { data: userData } = useSelectors((state) => state.user);
+  console.log(userData);
 
   return (
     <header className={ss.header}>

@@ -1,0 +1,33 @@
+@import "@/styles/assets/variables";
+
+.popup {
+  top: 0px;
+  right: 0px;
+  z-index: 100;
+  position: absolute;
+  .options {
+    cursor: pointer;
+  }
+  .box {
+    border-radius: 10px;
+    padding: 10px;
+    top: 20px;
+    right: 0px;
+    z-index: 100;
+    position: absolute;
+  }
+  .item {
+    cursor: pointer;
+    font-weight: 700;
+    color: $white;
+    font-size: 14px;
+    opacity: 0.75;
+    transition: 0.2s;
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

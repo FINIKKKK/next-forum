@@ -22,9 +22,9 @@ interface ReplyProps {
 
 export const Reply: React.FC<ReplyProps> = ({ questionId, setAnswers }) => {
   const [body, setBody] = React.useState([]);
-  const { data: userData } = useSelectors((state) => state.user);
   const [isLoading, setIsLoading] = React.useState(false);
   const [errors, setErrors] = React.useState<TError | null>([]);
+  const { data: userData } = useSelectors((state) => state.user);
 
   const onSumbit = async () => {
     try {
@@ -56,45 +56,35 @@ export const Reply: React.FC<ReplyProps> = ({ questionId, setAnswers }) => {
     }
   };
 
-  if (userData) {
-    return (
-      <div className={ss.reply}>
-        <div className={ss.answer__content}>
-          <div className={ss.answer__header}>
-            <UserBox className={ss.user} user={userData} />
-          </div>
-
-          <div className={ss.editor}>
-            <div className={`block2 ${ss.input}`}>
-              <Editor
-                className="editor--answer"
-                initialValue={body}
-                onChange={(blocks: any) => setBody(blocks)}
-                isAnswer={true}
-                placeholder="Введите текст"
-              />
-            </div>
-            {errors?.body && <div className={ss.error}>{errors?.body}</div>}
-          </div>
-
-          <button
-            onClick={onSumbit}
-            className={classNames("btn", ss.btn, {
-              disabled: isLoading,
-            })}
-          >
-            Опубликовать
-          </button>
+  return (
+    <div className={ss.reply}>
+      <div className={ss.answer__content}>
+        <div className={ss.answer__header}>
+          <UserBox className={ss.user} user={userData} />
         </div>
+
+        <div className={ss.editor}>
+          <div className={`block2 ${ss.input}`}>
+            <Editor
+              className="editor--answer"
+              initialValue={body}
+              onChange={(blocks: any) => setBody(blocks)}
+              isAnswer={true}
+              placeholder="Введите текст"
+            />
+          </div>
+          {errors?.body && <div className={ss.error}>{errors?.body}</div>}
+        </div>
+
+        <button
+          onClick={onSumbit}
+          className={classNames("btn", ss.btn, {
+            disabled: isLoading,
+          })}
+        >
+          Опубликовать
+        </button>
       </div>
-    );
-  } else {
-    return (
-      <div className={ss.noreply}>
-        <h3>
-          Войдите в аккаунт или зарегистрируйтесь, чтобы ответить на вопрос
-        </h3>
-      </div>
-    );
-  }
+    </div>
+  );
 };

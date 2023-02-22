@@ -8,6 +8,7 @@ export * from "./UI/AuthInput";
 export * from "./UI/UserBox";
 export * from "./UI/Select";
 export * from "./UI/Textarea";
+export * from "./UI/Popup";
 
 export * from "./components/Question";
 export * from "./components/Answer";

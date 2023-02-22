@@ -1,7 +1,9 @@
+import React from "react";
+import Link from "next/link";
+import Sticky from "react-stickynode";
+
 import { Api } from "@/utils/api";
 import { TTag } from "@/utils/api/models/tag/types";
-import Link from "next/link";
-import React from "react";
 
 import ss from "./Sidebar.module.scss";
 
@@ -9,6 +11,21 @@ interface SidebarProps {}
 
 export const Sidebar: React.FC<SidebarProps> = ({}) => {
   const [tags, setTags] = React.useState<TTag[]>([]);
+  const [bottomBoundary, setBottomBoundary] = React.useState<number | null>(
+    null
+  );
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      const boundary = document.documentElement.scrollHeight - 200;
+      setBottomBoundary(boundary);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   React.useEffect(() => {
     (async () => {
@@ -28,7 +45,11 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
   }, []);
 
   return (
-    <aside className={`sidebar ${ss.sidebar}`}>
+    <Sticky
+      top={25}
+      bottomBoundary={bottomBoundary ? bottomBoundary : "window"}
+      className={`sidebar ${ss.sidebar}`}
+    >
       <Link href="/create" className={`btn ${ss.btn}`}>
         Задать вопрос
       </Link>
@@ -104,6 +125,6 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
           ))}
         </ul>
       </div>
-    </aside>
+    </Sticky>
   );
 };

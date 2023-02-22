@@ -35,15 +35,6 @@
   .user {
     margin-bottom: 20px;
   }
-  .options {
-    z-index: 100;
-    position: absolute;
-    right: 45px;
-    top: 35px;
-    fill: $white;
-    cursor: pointer;
-    width: 20px;
-  }
   .title {
     font-weight: 700;
     font-size: 40px;
@@ -104,5 +95,9 @@
       fill: $gray;
       width: 17px;
     }
+  }
+  .popup {
+    top: 35px;
+    right: 40px;
   }
 }

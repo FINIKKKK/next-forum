@@ -1,6 +1,6 @@
 import React from "react";
 
-import { QuestionBody, UserBox } from "@/components";
+import { Popup, QuestionBody, UserBox } from "@/components";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 import { useSelectors } from "@/hooks/useSelectors";
 import { useTimeNow } from "@/hooks/useTimeNow";
@@ -17,12 +17,8 @@ interface QuestionContentProps {
 export const QuestionContent: React.FC<QuestionContentProps> = ({
   question,
 }) => {
-  const { data } = useSelectors((state) => state.user);
   const [visiblePopup, setVisiblePopup] = React.useState(false);
-  const refPopup = React.useRef<HTMLDivElement>(null);
   const router = useRouter();
-
-  useOutsideClick(refPopup, setVisiblePopup);
 
   const onRemoveQuestion = async () => {
     if (window.confirm("Вы действительно хотите удалить вопрос")) {
@@ -33,6 +29,8 @@ export const QuestionContent: React.FC<QuestionContentProps> = ({
         console.warn(err);
         alert("Ошибка при удалении вопроса");
       }
+    } else {
+      setVisiblePopup(false);
     }
   };
 
@@ -60,34 +58,15 @@ export const QuestionContent: React.FC<QuestionContentProps> = ({
         </div>
       </div>
 
-      <div ref={refPopup} className="popup__wrapper">
-        <svg
-          onClick={() => setVisiblePopup(!visiblePopup)}
-          className={ss.options}
-          width="20"
-          height="20"
-        >
-          <use xlinkHref="../img/icons/icons.svg#options" />
-        </svg>
-        {visiblePopup && (
-          <div className="popup block">
-            {data?.id !== question.user.id ? (
-              <>
-                <div className="popup__item">Пожаловаться</div>
-              </>
-            ) : (
-              <>
-                <div className="popup__item">
-                  <a href={`/create/${question.id}`}>Редактировать</a>
-                </div>
-                <div onClick={onRemoveQuestion} className="popup__item">
-                  Удалить
-                </div>
-              </>
-            )}
-          </div>
-        )}
-      </div>
+      <Popup
+        type="question"
+        className={ss.popup}
+        isVisible={visiblePopup}
+        setIsVisible={setVisiblePopup}
+        onRemove={onRemoveQuestion}
+        userId={question.user.id}
+        questionId={question.id}
+      />
 
       <h1 className={ss.title}>{question.title}</h1>
 

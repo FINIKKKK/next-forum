@@ -141,29 +141,6 @@ svg {
   }
 }
 
-.popup {
-  z-index: 100;
-  position: absolute;
-  top: 20px;
-  right: 10px;
-  border-radius: 10px;
-  padding: 10px;
-  .popup__item {
-    cursor: pointer;
-    font-weight: 700;
-    color: $white;
-    font-size: 14px;
-    opacity: 0.75;
-    transition: 0.2s;
-    &:not(:last-child) {
-      margin-bottom: 10px;
-    }
-    &:hover {
-      opacity: 1;
-    }
-  }
-}
-
 .avatar {
   width: 40px;
   height: 40px;

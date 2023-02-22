@@ -6,11 +6,9 @@
     color: $gray;
     font-weight: 700;
     transition: 0.2s;
+    margin-bottom: 15px;
     &:hover {
       color: $white;
     }
-  }
-  .list {
-    margin-top: 15px;
   }
 }

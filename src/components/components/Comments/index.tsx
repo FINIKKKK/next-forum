@@ -31,6 +31,7 @@ export const Comments: React.FC<CommentsProps> = ({
             <Comment
               key={obj.id}
               {...obj}
+              comments={comments}
               setComments={setComments}
               onChangeComment={onChangeComment}
             />

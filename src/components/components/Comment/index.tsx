@@ -6,11 +6,13 @@ import ss from "./Comment.module.scss";
 import { Api } from "@/utils/api";
 import { TComment } from "@/utils/api/models/comments/types";
 import { useSelectors } from "@/hooks/useSelectors";
+import { Textarea } from "@/components";
 
 interface CommentProps {
   id: number;
   text: string;
   user: TUser;
+  comments: TComment[];
   setComments: (value: TComment) => TComment[];
 }
 
@@ -18,6 +20,7 @@ export const Comment: React.FC<CommentProps> = ({
   id,
   text,
   user,
+  comments,
   setComments,
 }) => {
   const { data: userData } = useSelectors((state) => state.user);
@@ -38,12 +41,27 @@ export const Comment: React.FC<CommentProps> = ({
 
   const onChangeComment = async () => {
     try {
-      await Api().comment.remove(id);
-      setComments((prev: TComment[]) => prev.filter((obj) => obj.id !== id));
+      const dto = {
+        text: value,
+      };
+      const comment = await Api().comment.update(id, dto);
+      setOpenInput(false);
+      const newItems = comments.map((obj) => {
+        if (obj.id === id) {
+          return comment;
+        }
+        return obj;
+      });
+      setComments(newItems);
     } catch (err) {
       console.warn(err);
-      alert("Ошибка при удалении комментария");
+      alert("Ошибка при изменении комментария");
     }
+  };
+
+  const onOpenInput = () => {
+    setOpenInput(!openInput);
+    setValue(text);
   };
 
   return (
@@ -53,29 +71,28 @@ export const Comment: React.FC<CommentProps> = ({
           <b>@{user.login}</b> – {text}
         </p>
       ) : (
-        <textarea
+        <Textarea
+          className={ss.input}
           value={value}
-          onChange={(e: any) => setValue(e.target.value)}
-        ></textarea>
+          setValue={setValue}
+          onSubmit={onChangeComment}
+        />
       )}
       {userData?.id === user.id && (
         <div className={ss.icons}>
-          <svg
-            onClick={() => setOpenInput(!openInput)}
-            className={ss.edit}
-            width="20"
-            height="20"
-          >
+          <svg onClick={onOpenInput} className={ss.edit} width="20" height="20">
             <use xlinkHref="../img/icons/icons.svg#edit" />
           </svg>
-          <svg
-            onClick={onRemoveComment}
-            className={ss.remove}
-            width="20"
-            height="20"
-          >
-            <use xlinkHref="../img/icons/icons.svg#close" />
-          </svg>
+          {!openInput && (
+            <svg
+              onClick={onRemoveComment}
+              className={ss.remove}
+              width="20"
+              height="20"
+            >
+              <use xlinkHref="../img/icons/icons.svg#close" />
+            </svg>
+          )}
         </div>
       )}
     </div>

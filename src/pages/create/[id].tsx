@@ -6,10 +6,10 @@ import { useRouter } from "next/router";
 import { MainLayout } from "@/layouts/MainLayout";
 import { Api } from "@/utils/api";
 import { QuestionScheme } from "@/utils/validation";
-import { InputTags, InputTitle } from "@/components/CreatePage";
 import { TQuestion } from "@/utils/api/models/question/types";
+import { InputTags, InputTitle } from "@/components";
 
-let Editor = dynamic(() => import("../../components/Editor"), {
+let Editor = dynamic(() => import("@/components/components/Editor"), {
   ssr: false,
 });
 
@@ -31,6 +31,8 @@ const EditQuestionPage: NextPage<EditQuestionPageProps> = ({ question }) => {
   const [errors, setErrors] = React.useState<TError | null>(null);
   const router = useRouter();
 
+  console.log(selectedTags);
+
   const onSubmit = async () => {
     try {
       QuestionScheme.validate(
@@ -43,7 +45,7 @@ const EditQuestionPage: NextPage<EditQuestionPageProps> = ({ question }) => {
             const dto = {
               title: title,
               body: body,
-              tags: selectedTags,
+              // tags: selectedTags,
             };
             if (question?.id) {
               await Api().question.update(question?.id, dto);
@@ -90,6 +92,7 @@ const EditQuestionPage: NextPage<EditQuestionPageProps> = ({ question }) => {
                 <Editor
                   initialValue={body}
                   onChange={(blocks: any) => setBody(blocks)}
+                  placeholder="Введите текст"
                 />
               </div>
               {errors?.body && <div className="error">{errors?.body}</div>}

@@ -2,9 +2,9 @@
 .main__inner {
   margin: 85px 0 150px;
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
   .sidebar {
-    width: 25%;
     margin-right: 75px;
   }
   .content {
@@ -495,6 +495,12 @@
 }
 .editor--answer {
   margin-left: 70px;
+  .ce-toolbar__actions {
+    margin-top: 2px !important;
+  }
+  .ce-paragraph {
+    font-size: 16px !important;
+  }
   .ce-toolbar__actions {
     right: 101.5% !important;
   }

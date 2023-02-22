@@ -6,6 +6,7 @@ import { ForumLayout } from "@/layouts/ForumLayout";
 import { Api } from "@/utils/api";
 import { TQuestion } from "@/utils/api/models/question/types";
 import { TAnswer } from "@/utils/api/models/answer/types";
+import { useSelectors } from "@/hooks/useSelectors";
 
 interface QuestionPageProps {
   question: TQuestion;
@@ -29,6 +30,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
 }) => {
   const [answers, setAnswers] = React.useState<TAnswer[]>(answerList || []);
   const [option, setOption] = React.useState(options[0]);
+  const { data: userData } = useSelectors((state) => state.user);
 
   React.useEffect(() => {
     if (option.value === "rating") {
@@ -59,8 +61,17 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
           {answers.map((obj: TAnswer) => (
             <Answer key={obj.id} {...obj} setAnswers={setAnswers} />
           ))}
-
-          <Reply questionId={question.id} setAnswers={setAnswers} />
+          {userData && userData.id !== question.user.id && (
+            <Reply questionId={question.id} setAnswers={setAnswers} />
+          )}
+          {!userData && (
+            <div className="noreply">
+              <h3>
+                Войдите в аккаунт или зарегистрируйтесь, чтобы ответить на
+                вопрос
+              </h3>
+            </div>
+          )}
         </div>
       </div>
     </ForumLayout>
