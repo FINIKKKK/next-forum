@@ -6,14 +6,13 @@ export const QuestionApi = (instance: AxiosInstance) => ({
     const tag = params.tagBy ? `&tagBy=${params.tagBy}` : undefined;
     const search =
       params.search !== "" ? `&search=${params.search}` : undefined;
-    // const user = `userId=${params.userId}` || undefined;
+    const user = params.userId ? `&userId=${params.userId}` : undefined;
     const { data } = await instance.get<TQuestions>(
       `/questions?limit=${params.limit}&page=${params.page}&orderBy=${
         params.orderBy
-      }${tag ? tag : ""}${search ? search : ""}`
+      }${tag ? tag : ""}${search ? search : ""}${user ? user : ""}`
     );
     return data;
-    // &${tag ? tag : ""}&${user ? user : ""}&$
   },
   async getOne(id: number) {
     const { data } = await instance.get<TQuestion>(`/questions/${id}`);

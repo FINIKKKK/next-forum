@@ -1,16 +1,19 @@
 import { NextPage } from "next";
 
 import { QuestionsLayout } from "@/layouts/QuestionsLayout";
+import { useSelectors } from "@/hooks/useSelectors";
 
 interface MyQuestionsPageProps {}
 
 const MyQuestionsPage: NextPage<MyQuestionsPageProps> = ({}) => {
-  return (
-    <QuestionsLayout>
-     
+  const { data: userData } = useSelectors((state) => state.user);
 
-      
-    </QuestionsLayout>
+  return (
+    <QuestionsLayout
+      limit={4}
+      label="Мои вопросы"
+      userId={userData?.id}
+    ></QuestionsLayout>
   );
 };
 

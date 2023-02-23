@@ -13,7 +13,7 @@ export type TQuestion = TBase & {
   user: TUser;
   tags: TTag[];
   views: number;
-  isAsnwer: boolean;
+  isAnswer: boolean;
   answerCount: number;
 };
 

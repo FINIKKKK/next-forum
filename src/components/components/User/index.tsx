@@ -6,7 +6,7 @@ import ss from "./User.module.scss";
 interface UserProps {
   id: number;
   login: string;
-  avatar?: string;
+  avatar?: string | null;
   firstName?: string;
   lastName?: string;
   questionCount: number;

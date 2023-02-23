@@ -11,7 +11,7 @@ const TagsPage: NextPage<TagsPageProps> = ({}) => {
   const [tags, setTags] = React.useState<TTag[]>([]);
 
   return (
-    <FiltersLayout setItems={setTags} type="tag">
+    <FiltersLayout type="tag" limit={6} label="Все метки" setItems={setTags}>
       <div className="tags">
         {tags.map((obj: TTag) => (
           <Tag key={obj.id} {...obj} />

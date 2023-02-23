@@ -3,10 +3,19 @@ import React from "react";
 import { Filters, options, options2, Question, Selects } from "@/components";
 import { FiltersLayout } from "./FiltersLayout";
 import { TQuestion } from "@/utils/api/models/question/types";
+import { useSelectors } from "@/hooks/useSelectors";
 
-type QuestionsLayoutsProps = {};
+type QuestionsLayoutsProps = {
+  limit: number;
+  label: string;
+  userId?: number;
+};
 
-export const QuestionsLayout: React.FC<QuestionsLayoutsProps> = ({}) => {
+export const QuestionsLayout: React.FC<QuestionsLayoutsProps> = ({
+  limit,
+  label,
+  userId,
+}) => {
   const [option, setOption] = React.useState(options[0]);
   const [option2, setOption2] = React.useState(options2[0]);
   const [activeFilter, setActiveFilter] = React.useState<string | null>(null);
@@ -15,9 +24,12 @@ export const QuestionsLayout: React.FC<QuestionsLayoutsProps> = ({}) => {
   return (
     <FiltersLayout
       type="question"
+      limit={limit}
+      label={label}
       setItems={setQuestions}
       option={option}
       setOption={setOption}
+      userId={userId}
     >
       <div className="filters">
         <Selects

@@ -7,21 +7,26 @@ import { ForumLayout } from "./ForumLayout";
 
 type FiltersLayoutsProps = {
   children: any;
-  setItems: (value: any) => void;
   type: string;
+  limit: number;
+  label: string;
+  setItems: (value: any) => void;
   option?: TOption;
   setOption?: (value: TOption) => void;
+  userId?: number;
 };
 
 export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
   children,
-  setItems,
   type,
+  limit,
+  label,
+  setItems,
   option,
   setOption,
+  userId
 }) => {
   const router = useRouter();
-  const limit = 4;
   const [total, setTotal] = React.useState(0);
   const [page, setPage] = React.useState(1);
   const isMounted = React.useRef(false);
@@ -38,6 +43,7 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
           search: searchValue2,
           ...(option && { orderBy: option.value }),
           ...(tag && { tagBy: tag }),
+          ...(userId && { userId }),
         };
         let data;
         if (type === "tag") {
@@ -94,7 +100,7 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
   return (
     <ForumLayout>
       <div className="content block">
-        <h1 className="title">Все метки</h1>
+        <h1 className="title">{label}</h1>
 
         <Search
           value={searchValue}
