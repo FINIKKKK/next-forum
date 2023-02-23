@@ -38,7 +38,6 @@ export const User: React.FC<UserProps> = ({
         <div className={ss.info}>
           <p className={ss.name}>
             {firstName} {lastName}
-            Dmitriy Bozhko
           </p>
           <Link className={ss.login} href={`/profile/${id}`}>
             @{login}

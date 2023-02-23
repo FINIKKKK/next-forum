@@ -14,6 +14,7 @@ type FiltersLayoutsProps = {
   option?: TOption;
   setOption?: (value: TOption) => void;
   userId?: number;
+  setIsLoading: (value: boolean) => void;
 };
 
 export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
@@ -24,7 +25,8 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
   setItems,
   option,
   setOption,
-  userId
+  userId,
+  setIsLoading,
 }) => {
   const router = useRouter();
   const [total, setTotal] = React.useState(0);
@@ -59,6 +61,8 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
           setItems(items);
           setTotal(total);
         }
+
+        setIsLoading(false);
       } catch (err) {
         console.warn(err);
         alert("Ошибка при получении");

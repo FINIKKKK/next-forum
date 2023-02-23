@@ -1,9 +1,15 @@
 import React from "react";
 
-import { Filters, options, options2, Question, Selects } from "@/components";
+import {
+  Filters,
+  LoadingElement,
+  options,
+  options2,
+  Question,
+  Selects,
+} from "@/components";
 import { FiltersLayout } from "./FiltersLayout";
 import { TQuestion } from "@/utils/api/models/question/types";
-import { useSelectors } from "@/hooks/useSelectors";
 
 type QuestionsLayoutsProps = {
   limit: number;
@@ -20,6 +26,7 @@ export const QuestionsLayout: React.FC<QuestionsLayoutsProps> = ({
   const [option2, setOption2] = React.useState(options2[0]);
   const [activeFilter, setActiveFilter] = React.useState<string | null>(null);
   const [questions, setQuestions] = React.useState<TQuestion[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   return (
     <FiltersLayout
@@ -30,6 +37,7 @@ export const QuestionsLayout: React.FC<QuestionsLayoutsProps> = ({
       option={option}
       setOption={setOption}
       userId={userId}
+      setIsLoading={setIsLoading}
     >
       <div className="filters">
         <Selects
@@ -46,9 +54,13 @@ export const QuestionsLayout: React.FC<QuestionsLayoutsProps> = ({
       </div>
 
       <div className="questions">
-        {questions.map((obj: TQuestion) => (
-          <Question key={obj.id} {...obj} />
-        ))}
+        {isLoading
+          ? Array(limit)
+              .fill(0)
+              .map((_, index) => <LoadingElement key={index} />)
+          : questions.map((obj: TQuestion) => (
+              <Question key={obj.id} {...obj} />
+            ))}
       </div>
     </FiltersLayout>
   );

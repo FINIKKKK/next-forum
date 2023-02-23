@@ -18,6 +18,7 @@ export * from "./components/QuestionBody";
 export * from "./components/Reply";
 export * from "./components/Comments";
 export * from "./components/Comment";
+export * from "./components/LoadingElement";
 
 export * from "./pages/PageCreate";
 export * from "./pages/PageHome";

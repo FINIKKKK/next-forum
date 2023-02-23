@@ -16,6 +16,13 @@
     padding: 35px 45px;
     background-color: $purple2;
   }
+  .list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: -20px;
+    margin-right: -20px;
+  }
 }
 
 // --------- content ----------
@@ -506,11 +513,18 @@
   }
 }
 
-// --------- tags ----------
-.tags {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: -20px;
-  margin-right: -20px;
+// --------- loading ----------
+.loading__tag {
+  border-radius: 10px !important;
+  width: 47% !important;
+  height: 170px !important;
+  margin-bottom: 20px !important;
+  margin-right: 20px !important;
+}
+.loading__user {
+  border-radius: 10px !important;
+  width: 30.5% !important;
+  height: 105px !important;
+  margin-bottom: 20px !important;
+  margin-right: 20px !important;
 }
