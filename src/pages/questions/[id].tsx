@@ -81,14 +81,20 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
     const id = ctx?.params?.id;
-    const question = await Api().question.getOne(id);
-    const answers = await Api().answer.getAll({ questionId: question.id });
-    return {
-      props: {
-        question,
-        answers,
-      },
-    };
+    if (id) {
+      const question = await Api().question.getOne(+id);
+      const answers = await Api().answer.getAll({ questionId: question.id });
+      return {
+        props: {
+          question,
+          answers,
+        },
+      };
+    } else {
+      return {
+        props: {},
+      };
+    }
   } catch (err) {
     console.warn(err);
     alert("Ошибка при получении вопроса");

@@ -23,6 +23,8 @@ export type QuestionDto = {
   tags: TTag[];
 };
 
+export type UpdateQuestionDto = Partial<QuestionDto>;
+
 export type ParamsQuestionDto = ParamsDto & {
   orderBy?: string;
   tagBy?: string;

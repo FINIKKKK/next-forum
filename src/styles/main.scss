@@ -1,3 +1,84 @@
+.btn__theme {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: $purple;
+  width: 30px;
+  height: 30px;
+  font-size: 10px;
+  box-shadow: 4px 4px 15px rgba(53, 49, 117, 0.2);
+  transition: box-shadow 500ms;
+  margin-right: 25px;
+  &:hover {
+    .ray {
+      background-color: $white !important;
+    }
+    .shape.moon {
+      box-shadow: inset -0.5em -0.5em $white;
+    }
+    .shape.sun {
+      box-shadow: inset -0.7em -0.7em $white;
+    }
+  }
+  span {
+    display: inline-block;
+  }
+  .rays--container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+  }
+  .rays--container .ray {
+    position: absolute;
+    border-radius: 50%;
+    transition: all 500ms;
+  }
+  .rays--container .ray:nth-child(2) {
+    transform: rotate(45deg);
+  }
+  .rays--container .ray:nth-child(3) {
+    transform: rotate(90deg);
+  }
+  .rays--container .ray:nth-child(4) {
+    transform: rotate(-45deg);
+  }
+  .shape {
+    z-index: 1;
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid $purple;
+    transition: all 500ms;
+  }
+  .shape.moon {
+    width: 1.667em;
+    height: 1.667em;
+    box-shadow: inset -0.5em -0.5em $gray;
+  }
+  .shape.moon ~ .rays--container .ray {
+    width: 0;
+    height: 0;
+  }
+  .shape.sun {
+    width: 1em;
+    height: 1em;
+    box-shadow: inset -0.7em -0.7em $gray;
+  }
+  .shape.sun ~ .rays--container {
+    transform: rotate(90deg);
+    transition: transform 750ms 400ms;
+  }
+  .shape.sun ~ .rays--container .ray {
+    width: 0.350em;
+    height: 1.767em;
+    background-color: $gray;
+  }
+}
+
 // --------- main ----------
 .main__inner {
   margin: 85px 0 150px;

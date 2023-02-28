@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 interface AuthLayoutProps {
-  children: any;
+  children: React.ReactNode;
 }
 
 export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {

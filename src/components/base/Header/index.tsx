@@ -11,7 +11,11 @@ interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = ({}) => {
   const { data: userData } = useSelectors((state) => state.user);
-  console.log(userData);
+  const [lightTheme, setLightTheme] = React.useState(false);
+
+  const onChangeTheme = () => {
+    setLightTheme(!lightTheme);
+  };
 
   return (
     <header className={ss.header}>
@@ -33,8 +37,20 @@ export const Header: React.FC<HeaderProps> = ({}) => {
               </li>
             </ul>
           </div>
+
+          <div className={ss.theme}></div>
+
           {userData ? (
             <div className={ss.options}>
+              <button onClick={onChangeTheme} className="btn__theme">
+                <span className={`shape ${lightTheme ? "sun" : "moon"}`}></span>
+                <span className="rays--container">
+                  <span className="ray"></span>
+                  <span className="ray"></span>
+                  <span className="ray"></span>
+                  <span className="ray"></span>
+                </span>
+              </button>
               <Notices />
               <User avatar={userData.avatar} />
             </div>

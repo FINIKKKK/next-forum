@@ -15,11 +15,7 @@ export type AnswerDto = {
   questionId: number;
   body: OutputBlockData[];
 };
-export type UpdateAnswerDto = {
-  body?: OutputBlockData[];
-  isAnswer?: boolean;
-  rating?: number;
-};
+export type UpdateAnswerDto = Partial<AnswerDto>;
 
 export type ParamsAnswerDto = {
   questionId: number;
