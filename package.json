@@ -24,6 +24,7 @@
     "@hookform/resolvers": "^2.9.10",
     "@next/font": "13.1.6",
     "@reduxjs/toolkit": "^1.9.2",
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/node": "18.11.19",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
@@ -54,6 +55,10 @@
     "@types/lodash.debounce": "^4.0.7",
     "@types/moment": "^2.13.0",
     "@types/qs": "^6.9.7",
-    "@types/react-stickynode": "^4.0.0"
+    "@types/react-stickynode": "^4.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.4",
+    "prettier-plugin-import-sort": "^0.0.7",
+    "prettier-plugin-sort-imports": "^1.7.1"
   }
 }

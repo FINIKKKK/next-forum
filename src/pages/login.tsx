@@ -1,34 +1,33 @@
-import React from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { setCookie } from "nookies";
-import { FormProvider, useForm } from "react-hook-form";
-import { NextPage } from "next";
-
-import { AuthInput } from "@/components";
-import { useActions } from "@/hooks/useActions";
-import { AuthLayout } from "@/layouts/AuthLayout";
-import { Api } from "@/utils/api";
-import { LoginUserDto } from "@/utils/api/models/auth/types";
+import { AuthInput } from '@/components';
+import { useActions } from '@/hooks/useActions';
+import { AuthLayout } from '@/layouts/AuthLayout';
+import { Api } from '@/utils/api';
+import { LoginUserDto } from '@/utils/api/models/auth/types';
+import { NextPage } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { setCookie } from 'nookies';
+import React from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 
 interface LoginPageProps {}
 
 const LoginPage: NextPage<LoginPageProps> = ({}) => {
   const form = useForm();
-  const [error, setError] = React.useState("");
+  const [error, setError] = React.useState('');
   const { setUserData } = useActions();
   const router = useRouter();
 
   const onSubmit = async (dto: LoginUserDto) => {
     try {
       const user = await Api().auth.login(dto);
-      setCookie(null, "token", user.token, {
+      setCookie(null, 'token', user.token, {
         maxAge: 30 * 60 * 24 * 60,
-        path: "/",
+        path: '/',
       });
       setUserData(user.token);
-      setError("");
-      router.push("/");
+      setError('');
+      router.push('/');
     } catch (err) {
       setError(err?.response?.data?.message);
     }

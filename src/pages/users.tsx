@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { FiltersLayout } from "@/layouts/FiltersLayout";
-import { LoadingElement, User } from "@/components";
+import { FiltersLayout } from '@/layouts/FiltersLayout';
+import { LoadingElement, User } from '@/components';
 
-import { NextPage } from "next";
-import { TUser } from "@/utils/api/models/user/types";
+import { NextPage } from 'next';
+import { TUser } from '@/utils/api/models/user/types';
 
 interface UsersPageProps {}
 

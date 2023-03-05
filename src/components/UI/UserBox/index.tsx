@@ -1,22 +1,31 @@
-import { TUser } from "@/utils/api/models/user/types";
+import ss from "./UserBox.module.scss";
 import Link from "next/link";
 import React from "react";
 
-import ss from "./UserBox.module.scss";
-
 interface UserBoxProps {
-  user: TUser;
+  id: number;
+  avatar: string;
+  firstName: string;
+  lastName: string;
+  login: string;
   className: string;
 }
 
-export const UserBox: React.FC<UserBoxProps> = ({ user, className }) => {
+export const UserBox: React.FC<UserBoxProps> = ({
+  id,
+  avatar,
+  login,
+  firstName,
+  lastName,
+  className,
+}) => {
   return (
     <div className={`${className} ${ss.user}`}>
-      <Link href={`/profile/${user.id}`}>
+      <Link href={`/profile/${id}`}>
         <img
           src={
-            user.avatar !== null
-              ? `http://localhost:7777/img/avatars/${user.avatar}`
+            avatar !== null
+              ? `http://localhost:7777/img/avatars/${avatar}`
               : `../img/avatar.png`
           }
           alt="avatar"
@@ -24,14 +33,14 @@ export const UserBox: React.FC<UserBoxProps> = ({ user, className }) => {
         />
       </Link>
       <div className={ss.info}>
-        {user.firstName !== null ||
-          (user.lastName !== null && (
+        {firstName !== null ||
+          (lastName !== null && (
             <div className={ss.name}>
-              {user.firstName} {user.lastName}
+              {firstName} {lastName}
             </div>
           ))}
-        <Link href={`/profile/${user.id}`}>
-          <h6 className={ss.login}>@{user.login}</h6>
+        <Link href={`/profile/${id}`}>
+          <h6 className={ss.login}>@{login}</h6>
         </Link>
       </div>
     </div>

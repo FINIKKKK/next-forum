@@ -1,0 +1,60 @@
+@import '@/styles/assets/variables';
+
+.user {
+  .avatar {
+    width: 164px;
+    height: 164px;
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 24px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .info {
+    text-align: center;
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 50px;
+  }
+  .name {
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .login {
+    font-weight: 700;
+    color: $gray;
+  }
+
+  .extra {
+    margin-bottom: 54px;
+    .box:not(:last-child) {
+      margin-bottom: 25px;
+    }
+  }
+
+  .box {
+    .label {
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 16px;
+      color: $gray;
+      margin-bottom: 10px;
+    }
+    .item {
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 700;
+    }
+  }
+
+  .subscribe {
+    font-size: 16px;
+    line-height: 20px;
+    padding: 9px 40px;
+    display: flex;
+    margin: 0 auto;
+  }
+}

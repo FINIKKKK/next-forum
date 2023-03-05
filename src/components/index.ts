@@ -23,3 +23,4 @@ export * from "./components/LoadingElement";
 export * from "./pages/PageCreate";
 export * from "./pages/PageHome";
 export * from "./pages/PageQuestion";
+export * from "./pages/PageProfile";

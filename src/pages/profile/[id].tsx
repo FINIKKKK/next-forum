@@ -1,69 +1,62 @@
-import { Question } from "@/components";
+import { Question, UserAbout, UserInfo } from "@/components";
 import { MainLayout } from "@/layouts/MainLayout";
-import { NextPage } from "next";
+import { Api } from "@/utils/api";
+import { TQuestion } from "@/utils/api/models/question/types";
+import { TUser } from "@/utils/api/models/user/types";
+import { GetServerSideProps, NextPage } from "next";
+import React from "react";
 
-interface ProfilePageProps {}
+interface ProfilePageProps {
+  user: TUser;
+}
 
-const ProfilePage: NextPage<ProfilePageProps> = ({}) => {
+const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
+  const [questions, setQuestions] = React.useState<TQuestion[]>([]);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const params = {
+          limit: 5,
+          page: 1,
+          orderBy: "date",
+          userId: user.id,
+        };
+        const questions = await Api().question.getAll(params);
+        setQuestions(questions.items);
+      } catch (err) {
+        console.warn(err);
+        alert("Ошибка при получении вопросов");
+      }
+    })();
+  }, []);
+
   return (
     <MainLayout>
       <div className="profile">
         <div className="container">
           <div className="profile__inner">
-            <div className="user__info block">
-              <img src="../img/avatar.png" alt="" className="avatar" />
-              <h3 className="name">Dmitriy Bozhko</h3>
-              <div className="info__box">
-                <div className="info">
-                  <div className="label">Местоположение</div>
-                  <p className="item">City 17</p>
-                </div>
-                <div className="info">
-                  <div className="label">Место работы</div>
-                  <p className="item">OOO "City 17"</p>
-                </div>
-                <div className="info">
-                  <div className="label">Email</div>
-                  <p className="item">krashmate@gmail.com</p>
-                </div>
-              </div>
-              <button className="subscribe btn">Подписаться</button>
-            </div>
+            <UserInfo user={user} />
 
-            <div className="user__about block">
-              <div className="statistic">
-                <p className="item">
-                  Подписчики: <b>117</b>
-                </p>
-                <p className="item">
-                  Вопросы: <b>12</b>
-                </p>
-              </div>
-              <div className="info">
-                <div className="label">О себе:</div>
-                <p className="item">
-                  Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                  amet sint. Velit officia consequat duis enim velit mollit.
-                  Exercitation veniam consequat sunt nostrud amet.
-                  <br />
-                  <br />
-                  Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                  amet sint. Velit officia consequat duis enim velit mollit.
-                  Exercitation veniam consequat sunt nostrud amet.
-                </p>
-              </div>
-            </div>
+            <UserAbout
+              questionCount={user.questionCount}
+              answerCount={user.answerCount}
+            />
 
             <div className="user__work">
               <ul className="nav">
-                <li className="item hover active">Мои избранное</li>
-                <li className="item hover">Мои вопросы</li>
+                <li className="item hover active">Мои вопросы</li>
+                <li className="item hover">Мои избранное</li>
               </ul>
               <div className="block">
                 <div className="questions">
-                  <Question />
-                  <Question />
-                  <Question />
+                  {questions.map((obj) => (
+                    <Question
+                      className="profile__question"
+                      key={obj.id}
+                      {...obj}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
@@ -72,6 +65,29 @@ const ProfilePage: NextPage<ProfilePageProps> = ({}) => {
       </div>
     </MainLayout>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  try {
+    const id = ctx?.params?.id;
+    if (id) {
+      const user = await Api().user.getOne(+id);
+      return {
+        props: {
+          user,
+        },
+      };
+    }
+    return {
+      props: {},
+    };
+  } catch (err) {
+    console.warn(err);
+    alert("Ошибка при получении пользователя");
+    return {
+      props: {},
+    };
+  }
 };
 
 export default ProfilePage;

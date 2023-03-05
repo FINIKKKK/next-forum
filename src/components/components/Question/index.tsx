@@ -1,10 +1,9 @@
-import React from "react";
-import Link from "next/link";
-
 import ss from "./Question.module.scss";
-import { TTag } from "@/utils/api/models/tag/types";
 import { useTimeNow } from "@/hooks/useTimeNow";
+import { TTag } from "@/utils/api/models/tag/types";
 import classNames from "classnames";
+import Link from "next/link";
+import React from "react";
 
 interface QuestionProps {
   id: number;
@@ -14,6 +13,7 @@ interface QuestionProps {
   tags: TTag[];
   isAnswer: boolean;
   answerCount: number;
+  className?: string;
 }
 
 export const Question: React.FC<QuestionProps> = ({
@@ -24,11 +24,12 @@ export const Question: React.FC<QuestionProps> = ({
   tags,
   isAnswer,
   answerCount,
+  className,
 }) => {
   const [favorite, setFavorite] = React.useState(false);
 
   return (
-    <div className={`block hover ${ss.question}`}>
+    <div className={`block hover ${ss.question} ${className}`}>
       <div className={ss.left}>
         <Link href={`/questions/${id}`} className={ss.title}>
           <h3>{title}</h3>
@@ -49,20 +50,20 @@ export const Question: React.FC<QuestionProps> = ({
       <div className={ss.right}>
         <div className={ss.item}>
           <svg width="20" height="20">
-            <use xlinkHref="./img/icons/icons.svg#eye" />
+            <use xlinkHref="../img/icons/icons.svg#eye" />
           </svg>
           <p>{views}</p>
         </div>
         <div className={ss.item}>
           <svg width="20" height="20">
-            <use xlinkHref="./img/icons/icons.svg#answers" />
+            <use xlinkHref="../img/icons/icons.svg#answers" />
           </svg>
           <p>{answerCount}</p>
         </div>
         {isAnswer && (
           <div className={`${ss.item} ${ss.answer}`}>
             <svg width="20" height="20">
-              <use xlinkHref="./img/icons/icons.svg#check" />
+              <use xlinkHref="../img/icons/icons.svg#check" />
             </svg>
             <p>Ответ</p>
           </div>

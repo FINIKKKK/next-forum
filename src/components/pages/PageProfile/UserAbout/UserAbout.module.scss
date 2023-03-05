@@ -1,0 +1,32 @@
+@import "@/styles/assets/variables";
+
+.info {
+  .statistic {
+    display: flex;
+    align-items: center;
+    margin-bottom: 35px;
+    .item:not(:last-child) {
+      margin-right: 25px;
+    }
+    .item {
+      color: $gray;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 16px;
+      b {
+        color: $white;
+      }
+    }
+  }
+  .label {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    color: $gray;
+    margin-bottom: 10px;
+  }
+  .item {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
