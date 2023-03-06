@@ -1,0 +1,88 @@
+// ---- Global-Tags ----
+body.light {
+  color: $light-main;
+  background: $light-white;
+}
+
+.light {
+  a {
+    color: $light-main;
+  }
+  svg {
+    fill: $light-main;
+  }
+}
+
+// ---- Global-Classes ----
+.light {
+  .btn {
+    color: $light-white;
+    background: $light-main;
+    &:hover {
+      box-shadow: 0px 0px 8px rgba($main, 0.25);
+    }
+  }
+
+  .input {
+    input {
+      color: $white;
+      &::placeholder {
+        color: $light-main;
+      }
+    }
+    svg {
+      fill: $light-main;
+    }
+  }
+
+  .block {
+    background-color: $light-block;
+    box-shadow: 0px 4px 8px rgba(#715ca0, 0.3);
+    &.hover {
+      &:hover {
+        box-shadow: 0px 4px 12px rgba(#715ca0, 0.6);
+      }
+    }
+  }
+
+  .block2 {
+    background-color: $light-block2;
+  }
+
+  .tag {
+    background-color: $light-main;
+    a {
+      color: $light-white;
+    }
+  }
+
+  .bb {
+    background-color: $main;
+    color: $light-white;
+  }
+
+  .inline {
+    color: $gray;
+    &:hover {
+      color: $main;
+    }
+  }
+
+  .popup {
+    .popup__item {
+      color: $white;
+    }
+  }
+}
+
+.light {
+  &::-webkit-scrollbar-thumb {
+    background-color: $light-main;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: $light-white;
+  }
+  &::selection {
+    background: rgba($light-main, 0.2) !important;
+  }
+}

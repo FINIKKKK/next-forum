@@ -1,10 +1,11 @@
+import { Theme, TUserSlice } from "./types";
 import { TUser } from "@/utils/api/models/user/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { TUserSlice } from "./types";
 
 const initialState: TUserSlice = {
   data: null,
+  theme: Theme.dark,
 };
 
 const userSlice = createSlice({
@@ -14,6 +15,9 @@ const userSlice = createSlice({
     setUserData(state, { payload }: PayloadAction<TUser | null>) {
       state.data = payload;
     },
+    setTheme(state, { payload }: PayloadAction<Theme>) {
+      state.theme = payload;
+    },
   },
   extraReducers: {
     [HYDRATE]: (state, { payload }: PayloadAction<TUser>) => {
@@ -22,7 +26,7 @@ const userSlice = createSlice({
   },
 });
 
-// export const userActions = userSlice.actions;
+export const userActions = userSlice.actions;
 export const { setUserData } = userSlice.actions;
 
 export default userSlice.reducer;

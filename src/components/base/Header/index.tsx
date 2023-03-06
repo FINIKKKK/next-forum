@@ -1,20 +1,22 @@
-import React from "react";
-import Link from "next/link";
-
+import ss from "./Header.module.scss";
 import { Notices } from "./Notices";
 import { User } from "./User";
+import { useActions } from "@/hooks/useActions";
 import { useSelectors } from "@/hooks/useSelectors";
-
-import ss from "./Header.module.scss";
+import { Theme } from "@/redux/user/types";
+import Link from "next/link";
+import React from "react";
 
 interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = ({}) => {
-  const { data: userData } = useSelectors((state) => state.user);
-  const [lightTheme, setLightTheme] = React.useState(false);
+  const { data: userData, theme } = useSelectors((state) => state.user);
+  const { setTheme } = useActions();
+
 
   const onChangeTheme = () => {
-    setLightTheme(!lightTheme);
+    const newTheme = theme === Theme.dark ? Theme.light : Theme.dark;
+    setTheme(newTheme);
   };
 
   return (
@@ -38,12 +40,10 @@ export const Header: React.FC<HeaderProps> = ({}) => {
             </ul>
           </div>
 
-          <div className={ss.theme}></div>
-
           {userData ? (
             <div className={ss.options}>
               <button onClick={onChangeTheme} className="btn__theme">
-                <span className={`shape ${lightTheme ? "sun" : "moon"}`}></span>
+                <span className={`shape ${theme === Theme.dark ? "sun" : "moon"}`}></span>
                 <span className="rays--container">
                   <span className="ray"></span>
                   <span className="ray"></span>

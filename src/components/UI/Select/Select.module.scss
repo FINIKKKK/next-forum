@@ -59,3 +59,28 @@
     }
   }
 }
+
+:global(.light) {
+  .select {
+    :global {
+      .select__dropdown-indicator {
+        color: $light-main !important;
+      }
+      .select__single-value {
+        color: $light-main;
+      }
+      .select__option--is-selected {
+        color: $light-main;
+      }
+      .select__indicator {
+        &:hover {
+          color: $light-main;
+        }
+      }
+      .select__menu {
+        background-color: $light-block;
+        box-shadow: 0px 0px 5px rgba($light-main, 0.3);
+      }
+    }
+  }
+}

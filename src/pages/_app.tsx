@@ -1,12 +1,33 @@
+import { useSelectors } from "@/hooks/useSelectors";
+import { wrapper } from "@/redux/store";
+import { setUserData } from "@/redux/user/slice";
+import "@/styles/style.scss";
+import { Api } from "@/utils/api";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import React from "react";
 import { Provider } from "react-redux";
 
-import { wrapper } from "@/redux/store";
-import { Api } from "@/utils/api";
-import { setUserData } from "@/redux/user/slice";
+interface AppComponentProps {
+  Component: any;
+  props: any;
+}
 
-import "@/styles/style.scss";
+export const AppComponent: React.FC<AppComponentProps> = ({
+  Component,
+  props,
+}) => {
+  const { theme } = useSelectors((state) => state.user);
+
+  React.useEffect(() => {
+    document.body.classList.add(theme.toLowerCase());
+    return () => {
+      document.body.classList.remove(theme.toLowerCase());
+    };
+  }, [theme]);
+
+  return <Component {...props.pageProps} />;
+};
 
 const App = ({ Component, ...rest }: AppProps) => {
   const { store, props } = wrapper.useWrappedStore(rest);
@@ -25,7 +46,7 @@ const App = ({ Component, ...rest }: AppProps) => {
       </Head>
 
       <Provider store={store}>
-        <Component {...props.pageProps} />
+        <AppComponent Component={Component} props={props} />
       </Provider>
     </>
   );

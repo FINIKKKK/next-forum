@@ -103,3 +103,21 @@
     }
   }
 }
+
+:global(.light) {
+  .favorite {
+    path:nth-child(2) {
+      fill: $light-main;
+    }
+    &.active {
+      path:nth-child(1) {
+        fill: $light-main;
+      }
+    }
+  }
+  .item {
+    svg {
+      fill: $light-main;
+    }
+  }
+}

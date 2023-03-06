@@ -12,3 +12,10 @@
     color: $white;
   }
 }
+
+:global(.light) {
+  .copy {
+    background: $light-main;
+    color: $light-white;
+  }  
+}

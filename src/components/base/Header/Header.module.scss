@@ -36,7 +36,8 @@
       content: "";
       position: absolute;
       background-color: $main;
-      height: 1px;
+      height: 1.5px;
+      border-radius: 1px;
       width: 0%;
       bottom: 0;
       left: 50%;
@@ -106,5 +107,16 @@
     top: 25px;
     right: 20px;
     position: absolute;
+  }
+}
+
+:global(.light) {
+  .item.active {
+    a {
+      color: $light-main;
+    }
+    &::after {
+      background-color: $light-main;
+    }
   }
 }

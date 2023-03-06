@@ -63,3 +63,23 @@
     }
   }
 }
+
+:global(.light) {
+  .block {
+    &:not(:last-child) {
+      border-bottom: 1px solid $light-main;
+    }
+  }
+  .nav {
+    .item {
+      &.active {
+        a {
+          color: $light-main;
+        }
+      }
+      svg {
+        fill: $light-main;
+      }
+    }
+  }
+}

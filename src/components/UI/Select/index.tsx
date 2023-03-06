@@ -28,6 +28,7 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({
       value={value}
       onChange={(value: any) => setValue(value)}
       options={options}
+      // menuIsOpen={true}
     />
   );
 };
