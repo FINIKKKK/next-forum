@@ -1,5 +1,5 @@
+import { TUser, ParamsUserDto, TUsers, UpdateUserDto } from "./types";
 import { AxiosInstance } from "axios";
-import { TUser, ParamsUserDto, TUsers } from "./types";
 
 export const UserApi = (instance: AxiosInstance) => ({
   async getProfile() {
@@ -21,13 +21,23 @@ export const UserApi = (instance: AxiosInstance) => ({
     const { data } = await instance.get<TUser>(`/users/${id}`);
     return data;
   },
-  // async update(id: number, dto: RegisterUserDto) {
-  //   const { data } = await instance.patch<RegisterUserDto, { data: TUser }>(
-  //     `/users/${id}`,
-  //     dto
-  //   );
-  //   return data;
-  // },
+  async updateAvatar(id: number, file: any) {
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("imagePath", 'avatars');
+
+    const userAvatar = await instance.patch(`/users/avatar/${id}`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return userAvatar;
+  },
+  async update(id: number, dto: UpdateUserDto) {
+    const { data } = await instance.patch<UpdateUserDto, { data: TUser }>(
+      `/users/${id}`,
+      dto
+    );
+    return data;
+  },
   async remove(id: number) {
     const { data } = await instance.delete<TUser>(`/users/${id}`);
     return data;

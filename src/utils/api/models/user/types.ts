@@ -16,6 +16,8 @@ export type TUser = TBase & {
   location?: string;
 };
 
+export type UpdateUserDto = Partial<TUser>;
+
 export type ParamsUserDto = ParamsDto & {
   search?: string;
 };

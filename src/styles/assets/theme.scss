@@ -73,6 +73,18 @@ body.light {
       color: $white;
     }
   }
+
+  .avatar {
+    box-shadow: 0px 0px 10px rgba($light-main, 0.4) !important;
+    svg {
+      path {
+        fill: $light-main;
+      }
+      circle {
+        fill: $light-block2;
+      }
+    }
+  }
 }
 
 .light {

@@ -13,13 +13,7 @@
   }
   .logo {
     width: 150px;
-    height: auto;
     margin-right: 120px;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
   }
   .menu {
     display: flex;
@@ -107,10 +101,21 @@
     top: 25px;
     right: 20px;
     position: absolute;
+    .popup__item {
+      display: block;
+    }
   }
 }
 
 :global(.light) {
+  .logo {
+    path:nth-child(n+2):nth-child(-n+32) {
+      fill: $light-main;
+    }
+    path:nth-child(31) {
+      fill: $gray !important;
+    }
+  }
   .item.active {
     a {
       color: $light-main;

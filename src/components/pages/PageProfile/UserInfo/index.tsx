@@ -1,5 +1,6 @@
 import ss from "./UserInfo.module.scss";
 import { useSelectors } from "@/hooks/useSelectors";
+import { Api } from "@/utils/api";
 import { TUser } from "@/utils/api/models/user/types";
 import React from "react";
 
@@ -13,6 +14,7 @@ export const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
   const [isEdit, setIsEdit] = React.useState(false);
   const [nameValue, setNameValue] = React.useState(user.name);
   const [locationValue, setLocationValue] = React.useState(user.location);
+  const [userAvatar, setUserAvatar] = React.useState(user.avatar);
 
   const onEditContent = () => {
     if (!isEdit) {
@@ -22,19 +24,35 @@ export const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
     }
   };
 
+  const onUpdateAvatar = async (e: any) => {
+    if (e.target.files) {
+      try {
+        const avatar = await Api().user.updateAvatar(
+          user.id,
+          e.target.files[0]
+        );
+        setUserAvatar(avatar);
+      } catch (err) {
+        console.warn(err);
+        alert("Ошибка при изменении аватарки");
+      }
+    }
+  };
+
   return (
     <div className={`user__info block ${ss.user}`}>
       <div className={ss.avatar}>
         <img
           src={
-            user.avatar
-              ? `http://localhost:7777/img/avatars/${user.avatar}`
+            userAvatar
+              ? `http://localhost:7777/img/avatars/${userAvatar}`
               : `../img/avatar.png`
           }
           alt="avatar"
         />
         {isAuthor && (
           <div className={ss.avatar__edit}>
+            <input type="file" onChange={onUpdateAvatar} />
             <svg width="20" height="20">
               <use xlinkHref="../img/icons/icons.svg#edit" />
             </svg>
