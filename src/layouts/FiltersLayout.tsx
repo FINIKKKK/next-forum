@@ -1,9 +1,9 @@
-import { options, Pagination, Search, TOption } from "@/components";
+import { ForumLayout } from "./ForumLayout";
+import { NotFound, options, Pagination, Search, TOption } from "@/components";
 import { Api } from "@/utils/api";
 import { useRouter } from "next/router";
 import qs from "qs";
 import React from "react";
-import { ForumLayout } from "./ForumLayout";
 
 type FiltersLayoutsProps = {
   children: any;
@@ -15,6 +15,7 @@ type FiltersLayoutsProps = {
   setOption?: (value: TOption) => void;
   userId?: number;
   setIsLoading: (value: boolean) => void;
+  itemsLength: number;
 };
 
 export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
@@ -27,6 +28,7 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
   setOption,
   userId,
   setIsLoading,
+  itemsLength,
 }) => {
   const router = useRouter();
   const [total, setTotal] = React.useState(0);
@@ -104,7 +106,7 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
   return (
     <ForumLayout>
       <div className="content block">
-        <h1 className="title">{label}</h1>
+        <h1 className="title">{tag ? `Поиск по метке "${tag}"` : label}</h1>
 
         <Search
           value={searchValue}
@@ -114,7 +116,14 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
 
         {children}
 
-        <Pagination page={page} limit={limit} total={total} setPage={setPage} />
+        {itemsLength !== 0 && (
+          <Pagination
+            page={page}
+            limit={limit}
+            total={total}
+            setPage={setPage}
+          />
+        )}
       </div>
     </ForumLayout>
   );

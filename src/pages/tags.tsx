@@ -1,9 +1,8 @@
-import React from "react";
-import { NextPage } from "next";
-
-import { TTag } from "@/utils/api/models/tag/types";
+import { LoadingElement, NotFound, Tag } from "@/components";
 import { FiltersLayout } from "@/layouts/FiltersLayout";
-import { LoadingElement, Tag } from "@/components";
+import { TTag } from "@/utils/api/models/tag/types";
+import { NextPage } from "next";
+import React from "react";
 
 interface TagsPageProps {}
 
@@ -19,15 +18,20 @@ const TagsPage: NextPage<TagsPageProps> = ({}) => {
       label="Все метки"
       setItems={setTags}
       setIsLoading={setIsLoading}
+      itemsLength={tags.length}
     >
       <div className="list">
-        {isLoading
-          ? Array(limit)
-              .fill(0)
-              .map((_, index) => (
-                <LoadingElement className="loading__tag" key={index} />
-              ))
-          : tags.map((obj: TTag) => <Tag key={obj.id} {...obj} />)}
+        {isLoading ? (
+          Array(limit)
+            .fill(0)
+            .map((_, index) => (
+              <LoadingElement className="loading__tag" key={index} />
+            ))
+        ) : tags.length ? (
+          tags.map((obj: TTag) => <Tag key={obj.id} {...obj} />)
+        ) : (
+          <NotFound />
+        )}
       </div>
     </FiltersLayout>
   );

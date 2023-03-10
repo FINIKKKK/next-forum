@@ -22,7 +22,7 @@ export const User: React.FC<UserProps> = ({
   return (
     <div className={`block ${ss.user}`}>
       <div className={ss.inner}>
-        <Link className={`avatar ${ss.avatar}`} href={`/profile/${id}`}>
+        <Link className={`avatar ${ss.avatar}`} href={`/users/${id}`}>
           {avatar ? (
             <img
               className="avatar"
@@ -51,7 +51,7 @@ export const User: React.FC<UserProps> = ({
         </Link>
         <div className={ss.info}>
           <p className={ss.name}>{name}</p>
-          <Link className={ss.login} href={`/profile/${id}`}>
+          <Link className={ss.login} href={`/users/${id}`}>
             @{login}
           </Link>
         </div>

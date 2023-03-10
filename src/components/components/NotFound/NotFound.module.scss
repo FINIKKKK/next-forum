@@ -1,0 +1,19 @@
+@import "@/styles/assets/variables";
+
+.notfound {
+  width: 300px;
+  margin: 50px auto;
+  text-align: center;
+  svg {
+    fill: $gray;
+    width: 110px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+  }
+  p {
+    color: $gray;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 700;
+  }
+}
