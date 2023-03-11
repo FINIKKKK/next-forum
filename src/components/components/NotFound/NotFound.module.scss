@@ -1,19 +1,21 @@
 @import "@/styles/assets/variables";
 
 .notfound {
-  width: 300px;
   margin: 50px auto;
   text-align: center;
   svg {
     fill: $gray;
-    width: 110px;
+    width: 250px;
     margin: 0 auto;
-    margin-bottom: 15px;
   }
-  p {
+  h4 {
+    width: 350px;
     color: $gray;
-    font-size: 14px;
-    line-height: 24px;
     font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0 auto;
+    margin-top: -25px;
+    margin-bottom: 10px;
   }
 }

@@ -1,3 +1,5 @@
+import { QuestionBody } from "../QuestionBody";
+import ss from "./Answer.module.scss";
 import { Comments, Popup, Textarea, UserBox } from "@/components";
 import { useSelectors } from "@/hooks/useSelectors";
 import { Api } from "@/utils/api";
@@ -7,9 +9,6 @@ import { OutputBlockData } from "@editorjs/editorjs";
 import classNames from "classnames";
 import Link from "next/link";
 import React from "react";
-import { QuestionBody } from "../QuestionBody";
-
-import ss from "./Answer.module.scss";
 
 interface AnswerProps {
   id: number;
@@ -18,6 +17,7 @@ interface AnswerProps {
   isAnswer: boolean;
   rating: number;
   setAnswers: (value: any) => void;
+  setAnswer: (value: any) => void;
 }
 
 export const Answer: React.FC<AnswerProps> = ({
@@ -27,6 +27,7 @@ export const Answer: React.FC<AnswerProps> = ({
   isAnswer: isAnswerProp,
   rating: ratingProp,
   setAnswers,
+  setAnswer
 }) => {
   const refPopup = React.useRef<HTMLDivElement>(null);
   const [visiblePopup, setVisiblePopup] = React.useState(false);
@@ -55,8 +56,9 @@ export const Answer: React.FC<AnswerProps> = ({
 
   const onSetIsAnswer = async () => {
     try {
-      await Api().answer.update(id, { isAnswer: !isAnswer });
+      // await Api().answer.update(id, { isAnswer: !isAnswer });
       setIsAnswer(!isAnswer);
+      setAnswer(id)
     } catch (err) {
       console.warn(err);
       alert("Ошибка при изменении статуса");
@@ -143,18 +145,16 @@ export const Answer: React.FC<AnswerProps> = ({
             <use xlinkHref="../img/icons/icons.svg#arrow-down" />
           </svg>
         </div>
-        {userData && userData.id === user.id && (
-          <svg
-            onClick={onSetIsAnswer}
-            className={classNames(ss.isAnswer__icon, {
-              [ss.active]: isAnswer,
-            })}
-            width="20"
-            height="20"
-          >
-            <use xlinkHref="../img/icons/icons.svg#check" />
-          </svg>
-        )}
+        <svg
+          onClick={onSetIsAnswer}
+          className={classNames(ss.isAnswer__icon, {
+            [ss.active]: isAnswer,
+          })}
+          width="20"
+          height="20"
+        >
+          <use xlinkHref="../img/icons/icons.svg#check" />
+        </svg>
       </div>
 
       <div className={ss.content}>

@@ -48,6 +48,10 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
     }
   }, [option]);
 
+  const setAnswer = (id: number) => {
+   
+  }
+
   return (
     <ForumLayout>
       <div className="ques block rightSide">
@@ -66,7 +70,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
             )}
           </div>
           {userData?.id === question.user.id && answers.length === 0 ? (
-            <NotFound />
+            <NotFound label="На данный вопрос пока никто не ответил :(" />
           ) : (
             answers.map((obj: TAnswer) => (
               <Answer key={obj.id} {...obj} setAnswers={setAnswers} />

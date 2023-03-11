@@ -1,18 +1,15 @@
-import React from "react";
-import EditorJS, { OutputData } from "@editorjs/editorjs";
-
+import ss from "./Editor.module.scss";
+import { Api } from "@/utils/api";
 import CodeBox from "@bomdi/codebox";
 import Delimiter from "@editorjs/delimiter";
+import EditorJS, { OutputData } from "@editorjs/editorjs";
 import Embed from "@editorjs/embed";
+import Header from "@editorjs/header";
 import Image from "@editorjs/image";
 import InlineCode from "@editorjs/inline-code";
 import List from "@editorjs/list";
 import Quote from "@editorjs/quote";
-import Header from "@editorjs/header";
-
-import ss from "./Editor.module.scss";
-
-import { Api } from "@/utils/api";
+import React from "react";
 
 interface EditorProps {
   initialValue?: OutputData["blocks"];

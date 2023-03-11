@@ -29,12 +29,15 @@ export const User: React.FC<UserProps> = ({ avatar }) => {
     <div className={ss.user} ref={popupRef}>
       {avatar ? (
         <img
-          className="avatar"
+          onClick={() => setShowPopup(!showPopup)}
+          className={`avatar ${ss.avatar}`}
           src={`http://localhost:7777/img/avatars/${avatar}`}
           alt="avatar"
         />
       ) : (
         <svg
+          className={ss.avatar_icon}
+          onClick={() => setShowPopup(!showPopup)}
           width="164"
           height="164"
           viewBox="0 0 164 164"

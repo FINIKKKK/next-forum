@@ -90,12 +90,16 @@
 }
 
 .user {
-  img {
-    cursor: pointer;
+  .avatar {
     width: 45px;
     height: 45px;
     object-fit: cover;
     border-radius: 50%;
+  }
+  .avatar_icon {
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
   }
   .popup {
     top: 25px;
@@ -109,7 +113,7 @@
 
 :global(.light) {
   .logo {
-    path:nth-child(n+2):nth-child(-n+32) {
+    path:nth-child(n + 2):nth-child(-n + 32) {
       fill: $light-main;
     }
     path:nth-child(31) {
