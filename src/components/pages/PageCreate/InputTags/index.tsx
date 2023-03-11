@@ -1,9 +1,8 @@
+import ss from "./InputTags.module.scss";
 import { Api } from "@/utils/api";
 import { TTag, TTags } from "@/utils/api/models/tag/types";
 import debounce from "lodash.debounce";
 import React from "react";
-
-import ss from "./InputTags.module.scss";
 
 interface InputTagsProps {
   selectedTags: TTag[];
@@ -34,11 +33,12 @@ export const InputTags: React.FC<InputTagsProps> = ({
       (async () => {
         try {
           let dto = {
-            name: value,
+            page: 1,
             limit: 3,
+            search: value,
           };
           if (value !== "") {
-            const tags = await Api().tag.search(dto);
+            const tags = await Api().tag.getAll(dto);
             setTags(tags?.items);
           }
         } catch (err) {

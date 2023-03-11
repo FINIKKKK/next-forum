@@ -1,12 +1,17 @@
-import React from "react";
-import { GetServerSideProps, NextPage } from "next";
-
-import { Answer, QuestionContent, Reply, SelectComponent } from "@/components";
+import {
+  Answer,
+  NotFound,
+  QuestionContent,
+  Reply,
+  SelectComponent,
+} from "@/components";
+import { useSelectors } from "@/hooks/useSelectors";
 import { ForumLayout } from "@/layouts/ForumLayout";
 import { Api } from "@/utils/api";
-import { TQuestion } from "@/utils/api/models/question/types";
 import { TAnswer } from "@/utils/api/models/answer/types";
-import { useSelectors } from "@/hooks/useSelectors";
+import { TQuestion } from "@/utils/api/models/question/types";
+import { GetServerSideProps, NextPage } from "next";
+import React from "react";
 
 interface QuestionPageProps {
   question: TQuestion;
@@ -51,16 +56,22 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
         <div className="answers">
           <div className="answers__header">
             <h2 className="answers__title">Ответы</h2>
-            <SelectComponent
-              className="asnwers__select"
-              value={option}
-              options={options}
-              setValue={setOption}
-            />
+            {answers.length !== 0 && (
+              <SelectComponent
+                className="asnwers__select"
+                value={option}
+                options={options}
+                setValue={setOption}
+              />
+            )}
           </div>
-          {answers.map((obj: TAnswer) => (
-            <Answer key={obj.id} {...obj} setAnswers={setAnswers} />
-          ))}
+          {userData?.id === question.user.id && answers.length === 0 ? (
+            <NotFound />
+          ) : (
+            answers.map((obj: TAnswer) => (
+              <Answer key={obj.id} {...obj} setAnswers={setAnswers} />
+            ))
+          )}
           {userData && userData.id !== question.user.id && (
             <Reply questionId={question.id} setAnswers={setAnswers} />
           )}

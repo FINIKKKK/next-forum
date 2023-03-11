@@ -31,7 +31,8 @@ const EditQuestionPage: NextPage<EditQuestionPageProps> = ({ question }) => {
   const [errors, setErrors] = React.useState<TError | null>(null);
   const router = useRouter();
 
-  console.log(selectedTags);
+
+
 
   const onSubmit = async () => {
     try {

@@ -1,12 +1,11 @@
-import React from "react";
-import { NextPage } from "next";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
-
+import { InputTags, InputTitle } from "@/components";
 import { MainLayout } from "@/layouts/MainLayout";
 import { Api } from "@/utils/api";
 import { QuestionScheme } from "@/utils/validation";
-import { InputTags, InputTitle } from "@/components";
+import { NextPage } from "next";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
+import React from "react";
 
 let Editor = dynamic(() => import("@/components/components/Editor"), {
   ssr: false,
@@ -27,6 +26,28 @@ const CreateQuestionPage: NextPage<CreateQuestionPageProps> = ({}) => {
   const [selectedTags, setSelectedTags] = React.useState([]);
   const [errors, setErrors] = React.useState<TError | null>(null);
   const router = useRouter();
+  const [isSubmit, setIsSubmit] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleRouteChange = (url: any) => {
+      if (!isSubmit) {
+        console.log("isSubmit", isSubmit);
+        if (
+          (title || body || selectedTags) &&
+          !window.confirm(
+            "Вы действительно хотите уйти со страницы? Все несохраненные данные будут потеряны."
+          )
+        ) {
+          router.events.emit("routeChangeError");
+          throw "routeChange aborted.";
+        }
+      }
+    };
+    router.events.on("routeChangeStart", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, [title, body, selectedTags, router.events, isSubmit]);
 
   const onSubmit = async () => {
     try {
@@ -37,6 +58,7 @@ const CreateQuestionPage: NextPage<CreateQuestionPageProps> = ({}) => {
         .then(() => {
           (async () => {
             setIsLoading(true);
+            setIsSubmit(true);
             const dto = {
               title: title,
               body: body,
@@ -57,6 +79,7 @@ const CreateQuestionPage: NextPage<CreateQuestionPageProps> = ({}) => {
       console.warn(err);
       alert("Ошибка при создании вопроса");
     } finally {
+      setIsSubmit(false);
       setIsLoading(false);
     }
   };
