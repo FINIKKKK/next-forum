@@ -36,6 +36,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
   const [answers, setAnswers] = React.useState<TAnswer[]>(answerList || []);
   const [option, setOption] = React.useState(options[0]);
   const { data: userData } = useSelectors((state) => state.user);
+  const [isAnswer, setIsAnswer] = React.useState<number | null>(null);
 
   React.useEffect(() => {
     if (option.value === "rating") {
@@ -49,7 +50,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
   }, [option]);
 
   const setAnswer = (id: number) => {
-   
+   setIsAnswer(id)
   }
 
   return (
@@ -73,7 +74,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
             <NotFound label="На данный вопрос пока никто не ответил :(" />
           ) : (
             answers.map((obj: TAnswer) => (
-              <Answer key={obj.id} {...obj} setAnswers={setAnswers} />
+              <Answer setAnswer={setAnswer} answerId={isAnswer} key={obj.id} {...obj} setAnswers={setAnswers} />
             ))
           )}
           {userData && userData.id !== question.user.id && (

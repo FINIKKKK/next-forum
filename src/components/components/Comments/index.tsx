@@ -1,16 +1,15 @@
-import React from "react";
-
+import ss from "./Comments.module.scss";
 import { Comment } from "@/components";
 import { TComment } from "@/utils/api/models/comments/types";
-
-import ss from "./Comments.module.scss";
+import React from "react";
 
 interface CommentsProps {
   comments: TComment[];
-  setComments: (value: TComment) => void;
+  setComments: any;
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   onChangeComment: any;
+  isQuestion?: boolean;
 }
 
 export const Comments: React.FC<CommentsProps> = ({
@@ -19,13 +18,19 @@ export const Comments: React.FC<CommentsProps> = ({
   isOpen,
   setIsOpen,
   onChangeComment,
+  isQuestion,
 }) => {
   return (
     <div className={ss.comments}>
-      <button onClick={() => setIsOpen(!isOpen)} className={`inline ${ss.btn}`}>
-        Комментарии ({comments.length})
-      </button>
-      {isOpen && (
+      {!isQuestion && (
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className={`inline ${ss.btn}`}
+        >
+          Комментарии ({comments.length})
+        </button>
+      )}
+      {(isOpen || isQuestion) && (
         <div className={ss.list}>
           {comments.map((obj) => (
             <Comment

@@ -4,7 +4,8 @@ import { TComment, CommentDto, TComments, ParamsCommentDto } from "./types";
 export const CommentApi = (instance: AxiosInstance) => ({
   async getAll(params: ParamsCommentDto) {
     const answer = params.answerId ? `answerId=${params.answerId}` : undefined;
-    const { data } = await instance.get<TComments>(`/comments?${answer}`);
+    const question = params.questionId ? `questionId=${params.questionId}` : undefined;
+    const { data } = await instance.get<TComments>(`/comments?${answer ? answer : ''}${question ? question : ''}`);
     return data;
   },
   async getOne(id: number) {

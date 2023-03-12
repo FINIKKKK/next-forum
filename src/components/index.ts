@@ -20,6 +20,8 @@ export * from "./components/Comments";
 export * from "./components/Comment";
 export * from "./components/LoadingElement";
 export * from "./components/NotFound";
+export * from "./components/Rating";
+export * from "./components/CommentsBox";
 
 export * from "./pages/PageCreate";
 export * from "./pages/PageHome";

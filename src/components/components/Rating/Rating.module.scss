@@ -1,0 +1,21 @@
+.rating {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 25px;
+  .number {
+    margin: 7px 0;
+    user-select: none;
+  }
+  .arrow {
+    cursor: pointer;
+    width: 18px;
+    opacity: 0.25;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

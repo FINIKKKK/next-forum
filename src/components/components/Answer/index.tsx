@@ -1,6 +1,13 @@
 import { QuestionBody } from "../QuestionBody";
 import ss from "./Answer.module.scss";
-import { Comments, Popup, Textarea, UserBox } from "@/components";
+import {
+  Comments,
+  CommentsBox,
+  Popup,
+  Rating,
+  Textarea,
+  UserBox,
+} from "@/components";
 import { useSelectors } from "@/hooks/useSelectors";
 import { Api } from "@/utils/api";
 import { TComment } from "@/utils/api/models/comments/types";
@@ -18,6 +25,7 @@ interface AnswerProps {
   rating: number;
   setAnswers: (value: any) => void;
   setAnswer: (value: any) => void;
+  answerId: number | null;
 }
 
 export const Answer: React.FC<AnswerProps> = ({
@@ -25,20 +33,19 @@ export const Answer: React.FC<AnswerProps> = ({
   body,
   user,
   isAnswer: isAnswerProp,
-  rating: ratingProp,
+  rating,
   setAnswers,
-  setAnswer
+  setAnswer,
+  answerId,
 }) => {
-  const refPopup = React.useRef<HTMLDivElement>(null);
   const [visiblePopup, setVisiblePopup] = React.useState(false);
-  const { data: userData } = useSelectors((state) => state.user);
-  const [isAnswer, setIsAnswer] = React.useState(isAnswerProp);
-  const [rating, setRating] = React.useState(ratingProp);
-  const [commentValue, setCommentValue] = React.useState("");
-  const [comments, setComments] = React.useState<TComment[]>([]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isAnswer, setIsAnswer] = React.useState(
+    answerId === id ? isAnswerProp : null
+  );
   const [openInput, setOpenInput] = React.useState(false);
-  const [openComments, setOpenComments] = React.useState(false);
+  const [commentValue, setCommentValue] = React.useState("");
+
+
 
   const onRemoveAnswer = async () => {
     if (window.confirm("Вы действительно хотите удалить ответ?")) {
@@ -57,65 +64,14 @@ export const Answer: React.FC<AnswerProps> = ({
   const onSetIsAnswer = async () => {
     try {
       // await Api().answer.update(id, { isAnswer: !isAnswer });
-      setIsAnswer(!isAnswer);
-      setAnswer(id)
+      if (answerId === id) {
+        setIsAnswer(!isAnswer);
+      }
+      setAnswer(id);
     } catch (err) {
       console.warn(err);
       alert("Ошибка при изменении статуса");
     }
-  };
-
-  const onChangeRating = async (type: string) => {
-    try {
-      if (type === "+") {
-        await Api().answer.update(id, { rating: rating + 1 });
-        setRating(rating + 1);
-      } else if (type === "-") {
-        await Api().answer.update(id, { rating: rating - 1 });
-        setRating(rating - 1);
-      }
-    } catch (err) {
-      console.warn(err);
-      alert("Ошибка при изменении рейтинга");
-    }
-  };
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        const params = {
-          answerId: id,
-        };
-        const comments = await Api().comment.getAll(params);
-        setComments(comments.items);
-      } catch (err) {
-        console.warn(err);
-        alert("Ошибка при получении комментариев");
-      }
-    })();
-  }, []);
-
-  const onCreateComment = async () => {
-    try {
-      setIsLoading(true);
-      const dto = {
-        text: commentValue,
-        answerId: id,
-      };
-      const comment = await Api().comment.create(dto);
-      setOpenInput(false);
-      setComments([{ ...comment, user: userData }, ...comments]);
-      setOpenComments(true);
-    } catch (err) {
-      console.warn(err);
-      alert("Ошибка при создании комментария");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const onChangeComment = async (commentId: number, value: string) => {
-    setCommentValue(value);
   };
 
   const onOpenInput = () => {
@@ -123,28 +79,11 @@ export const Answer: React.FC<AnswerProps> = ({
     setCommentValue("");
   };
 
+
   return (
     <div className={ss.answer}>
       <div className={ss.side}>
-        <div className={ss.rating}>
-          <svg
-            onClick={() => onChangeRating("+")}
-            className={ss.arrow}
-            width="20"
-            height="20"
-          >
-            <use xlinkHref="../img/icons/icons.svg#arrow-up" />
-          </svg>
-          <div className={ss.number}>{rating}</div>
-          <svg
-            onClick={() => onChangeRating("-")}
-            className={ss.arrow}
-            width="20"
-            height="20"
-          >
-            <use xlinkHref="../img/icons/icons.svg#arrow-down" />
-          </svg>
-        </div>
+        <Rating rating={rating} />
         <svg
           onClick={onSetIsAnswer}
           className={classNames(ss.isAnswer__icon, {
@@ -184,22 +123,7 @@ export const Answer: React.FC<AnswerProps> = ({
           <button onClick={onOpenInput} className={`btn ${ss.btn}`}>
             {!openInput ? "Ответить" : "Закрыть"}
           </button>
-          <div className={ss.comments}>
-            <Comments
-              comments={comments}
-              setComments={setComments}
-              isOpen={openComments}
-              setIsOpen={setOpenComments}
-              onChangeComment={onChangeComment}
-            />
-            {openInput && (
-              <Textarea
-                value={commentValue}
-                setValue={setCommentValue}
-                onSubmit={onCreateComment}
-              />
-            )}
-          </div>
+          <CommentsBox answerId={id} openInput={openInput} setOpenInput={setOpenInput} commentValue={commentValue} setCommentValue={setCommentValue} />
         </div>
       </div>
     </div>
