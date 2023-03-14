@@ -37,6 +37,8 @@ export const QuestionsLayout: React.FC<QuestionsLayoutsProps> = ({
       option={option}
       setOption={setOption}
       userId={userId}
+      activeFilter={activeFilter}
+      setActiveFilter={setActiveFilter}
       setIsLoading={setIsLoading}
       itemsLength={questions.length}
     >

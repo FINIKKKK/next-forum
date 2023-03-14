@@ -9,11 +9,12 @@ export const QuestionApi = (instance: AxiosInstance) => ({
         ? `&search=${params.search}`
         : undefined;
     const user = params.userId ? `&userId=${params.userId}` : undefined;
+    const isAnswer = params.isAnswer ? `&isAnswer=${params.isAnswer}` : undefined;
 
     const { data } = await instance.get<TQuestions>(
       `/questions?limit=${params.limit}&page=${params.page}&orderBy=${
         params.orderBy
-      }${tag ? tag : ""}${search ? search : ""}${user ? user : ""}`
+      }${tag ? tag : ""}${search ? search : ""}${user ? user : ""}${isAnswer ? isAnswer : ""}`
     );
     return data;
   },

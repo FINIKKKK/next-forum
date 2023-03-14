@@ -16,6 +16,8 @@ type FiltersLayoutsProps = {
   userId?: number;
   setIsLoading: (value: boolean) => void;
   itemsLength: number;
+  activeFilter: string | null;
+  setActiveFilter: (value: string | null) => void;
 };
 
 export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
@@ -27,6 +29,8 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
   option,
   setOption,
   userId,
+  activeFilter,
+  setActiveFilter,
   setIsLoading,
   itemsLength,
 }) => {
@@ -48,6 +52,7 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
           ...(option && { orderBy: option.value }),
           ...(tag && { tagBy: tag }),
           ...(userId && { userId }),
+          ...(activeFilter && { isAnswer: activeFilter }),
         };
         let data;
         if (type === "tag") {
@@ -70,7 +75,7 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
         alert("Ошибка при получении");
       }
     })();
-  }, [page, searchValue2, option, tag]);
+  }, [page, searchValue2, option, tag, activeFilter]);
 
   React.useEffect(() => {
     if (isMounted.current) {
@@ -79,10 +84,11 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
         ...(searchValue2 && { search: searchValue2 }),
         ...(tag && { tagBy: tag }),
         ...(option && { orderBy: option.value }),
+        ...(activeFilter && { isAnswer: activeFilter }),
       });
       router.push(`?${params}`);
     }
-  }, [page, searchValue2, option, tag]);
+  }, [page, searchValue2, option, tag, activeFilter]);
 
   React.useEffect(() => {
     const params = router.query;

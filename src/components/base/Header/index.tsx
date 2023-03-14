@@ -181,23 +181,26 @@ export const Header: React.FC<HeaderProps> = ({}) => {
             </ul> */}
           </div>
 
-          {userData ? (
-            <div className={ss.options}>
-              <button onClick={onChangeTheme} className="btn__theme">
-                <span
-                  className={`shape ${theme === Theme.dark ? "sun" : "moon"}`}
-                ></span>
-                <span className="rays--container">
-                  <span className="ray"></span>
-                  <span className="ray"></span>
-                  <span className="ray"></span>
-                  <span className="ray"></span>
-                </span>
-              </button>
-              <Notices />
-              <User avatar={userData.avatar} />
-            </div>
-          ) : (
+          <div className={ss.options}>
+            <button onClick={onChangeTheme} className="btn__theme">
+              <span
+                className={`shape ${theme === Theme.dark ? "sun" : "moon"}`}
+              ></span>
+              <span className="rays--container">
+                <span className="ray"></span>
+                <span className="ray"></span>
+                <span className="ray"></span>
+                <span className="ray"></span>
+              </span>
+            </button>
+            {userData && (
+              <>
+                <Notices />
+                <User avatar={userData.avatar} />
+              </>
+            )}
+          </div>
+          {!userData && (
             <Link href="/login" className="btn">
               Войти
             </Link>

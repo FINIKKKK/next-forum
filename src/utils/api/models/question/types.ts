@@ -30,4 +30,5 @@ export type ParamsQuestionDto = ParamsDto & {
   tagBy?: string;
   userId?: number;
   search?: string;
+  isAnswer?: string;
 };

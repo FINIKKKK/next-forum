@@ -36,3 +36,13 @@
     font-size: 14px;
   }
 }
+
+
+:global(.light) {
+  .tag {
+    a {
+      background-color: $light-main;
+      color: $light-white;
+    }
+  }
+}
