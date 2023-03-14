@@ -72,12 +72,12 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             </Link>
           </li>
           <li className={`hover ${ss.item}`}>
-            <a href="#">
+            <Link href="#">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#fire" />
               </svg>
               <p>Мои предпочтения</p>
-            </a>
+            </Link>
           </li>
           <li
             className={classNames("hover", ss.item, {
@@ -92,20 +92,20 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             </Link>
           </li>
           <li className={`hover ${ss.item}`}>
-            <a href="#">
+            <Link href="#">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#favorite" />
               </svg>
               <p>Мое избранное</p>
-            </a>
+            </Link>
           </li>
           <li className={`hover ${ss.item}`}>
-            <a href="#">
+            <Link href="#">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#subcribe" />
               </svg>
               <p>Отслеживаемое</p>
-            </a>
+            </Link>
           </li>
           <li
             className={classNames("hover", ss.item, {
@@ -124,12 +124,12 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
               [ss.active]: router.pathname === "/users",
             })}
           >
-            <a href="/users">
+            <Link href="/users">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#users" />
               </svg>
               <p>Все пользователи</p>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
@@ -139,7 +139,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
         <ul className={ss.tagList}>
           {tags.map((obj) => (
             <li key={obj.id} className={`hover tag ${ss.tag}`}>
-              <a href={`/?tagBy=${obj.name}`}>{obj.name}</a>
+              <Link href={`/?tagBy=${obj.name}`}>{obj.name}</Link>
             </li>
           ))}
         </ul>

@@ -1,8 +1,7 @@
+import ss from "./Pagination.module.scss";
 import classNames from "classnames";
 import React from "react";
 import ReactPagination from "react-paginate";
-
-import ss from "./Pagination.module.scss";
 
 interface PaginationProps {
   limit: number;
@@ -19,9 +18,10 @@ export const Pagination: React.FC<PaginationProps> = ({
 }) => {
   const [value, setValue] = React.useState(page);
   const [error, setError] = React.useState(false);
+  const pageCount = Math.ceil(total / limit);
 
   const onSkipPage = () => {
-    if (value > page) {
+    if (value > pageCount) {
       setError(true);
       setTimeout(() => setError(false), 5000);
     } else {
@@ -38,7 +38,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         breakLabel="..."
         onPageChange={(e) => setPage(e.selected + 1)}
         pageRangeDisplayed={limit}
-        pageCount={Math.ceil(total / limit)}
+        pageCount={pageCount}
         nextLabel={
           <svg width="20" height="20">
             <use xlinkHref="../img/icons/icons.svg#next" />

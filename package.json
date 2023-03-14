@@ -46,6 +46,7 @@
     "react-sticky": "^6.0.3",
     "react-sticky-box": "^2.0.0",
     "react-stickynode": "^4.1.0",
+    "redux-persist": "^6.0.0",
     "sass": "^1.58.0",
     "typescript": "4.9.5",
     "yup": "^0.32.11"

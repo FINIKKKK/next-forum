@@ -84,6 +84,9 @@
   .pagination {
     :global {
       li {
+        a {
+          color: $light-gray;
+        }
         &:hover {
           a {
             color: $light-main;

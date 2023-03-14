@@ -2,7 +2,7 @@ import { TUser } from "@/utils/api/models/user/types";
 
 export type TUserSlice = {
   data: TUser | null;
-  theme: Theme;
+  theme: any;
 };
 
 export enum Theme {

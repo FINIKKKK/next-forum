@@ -55,7 +55,7 @@ export const CommentsBox: React.FC<CommentsBoxProps> = ({
       };
       const comment = await Api().comment.create(dto);
       setOpenInput && setOpenInput(false);
-      setComments([{ ...comment, user: userData }, ...comments]);
+      setComments([{ ...comment, user: userData! }, ...comments]);
       setOpenComments(true);
     } catch (err) {
       console.warn(err);

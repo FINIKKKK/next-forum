@@ -1,7 +1,7 @@
 // ---- Global-Tags ----
 body.light {
   color: $light-main;
-  background: $light-white;
+  background: $light-bg;
 }
 
 .light {
@@ -38,9 +38,16 @@ body.light {
   .block {
     background-color: $light-block;
     box-shadow: 0px 4px 8px rgba(#715ca0, 0.3);
+    box-shadow: -5px -5px 20px rgba(255, 255, 255, 0.53),
+      13px 14px 12px -6px rgba(166, 180, 200, 0.57);
+    border: 1px solid transparent;
+    transition: 0.3s;
+    background: linear-gradient(#D9E9EA 0 0) padding-box,
+      linear-gradient(135.83deg, #ffffff 22.24%, #bac3cf 85.59%) border-box;
+
     &.hover {
       &:hover {
-        box-shadow: 0px 4px 12px rgba(#715ca0, 0.6);
+        box-shadow: 0px 4px 12px rgba($light-main, 0.3);
       }
     }
   }
@@ -70,7 +77,7 @@ body.light {
 
   .popup {
     .popup__item {
-      color: $white;
+      color: $light-main;
     }
   }
 
@@ -92,7 +99,7 @@ body.light {
     background-color: $light-main;
   }
   &::-webkit-scrollbar-track {
-    background-color: $light-white;
+    background-color: $light-block2;
   }
   &::selection {
     background: rgba($light-main, 0.2) !important;

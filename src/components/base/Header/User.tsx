@@ -36,7 +36,7 @@ export const User: React.FC<UserProps> = ({ avatar }) => {
         />
       ) : (
         <svg
-          className={ss.avatar_icon}
+          className={ss.avatar__icon}
           onClick={() => setShowPopup(!showPopup)}
           width="164"
           height="164"

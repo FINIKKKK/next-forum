@@ -103,6 +103,11 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
     isMounted.current = true;
   }, []);
 
+  // React.useEffect(() => {
+  //   setPage(1);
+  //   setOption && setOption(options[0]);
+  // }, [searchValue]);
+
   return (
     <ForumLayout>
       <div className="content block">

@@ -53,6 +53,7 @@
     border-left: 2px solid rgba(242, 236, 248, 0.1);
   }
   .item {
+    width: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -105,8 +106,11 @@
 }
 
 :global(.light) {
+  .date {
+    color: $light-gray;
+  }
   .right {
-    border-color: rgba($light-main, 0.2);
+    border-color: $light-gray2;
   }
   .favorite {
     path:nth-child(2) {
@@ -121,6 +125,14 @@
   .item {
     svg {
       fill: $light-main;
+    }
+  }
+  .answer {
+    svg {
+      fill: $light-main;
+    }
+    p {
+      color: $light-main;
     }
   }
 }

@@ -96,7 +96,7 @@
     object-fit: cover;
     border-radius: 50%;
   }
-  .avatar_icon {
+  .avatar__icon {
     width: 45px;
     height: 45px;
     cursor: pointer;
@@ -116,8 +116,8 @@
     path:nth-child(n + 2):nth-child(-n + 32) {
       fill: $light-main;
     }
-    path:nth-child(31) {
-      fill: $gray !important;
+    path:nth-child(31), path:nth-child(1) {
+      fill: $light-gray !important;
     }
   }
   .item.active {
@@ -126,6 +126,19 @@
     }
     &::after {
       background-color: $light-main;
+    }
+  }
+  .avatar {
+    border: 1px solid $light-main;
+  }
+  .avatar__icon {
+    border-radius: 50%;
+    border: 1px solid $light-main;
+    path {
+      fill: $light-main;
+    }
+    circle {
+      fill: $light-block2;
     }
   }
 }
