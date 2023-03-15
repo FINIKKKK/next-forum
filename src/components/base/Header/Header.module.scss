@@ -65,27 +65,45 @@
   }
 }
 
-.notices {
+.notices__wrapper {
   position: relative;
-  margin-top: 6px;
-  .icon {
-    width: 22px;
-    margin-right: 20px;
+  .notices {
+    cursor: pointer;
+    position: relative;
+    margin-top: 6px;
   }
-  .number {
+  .icon {
+    path {
+      fill: $white;
+    }
+    width: 18px;
+    margin-right: 25px;
+  }
+  .has {
     position: absolute;
     bottom: -4px;
     right: 23px;
-    font-size: 10px;
-    font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: $main;
-    width: 16px;
-    height: 16px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     color: $bg;
+  }
+  .popup {
+    z-index: 100;
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    width: 200px;
+    border-radius: 10px;
+    padding: 20px 15px;
+    .empty {
+      text-align: center;
+      font-weight: 700;
+    }
   }
 }
 
@@ -97,6 +115,7 @@
     border-radius: 50%;
   }
   .avatar__icon {
+    border-radius: 50%;
     width: 45px;
     height: 45px;
     cursor: pointer;
@@ -111,12 +130,81 @@
   }
 }
 
+.btn__theme {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 10px;
+  transition: box-shadow 500ms;
+  margin-right: 23px;
+  span {
+    display: inline-block;
+  }
+  .rays {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+  }
+  .rays .ray {
+    position: absolute;
+    border-radius: 50%;
+    transition: all 500ms;
+  }
+  .rays .ray:nth-child(2) {
+    transform: rotate(45deg);
+  }
+  .rays .ray:nth-child(3) {
+    transform: rotate(90deg);
+  }
+  .rays .ray:nth-child(4) {
+    transform: rotate(-45deg);
+  }
+  .shape {
+    z-index: 1;
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid $bg;
+    transition: all 500ms;
+  }
+  .shape.dark {
+    width: 2em;
+    height: 2em;
+    box-shadow: inset -0.5em -0.5em $white;
+  }
+  .shape.dark ~ .rays .ray {
+    width: 0;
+    height: 0;
+  }
+  .shape.light {
+    width: 1.25em;
+    height: 1.25em;
+    box-shadow: inset -0.7em -0.7em $light-main;
+  }
+  .shape.light ~ .rays {
+    transform: rotate(90deg);
+    transition: transform 750ms 400ms;
+  }
+  .shape.light ~ .rays .ray {
+    width: 0.4em;
+    height: 2.1em;
+    background-color: $light-main;
+  }
+}
+
 :global(.light) {
   .logo {
     path:nth-child(n + 2):nth-child(-n + 32) {
       fill: $light-main;
     }
-    path:nth-child(31), path:nth-child(1) {
+    path:nth-child(31),
+    path:nth-child(1) {
       fill: $light-gray !important;
     }
   }
@@ -132,7 +220,6 @@
     border: 1px solid $light-main;
   }
   .avatar__icon {
-    border-radius: 50%;
     border: 1px solid $light-main;
     path {
       fill: $light-main;
@@ -140,5 +227,15 @@
     circle {
       fill: $light-block2;
     }
+  }
+  .notices {
+    .icon {
+      path {
+        fill: $light-main;
+      }
+    }
+  }
+  .shape {
+    border: 2px solid #D0E4E5;
   }
 }

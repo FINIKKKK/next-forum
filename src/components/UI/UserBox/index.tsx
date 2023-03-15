@@ -11,7 +11,7 @@ interface UserBoxProps {
 export const UserBox: React.FC<UserBoxProps> = ({ user, className }) => {
   return (
     <div className={`${className} ${ss.user}`}>
-      <Link className={`avatar ${ss.avatar}`} href={`/users/${user?.id}`}>
+      <Link className={`avatar ${ss.avatar}`} href={`/users/${user?.login}`}>
         {user?.avatar ? (
           <img
             src={`http://localhost:7777/img/avatars/${user?.avatar}`}
@@ -39,7 +39,7 @@ export const UserBox: React.FC<UserBoxProps> = ({ user, className }) => {
       </Link>
       <div className={ss.info}>
         {user?.name && <div className={ss.name}>{user?.name}</div>}
-        <Link href={`/users/${user?.id}`}>
+        <Link href={`/users/${user?.login}`}>
           <h6 className={ss.login}>@{user?.login}</h6>
         </Link>
       </div>

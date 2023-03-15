@@ -6,10 +6,11 @@ import { setCookie } from "nookies";
 import React from "react";
 
 interface UserProps {
-  avatar: string;
+  avatar?: string;
+  userLogin: string;
 }
 
-export const User: React.FC<UserProps> = ({ avatar }) => {
+export const User: React.FC<UserProps> = ({ avatar, userLogin }) => {
   const [showPopup, setShowPopup] = React.useState(false);
   const popupRef = React.useRef<HTMLDivElement>(null);
   const { setUserData } = useActions();
@@ -59,7 +60,7 @@ export const User: React.FC<UserProps> = ({ avatar }) => {
         <div className={`block popup ${ss.popup}`}>
           <Link
             className={`popup__item ${ss.popup__item}`}
-            href={`/users/${1}`}
+            href={`/users/${userLogin}`}
           >
             Профиль
           </Link>

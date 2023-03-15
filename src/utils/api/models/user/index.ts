@@ -17,8 +17,8 @@ export const UserApi = (instance: AxiosInstance) => ({
     );
     return data;
   },
-  async getOne(id: number) {
-    const { data } = await instance.get<TUser>(`/users/${id}`);
+  async getOne(login: string) {
+    const { data } = await instance.get<TUser>(`/users/${login}`);
     return data;
   },
   async updateAvatar(id: number, file: any) {

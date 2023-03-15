@@ -1,0 +1,23 @@
+@import '@/styles/assets/variables';
+
+.nav {
+  // padding-top: 21px;
+  .item {
+    text-align: center;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+    background-color: $purple;
+    border-radius: 5px;
+    padding: 9px 22px;
+    cursor: pointer;
+    color: $white;
+    &.active {
+      background-color: $main;
+      color: $bg;
+    }
+  }
+  .item:not(:last-child) {
+    margin-bottom: 25px;
+  }
+}

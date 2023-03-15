@@ -1,4 +1,4 @@
-import { Question, UserAbout, UserInfo } from "@/components";
+import { ProfileNav, Question, UserAbout, UserInfo } from "@/components";
 import { MainLayout } from "@/layouts/MainLayout";
 import { Api } from "@/utils/api";
 import { TQuestion } from "@/utils/api/models/question/types";
@@ -17,7 +17,7 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
     (async () => {
       try {
         const params = {
-          limit: 5,
+          limit: 4,
           page: 1,
           orderBy: "date",
           userId: user.id,
@@ -36,19 +36,19 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
       <div className="profile">
         <div className="container">
           <div className="profile__inner">
-            <UserInfo user={user} />
+            <div className="user__info">
+              <UserInfo user={user} />
 
-            <UserAbout
-              questionCount={user.questionCount}
-              answerCount={user.answerCount}
-            />
+              <UserAbout
+                questionCount={user.questionCount}
+                answerCount={user.answerCount}
+              />
+            </div>
 
             <div className="user__work">
-              <ul className="nav">
-                <li className="item hover active">Мои вопросы</li>
-                <li className="item hover">Мои избранное</li>
-              </ul>
-              <div className="block">
+              <ProfileNav userId={user.id} />
+
+              <div className="questions__wrapper block">
                 <div className="questions">
                   {questions.map((obj) => (
                     <Question
@@ -69,9 +69,10 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
-    const id = ctx?.params?.id;
-    if (id) {
-      const user = await Api().user.getOne(+id);
+    const login = ctx?.params?.slug;
+    console.log(login);
+    if (login) {
+      const user = await Api().user.getOne(`${login}`);
       return {
         props: {
           user,

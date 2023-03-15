@@ -40,38 +40,40 @@ export const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
   };
 
   return (
-    <div className={`user__info block ${ss.user}`}>
-      <div className={ss.avatar}>
-        <img
-          src={
-            userAvatar
-              ? `http://localhost:7777/img/avatars/${userAvatar}`
-              : `../img/avatar.png`
-          }
-          alt="avatar"
-        />
-        {isAuthor && (
-          <div className={ss.avatar__edit}>
-            <input type="file" onChange={onUpdateAvatar} />
-            <svg width="20" height="20">
-              <use xlinkHref="../img/icons/icons.svg#edit" />
-            </svg>
-          </div>
-        )}
-      </div>
-      <div className={ss.info}>
-        {!isEdit ? (
-          user.name && <div className={ss.name}>{user.name}</div>
-        ) : (
-          <input
-            value={nameValue}
-            onChange={(e) => setNameValue(e.target.value)}
-            className={`${ss.input} ${ss.inputName}`}
-            placeholder="Имя"
-            type="text"
+    <div className={`block ${ss.user}`}>
+      <div className={ss.user__header}>
+        <div className={ss.avatar}>
+          <img
+            src={
+              userAvatar
+                ? `http://localhost:7777/img/avatars/${userAvatar}`
+                : `../img/avatar.png`
+            }
+            alt="avatar"
           />
-        )}
-        {!isEdit && <h6 className={ss.login}>@{user.login}</h6>}
+          {isAuthor && (
+            <div className={ss.avatar__edit}>
+              <input type="file" onChange={onUpdateAvatar} />
+              <svg width="20" height="20">
+                <use xlinkHref="../img/icons/icons.svg#edit" />
+              </svg>
+            </div>
+          )}
+        </div>
+        <div className={ss.info}>
+          {!isEdit ? (
+            user.name && <div className={ss.name}>{user.name}</div>
+          ) : (
+            <input
+              value={nameValue}
+              onChange={(e) => setNameValue(e.target.value)}
+              className={`${ss.input} ${ss.inputName}`}
+              placeholder="Имя"
+              type="text"
+            />
+          )}
+          {!isEdit && <h6 className={ss.login}>@{user.login}</h6>}
+        </div>
       </div>
       <div className={ss.extra}>
         {isEdit ? (
@@ -97,7 +99,7 @@ export const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
           </div>
         )}
       </div>
-      <div className={ss.footer}>
+      {/* <div className={ss.footer}>
         {isAuthor ? (
           <button onClick={onEditContent} className={`btn ${ss.edit}`}>
             {!isEdit ? "Редактировать" : "Сохранить"}
@@ -105,7 +107,7 @@ export const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
         ) : (
           <button className={`btn ${ss.subscribe}`}>Подписаться</button>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

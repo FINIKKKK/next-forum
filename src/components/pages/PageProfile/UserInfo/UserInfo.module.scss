@@ -1,13 +1,14 @@
 @import "@/styles/assets/variables";
 
 .user {
+  margin-right: 55px;
+  width: 30%;
   .avatar {
-    width: 164px;
-    height: 164px;
+    flex: 0 0 auto;
+    width: 94px;
+    height: 94px;
     border-radius: 50%;
     border: 3px solid $purple;
-    margin: 0 auto;
-    margin-bottom: 24px;
     overflow: hidden;
     position: relative;
     img {
@@ -48,11 +49,16 @@
       font-size: 0;
     }
   }
+  .user__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
   .info {
-    text-align: center;
+    margin-left: 30px;
     font-size: 20px;
     line-height: 24px;
-    margin-bottom: 50px;
+    width: 100%;
   }
   .name {
     font-weight: 700;
@@ -64,7 +70,6 @@
   }
 
   .extra {
-    margin-bottom: 54px;
     .box:not(:last-child) {
       margin-bottom: 25px;
     }

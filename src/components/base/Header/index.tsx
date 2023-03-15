@@ -4,6 +4,7 @@ import { User } from "./User";
 import { useActions } from "@/hooks/useActions";
 import { useSelectors } from "@/hooks/useSelectors";
 import { Theme } from "@/redux/user/types";
+import classNames from "classnames";
 import Link from "next/link";
 import React from "react";
 
@@ -182,21 +183,24 @@ export const Header: React.FC<HeaderProps> = ({}) => {
           </div>
 
           <div className={ss.options}>
-            <button onClick={onChangeTheme} className="btn__theme">
+            <button onClick={onChangeTheme} className={ss.btn__theme}>
               <span
-                className={`shape ${theme === Theme.dark ? "sun" : "moon"}`}
+                className={classNames(ss.shape, {
+                  [ss.dark]: theme === Theme.dark,
+                  [ss.light]: theme === Theme.light,
+                })}
               ></span>
-              <span className="rays--container">
-                <span className="ray"></span>
-                <span className="ray"></span>
-                <span className="ray"></span>
-                <span className="ray"></span>
+              <span className={ss.rays}>
+                <span className={ss.ray}></span>
+                <span className={ss.ray}></span>
+                <span className={ss.ray}></span>
+                <span className={ss.ray}></span>
               </span>
             </button>
             {userData && (
               <>
                 <Notices />
-                <User avatar={userData.avatar} />
+                <User userLogin={userData?.login} avatar={userData?.avatar} />
               </>
             )}
           </div>

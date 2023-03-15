@@ -112,6 +112,11 @@
   .right {
     border-color: $light-gray2;
   }
+  .tagList {
+    .more {
+      color: $light-gray;
+    }
+  }
   .favorite {
     path:nth-child(2) {
       fill: $light-main;
