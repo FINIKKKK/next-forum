@@ -2,11 +2,16 @@
 
 .user {
   width: 30.5%;
-  height: 105px;
+  height: 205px;
+  padding: 20px 15px;
   margin-bottom: 20px;
   margin-right: 20px;
   border-radius: 10px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
   .inner {
     display: flex;
     align-items: center;
@@ -15,10 +20,9 @@
   }
   .avatar {
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    box-shadow: 0px 0px 10px rgba($bg, 0.8);
-    margin-right: 15px;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
     img {
       width: 100%;
       height: 100%;
@@ -28,6 +32,7 @@
   .info {
     font-size: 14px;
     font-weight: 700;
+    margin-bottom: 20px;
   }
   .name {
     margin-bottom: 5px;
@@ -41,15 +46,18 @@
   .results {
     display: flex;
     align-items: center;
-    background-color: $main;
-    padding: 4px 0;
-    padding-left: 15px;
     li {
       font-weight: 700;
-      color: $bg;
       &:not(:last-child) {
         margin-right: 15px;
       }
     }
+  }
+}
+
+
+:global(.light) {
+  .login {
+    color: $light-gray;
   }
 }

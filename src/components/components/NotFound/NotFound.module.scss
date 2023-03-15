@@ -4,7 +4,6 @@
   margin: 50px auto;
   text-align: center;
   svg {
-    fill: $gray;
     width: 250px;
     margin: 0 auto;
   }
@@ -17,5 +16,13 @@
     margin: 0 auto;
     margin-top: -25px;
     margin-bottom: 10px;
+  }
+}
+
+:global(.light) {
+  .notfound {
+    h4 {
+      color: $light-gray;
+    }
   }
 }

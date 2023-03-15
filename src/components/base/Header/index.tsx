@@ -186,8 +186,8 @@ export const Header: React.FC<HeaderProps> = ({}) => {
             <button onClick={onChangeTheme} className={ss.btn__theme}>
               <span
                 className={classNames(ss.shape, {
-                  [ss.dark]: theme === Theme.dark,
-                  [ss.light]: theme === Theme.light,
+                  [ss.dark]: theme === Theme.light,
+                  [ss.light]: theme === Theme.dark,
                 })}
               ></span>
               <span className={ss.rays}>

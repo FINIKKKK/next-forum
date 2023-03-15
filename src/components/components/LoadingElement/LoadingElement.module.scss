@@ -1,8 +1,8 @@
-@import '@/styles/assets/variables';
+@import "@/styles/assets/variables";
 
 .loading {
   &:not(:last-child) {
-   margin-bottom: 55px; 
+    margin-bottom: 55px;
   }
   position: relative;
   background-color: $purple;
@@ -30,5 +30,26 @@
 @keyframes loading {
   100% {
     transform: translateX(100%);
+  }
+}
+
+:global(.light) {
+  .loading {
+    background-color: $light-block;
+    box-shadow: 0px 4px 8px rgba(#715ca0, 0.3);
+    box-shadow: -5px -5px 20px rgba(255, 255, 255, 0.53),
+      13px 14px 12px -6px rgba(166, 180, 200, 0.57);
+    border: 1px solid transparent;
+    transition: 0.3s;
+    background: linear-gradient(#D9E9EA 0 0) padding-box,
+      linear-gradient(135.83deg, #ffffff 22.24%, #bac3cf 85.59%) border-box;
+    &::after {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+      );
+    }
   }
 }

@@ -15,7 +15,7 @@ export const Tag: React.FC<TagProps> = ({
   questionCount,
 }) => {
   return (
-    <div className={`block ${ss.tag}`}>
+    <div className={`block hover ${ss.tag}`}>
       <div className={ss.header}>
         <Link className="hover" href={`/?tagBy=${name}`}>
           {name}
