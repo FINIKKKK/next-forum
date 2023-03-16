@@ -1,4 +1,5 @@
 import ss from "./User.module.scss";
+import { useWordEnding } from "@/hooks/useWordEnding";
 import Link from "next/link";
 import React from "react";
 
@@ -19,9 +20,12 @@ export const User: React.FC<UserProps> = ({
   questionCount,
   answerCount,
 }) => {
+  const questionWord = useWordEnding(questionCount, "вопрос");
+  const answerWord = useWordEnding(answerCount, "ответ");
+
   return (
     <div className={`block hover ${ss.user}`}>
-      <Link className={`avatar block ${ss.avatar}`} href={`/users/${id}`}>
+      <Link className={`avatar block ${ss.avatar}`} href={`/users/${login}`}>
         {avatar ? (
           <img
             className="avatar"
@@ -50,13 +54,13 @@ export const User: React.FC<UserProps> = ({
       </Link>
       <div className={ss.info}>
         <p className={ss.name}>{name}</p>
-        <Link className={ss.login} href={`/users/${id}`}>
+        <Link className={ss.login} href={`/users/${login}`}>
           @{login}
         </Link>
       </div>
       <ul className={ss.results}>
-        <li>{questionCount} вопросов</li>
-        <li>{answerCount} ответов</li>
+        <li>{questionWord}</li>
+        <li>{answerWord}</li>
       </ul>
     </div>
   );

@@ -1,4 +1,11 @@
-import { ProfileNav, Question, UserAbout, UserInfo } from "@/components";
+import {
+  LoadingElement,
+  NotFound,
+  ProfileNav,
+  Question,
+  UserAbout,
+  UserInfo,
+} from "@/components";
 import { MainLayout } from "@/layouts/MainLayout";
 import { Api } from "@/utils/api";
 import { TQuestion } from "@/utils/api/models/question/types";
@@ -12,23 +19,56 @@ interface ProfilePageProps {
 
 const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
   const [questions, setQuestions] = React.useState<TQuestion[]>([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isFetching, setIsFetching] = React.useState(true);
+  const limit = 4;
+  const [page, setPage] = React.useState(1);
+  const [total, setTotal] = React.useState(0);
 
   React.useEffect(() => {
     (async () => {
       try {
-        const params = {
-          limit: 4,
-          page: 1,
-          orderBy: "date",
-          userId: user.id,
-        };
-        const questions = await Api().question.getAll(params);
-        setQuestions(questions.items);
+        if (isFetching) {
+          setIsLoading(true);
+          const params = {
+            limit,
+            page,
+            orderBy: "date",
+            userId: user.id,
+          };
+          const { items, total } = await Api().question.getAll(params);
+          setQuestions([...questions, ...items]);
+          setTotal(total);
+          setPage((prev) => prev + 1);
+        }
       } catch (err) {
         console.warn(err);
         alert("Ошибка при получении вопросов");
+      } finally {
+        setIsLoading(false);
+        setIsFetching(false);
       }
     })();
+  }, [isFetching]);
+
+  const scrollHandler = (e: any) => {
+    if (
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+      100
+      // && questions.length !== total
+    ) {
+      setIsFetching(true);
+    }
+  };
+
+  console.log(isFetching);
+
+  React.useEffect(() => {
+    document.addEventListener("scroll", scrollHandler);
+    return () => {
+      document.removeEventListener("scroll", scrollHandler);
+    };
   }, []);
 
   return (
@@ -50,13 +90,21 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
 
               <div className="questions__wrapper block">
                 <div className="questions">
-                  {questions.map((obj) => (
-                    <Question
-                      className="profile__question"
-                      key={obj.id}
-                      {...obj}
-                    />
-                  ))}
+                  {/* {isLoading ? (
+                    Array(limit)
+                      .fill(0)
+                      .map((_, index) => <LoadingElement key={index} />) */}
+                  {questions.length > 0 ? (
+                    questions.map((obj) => (
+                      <Question
+                        className="profile__question"
+                        key={obj.id}
+                        {...obj}
+                      />
+                    ))
+                  ) : (
+                    <NotFound label="Здесь пока ничего нет :(" />
+                  )}
                 </div>
               </div>
             </div>

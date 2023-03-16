@@ -203,12 +203,12 @@ export const Header: React.FC<HeaderProps> = ({}) => {
                 <User userLogin={userData?.login} avatar={userData?.avatar} />
               </>
             )}
-          </div>
           {!userData && (
             <Link href="/login" className="btn">
               Войти
             </Link>
           )}
+          </div>
         </nav>
       </div>
     </header>
