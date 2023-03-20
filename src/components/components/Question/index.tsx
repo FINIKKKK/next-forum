@@ -1,6 +1,8 @@
 import ss from "./Question.module.scss";
+import { useFormatNumber } from "@/hooks/useFormatNumber";
 import { useSelectors } from "@/hooks/useSelectors";
 import { useTimeNow } from "@/hooks/useTimeNow";
+import { Api } from "@/utils/api";
 import { TTag } from "@/utils/api/models/tag/types";
 import { TUser } from "@/utils/api/models/user/types";
 import classNames from "classnames";
@@ -30,8 +32,21 @@ export const Question: React.FC<QuestionProps> = ({
   answerCount,
   className,
 }) => {
-  const [favorite, setFavorite] = React.useState(false);
   const { data: userData } = useSelectors((state) => state.user);
+  const [favorite, setFavorite] = React.useState(
+    userData?.favorites.includes(id)
+  );
+  const formatViews = useFormatNumber(views);
+
+  const onAddToFavorites = async () => {
+    try {
+      await Api().user.favorite(id);
+      setFavorite(!favorite);
+    } catch (err) {
+      console.warn(err);
+      alert("Ошибка при добавлении в избранное");
+    }
+  };
 
   return (
     <div className={`block hover ${ss.question} ${className}`}>
@@ -57,7 +72,7 @@ export const Question: React.FC<QuestionProps> = ({
           <svg width="20" height="20">
             <use xlinkHref="../img/icons/icons.svg#eye" />
           </svg>
-          <p>{views}</p>
+          <p>{formatViews}</p>
         </div>
         <div className={ss.item}>
           <svg width="20" height="20">
@@ -76,7 +91,7 @@ export const Question: React.FC<QuestionProps> = ({
       </div>
       {!(userData?.id === user.id) && (
         <svg
-          onClick={() => setFavorite(!favorite)}
+          onClick={onAddToFavorites}
           className={classNames(ss.favorite, {
             [ss.active]: favorite,
           })}

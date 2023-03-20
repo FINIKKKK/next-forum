@@ -14,6 +14,7 @@ export type TUser = TBase & {
   questionCount: number;
   answerCount: number;
   location?: string;
+  favorites: Number[];
 };
 
 export type UpdateUserDto = Partial<TUser>;

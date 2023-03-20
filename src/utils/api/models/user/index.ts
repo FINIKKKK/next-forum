@@ -24,7 +24,7 @@ export const UserApi = (instance: AxiosInstance) => ({
   async updateAvatar(id: number, file: any) {
     const formData = new FormData();
     formData.append("image", file);
-    formData.append("imagePath", 'avatars');
+    formData.append("imagePath", "avatars");
 
     const userAvatar = await instance.patch(`/users/avatar/${id}`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
@@ -36,6 +36,13 @@ export const UserApi = (instance: AxiosInstance) => ({
       `/users/${id}`,
       dto
     );
+    return data;
+  },
+  async favorite(questionId: number) {
+    const { data } = await instance.post<
+      { questionId: number },
+      { data: TUser }
+    >(`/users/favorite`, { questionId });
     return data;
   },
   async remove(id: number) {
