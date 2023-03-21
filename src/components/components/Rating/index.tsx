@@ -1,62 +1,74 @@
 import ss from "./Rating.module.scss";
+import { Api } from "@/utils/api";
 import React from "react";
 
 interface RatingProps {
+  id: number;
   rating: number;
 }
 
-export const Rating: React.FC<RatingProps> = ({ rating: ratingValue }) => {
+export const Rating: React.FC<RatingProps> = ({ id, rating: ratingValue }) => {
   const [rating, setRating] = React.useState(ratingValue);
-  const [ratedUp, setRatedUp] = React.useState(false);
-  const [ratedDown, setRatedDown] = React.useState(false);
+  const [ratedUp, setRatedUp] = React.useState(true);
+  const [ratedDown, setRatedDown] = React.useState(true);
+  const [lastVote, setLastVote] = React.useState<string | null>(null);
 
-  React.useEffect(() => {
-    const ratedUpLocal = localStorage.getItem("ratedUp");
-    const ratedDownLocal = localStorage.getItem("ratedDown");
-    if (ratedUpLocal === "true") {
-      setRatedUp(true);
-    }
-    if (ratedDownLocal === "true") {
-      setRatedDown(true);
-    }
-  }, []);
+  console.log(lastVote);
+
+  // React.useEffect(() => {
+  //   const ratedUpLocal = localStorage.getItem("ratedUp");
+  //   const ratedDownLocal = localStorage.getItem("ratedDown");
+  //   if (ratedUpLocal === "true") {
+  //     setRatedUp(true);
+  //   }
+  //   if (ratedDownLocal === "true") {
+  //     setRatedDown(true);
+  //   }
+  // }, []);
 
   const onChangeRating = async (type: string) => {
-    try {
-      if (type === "+") {
-        // await Api().answer.update(id, { rating: rating + 1 });
-        if (!ratedUp) {
-          setRating(rating + 1);
-          setRatedUp(true);
-          localStorage.setItem("ratedUp", "true");
-        }
-        if (ratedDown) {
-          setRating(rating + 1);
-          setRatedUp(true);
-          setRatedDown(false);
-          localStorage.setItem("ratedDown", "false");
-          localStorage.setItem("ratedUp", "true");
-        }
-      } else if (type === "-") {
-        // await Api().answer.update(id, { rating: rating - 1 });
-        if (!ratedDown) {
-          setRating(rating - 1);
-          setRatedDown(true);
-          localStorage.setItem("ratedDown", "true");
-        }
-        if (ratedUp) {
-          setRating(rating - 1);
-          setRatedDown(true);
-          setRatedUp(false);
-          localStorage.setItem("ratedUp", "false");
-          localStorage.setItem("ratedDown", "true");
-        }
+    if (type === "+") {
+      if (lastVote !== "upvote") {
+        setRating(rating + 1);
+        setLastVote("upvote");
+      } else {
+        setRating(rating - 1);
+        setLastVote(null);
       }
-    } catch (err) {
-      console.warn(err);
-      alert("Ошибка при изменении рейтинга");
+    } else if (type === "-") {
+      if (lastVote !== "downvote") {
+        setRating(rating - 1);
+        setLastVote("downvote");
+      } else {
+        setRating(rating + 1);
+        setLastVote(null);
+      }
     }
   };
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        // await Api().answer.update(id, { rating });
+      } catch (err) {
+        console.warn(err);
+        alert("Ошибка при изменении рейтинга");
+      }
+    })();
+  }, [rating]);
+
+  React.useEffect(() => {
+    // if (lastVote) {
+    //   localStorage.setItem(`lastVote`, lastVote);
+    // }
+  }, [lastVote]);
+
+  React.useEffect(() => {
+    // const storedLastVote = localStorage.getItem(`lastVote`);
+    // if (storedLastVote) {
+    //   setLastVote(storedLastVote);
+    // }
+  }, []);
 
   return (
     <div className={ss.rating}>

@@ -11,6 +11,7 @@ interface CommentsBoxProps {
   commentValue: string;
   setCommentValue: (value: string) => void;
   openInput?: boolean;
+  onOpenInput?: () => void;
   setOpenInput?: (value: boolean) => void;
   className?: string;
 }
@@ -21,6 +22,7 @@ export const CommentsBox: React.FC<CommentsBoxProps> = ({
   commentValue,
   setCommentValue,
   openInput,
+  onOpenInput,
   setOpenInput,
   className,
 }) => {
@@ -56,7 +58,8 @@ export const CommentsBox: React.FC<CommentsBoxProps> = ({
       const comment = await Api().comment.create(dto);
       setOpenInput && setOpenInput(false);
       setComments([{ ...comment, user: userData! }, ...comments]);
-      setOpenComments(true);
+      setOpenComments && setOpenComments(true);
+      setCommentValue && setCommentValue('')
     } catch (err) {
       console.warn(err);
       alert("Ошибка при создании комментария");

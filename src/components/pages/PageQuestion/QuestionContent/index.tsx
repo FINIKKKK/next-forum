@@ -27,6 +27,7 @@ export const QuestionContent: React.FC<QuestionContentProps> = ({
   const router = useRouter();
   const [openComments, setOpenComments] = React.useState(false);
   const [commentValue, setCommentValue] = React.useState("");
+  const [comments, setComments] = React.useState<TComment[]>([]);
 
   const onRemoveQuestion = async () => {
     if (window.confirm("Вы действительно хотите удалить вопрос")) {
@@ -46,6 +47,21 @@ export const QuestionContent: React.FC<QuestionContentProps> = ({
     setOpenComments(!openComments);
     setCommentValue("");
   };
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const params = {
+          questionId: question.id,
+        };
+        const comments = await Api().comment.getAll(params);
+        setComments(comments.items);
+      } catch (err) {
+        console.warn(err);
+        alert("Ошибка при получении комментариев");
+      }
+    })();
+  }, []);
 
   return (
     <div className={ss.question}>
@@ -97,17 +113,14 @@ export const QuestionContent: React.FC<QuestionContentProps> = ({
 
       <div className={ss.footer}>
         <div className={`inline ${ss.footer__btn}`}>Подписаться</div>
-        <div
-          onClick={onOpenInput}
-          className={`inline ${ss.footer__btn}`}
-        >
-          Комментарии
+        <div onClick={onOpenInput} className={`inline ${ss.footer__btn}`}>
+          Комментарии {!!comments.length && `(${comments.length})`}
         </div>
       </div>
       <CommentsBox
         questionId={question.id}
         openInput={openComments}
-        setOpenInput={setOpenComments}
+        onOpenInput={onOpenInput}
         commentValue={commentValue}
         setCommentValue={setCommentValue}
         className={ss.comments}

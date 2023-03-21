@@ -18,6 +18,7 @@ type FiltersLayoutsProps = {
   itemsLength: number;
   activeFilter: string | null;
   setActiveFilter: (value: string | null) => void;
+  favorites?: boolean;
 };
 
 export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
@@ -33,6 +34,7 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
   setActiveFilter,
   setIsLoading,
   itemsLength,
+  favorites,
 }) => {
   const router = useRouter();
   const [total, setTotal] = React.useState(0);
@@ -53,6 +55,7 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
           ...(tag && { tagBy: tag }),
           ...(userId && { userId }),
           ...(activeFilter && { isAnswer: activeFilter }),
+          ...(favorites && { favorites }),
         };
         let data;
         if (type === "tag") {

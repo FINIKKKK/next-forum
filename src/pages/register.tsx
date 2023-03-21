@@ -17,11 +17,14 @@ interface RegisterPageProps {}
 
 const RegisterPage: NextPage<RegisterPageProps> = ({}) => {
   const form = useForm({
+    mode: "onChange",
     resolver: yupResolver(RegisterScheme),
   });
   const [error, setError] = React.useState("");
   const router = useRouter();
   const { setUserData } = useActions();
+
+  
 
   const onSubmit = async (dto: RegisterUserDto) => {
     try {

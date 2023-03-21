@@ -1,13 +1,11 @@
-import React from "react";
-import Link from "next/link";
-import Sticky from "react-stickynode";
-
+import ss from "./Sidebar.module.scss";
 import { Api } from "@/utils/api";
 import { TTag } from "@/utils/api/models/tag/types";
-
-import ss from "./Sidebar.module.scss";
-import { useRouter } from "next/router";
 import classNames from "classnames";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
+import Sticky from "react-stickynode";
 
 interface SidebarProps {}
 
@@ -91,8 +89,12 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
               <p>Мои вопросы</p>
             </Link>
           </li>
-          <li className={`hover ${ss.item}`}>
-            <Link href="#">
+          <li
+            className={classNames("hover", ss.item, {
+              [ss.active]: router.pathname === "/favorites",
+            })}
+          >
+            <Link href="/favorites">
               <svg width="20" height="20">
                 <use xlinkHref="../img/icons/icons.svg#favorite" />
               </svg>

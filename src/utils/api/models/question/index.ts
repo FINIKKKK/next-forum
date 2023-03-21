@@ -10,11 +10,12 @@ export const QuestionApi = (instance: AxiosInstance) => ({
         : undefined;
     const user = params.userId ? `&userId=${params.userId}` : undefined;
     const isAnswer = params.isAnswer ? `&isAnswer=${params.isAnswer}` : undefined;
+    const favorites = params.favorites ? `&favorites=${params.favorites}` : undefined;
 
     const { data } = await instance.get<TQuestions>(
       `/questions?limit=${params.limit}&page=${params.page}&orderBy=${
         params.orderBy
-      }${tag ? tag : ""}${search ? search : ""}${user ? user : ""}${isAnswer ? isAnswer : ""}`
+      }${tag ? tag : ""}${search ? search : ""}${user ? user : ""}${isAnswer ? isAnswer : ""}${favorites ? favorites : ""}`
     );
     return data;
   },

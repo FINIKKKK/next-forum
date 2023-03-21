@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormContext } from "react-hook-form";
+import { useController, useFormContext } from "react-hook-form";
 
 interface AuthInputProps {
   name: string;
@@ -38,7 +38,7 @@ export const AuthInput: React.FC<AuthInputProps> = ({
           {...register(name)}
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          onFocus={() => setFocus(true)}
+          // onFocus={() => setFocus(true)}
           // onBlur={() => setFocus(false)}
           name={name}
           type={isPassword && !showPassword ? "password" : "text"}

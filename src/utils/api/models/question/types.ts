@@ -31,4 +31,5 @@ export type ParamsQuestionDto = ParamsDto & {
   userId?: number;
   search?: string;
   isAnswer?: string;
+  favorites?: boolean;
 };

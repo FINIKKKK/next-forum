@@ -15,12 +15,14 @@ type QuestionsLayoutsProps = {
   limit: number;
   label: string;
   userId?: number;
+  favorites?: boolean;
 };
 
 export const QuestionsLayout: React.FC<QuestionsLayoutsProps> = ({
   limit,
   label,
   userId,
+  favorites,
 }) => {
   const [option, setOption] = React.useState(options[0]);
   const [option2, setOption2] = React.useState(options2[0]);
@@ -41,6 +43,7 @@ export const QuestionsLayout: React.FC<QuestionsLayoutsProps> = ({
       setActiveFilter={setActiveFilter}
       setIsLoading={setIsLoading}
       itemsLength={questions.length}
+      favorites={favorites}
     >
       <div className="filters">
         <Selects

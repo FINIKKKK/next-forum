@@ -45,8 +45,6 @@ export const Answer: React.FC<AnswerProps> = ({
   const [openInput, setOpenInput] = React.useState(false);
   const [commentValue, setCommentValue] = React.useState("");
 
-
-
   const onRemoveAnswer = async () => {
     if (window.confirm("Вы действительно хотите удалить ответ?")) {
       try {
@@ -79,11 +77,10 @@ export const Answer: React.FC<AnswerProps> = ({
     setCommentValue("");
   };
 
-
   return (
     <div className={ss.answer}>
       <div className={ss.side}>
-        <Rating rating={rating} />
+        <Rating id={id} rating={rating} />
         <svg
           onClick={onSetIsAnswer}
           className={classNames(ss.isAnswer__icon, {
@@ -123,7 +120,13 @@ export const Answer: React.FC<AnswerProps> = ({
           <button onClick={onOpenInput} className={`btn ${ss.btn}`}>
             {!openInput ? "Ответить" : "Закрыть"}
           </button>
-          <CommentsBox answerId={id} openInput={openInput} setOpenInput={setOpenInput} commentValue={commentValue} setCommentValue={setCommentValue} />
+          <CommentsBox
+            answerId={id}
+            openInput={openInput}
+            setOpenInput={setOpenInput}
+            commentValue={commentValue}
+            setCommentValue={setCommentValue}
+          />
         </div>
       </div>
     </div>
