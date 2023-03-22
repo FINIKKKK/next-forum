@@ -17,6 +17,7 @@ export const Header: React.FC<HeaderProps> = ({}) => {
   const onChangeTheme = () => {
     const newTheme = theme === Theme.dark ? Theme.light : Theme.dark;
     setTheme(newTheme);
+    window.localStorage.setItem('theme', theme);
   };
 
   return (

@@ -113,7 +113,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   } catch (err) {
     console.warn(err);
-    alert("Ошибка при получении вопроса");
     return {
       props: {},
     };

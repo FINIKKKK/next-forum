@@ -1,16 +1,26 @@
+import user, { userSlice } from "./user/slice";
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import { useDispatch } from "react-redux";
 
-import user from "./user/slice";
-
-export function makeStore() {
-  return configureStore({
+const makeStore = () => {
+  const store = configureStore({
     reducer: {
       user,
     },
   });
-}
+
+  if (typeof window !== "undefined") {
+    store.dispatch((dispatch) => {
+      const storedTheme = window.localStorage.getItem("theme");
+      if (storedTheme) {
+        dispatch(userSlice.actions.setTheme(storedTheme));
+      }
+    });
+  }
+
+  return store;
+};
 
 export const store = makeStore();
 

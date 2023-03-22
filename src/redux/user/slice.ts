@@ -15,7 +15,7 @@ const userSlice = createSlice({
     setUserData(state, { payload }: PayloadAction<TUser | null>) {
       state.data = payload;
     },
-    setTheme(state, { payload }: PayloadAction<Theme>) {
+    setTheme(state, { payload }: PayloadAction<any>) {
       state.theme = payload;
     },
   },
@@ -28,5 +28,5 @@ const userSlice = createSlice({
 
 export const userActions = userSlice.actions;
 export const { setUserData } = userSlice.actions;
-
+export {userSlice}
 export default userSlice.reducer;
