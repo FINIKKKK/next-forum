@@ -1,0 +1,32 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2020": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["@typescript-eslint", "react", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "no-var": "error",
+    "no-undef": "warn",
+    "quotes": ["warn", "single"],
+    "no-console": "warn",
+    "no-trailing-spaces": "warn",
+    "eqeqeq": "warn",
+    "camelcase": "warn",
+    "@typescript-eslint/no-empty-interface": "warn",
+    "no-empty-pattern": "warn"
+  }
+}

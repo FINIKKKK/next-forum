@@ -1,12 +1,14 @@
-import ss from "./Header.module.scss";
-import { Notices } from "./Notices";
-import { User } from "./User";
-import { useActions } from "@/hooks/useActions";
-import { useSelectors } from "@/hooks/useSelectors";
-import { Theme } from "@/redux/user/types";
-import classNames from "classnames";
-import Link from "next/link";
-import React from "react";
+import classNames from 'classnames';
+import Link from 'next/link';
+import React from 'react';
+
+import { useActions } from '@/hooks/useActions';
+import { useSelectors } from '@/hooks/useSelectors';
+import { Theme } from '@/redux/user/types';
+
+import ss from './Header.module.scss';
+import { Notices } from './Notices';
+import { User } from './User';
 
 interface HeaderProps {}
 
@@ -204,11 +206,11 @@ export const Header: React.FC<HeaderProps> = ({}) => {
                 <User userLogin={userData?.login} avatar={userData?.avatar} />
               </>
             )}
-          {!userData && (
-            <Link href="/login" className="btn">
-              Войти
-            </Link>
-          )}
+            {!userData && (
+              <Link href="/login" className="btn">
+                Войти
+              </Link>
+            )}
           </div>
         </nav>
       </div>
