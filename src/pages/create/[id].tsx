@@ -1,8 +1,12 @@
+import { useSelectors } from "@/hooks/useSelectors";
 import { CreateQuestionLayout } from "@/layouts/CreateQuestionLayout";
+import { wrapper } from "@/redux/store";
 import { Api } from "@/utils/api";
 import { TQuestion } from "@/utils/api/models/question/types";
 import { GetServerSideProps, NextPage } from "next";
+import { useRouter } from "next/router";
 import React from "react";
+import { useSelector } from "react-redux";
 
 interface EditQuestionPageProps {
   question: TQuestion;
@@ -12,27 +16,42 @@ const EditQuestionPage: NextPage<EditQuestionPageProps> = ({ question }) => {
   return <CreateQuestionLayout questionData={question} />;
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  try {
-    const id = ctx?.params?.id;
-    if (id) {
-      const question = await Api().question.getOne(+id);
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (ctx) => {
+    try {
+      const id = ctx?.params?.id;
+      const state = store.getState();
+
+      if (id) {
+        const question = await Api().question.getOne(+id);
+        if (state?.user?.data?.id !== question.user.id) {
+          return {
+            redirect: {
+              destination: `/questions/${question.id}`,
+              permanent: false,
+            },
+          };
+        }
+        return {
+          props: {
+            question,
+          },
+        };
+      }
       return {
         props: {
-          question,
+          question: {},
+        },
+      };
+    } catch (err) {
+      console.warn(err);
+      return {
+        props: {
+          question: {},
         },
       };
     }
-    return {
-      props: {},
-    };
-  } catch (err) {
-    console.warn(err);
-    alert("Ошибка при получении вопроса");
-    return {
-      props: {},
-    };
   }
-};
+);
 
 export default EditQuestionPage;

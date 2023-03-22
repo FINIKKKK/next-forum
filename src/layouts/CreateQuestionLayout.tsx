@@ -1,4 +1,5 @@
 import { InputTags, InputTitle } from "@/components";
+import { useSelectors } from "@/hooks/useSelectors";
 import { MainLayout } from "@/layouts/MainLayout";
 import { Api } from "@/utils/api";
 import { TQuestion } from "@/utils/api/models/question/types";
@@ -38,9 +39,8 @@ export const CreateQuestionLayout: React.FC<CreateQuestionLayoutsProps> = ({
   React.useEffect(() => {
     const handleRouteChange = (url: any) => {
       if (!isSubmit) {
-        console.log("isSubmit", isSubmit);
         if (
-          (title || body || selectedTags) &&
+          (title || !!body.length || !!selectedTags.length) &&
           !window.confirm(
             "Вы действительно хотите уйти со страницы? Все несохраненные данные будут потеряны."
           )

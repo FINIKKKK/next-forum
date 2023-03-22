@@ -55,6 +55,7 @@
     "@types/editorjs__header": "^2.6.0",
     "@types/lodash.debounce": "^4.0.7",
     "@types/moment": "^2.13.0",
+    "@types/next": "^9.0.0",
     "@types/qs": "^6.9.7",
     "@types/react-stickynode": "^4.0.0",
     "eslint-plugin-prettier": "^4.2.1",
