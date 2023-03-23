@@ -1,5 +1,3 @@
-
-
 // --------- main ----------
 .main__inner {
   margin: 85px 0 150px;
@@ -118,7 +116,7 @@
 .login {
   width: 100%;
   height: 100vh;
-  background-image: url("../../public/img/bg.jpg");
+  background-image: url('../../public/img/bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -217,8 +215,8 @@
         -webkit-box-shadow: 0 0 0 30px $purple inset !important;
         -webkit-text-fill-color: inherit !important;
       }
-      input[type="password"]::-ms-reveal,
-      input[type="password"]::-ms-clear {
+      input[type='password']::-ms-reveal,
+      input[type='password']::-ms-clear {
         display: none;
       }
 
@@ -371,7 +369,6 @@
       margin-bottom: 45px;
     }
   }
-  
 }
 
 // --------- edit ----------
@@ -465,4 +462,33 @@
   height: 105px !important;
   margin-bottom: 20px !important;
   margin-right: 20px !important;
+}
+
+// --------- error404 ----------
+.error404__wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .error404 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    img {
+      width: 400px;
+      object-fit: cover;
+      margin-bottom: 35px;
+    }
+    h3 {
+      font-size: 25px;
+      margin-bottom: 40px;
+    }
+    .btn {
+      font-size: 14px;
+      padding: 8px 45px;
+      text-transform: uppercase;
+    }
+  }
 }
