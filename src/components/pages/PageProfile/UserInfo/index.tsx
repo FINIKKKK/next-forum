@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Avatar } from '@/components';
 import { useActions } from '@/hooks/useActions';
 import { useSelectors } from '@/hooks/useSelectors';
 import { Api } from '@/utils/api';
@@ -47,14 +48,12 @@ export const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
   return (
     <div className={`block ${ss.user}`}>
       <div className={ss.user__header}>
-        <div className={ss.avatar}>
-          <img
-            src={
-              avatar
-                ? `http://localhost:7777/img/avatars/${avatar}`
-                : `../img/avatar.png`
-            }
-            alt="avatar"
+        <div className={ss.avatar__wrapper}>
+          <Avatar
+            avatar={user.avatar}
+            login={user.login}
+            className={ss.avatar}
+            isAnother
           />
           {isAuthor && (
             <div className={ss.avatar__edit}>

@@ -82,7 +82,9 @@
     }
     .item.active {
       font-weight: 700;
-      color: $main;
+      p {
+        color: $main;
+      }
       svg {
         fill: $main;
       }
@@ -97,7 +99,7 @@
   .chooseAnswers {
     .item {
       p {
-        color: $light-main;
+        color: $light-main !important;
       }
       svg {
         fill: $light-main;
