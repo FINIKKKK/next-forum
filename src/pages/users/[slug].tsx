@@ -62,8 +62,6 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
     }
   };
 
-  console.log(isFetching);
-
   React.useEffect(() => {
     document.addEventListener("scroll", scrollHandler);
     return () => {
@@ -118,7 +116,6 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
     const login = ctx?.params?.slug;
-    console.log(login);
     if (login) {
       const user = await Api().user.getOne(`${login}`);
       return {

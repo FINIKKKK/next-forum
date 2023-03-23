@@ -1,8 +1,11 @@
-import ss from "./UserInfo.module.scss";
-import { useSelectors } from "@/hooks/useSelectors";
-import { Api } from "@/utils/api";
-import { TUser } from "@/utils/api/models/user/types";
-import React from "react";
+import React from 'react';
+
+import { useActions } from '@/hooks/useActions';
+import { useSelectors } from '@/hooks/useSelectors';
+import { Api } from '@/utils/api';
+import { TUser } from '@/utils/api/models/user/types';
+
+import ss from './UserInfo.module.scss';
 
 interface UserInfoProps {
   user: TUser;
@@ -14,7 +17,8 @@ export const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
   const [isEdit, setIsEdit] = React.useState(false);
   const [nameValue, setNameValue] = React.useState(user.name);
   const [locationValue, setLocationValue] = React.useState(user.location);
-  const [userAvatar, setUserAvatar] = React.useState(user.avatar);
+  const [avatar, setAvatar] = React.useState(user.avatar);
+  const { setUserAvatar } = useActions();
 
   const onEditContent = () => {
     if (!isEdit) {
@@ -29,12 +33,13 @@ export const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
       try {
         const avatar = await Api().user.updateAvatar(
           user.id,
-          e.target.files[0]
+          e.target.files[0],
         );
+        setAvatar(avatar);
         setUserAvatar(avatar);
       } catch (err) {
         console.warn(err);
-        alert("Ошибка при изменении аватарки");
+        alert('Ошибка при изменении аватарки');
       }
     }
   };
@@ -45,8 +50,8 @@ export const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
         <div className={ss.avatar}>
           <img
             src={
-              userAvatar
-                ? `http://localhost:7777/img/avatars/${userAvatar}`
+              avatar
+                ? `http://localhost:7777/img/avatars/${avatar}`
                 : `../img/avatar.png`
             }
             alt="avatar"

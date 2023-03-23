@@ -1,7 +1,9 @@
-import { Theme, TUserSlice } from "./types";
-import { TUser } from "@/utils/api/models/user/types";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { HYDRATE } from "next-redux-wrapper";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { HYDRATE } from 'next-redux-wrapper';
+
+import { TUser } from '@/utils/api/models/user/types';
+
+import { Theme, TUserSlice } from './types';
 
 const initialState: TUserSlice = {
   data: null,
@@ -9,18 +11,23 @@ const initialState: TUserSlice = {
 };
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     setUserData(state, { payload }: PayloadAction<TUser | null>) {
       state.data = payload;
+    },
+    setUserAvatar(state, { payload }: PayloadAction<string>) {
+      if (state.data) {
+        state.data.avatar = payload;
+      }
     },
     setTheme(state, { payload }: PayloadAction<any>) {
       state.theme = payload;
     },
   },
   extraReducers: {
-    [HYDRATE]: (state, { payload }: PayloadAction<TUser>) => {
+    [HYDRATE]: (state, { payload }: PayloadAction<any>) => {
       state.data = payload?.user?.data;
     },
   },
@@ -28,5 +35,5 @@ const userSlice = createSlice({
 
 export const userActions = userSlice.actions;
 export const { setUserData } = userSlice.actions;
-export {userSlice}
+export { userSlice };
 export default userSlice.reducer;

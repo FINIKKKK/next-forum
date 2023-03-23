@@ -1,19 +1,20 @@
-import { TUser, ParamsUserDto, TUsers, UpdateUserDto } from "./types";
-import { AxiosInstance } from "axios";
+import { AxiosInstance } from 'axios';
+
+import { TUser, ParamsUserDto, TUsers, UpdateUserDto } from './types';
 
 export const UserApi = (instance: AxiosInstance) => ({
   async getProfile() {
-    const { data } = await instance.get<TUser>("/users/profile");
+    const { data } = await instance.get<TUser>('/users/profile');
     return data;
   },
   async getAll(params: ParamsUserDto) {
     const search =
-      params.search !== "" && params.search !== undefined
+      params.search !== '' && params.search !== undefined
         ? `&search=${params.search}`
         : undefined;
 
     const { data } = await instance.get<TUsers>(
-      `/users?limit=${params.limit}&page=${params.page}${search ? search : ""}`
+      `/users?limit=${params.limit}&page=${params.page}${search ? search : ''}`,
     );
     return data;
   },
@@ -23,18 +24,17 @@ export const UserApi = (instance: AxiosInstance) => ({
   },
   async updateAvatar(id: number, file: any) {
     const formData = new FormData();
-    formData.append("image", file);
-    formData.append("imagePath", "avatars");
+    formData.append('avatar', file);
 
-    const userAvatar = await instance.patch(`/users/avatar/${id}`, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
+    const { data } = await instance.patch(`/users/avatar/${id}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
-    return userAvatar;
+    return data;
   },
   async update(id: number, dto: UpdateUserDto) {
     const { data } = await instance.patch<UpdateUserDto, { data: TUser }>(
       `/users/${id}`,
-      dto
+      dto,
     );
     return data;
   },
