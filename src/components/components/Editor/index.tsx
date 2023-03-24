@@ -60,7 +60,6 @@ const Editor: React.FC<EditorProps> = ({
                       file,
                       "questions"
                     );
-                    console.log(fileName);
                     return {
                       success: 1,
                       file: {

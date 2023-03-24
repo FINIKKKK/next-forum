@@ -10,14 +10,14 @@ const makeStore = () => {
     },
   });
 
-  if (typeof window !== "undefined") {
-    store.dispatch((dispatch) => {
-      const storedTheme = window.localStorage.getItem("theme");
-      if (storedTheme) {
-        dispatch(userSlice.actions.setTheme(storedTheme));
-      }
-    });
-  }
+  // if (typeof window !== "undefined") {
+  //   store.dispatch((dispatch) => {
+  //     const storedTheme = window.localStorage.getItem("theme");
+  //     if (storedTheme) {
+  //       dispatch(userSlice.actions.setTheme(storedTheme));
+  //     }
+  //   });
+  // }
 
   return store;
 };

@@ -26,10 +26,10 @@ const userSlice = createSlice({
       state.theme = payload;
     },
   },
-  extraReducers: {
-    [HYDRATE]: (state, { payload }: PayloadAction<any>) => {
+  extraReducers: (builder) => {
+    builder.addCase(HYDRATE, (state, { payload }) => {
       state.data = payload?.user?.data;
-    },
+    });
   },
 });
 

@@ -47,37 +47,35 @@ export const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
 
   return (
     <div className={`block ${ss.user}`}>
-      <div className={ss.user__header}>
-        <div className={ss.avatar__wrapper}>
-          <Avatar
-            avatar={user.avatar}
-            login={user.login}
-            className={ss.avatar}
-            isAnother
+      <div className={ss.avatar__wrapper}>
+        <Avatar
+          avatar={user.avatar}
+          login={user.login}
+          className={ss.avatar}
+          isAnother
+        />
+        {isAuthor && (
+          <div className={ss.avatar__edit}>
+            <input type="file" onChange={onUpdateAvatar} />
+            <svg width="20" height="20">
+              <use xlinkHref="../img/icons/icons.svg#edit" />
+            </svg>
+          </div>
+        )}
+      </div>
+      <div className={ss.info}>
+        {!isEdit ? (
+          user.name && <div className={ss.name}>{user.name}</div>
+        ) : (
+          <input
+            value={nameValue}
+            onChange={(e) => setNameValue(e.target.value)}
+            className={`${ss.input} ${ss.inputName}`}
+            placeholder="Имя"
+            type="text"
           />
-          {isAuthor && (
-            <div className={ss.avatar__edit}>
-              <input type="file" onChange={onUpdateAvatar} />
-              <svg width="20" height="20">
-                <use xlinkHref="../img/icons/icons.svg#edit" />
-              </svg>
-            </div>
-          )}
-        </div>
-        <div className={ss.info}>
-          {!isEdit ? (
-            user.name && <div className={ss.name}>{user.name}</div>
-          ) : (
-            <input
-              value={nameValue}
-              onChange={(e) => setNameValue(e.target.value)}
-              className={`${ss.input} ${ss.inputName}`}
-              placeholder="Имя"
-              type="text"
-            />
-          )}
-          {!isEdit && <h6 className={ss.login}>@{user.login}</h6>}
-        </div>
+        )}
+        {!isEdit && <h6 className={ss.login}>@{user.login}</h6>}
       </div>
       <div className={ss.extra}>
         {isEdit ? (

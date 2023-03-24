@@ -117,7 +117,7 @@
   }
   .quote {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     svg {
       fill: $gray;
       width: 25px;

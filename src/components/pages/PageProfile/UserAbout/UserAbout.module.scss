@@ -1,21 +1,32 @@
 @import "@/styles/assets/variables";
 
 .info {
-  width: 70%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  .about {
+    padding-right: 30px;
+  }
   .statistic {
+    height: 100%;
+    border-left: 2px solid rgba(#fff, 0.1);
+    padding-left: 30px;
     display: flex;
     align-items: center;
-    margin-bottom: 35px;
+    justify-content: center;
+    flex-direction: column;
     .item:not(:last-child) {
-      margin-right: 25px;
+      margin-bottom: 25px;
     }
     .item {
+      text-align: center;
       color: $gray;
-      font-weight: 700;
       font-size: 14px;
       line-height: 16px;
       b {
         color: $white;
+        display: block;
+        font-weight: 700;
       }
     }
   }

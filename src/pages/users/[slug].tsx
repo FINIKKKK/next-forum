@@ -1,3 +1,6 @@
+import { GetServerSideProps, NextPage } from 'next';
+import React from 'react';
+
 import {
   LoadingElement,
   NotFound,
@@ -5,13 +8,11 @@ import {
   Question,
   UserAbout,
   UserInfo,
-} from "@/components";
-import { MainLayout } from "@/layouts/MainLayout";
-import { Api } from "@/utils/api";
-import { TQuestion } from "@/utils/api/models/question/types";
-import { TUser } from "@/utils/api/models/user/types";
-import { GetServerSideProps, NextPage } from "next";
-import React from "react";
+} from '@/components';
+import { MainLayout } from '@/layouts/MainLayout';
+import { Api } from '@/utils/api';
+import { TQuestion } from '@/utils/api/models/question/types';
+import { TUser } from '@/utils/api/models/user/types';
 
 interface ProfilePageProps {
   user: TUser;
@@ -33,7 +34,7 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
           const params = {
             limit,
             page,
-            orderBy: "date",
+            orderBy: 'date',
             userId: user.id,
           };
           const { items, total } = await Api().question.getAll(params);
@@ -43,7 +44,7 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
         }
       } catch (err) {
         console.warn(err);
-        alert("Ошибка при получении вопросов");
+        alert('Ошибка при получении вопросов');
       } finally {
         setIsLoading(false);
         setIsFetching(false);
@@ -63,9 +64,9 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
   };
 
   React.useEffect(() => {
-    document.addEventListener("scroll", scrollHandler);
+    document.addEventListener('scroll', scrollHandler);
     return () => {
-      document.removeEventListener("scroll", scrollHandler);
+      document.removeEventListener('scroll', scrollHandler);
     };
   }, []);
 
@@ -74,35 +75,35 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
       <div className="profile">
         <div className="container">
           <div className="profile__inner">
-            <div className="user__info">
-              <UserInfo user={user} />
+            <UserInfo user={user} />
 
+            <div className="leftSide">
               <UserAbout
                 questionCount={user.questionCount}
                 answerCount={user.answerCount}
               />
-            </div>
 
-            <div className="user__work">
-              <ProfileNav userId={user.id} />
+              <div className="user__work">
+                <ProfileNav userId={user.id} />
 
-              <div className="questions__wrapper block">
-                <div className="questions">
-                  {/* {isLoading ? (
+                <div className="questions__wrapper block">
+                  <div className="questions">
+                    {/* {isLoading ? (
                     Array(limit)
                       .fill(0)
                       .map((_, index) => <LoadingElement key={index} />) */}
-                  {questions.length > 0 ? (
-                    questions.map((obj) => (
-                      <Question
-                        className="profile__question"
-                        key={obj.id}
-                        {...obj}
-                      />
-                    ))
-                  ) : (
-                    <NotFound label="Здесь пока ничего нет :(" />
-                  )}
+                    {questions.length > 0 ? (
+                      questions.map((obj) => (
+                        <Question
+                          className="profile__question"
+                          key={obj.id}
+                          {...obj}
+                        />
+                      ))
+                    ) : (
+                      <NotFound label="Здесь пока ничего нет :(" />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -129,7 +130,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   } catch (err) {
     console.warn(err);
-    alert("Ошибка при получении пользователя");
+    alert('Ошибка при получении пользователя');
     return {
       props: {},
     };

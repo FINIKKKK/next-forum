@@ -13,7 +13,6 @@ export const Rating: React.FC<RatingProps> = ({ id, rating: ratingValue }) => {
   const [ratedDown, setRatedDown] = React.useState(true);
   const [lastVote, setLastVote] = React.useState<string | null>(null);
 
-  console.log(lastVote);
 
   // React.useEffect(() => {
   //   const ratedUpLocal = localStorage.getItem("ratedUp");

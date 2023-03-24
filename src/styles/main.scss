@@ -338,6 +338,13 @@
 // --------- profile ----------
 .profile {
   margin: 85px 0 150px;
+  .profile__inner {
+    display: flex;
+    align-items: flex-start;
+  }
+  .leftSide {
+    width: 100%;  
+  }
   .profile__question {
     &:not(:last-child) {
       margin-bottom: 35px;
@@ -355,11 +362,6 @@
   }
   .user__work {
     margin-top: 55px;
-    display: flex;
-    justify-content: space-between;
-    .questions__wrapper {
-      width: 80%;
-    }
     .questions {
       overflow: auto;
       padding: 7px 5px;

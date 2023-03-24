@@ -9,7 +9,6 @@ export const TagApi = (instance: AxiosInstance) => ({
     return data;
   },
   async getAll(params: ParamsTagDto) {
-    console.log("params.search", params.search);
     const search =
       params.search !== "" && params.search !== undefined ? `&search=${params.search}` : undefined;
 

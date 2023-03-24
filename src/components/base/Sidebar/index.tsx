@@ -36,7 +36,6 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
           page: 1,
         };
         const tags = await Api().tag.getAll(params);
-        console.log(tags);
         setTags(tags.items);
       } catch (err) {
         console.warn(err);
