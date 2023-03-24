@@ -25,6 +25,7 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
   const limit = 4;
   const [page, setPage] = React.useState(1);
   const [total, setTotal] = React.useState(0);
+  const [isEdit, setIsEdit] = React.useState(false);
 
   React.useEffect(() => {
     (async () => {
@@ -75,10 +76,12 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
       <div className="profile">
         <div className="container">
           <div className="profile__inner">
-            <UserInfo user={user} />
+            <UserInfo isEdit={isEdit} setIsEdit={setIsEdit} user={user} />
 
             <div className="leftSide">
               <UserAbout
+                isEdit={isEdit}
+                about={user.about}
                 questionCount={user.questionCount}
                 answerCount={user.answerCount}
               />

@@ -1,7 +1,8 @@
-import { usePressKey } from "@/hooks/usePressKey";
-import React from "react";
+import React from 'react';
 
-import ss from "./InputTitle.module.scss";
+import { usePressKey } from '@/hooks/usePressKey';
+
+import ss from './InputTitle.module.scss';
 
 interface InputTitleProps {
   value: string;
@@ -18,9 +19,9 @@ export const InputTitle: React.FC<InputTitleProps> = ({
 
   React.useEffect(() => {
     if (refTextarea.current) {
-      refTextarea.current.style.height = "auto";
+      refTextarea.current.style.height = 'auto';
       refTextarea.current.style.height =
-        refTextarea.current.scrollHeight + 3 + "px";
+        refTextarea.current.scrollHeight + 3 + 'px';
     }
   }, [value]);
 
@@ -33,7 +34,7 @@ export const InputTitle: React.FC<InputTitleProps> = ({
         placeholder="Заголовок"
         maxLength={200}
         rows={1}
-        onKeyPress={(e: any) => usePressKey(e, "Enter")}
+        onKeyPress={(e: any) => usePressKey(e, 'Enter')}
       />
       {error && <div className="error">{error}</div>}
     </div>

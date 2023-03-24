@@ -1,4 +1,4 @@
-import { ParamsDto, TBase, TTotal } from "../../types";
+import { ParamsDto, TBase, TTotal } from '../../types';
 
 export type TUsers = TTotal & {
   items: TUser[];
@@ -15,6 +15,8 @@ export type TUser = TBase & {
   answerCount: number;
   location?: string;
   favorites: Number[];
+  about?: string;
+  showEmail: boolean;
 };
 
 export type UpdateUserDto = Partial<TUser>;
