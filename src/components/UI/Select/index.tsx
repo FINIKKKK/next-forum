@@ -22,7 +22,7 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({
 }) => {
   return (
     <Select
-      className={`block hover ${className} ${ss.select}`}
+      className={`block hover select ${className} ${ss.select}`}
       classNamePrefix="select"
       value={value}
       onChange={(value: any) => setValue(value)}

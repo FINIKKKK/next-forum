@@ -26,6 +26,60 @@
 }
 
 // --------- content ----------
+.search {
+  margin-bottom: 65px;
+  input {
+    font-weight: 400;
+    width: 95%;
+  }
+}
+.filters {
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.selects {
+  display: flex;
+  align-items: center;
+  .block:not(:last-child) {
+    margin-right: 15px;
+  }
+}
+.chooseAnswers {
+  display: flex;
+  align-items: center;
+  .item:not(:last-child) {
+    margin-right: 25px;
+  }
+  .item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+    p {
+      font-size: 16px;
+      margin-right: 13px;
+      transition: 0.2s;
+      color: $white;
+    }
+    svg {
+      width: 12px;
+      height: auto;
+      fill: $white;
+      transition: 0.2s;
+    }
+  }
+  .item.active {
+    font-weight: 700;
+    p {
+      color: $main;
+    }
+    svg {
+      fill: $main;
+    }
+  }
+}
 .content {
   background-color: $purple2;
   padding: 50px;
@@ -35,60 +89,6 @@
     font-size: 36px;
     line-height: 44px;
     color: $white;
-  }
-  .search {
-    margin-bottom: 65px;
-    input {
-      font-weight: 400;
-      width: 95%;
-    }
-  }
-  .filters {
-    margin-bottom: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .selects {
-    display: flex;
-    align-items: center;
-    .block:not(:last-child) {
-      margin-right: 15px;
-    }
-  }
-  .chooseAnswers {
-    display: flex;
-    align-items: center;
-    .item:not(:last-child) {
-      margin-right: 25px;
-    }
-    .item {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      transition: 0.2s;
-      p {
-        font-size: 16px;
-        margin-right: 13px;
-        transition: 0.2s;
-        color: $white;
-      }
-      svg {
-        width: 12px;
-        height: auto;
-        fill: $white;
-        transition: 0.2s;
-      }
-    }
-    .item.active {
-      font-weight: 700;
-      p {
-        color: $main;
-      }
-      svg {
-        fill: $main;
-      }
-    }
   }
 }
 

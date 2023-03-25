@@ -11,26 +11,31 @@ const navLabels = [
 ];
 
 interface ProfileNavProps {
-  userId: number;
+  isAuthor: boolean;
+  active: number;
+  setActive: (value: number) => void;
 }
 
-export const ProfileNav: React.FC<ProfileNavProps> = ({ userId }) => {
-  const [activeLabel, setActiveLabel] = React.useState(0);
-  const { data: userData } = useSelectors((state) => state.user);
-
+export const ProfileNav: React.FC<ProfileNavProps> = ({
+  isAuthor,
+  active,
+  setActive,
+}) => {
   return (
     <ul className={ss.nav}>
-      {navLabels.map((obj, index) => (
-        <li
-          onClick={() => setActiveLabel(index)}
-          className={classNames('hover', ss.item, {
-            [ss.active]: index === activeLabel,
-          })}
-          key={obj.id}
-        >
-          {userData?.id === userId ? obj.name : obj.name2}
-        </li>
-      ))}
+      {navLabels.map((obj, index) =>
+        obj.id === 2 && !isAuthor ? null : (
+          <li
+            onClick={() => setActive(index)}
+            className={classNames('hover', ss.item, {
+              [ss.active]: index === active,
+            })}
+            key={obj.id}
+          >
+            {isAuthor ? obj.name : obj.name2}
+          </li>
+        ),
+      )}
     </ul>
   );
 };

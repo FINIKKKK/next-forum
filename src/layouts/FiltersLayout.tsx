@@ -122,11 +122,11 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
       <div className="content block">
         <h1 className="title">{tag ? `Поиск по метке "${tag}"` : label}</h1>
 
-        <Search
-          value={searchValue}
-          setValue={setSearchValue}
-          setSearchValue={setSearchValue2}
-        />
+          <Search
+            value={searchValue}
+            setValue={setSearchValue}
+            setSearchValue={setSearchValue2}
+          />
 
         {children}
 

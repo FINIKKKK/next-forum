@@ -36,7 +36,7 @@ export const Filters: React.FC<FiltersProps> = ({
         >
           <p>{obj.label}</p>
           <svg width="20" height="20">
-            <use xlinkHref="./img/icons/icons.svg#check" />
+            <use xlinkHref="../img/icons/icons.svg#check" />
           </svg>
         </div>
       ))}

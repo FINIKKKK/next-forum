@@ -1,18 +1,20 @@
-import debounce from "lodash.debounce";
-import React from "react";
+import debounce from 'lodash.debounce';
+import React from 'react';
 
-import ss from "./Search.module.scss";
+import ss from './Search.module.scss';
 
 interface SearchProps {
   value: string;
   setValue: (value: string) => void;
   setSearchValue: (value: string) => void;
+  className?: string;
 }
 
 export const Search: React.FC<SearchProps> = ({
   value,
   setValue,
   setSearchValue,
+  className
 }) => {
   const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -22,11 +24,11 @@ export const Search: React.FC<SearchProps> = ({
     debounce((value: string) => {
       setSearchValue(value);
     }, 250),
-    []
+    [],
   );
 
   return (
-    <div className="search input block hover">
+    <div className={`search input block hover ${className}`}>
       <input
         value={value}
         onChange={onChangeSearchInput}
@@ -34,7 +36,7 @@ export const Search: React.FC<SearchProps> = ({
         placeholder="Поиск вопросов"
       />
       <svg width="20" height="20">
-        <use xlinkHref="./img/icons/icons.svg#search" />
+        <use xlinkHref="../img/icons/icons.svg#search" />
       </svg>
     </div>
   );

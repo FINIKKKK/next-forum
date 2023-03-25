@@ -10,21 +10,21 @@ import { TUser } from '@/utils/api/models/user/types';
 import ss from './UserInfo.module.scss';
 
 interface UserInfoProps {
+  isAuthor: boolean;
   isEdit: boolean;
-  setIsEdit: (value: boolean) => void;
   user: TUser;
-  onUpdateUserData: any;
-  setName: any;
-  setLocation: any;
-  setShowEmail: any;
-  name: any;
-  location: any;
-  showEmail: any;
+  onUpdateUserData: () => void;
+  name?: string;
+  location?: string;
+  showEmail: boolean;
+  setName: (value: string) => void;
+  setLocation: (value: string) => void;
+  setShowEmail: (value: boolean) => void;
 }
 
 export const UserInfo: React.FC<UserInfoProps> = ({
+  isAuthor,
   isEdit,
-  setIsEdit,
   user,
   onUpdateUserData,
   setName,
@@ -34,13 +34,8 @@ export const UserInfo: React.FC<UserInfoProps> = ({
   location,
   showEmail,
 }) => {
-  const { data: userData } = useSelectors((state) => state.user);
-  const isAuthor = userData?.id === user.id;
-  const [avatar, setAvatar] = React.useState(user.avatar);
   const { setUserAvatar } = useActions();
-  const [bottomBoundary, setBottomBoundary] = React.useState<number | null>(
-    null,
-  );
+  const [avatar, setAvatar] = React.useState(user.avatar);
 
   const onUpdateAvatar = async (e: any) => {
     if (e.target.files) {
@@ -63,7 +58,7 @@ export const UserInfo: React.FC<UserInfoProps> = ({
       <div className="block">
         <div className={ss.avatar__wrapper}>
           <Avatar
-            avatar={user.avatar}
+            avatar={avatar}
             login={user.login}
             className={ss.avatar}
             isAnother
@@ -128,7 +123,7 @@ export const UserInfo: React.FC<UserInfoProps> = ({
                 id="checkbox"
                 name="checkbox"
               />
-              <label className={ss.label} for="checkbox">
+              <label className={ss.label} htmlFor="checkbox">
                 Показывать email
               </label>
             </div>

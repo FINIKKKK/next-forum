@@ -24,7 +24,7 @@ export const UserAbout: React.FC<UserAboutProps> = ({
     <div
       className={classNames('user__about', 'block', ss.info, {
         [ss.empty]: !about && !isEdit,
-        [ss.notEmpty]: about.length < 180 && !isEdit,
+        [ss.notEmpty]: about && about.length < 180 && !isEdit,
       })}
     >
       <div className={ss.about}>

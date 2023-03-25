@@ -5,12 +5,15 @@ import { ProfileWorks, UserAbout, UserInfo } from '@/components';
 import { MainLayout } from '@/layouts/MainLayout';
 import { Api } from '@/utils/api';
 import { TUser } from '@/utils/api/models/user/types';
+import { useSelectors } from '@/hooks/useSelectors';
 
 interface ProfilePageProps {
   user: TUser;
 }
 
 const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
+  const { data: userData } = useSelectors((state) => state.user);
+  const isAuthor = userData?.id === user.id;
   const [isEdit, setIsEdit] = React.useState(false);
   const [name, setName] = React.useState(user.name);
   const [location, setLocation] = React.useState(user.location);
@@ -43,8 +46,8 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
         <div className="container">
           <div className="profile__inner">
             <UserInfo
+              isAuthor={isAuthor}
               isEdit={isEdit}
-              setIsEdit={setIsEdit}
               user={user}
               onUpdateUserData={onUpdateUserData}
               name={name}
@@ -58,14 +61,13 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
             <div className="leftSide">
               <UserAbout
                 isEdit={isEdit}
-                userAbout={user.about}
                 questionCount={user.questionCount}
                 answerCount={user.answerCount}
                 setAbout={setAbout}
                 about={about}
               />
 
-              <ProfileWorks userId={user.id} />
+              <ProfileWorks isAuthor={isAuthor} userId={user.id} />
             </div>
           </div>
         </div>
