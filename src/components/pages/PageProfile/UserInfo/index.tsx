@@ -13,17 +13,29 @@ interface UserInfoProps {
   isEdit: boolean;
   setIsEdit: (value: boolean) => void;
   user: TUser;
+  onUpdateUserData: any;
+  setName: any;
+  setLocation: any;
+  setShowEmail: any;
+  name: any;
+  location: any;
+  showEmail: any;
 }
 
 export const UserInfo: React.FC<UserInfoProps> = ({
   isEdit,
   setIsEdit,
   user,
+  onUpdateUserData,
+  setName,
+  setLocation,
+  setShowEmail,
+  name,
+  location,
+  showEmail,
 }) => {
   const { data: userData } = useSelectors((state) => state.user);
   const isAuthor = userData?.id === user.id;
-  const [nameValue, setNameValue] = React.useState(user.name);
-  const [locationValue, setLocationValue] = React.useState(user.location);
   const [avatar, setAvatar] = React.useState(user.avatar);
   const { setUserAvatar } = useActions();
   const [bottomBoundary, setBottomBoundary] = React.useState<number | null>(
@@ -67,13 +79,13 @@ export const UserInfo: React.FC<UserInfoProps> = ({
         </div>
         <div className={ss.info}>
           {!isEdit ? (
-            user.name && <div className={ss.name}>{user.name}</div>
+            user.name && <div className={ss.name}>{name}</div>
           ) : (
             <div className={ss.box}>
               <label className={ss.label}>Имя:</label>
               <input
-                value={nameValue}
-                onChange={(e) => setNameValue(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className={`block ${ss.input}`}
                 type="text"
               />
@@ -86,21 +98,21 @@ export const UserInfo: React.FC<UserInfoProps> = ({
             <div className={ss.box}>
               <label className={ss.label}>Местоположение:</label>
               <input
-                value={locationValue}
-                onChange={(e) => setLocationValue(e.target.value)}
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
                 className={`block ${ss.input}`}
                 type="text"
               />
             </div>
           ) : (
-            user.location && (
+            location && (
               <div className={ss.box}>
                 <div className={ss.label}>Местоположение</div>
-                <p className={ss.item}>{user.location}</p>
+                <p className={ss.item}>{location}</p>
               </div>
             )
           )}
-          {!isEdit && (
+          {!isEdit && showEmail && (
             <div className={ss.box}>
               <div className={ss.label}>Email</div>
               <p className={ss.item}>{user.email}</p>
@@ -109,6 +121,8 @@ export const UserInfo: React.FC<UserInfoProps> = ({
           {isEdit && (
             <div className={`${ss.box} ${ss.showEmail}`}>
               <input
+                checked={showEmail}
+                onChange={(e) => setShowEmail(e.target.checked)}
                 type="checkbox"
                 className={ss.checkbox}
                 id="checkbox"
@@ -122,10 +136,7 @@ export const UserInfo: React.FC<UserInfoProps> = ({
         </div>
         <div className={ss.footer}>
           {isAuthor ? (
-            <button
-              onClick={() => setIsEdit(!isEdit)}
-              className={`btn ${ss.edit}`}
-            >
+            <button onClick={onUpdateUserData} className={`btn ${ss.edit}`}>
               {!isEdit ? 'Редактировать' : 'Сохранить'}
             </button>
           ) : (

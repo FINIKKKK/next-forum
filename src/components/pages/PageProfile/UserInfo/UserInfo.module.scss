@@ -87,6 +87,8 @@
       font-size: 16px;
       line-height: 20px;
       font-weight: 700;
+      word-wrap: break-word;
+      word-break: break-all !important;
     }
     .item,
     .input {

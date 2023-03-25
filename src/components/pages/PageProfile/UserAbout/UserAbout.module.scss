@@ -16,6 +16,7 @@
       background-color: $purple;
       color: $white;
       padding: 15px 15px;
+      font-size: 14px;
     }
   }
   .statistic {
@@ -59,6 +60,43 @@
     .item,
     textarea {
       margin-top: 10px;
+    }
+  }
+}
+
+.info.empty {
+  .about {
+    display: none;
+  }
+  .statistic {
+    padding: 0;
+    border: none;
+    width: 100%;
+    flex-direction: row;
+    .item:not(:last-child) {
+      margin-right: 50px;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.info.notEmpty {
+  flex-direction: column;
+  .about {
+    order: 2;
+  }
+  .statistic {
+    order: 1;
+    padding: 0;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 2px solid rgba(#fff, 0.1);
+    width: 100%;
+    flex-direction: row;
+    .item:not(:last-child) {
+      margin-right: 50px;
+      margin-bottom: 0;
     }
   }
 }

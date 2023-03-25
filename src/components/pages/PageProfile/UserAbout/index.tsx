@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 
 import { usePressKey } from '@/hooks/usePressKey';
@@ -6,34 +7,45 @@ import ss from './UserAbout.module.scss';
 
 interface UserAboutProps {
   isEdit: boolean;
-  about?: string;
   questionCount: number;
   answerCount: number;
+  setAbout: any;
+  about: any;
 }
 
 export const UserAbout: React.FC<UserAboutProps> = ({
   isEdit,
-  about,
   questionCount,
   answerCount,
+  setAbout,
+  about,
 }) => {
   return (
-    <div className={`user__about block ${ss.info}`}>
+    <div
+      className={classNames('user__about', 'block', ss.info, {
+        [ss.empty]: !about && !isEdit,
+        [ss.notEmpty]: about.length < 180 && !isEdit,
+      })}
+    >
       <div className={ss.about}>
         {isEdit ? (
           <div className={ss.box}>
             <label className={ss.label}>О себе:</label>
             <textarea
               maxLength={900}
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
               onKeyPress={(e: any) => usePressKey(e, 'Enter')}
               className="input block"
             ></textarea>
           </div>
         ) : (
-          <div className={ss.box}>
-            <label className={ss.label}>О себе:</label>
-            <p className={ss.item}>{about}</p>
-          </div>
+          about && (
+            <div className={ss.box}>
+              <label className={ss.label}>О себе:</label>
+              <p className={ss.item}>{about}</p>
+            </div>
+          )
         )}
       </div>
       <div className={ss.statistic}>
