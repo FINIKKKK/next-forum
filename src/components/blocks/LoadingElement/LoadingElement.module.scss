@@ -1,4 +1,4 @@
-@import "@/styles/assets/variables";
+@import '@/styles/assets/variables';
 
 .loading {
   &:not(:last-child) {
@@ -13,7 +13,7 @@
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.11);
   &::after {
     display: block;
-    content: "";
+    content: '';
     position: absolute;
     width: 100%;
     height: 100%;
@@ -26,10 +26,24 @@
     );
     animation: loading 1.5s infinite;
   }
-}
-@keyframes loading {
-  100% {
-    transform: translateX(100%);
+  &:global(.loading__tag) {
+    border-radius: 10px !important;
+    width: 47% !important;
+    height: 170px !important;
+    margin-bottom: 20px !important;
+    margin-right: 20px !important;
+  }
+  &:global(.loading__user) {
+    border-radius: 10px !important;
+    width: 30.5% !important;
+    height: 105px !important;
+    margin-bottom: 20px !important;
+    margin-right: 20px !important;
+  }
+  @keyframes loading {
+    100% {
+      transform: translateX(100%);
+    }
   }
 }
 
@@ -41,7 +55,7 @@
       13px 14px 12px -6px rgba(166, 180, 200, 0.57);
     border: 1px solid transparent;
     transition: 0.3s;
-    background: linear-gradient(#D9E9EA 0 0) padding-box,
+    background: linear-gradient(#d9e9ea 0 0) padding-box,
       linear-gradient(135.83deg, #ffffff 22.24%, #bac3cf 85.59%) border-box;
     &::after {
       background: linear-gradient(

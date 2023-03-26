@@ -11,7 +11,7 @@ import { AnswerScheme } from "@/utils/validation";
 import { TError } from "@/pages/create";
 import classNames from "classnames";
 
-let Editor = dynamic(() => import("@/components/components/Editor"), {
+let Editor = dynamic(() => import("@/components/blocks/Editor"), {
   ssr: false,
 });
 

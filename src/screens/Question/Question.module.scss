@@ -1,0 +1,35 @@
+@import '@/styles/assets/variables';
+
+.question {
+  width: 75%;
+  position: relative;
+  padding: 35px 45px;
+  background-color: $purple2;
+}
+
+.answers {
+  margin-top: 75px;
+  .answers__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 45px;
+  }
+  .answers__title {
+    font-weight: 700;
+    font-size: 24px;
+  }
+  .asnwers__select {
+    .select__control {
+      min-height: 30px;
+    }
+    .select__value-container {
+      padding: 0;
+      font-size: 12px;
+      margin-right: 10px;
+    }
+    .select__indicator {
+      padding: 0;
+    }
+  }
+}

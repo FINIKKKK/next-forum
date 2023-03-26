@@ -1,0 +1,18 @@
+@import '@/styles/assets/variables';
+
+.profile {
+  margin: 85px 0 150px;
+  .inner {
+    display: flex;
+    align-items: flex-start;
+  }
+  .leftSide {
+    width: 75%;
+  }
+  :global {
+    .block {
+      background-color: $purple2;
+      padding: 35px;
+    }
+  }
+}

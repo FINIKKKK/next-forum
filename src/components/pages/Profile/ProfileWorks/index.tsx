@@ -152,7 +152,7 @@ export const ProfileWorks: React.FC<ProfileWorksProps> = ({
                       .map((_, index) => <LoadingElement key={index} />) */}
           {questions.length > 0 ? (
             questions.map((obj) => (
-              <Question className="profile__question" key={obj.id} {...obj} />
+              <Question className={ss.question} key={obj.id} {...obj} />
             ))
           ) : (
             <NotFound label="Здесь пока ничего нет :(" />

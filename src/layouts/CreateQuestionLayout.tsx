@@ -1,15 +1,14 @@
-import { InputTags, InputTitle } from "@/components";
-import { useSelectors } from "@/hooks/useSelectors";
-import { MainLayout } from "@/layouts/MainLayout";
-import { Api } from "@/utils/api";
-import { TQuestion } from "@/utils/api/models/question/types";
-import { QuestionScheme } from "@/utils/validation";
-import { NextPage } from "next";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
-import React from "react";
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import React from 'react';
 
-let Editor = dynamic(() => import("@/components/components/Editor"), {
+import { InputTags, InputTitle } from '@/components';
+import { MainLayout } from '@/layouts/MainLayout';
+import { Api } from '@/utils/api';
+import { TQuestion } from '@/utils/api/models/question/types';
+import { QuestionScheme } from '@/utils/validation';
+
+let Editor = dynamic(() => import('@/components/blocks/Editor'), {
   ssr: false,
 });
 
@@ -27,10 +26,10 @@ export const CreateQuestionLayout: React.FC<CreateQuestionLayoutsProps> = ({
   questionData,
 }) => {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [title, setTitle] = React.useState(questionData?.title || "");
+  const [title, setTitle] = React.useState(questionData?.title || '');
   const [body, setBody] = React.useState(questionData?.body || []);
   const [selectedTags, setSelectedTags] = React.useState(
-    questionData?.tags || []
+    questionData?.tags || [],
   );
   const [errors, setErrors] = React.useState<TError | null>(null);
   const router = useRouter();
@@ -42,17 +41,17 @@ export const CreateQuestionLayout: React.FC<CreateQuestionLayoutsProps> = ({
         if (
           (title || !!body.length || !!selectedTags.length) &&
           !window.confirm(
-            "Вы действительно хотите уйти со страницы? Все несохраненные данные будут потеряны."
+            'Вы действительно хотите уйти со страницы? Все несохраненные данные будут потеряны.',
           )
         ) {
-          router.events.emit("routeChangeError");
-          throw "routeChange aborted.";
+          router.events.emit('routeChangeError');
+          throw 'routeChange aborted.';
         }
       }
     };
-    router.events.on("routeChangeStart", handleRouteChange);
+    router.events.on('routeChangeStart', handleRouteChange);
     return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
+      router.events.off('routeChangeStart', handleRouteChange);
     };
   }, [title, body, selectedTags, router.events, isSubmit]);
 
@@ -60,7 +59,7 @@ export const CreateQuestionLayout: React.FC<CreateQuestionLayoutsProps> = ({
     try {
       QuestionScheme.validate(
         { title: title, tags: selectedTags, body: body },
-        { abortEarly: false }
+        { abortEarly: false },
       )
         .then(() => {
           (async () => {
@@ -84,7 +83,7 @@ export const CreateQuestionLayout: React.FC<CreateQuestionLayoutsProps> = ({
         });
     } catch (err) {
       console.warn(err);
-      alert("Ошибка при создании вопроса");
+      alert('Ошибка при создании вопроса');
     } finally {
       setIsSubmit(false);
       setIsLoading(false);
@@ -123,9 +122,9 @@ export const CreateQuestionLayout: React.FC<CreateQuestionLayoutsProps> = ({
 
             <button
               onClick={onSubmit}
-              className={`btn submit ${isLoading ? "disabled" : ""}`}
+              className={`btn submit ${isLoading ? 'disabled' : ''}`}
             >
-              {questionData ? "Изменить" : "Создать"}
+              {questionData ? 'Изменить' : 'Создать'}
             </button>
           </div>
         </div>

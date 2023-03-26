@@ -1,12 +1,10 @@
-import { useSelectors } from "@/hooks/useSelectors";
-import { CreateQuestionLayout } from "@/layouts/CreateQuestionLayout";
-import { wrapper } from "@/redux/store";
-import { Api } from "@/utils/api";
-import { TQuestion } from "@/utils/api/models/question/types";
-import { GetServerSideProps, NextPage } from "next";
-import { useRouter } from "next/router";
-import React from "react";
-import { useSelector } from "react-redux";
+import { NextPage } from 'next';
+import React from 'react';
+
+import { CreateQuestionLayout } from '@/layouts/CreateQuestionLayout';
+import { wrapper } from '@/redux/store';
+import { Api } from '@/utils/api';
+import { TQuestion } from '@/utils/api/models/question/types';
 
 interface EditQuestionPageProps {
   question: TQuestion;
@@ -51,7 +49,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
         },
       };
     }
-  }
+  },
 );
 
 export default EditQuestionPage;

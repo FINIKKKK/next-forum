@@ -10,12 +10,6 @@
   .content {
     width: 75%;
   }
-  .rightSide {
-    width: 75%;
-    position: relative;
-    padding: 35px 45px;
-    background-color: $purple2;
-  }
   .list {
     display: flex;
     align-items: center;
@@ -91,7 +85,6 @@
     color: $white;
   }
 }
-
 .light {
   .title {
     color: $light-main;
@@ -307,74 +300,6 @@
   }
 }
 
-// --------- answer ----------
-.answers {
-  margin-top: 75px;
-  .answers__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 45px;
-  }
-  .answers__title {
-    font-weight: 700;
-    font-size: 24px;
-  }
-  .asnwers__select {
-    .select__control {
-      min-height: 30px;
-    }
-    .select__value-container {
-      padding: 0;
-      font-size: 12px;
-      margin-right: 10px;
-    }
-    .select__indicator {
-      padding: 0;
-    }
-  }
-}
-
-// --------- profile ----------
-.profile {
-  margin: 85px 0 150px;
-  .profile__inner {
-    display: flex;
-    align-items: flex-start;
-  }
-  .leftSide {
-    width: 75%;
-  }
-  .profile__question {
-    &:not(:last-child) {
-      margin-bottom: 35px;
-    }
-    padding: 24px 32px !important;
-    background-color: $purple !important;
-  }
-  .block {
-    background-color: $purple2;
-    padding: 35px;
-  }
-  .user__info {
-    display: flex;
-    justify-content: space-between;
-  }
-  .user__work {
-    margin-top: 55px;
-    .questions {
-      overflow: auto;
-      padding: 7px 5px;
-    }
-    .question {
-      background-color: $purple;
-    }
-    .question:not(:last-child) {
-      margin-bottom: 45px;
-    }
-  }
-}
-
 // --------- edit ----------
 .edit {
   margin: 100px 0;
@@ -449,50 +374,5 @@
   }
   .ce-toolbar__actions {
     right: 101.5% !important;
-  }
-}
-
-// --------- loading ----------
-.loading__tag {
-  border-radius: 10px !important;
-  width: 47% !important;
-  height: 170px !important;
-  margin-bottom: 20px !important;
-  margin-right: 20px !important;
-}
-.loading__user {
-  border-radius: 10px !important;
-  width: 30.5% !important;
-  height: 105px !important;
-  margin-bottom: 20px !important;
-  margin-right: 20px !important;
-}
-
-// --------- error404 ----------
-.error404__wrapper {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .error404 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    img {
-      width: 400px;
-      object-fit: cover;
-      margin-bottom: 35px;
-    }
-    h3 {
-      font-size: 25px;
-      margin-bottom: 40px;
-    }
-    .btn {
-      font-size: 14px;
-      padding: 8px 45px;
-      text-transform: uppercase;
-    }
   }
 }

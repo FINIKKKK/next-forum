@@ -1,0 +1,29 @@
+@import '@/styles/assets/variables';
+
+.works {
+  margin-top: 65px;
+  :global {
+    .search {
+      background-color: $purple !important;
+      padding: 14px 24px !important;
+      margin-bottom: 35px;
+    }
+    .select {
+      background-color: $purple !important;
+      padding: 0 !important;
+    }
+  }
+  .filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+  .question {
+    &:not(:last-child) {
+      margin-bottom: 35px;
+    }
+    padding: 24px 32px !important;
+    background-color: $purple !important;
+  }
+}
