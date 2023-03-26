@@ -21,8 +21,10 @@ export const AppComponent: React.FC<AppComponentProps> = ({
 
   React.useEffect(() => {
     document.body.classList.add(theme.toLowerCase());
+    document.documentElement.classList.add(theme.toLowerCase());
     return () => {
       document.body.classList.remove(theme.toLowerCase());
+      document.documentElement.classList.remove(theme.toLowerCase());
     };
   }, [theme]);
 

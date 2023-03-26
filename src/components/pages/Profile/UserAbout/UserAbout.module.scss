@@ -9,7 +9,7 @@
     width: 100%;
     position: relative;
     word-wrap: break-word;
-      word-break: break-all;
+    word-break: break-all;
     textarea {
       position: relative;
       width: 100%;
@@ -99,6 +99,24 @@
     .item:not(:last-child) {
       margin-right: 50px;
       margin-bottom: 0;
+    }
+  }
+}
+
+:global(.light) {
+  .box .label {
+    color: $light-gray;
+  }
+  .about textarea {
+    color: $light-main;
+  }
+  .statistic {
+    border-color: $light-gray2 !important;
+    .item {
+      color: $light-gray;
+      b {
+        color: $light-main;
+      }
     }
   }
 }

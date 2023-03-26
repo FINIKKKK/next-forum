@@ -22,3 +22,28 @@
     margin-right: 25px;
   }
 }
+
+:global(.light) {
+  .nav {
+    .item {
+      color: $light-main;
+      box-shadow: 0px 4px 8px rgba(#715ca0, 0.3);
+      box-shadow: -5px -5px 20px rgba(255, 255, 255, 0.53),
+        13px 14px 12px -6px rgba(166, 180, 200, 0.57);
+      border: 1px solid transparent;
+      transition: 0.3s;
+      background: linear-gradient(#d9e9ea 0 0) padding-box,
+        linear-gradient(135.83deg, #ffffff 22.24%, #bac3cf 85.59%) border-box;
+      &.active {
+        color: $light-white;
+        box-shadow: 0px 4px 8px rgba(#715ca0, 0.3);
+        box-shadow: -5px -5px 20px rgba(255, 255, 255, 0.53),
+          13px 14px 12px -6px rgba(166, 180, 200, 0.57);
+        border: 1px solid transparent;
+        transition: 0.3s;
+        background: linear-gradient($light-main 0 0) padding-box,
+          linear-gradient(135.83deg, #ffffff 22.24%, #bac3cf 85.59%) border-box;
+      }
+    }
+  }
+}
