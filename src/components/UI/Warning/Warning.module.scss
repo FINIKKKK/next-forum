@@ -1,0 +1,17 @@
+@import '@/styles/assets/variables';
+
+.warning {
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: $purple !important;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 15px 35px !important;
+  transition: 1s;
+  min-width: 250px;
+  &.active {
+    top: 20px;
+  }
+}

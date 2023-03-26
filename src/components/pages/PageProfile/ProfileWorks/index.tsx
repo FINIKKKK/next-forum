@@ -41,14 +41,17 @@ export const ProfileWorks: React.FC<ProfileWorksProps> = ({
   React.useEffect(() => {
     (async () => {
       try {
+        setIsLoading(true);
+        setPage(1)
+        setQuestions([])
         const params = {
-          limit: limit,
-          page: page,
+          limit,
+          page: 1,
           search: searchValue2,
           ...(option && { orderBy: option.value }),
           ...(userId && { userId }),
           ...(activeFilter && { isAnswer: activeFilter }),
-          // ...(favorites && { favorites }),
+          ...(activeLabel === 1 && { favorites: true }),
         };
         const { items, total } = await Api().question.getAll(params);
         setQuestions(items);
@@ -57,51 +60,59 @@ export const ProfileWorks: React.FC<ProfileWorksProps> = ({
       } catch (err) {
         console.warn(err);
         alert('Ошибка при получении');
+      } finally {
+        setIsLoading(false);
       }
     })();
-  }, [page, searchValue2, option, activeFilter]);
+  }, [searchValue2, option, activeFilter, activeLabel]);
 
-  // React.useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       if (isFetching) {
-  //         setIsLoading(true);
-  //         const params = {
-  //           limit,
-  //           page,
-  //           orderBy: 'date',
-  //           userId,
-  //         };
-  //         const { items, total } = await Api().question.getAll(params);
-  //         setQuestions([...questions, ...items]);
-  //         setTotal(total);
-  //         setPage((prev) => prev + 1);
-  //       }
-  //     } catch (err) {
-  //       console.warn(err);
-  //       alert('Ошибка при получении вопросов');
-  //     } finally {
-  //       setIsLoading(false);
-  //       setIsFetching(false);
-  //     }
-  //   })();
-  // }, [isFetching]);
-  // const scrollHandler = (e: any) => {
-  //   if (
-  //     e.target.documentElement.scrollHeight -
-  //       (e.target.documentElement.scrollTop + window.innerHeight) <
-  //     100
-  //     // && questions.length !== total
-  //   ) {
-  //     setIsFetching(true);
-  //   }
-  // };
-  // React.useEffect(() => {
-  //   document.addEventListener('scroll', scrollHandler);
-  //   return () => {
-  //     document.removeEventListener('scroll', scrollHandler);
-  //   };
-  // }, []);
+  React.useEffect(() => {
+    (async () => {
+      try {
+        if (isFetching) {
+          setIsLoading(true);
+          setQuestions([])
+          const params = {
+            limit,
+            page,
+            search: searchValue2,
+            ...(option && { orderBy: option.value }),
+            ...(userId && { userId }),
+            ...(activeFilter && { isAnswer: activeFilter }),
+            ...(activeLabel === 1 && { favorites: true }),
+          };
+          const { items, total } = await Api().question.getAll(params);
+          setQuestions([...questions, ...items]);
+          setTotal(total);
+          setPage((prev) => prev + 1);
+          setIsLoading(false);
+        }
+      } catch (err) {
+        console.warn(err);
+        alert('Ошибка при получении');
+      } finally {
+        setIsLoading(false);
+        setIsFetching(false);
+      }
+    })();
+  }, [isFetching]);
+
+  const scrollHandler = (e: any) => {
+    if (
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+      100
+      // && questions.length !== total
+    ) {
+      setIsFetching(true);
+    }
+  };
+  React.useEffect(() => {
+    document.addEventListener('scroll', scrollHandler);
+    return () => {
+      document.removeEventListener('scroll', scrollHandler);
+    };
+  }, []);
 
   return (
     <div className={ss.works}>

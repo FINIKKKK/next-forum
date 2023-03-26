@@ -10,6 +10,7 @@ export * from "./UI/Select";
 export * from "./UI/Textarea";
 export * from "./UI/Popup";
 export * from "./UI/Avatar";
+export * from "./UI/Warning";
 
 export * from "./components/Question";
 export * from "./components/Answer";
