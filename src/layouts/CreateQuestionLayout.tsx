@@ -70,8 +70,16 @@ export const CreateQuestionLayout: React.FC<CreateQuestionLayoutsProps> = ({
               body: body,
               tags: selectedTags,
             };
-            const question = await Api().question.create(dto);
-            await router.push(`/questions/${question.id}`);
+            if (questionData) {
+              const question = await Api().question.update(
+                questionData.id,
+                dto,
+              );
+              await router.push(`/questions/${question.id}`);
+            } else {
+              const question = await Api().question.create(dto);
+              await router.push(`/questions/${question.id}`);
+            }
           })();
         })
         .catch((errors) => {

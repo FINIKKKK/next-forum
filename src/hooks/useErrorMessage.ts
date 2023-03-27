@@ -3,7 +3,7 @@ import React from 'react';
 export const useErrorMessage = (
   error: string,
   setError: (value: string) => void,
-  time: number,
+  time?: number | 5000,
 ) => {
   React.useEffect(() => {
     if (error) {

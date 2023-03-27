@@ -51,7 +51,7 @@ export const Popup: React.FC<PopupProps> = ({
             <>
               {type === "question" ? (
                 <div onClick={onChange} className={`popup__item ${ss.item}`}>
-                  <Link href={`/create/${questionId}`}>Редактировать</Link>
+                  <Link href={`/questions/edit/${questionId}`}>Редактировать</Link>
                 </div>
               ) : (
                 <div onClick={onChange} className={`popup__item ${ss.item}`}>

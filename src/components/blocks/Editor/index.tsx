@@ -9,6 +9,7 @@ import List from '@editorjs/list';
 import Quote from '@editorjs/quote';
 import React from 'react';
 
+import { useErrorMessage } from '@/hooks/useErrorMessage';
 import { Api } from '@/utils/api';
 
 import ss from './Editor.module.scss';
@@ -42,7 +43,7 @@ const Editor: React.FC<EditorProps> = ({
   React.useEffect(() => {
     if (!isReady.current) {
       const editor = new EditorJS({
-        holder: 'editor',
+        holder: 'editorjs',
         placeholder: placeholder,
         data: {
           blocks: initialValue ? initialValue : [],
@@ -56,6 +57,7 @@ const Editor: React.FC<EditorProps> = ({
             image: {
               class: MyImage,
               config: {
+                buttonContent: 'Выберите изображение',
                 uploader: {
                   async uploadByFile(file: any) {
                     const fileName = await Api().files.upload(
@@ -65,7 +67,7 @@ const Editor: React.FC<EditorProps> = ({
                     return {
                       success: 1,
                       file: {
-                        url: `http://localhost:7777/img/questions/${fileName}`,
+                        url: `${fileName}`,
                       },
                     };
                   },
@@ -74,7 +76,16 @@ const Editor: React.FC<EditorProps> = ({
             },
           }),
           ...(!isAnswer && { header: Header }),
-          ...(!isAnswer && { quote: Quote }),
+          ...(!isAnswer && {
+            quote: {
+              class: Quote,
+              inlineToolbar: true,
+              config: {
+                quotePlaceholder: 'Введите цитату',
+                captionPlaceholder: 'Введите автора',
+              },
+            },
+          }),
           ...(!isAnswer && { delimiter: Delimiter }),
           embed: Embed,
           list: List,
@@ -87,7 +98,7 @@ const Editor: React.FC<EditorProps> = ({
     }
   }, []);
 
-  return <div className={`${className} ${ss.editor}`} id="editor"></div>;
+  return <div className={`${className} ${ss.editor}`} id="editorjs"></div>;
 };
 
 export default Editor;
