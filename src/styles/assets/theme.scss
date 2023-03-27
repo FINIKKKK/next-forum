@@ -27,7 +27,8 @@ body.light {
   }
 
   .input {
-    input {
+    input,
+    textarea {
       color: $light-main;
       &::placeholder {
         color: $light-main;
@@ -45,7 +46,7 @@ body.light {
       13px 14px 12px -6px rgba(166, 180, 200, 0.57);
     border: 1px solid transparent;
     transition: 0.3s;
-    background: linear-gradient(#D9E9EA 0 0) padding-box,
+    background: linear-gradient(#d9e9ea 0 0) padding-box,
       linear-gradient(135.83deg, #ffffff 22.24%, #bac3cf 85.59%) border-box;
 
     &.hover {

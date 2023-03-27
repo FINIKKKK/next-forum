@@ -1,8 +1,11 @@
-import ss from "./InputTags.module.scss";
-import { Api } from "@/utils/api";
-import { TTag, TTags } from "@/utils/api/models/tag/types";
-import debounce from "lodash.debounce";
-import React from "react";
+import debounce from 'lodash.debounce';
+import React from 'react';
+
+import { useOutsideClick } from '@/hooks/useOutsideClick';
+import { Api } from '@/utils/api';
+import { TTag, TTags } from '@/utils/api/models/tag/types';
+
+import ss from './InputTags.module.scss';
 
 interface InputTagsProps {
   selectedTags: TTag[];
@@ -15,12 +18,13 @@ export const InputTags: React.FC<InputTagsProps> = ({
   setSelectedTags,
   error,
 }) => {
-  const [isFocus, setIsFocus] = React.useState(false);
-  const [tagsValue, setTagsValue] = React.useState("");
+  const [isVisible, setIsVisible] = React.useState(false);
+  const [tagsValue, setTagsValue] = React.useState('');
   const [tags, setTags] = React.useState<TTag[]>([]);
+  const refTags = React.useRef<HTMLDivElement>(null);
 
   const filteredTags = tags.filter(
-    (obj) => !selectedTags.some((obj2) => obj2.id === obj.id)
+    (obj) => !selectedTags.some((obj2) => obj2.id === obj.id),
   );
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,30 +41,36 @@ export const InputTags: React.FC<InputTagsProps> = ({
             limit: 3,
             search: value,
           };
-          if (value !== "") {
+          if (value !== '') {
             const tags = await Api().tag.getAll(dto);
             setTags(tags?.items);
           }
         } catch (err) {
           console.warn(err);
-          alert("Ошибка при получении меток");
+          alert('Ошибка при получении меток');
         }
       })();
     }, 150),
-    []
+    [],
   );
 
   const onAddTag = (obj: TTag) => {
     setSelectedTags([...selectedTags, obj]);
-    setTagsValue("");
+    setTagsValue('');
   };
 
   const onRemoveTag = (obj: TTag) => {
     setSelectedTags(selectedTags.filter((item: TTag) => item.id !== obj.id));
   };
 
+  useOutsideClick(refTags, setIsVisible);
+
   return (
-    <div className={`inputBlock ${ss.tags}`}>
+    <div
+      ref={refTags}
+      onClick={() => setIsVisible(true)}
+      className={`inputBlock ${ss.tags}`}
+    >
       <div className={ss.input}>
         {selectedTags.length > 0 && (
           <ul className={ss.list}>
@@ -81,12 +91,10 @@ export const InputTags: React.FC<InputTagsProps> = ({
             onChange={onChangeInput}
             placeholder="Метки"
             type="text"
-            // onFocus={() => setIsFocus(true)}
-            // onBlur={() => setIsFocus(false)}
           />
         )}
       </div>
-      {true && tagsValue && (
+      {isVisible && tagsValue && (
         <div className={ss.popup}>
           {filteredTags.length > 0 ? (
             filteredTags.map((obj: TTag) => (

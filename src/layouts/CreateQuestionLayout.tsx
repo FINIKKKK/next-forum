@@ -93,8 +93,8 @@ export const CreateQuestionLayout: React.FC<CreateQuestionLayoutsProps> = ({
   return (
     <MainLayout>
       <div className="container">
-        <div className="rightSide edit block create__wrapper">
-          <div className="create">
+        <div className="block create">
+          <div className="inner">
             <h2 className="title">Задать вопрос</h2>
 
             <InputTitle

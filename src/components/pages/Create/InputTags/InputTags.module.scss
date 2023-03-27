@@ -1,4 +1,4 @@
-@import "@/styles/assets/variables";
+@import '@/styles/assets/variables';
 
 .tags {
   width: 100%;
@@ -46,7 +46,7 @@
     align-items: center;
     cursor: pointer;
     &::after {
-      content: url("~/public/img/close.svg");
+      content: url('~/public/img/close.svg');
       margin-left: 7px;
     }
   }
@@ -55,14 +55,14 @@
     z-index: 100;
     position: absolute;
     left: 5px;
-    top: 85%;
+    top: 45px;
     width: 100%;
     background-color: $purple;
     box-shadow: 0px 7px 10px rgba($bg, 0.5);
     padding: 25px 25px;
     border-radius: 0px 0px 10px 10px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     margin: 0 -5px;
   }
@@ -101,6 +101,53 @@
     }
     &:hover {
       background-color: $purple2;
+    }
+  }
+}
+
+:global(.light) {
+  .input {
+    box-shadow: 0px 4px 8px rgba(#715ca0, 0.3);
+    box-shadow: -5px -5px 20px rgba(255, 255, 255, 0.53),
+      13px 14px 12px -6px rgba(166, 180, 200, 0.57);
+    border: 1px solid transparent;
+    transition: 0.3s;
+    background: linear-gradient(#d9e9ea 0 0) padding-box,
+      linear-gradient(135.83deg, #ffffff 22.24%, #bac3cf 85.59%) border-box;
+
+    input {
+      color: $light-main;
+      &::placeholder {
+        color: $light-gray;
+      }
+    }
+  }
+  .popup {
+    box-shadow: 0px 4px 8px rgba(#715ca0, 0.3);
+    box-shadow: -5px -5px 20px rgba(255, 255, 255, 0.53),
+      13px 14px 12px -6px rgba(166, 180, 200, 0.57);
+    border: 1px solid transparent;
+    transition: 0.3s;
+    background: linear-gradient(#d9e9ea 0 0) padding-box,
+      linear-gradient(135.83deg, #ffffff 22.24%, #bac3cf 85.59%) border-box;
+  }
+  .tag {
+    h5 {
+      background-color: $light-main;
+      color: $light-white;
+    }
+    &:hover {
+      background-color: rgba($light-main, 0.1);
+    }
+  }
+  .warning {
+    color: $light-gray;
+  }
+  .item {
+    background-color: $light-main;
+    color: $light-white;
+    &::after {
+      content: url('~/public/img/close-light.svg');
     }
   }
 }

@@ -1,4 +1,4 @@
-@import "@/styles/assets/variables";
+@import '@/styles/assets/variables';
 
 .editor {
   position: relative;
@@ -37,7 +37,7 @@
       position: relative;
       background-color: transparent;
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         background-color: $purple2;
         border-radius: 5px;
@@ -60,13 +60,13 @@
         fill: $bg;
       }
     }
-    .ce-popover__item[data-item-name="codeBox"] {
+    .ce-popover__item[data-item-name='codeBox'] {
       svg path {
         stroke: none !important;
         fill: $bg !important;
       }
     }
-    .ce-popover__item[data-item-name="image"] {
+    .ce-popover__item[data-item-name='image'] {
       svg {
         fill: none;
       }
@@ -107,7 +107,7 @@
     .ce-block .inline-code {
       background-color: $purple2;
       color: $gray;
-      font-family: "Consolas";
+      font-family: 'Consolas';
       font-size: 14px !important;
       line-height: 20px !important;
       padding: 10px 15px !important;
@@ -264,6 +264,68 @@
     }
     .image-tool__caption {
       display: none;
+    }
+  }
+}
+
+:global(.light) {
+  .editor {
+    :global {
+      .ce-toolbar__plus,
+      .ce-toolbar__settings-btn {
+        color: $light-main;
+        &:hover {
+          background-color: $light-hover;
+        }
+      }
+      .ce-block--selected .ce-block__content {
+        &::before {
+          background-color: $light-hover;
+        }
+      }
+      .ce-block a {
+        color: $light-main;
+        text-decoration: underline;
+      }
+      .ce-block .inline-code {
+        background-color: $light-hover;
+        color: $light-gray;
+      }
+      .ce-popover__items {
+        &::-webkit-scrollbar-thumb {
+          background-color: $light-main;
+        }
+      }
+      .image-tool {
+        .cdx-button {
+          background-color: $light-main;
+          color: $light-white;
+        }
+      }
+      .cdx-quote {
+        .cdx-input {
+          background-color: $light-hover;
+          color: $light-main;
+        }
+      }
+      .codeBoxHolder {
+        .codeBoxTextArea {
+          &::-webkit-scrollbar-thumb {
+            background-color: $light-main;
+          }
+        }
+        .codeBoxSelectDropIcon.dark {
+          background-color: transparent !important;
+        }
+        .dark,
+        table {
+          color: $light-gray;
+          background-color: $light-hover !important;
+        }
+        .codeBoxTextArea div {
+          background-color: transparent;
+        }
+      }
     }
   }
 }
