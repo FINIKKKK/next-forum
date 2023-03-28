@@ -34,11 +34,19 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
   const [answers, setAnswers] = React.useState<TAnswer[]>(answerList || []);
   const [option, setOption] = React.useState(options[0]);
   const { data: userData } = useSelectors((state) => state.user);
-  const [isAnswer, setIsAnswer] = React.useState<number | null>(null);
+  const [solvedAnswerId, setSolvedAnswerId] = React.useState<number | null>(null);
 
   React.useEffect(() => {
     if (option.value === 'rating') {
-      answers.sort((a, b) => a.rating - b.rating);
+      answers.sort((a, b) => {
+        if (a.isAnswer && !b.isAnswer) {
+          return -1;
+        } else if (!a.isAnswer && b.isAnswer) {
+          return 1;
+        } else {
+          return b.rating - a.rating;
+        }
+      });
     } else if (option.value === 'date') {
       answers.sort(
         (a, b) =>
@@ -47,8 +55,12 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
     }
   }, [option]);
 
-  const setAnswer = (id: number) => {
-    setIsAnswer(id);
+  const changeIsAnswer = (id: number) => {
+    if (solvedAnswerId === id) {
+      setSolvedAnswerId(null);
+    } else {
+      setSolvedAnswerId(id);
+    }
   };
 
   return (
@@ -73,15 +85,17 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
           ) : (
             answers.map((obj: TAnswer) => (
               <Answer
-                setAnswer={setAnswer}
-                answerId={isAnswer}
                 key={obj.id}
-                {...obj}
+                answer={obj}
+                isAuthor={userData?.id === question.user.id}
                 setAnswers={setAnswers}
+                changeIsAnswer={changeIsAnswer}
+                solvedAnswerId={solvedAnswerId}
+                setSolvedAnswerId={setSolvedAnswerId}
               />
             ))
           )}
-          {userData && userData.id !== question.user.id && (
+          {userData?.id !== question.user.id && (
             <Reply questionId={question.id} setAnswers={setAnswers} />
           )}
           {!userData && (

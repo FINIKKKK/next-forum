@@ -19,6 +19,13 @@ export const AnswerApi = (instance: AxiosInstance) => ({
     );
     return data;
   },
+  async updateIsAnswer(id: number, dto: UpdateAnswerDto) {
+    const { data } = await instance.patch<UpdateAnswerDto, { data: TAnswer }>(
+      `/answers/isAnswer/${id}`,
+      dto
+    );
+    return data;
+  },
   async update(id: number, dto: UpdateAnswerDto) {
     const { data } = await instance.patch<UpdateAnswerDto, { data: TAnswer }>(
       `/answers/${id}`,

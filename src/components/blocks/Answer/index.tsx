@@ -1,58 +1,67 @@
-import { QuestionBody } from "../QuestionBody";
-import ss from "./Answer.module.scss";
+import classNames from 'classnames';
+import React from 'react';
+
 import {
-  Comments,
   CommentsBox,
   Popup,
+  QuestionBody,
   Rating,
-  Textarea,
   UserBox,
-} from "@/components";
-import { useSelectors } from "@/hooks/useSelectors";
-import { Api } from "@/utils/api";
-import { TComment } from "@/utils/api/models/comments/types";
-import { TUser } from "@/utils/api/models/user/types";
-import { OutputBlockData } from "@editorjs/editorjs";
-import classNames from "classnames";
-import Link from "next/link";
-import React from "react";
+} from '@/components';
+import { Api } from '@/utils/api';
+import { TAnswer } from '@/utils/api/models/answer/types';
+
+import ss from './Answer.module.scss';
 
 interface AnswerProps {
-  id: number;
-  body: OutputBlockData[];
-  user: TUser;
-  isAnswer: boolean;
-  rating: number;
+  answer: TAnswer;
+  isAuthor: boolean;
   setAnswers: (value: any) => void;
-  setAnswer: (value: any) => void;
-  answerId: number | null;
+  changeIsAnswer: (value: number) => void;
+  solvedAnswerId: number | null;
+  setSolvedAnswerId: (value: number) => void;
 }
 
 export const Answer: React.FC<AnswerProps> = ({
-  id,
-  body,
-  user,
-  isAnswer: isAnswerProp,
-  rating,
+  answer,
+  isAuthor,
   setAnswers,
-  setAnswer,
-  answerId,
+  changeIsAnswer,
+  solvedAnswerId,
+  setSolvedAnswerId,
 }) => {
   const [visiblePopup, setVisiblePopup] = React.useState(false);
-  const [isAnswer, setIsAnswer] = React.useState(
-    answerId === id ? isAnswerProp : null
-  );
   const [openInput, setOpenInput] = React.useState(false);
-  const [commentValue, setCommentValue] = React.useState("");
+  const [commentValue, setCommentValue] = React.useState('');
+  const [isSolved, setIsSolved] = React.useState(
+    solvedAnswerId === answer.id ? true : false,
+  );
+
+  React.useEffect(() => {
+    if (answer.isAnswer) {
+      setSolvedAnswerId(answer.id);
+      setIsSolved(true);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (solvedAnswerId === answer.id) {
+      setIsSolved(true);
+    } else {
+      setIsSolved(false);
+    }
+  }, [solvedAnswerId]);
 
   const onRemoveAnswer = async () => {
-    if (window.confirm("Вы действительно хотите удалить ответ?")) {
+    if (window.confirm('Вы действительно хотите удалить ответ?')) {
       try {
-        await Api().answer.remove(id);
-        setAnswers((prev: any) => prev.filter((obj: any) => obj.id !== id));
+        await Api().answer.remove(answer.id);
+        setAnswers((prev: any) =>
+          prev.filter((obj: any) => obj.id !== answer.id),
+        );
       } catch (err) {
         console.warn(err);
-        alert("Ошибка при удалении ответа");
+        alert('Ошибка при удалении ответа');
       }
     } else {
       setVisiblePopup(false);
@@ -61,36 +70,48 @@ export const Answer: React.FC<AnswerProps> = ({
 
   const onSetIsAnswer = async () => {
     try {
-      // await Api().answer.update(id, { isAnswer: !isAnswer });
-      if (answerId === id) {
-        setIsAnswer(!isAnswer);
+      console.log(isSolved);
+      setIsSolved(false);
+      changeIsAnswer(answer.id);
+      if (solvedAnswerId === answer.id) {
+        await Api().answer.updateIsAnswer(answer.id, {
+          questionId: answer.question.id,
+          isAnswer: false,
+        });
+      } else {
+        await Api().answer.updateIsAnswer(answer.id, {
+          questionId: answer.question.id,
+          isAnswer: true,
+        });
       }
-      setAnswer(id);
     } catch (err) {
       console.warn(err);
-      alert("Ошибка при изменении статуса");
+      alert('Ошибка при изменении статуса');
     }
   };
 
   const onOpenInput = () => {
     setOpenInput(!openInput);
-    setCommentValue("");
+    setCommentValue('');
   };
 
   return (
     <div className={ss.answer}>
       <div className={ss.side}>
-        <Rating id={id} rating={rating} />
-        <svg
-          onClick={onSetIsAnswer}
-          className={classNames(ss.isAnswer__icon, {
-            [ss.active]: isAnswer,
-          })}
-          width="20"
-          height="20"
-        >
-          <use xlinkHref="../img/icons/icons.svg#check" />
-        </svg>
+        <Rating id={answer.id} rating={answer.rating} />
+        {(isSolved || isAuthor) && (
+          <svg
+            onClick={onSetIsAnswer}
+            className={classNames(ss.isAnswer__icon, {
+              [ss.active]: isSolved,
+              [ss.disabled]: !isAuthor,
+            })}
+            width="20"
+            height="20"
+          >
+            <use xlinkHref="../img/icons/icons.svg#check" />
+          </svg>
+        )}
       </div>
 
       <div className={ss.content}>
@@ -99,12 +120,12 @@ export const Answer: React.FC<AnswerProps> = ({
           isVisible={visiblePopup}
           setIsVisible={setVisiblePopup}
           onRemove={onRemoveAnswer}
-          userId={user.id}
+          userId={answer.user.id}
         />
 
         <div className={ss.header}>
-          <UserBox className={ss.user} user={user} />
-          {isAnswer && (
+          <UserBox className={ss.user} user={answer.user} />
+          {isSolved && (
             <div className={`bb ${ss.isAnswer}`}>
               <p>Ответ</p>
               <svg width="20" height="20">
@@ -114,14 +135,14 @@ export const Answer: React.FC<AnswerProps> = ({
           )}
         </div>
 
-        <QuestionBody body={body} />
+        <QuestionBody body={answer.body} />
 
         <div className={ss.footer}>
           <button onClick={onOpenInput} className={`btn ${ss.btn}`}>
-            {!openInput ? "Ответить" : "Закрыть"}
+            {!openInput ? 'Ответить' : 'Закрыть'}
           </button>
           <CommentsBox
-            answerId={id}
+            answerId={answer.id}
             openInput={openInput}
             setOpenInput={setOpenInput}
             commentValue={commentValue}
