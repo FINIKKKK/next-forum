@@ -1,9 +1,10 @@
-import { useOutsideClick } from "@/hooks/useOutsideClick";
-import { useSelectors } from "@/hooks/useSelectors";
-import Link from "next/link";
-import React from "react";
+import Link from 'next/link';
+import React from 'react';
 
-import ss from "./Popup.module.scss";
+import { useOutsideClick } from '@/hooks/useOutsideClick';
+import { useSelectors } from '@/hooks/useSelectors';
+
+import ss from './Popup.module.scss';
 
 interface PopupProps {
   type: string;
@@ -49,15 +50,18 @@ export const Popup: React.FC<PopupProps> = ({
             </>
           ) : (
             <>
-              {type === "question" ? (
+              {type === 'question' ? (
                 <div onClick={onChange} className={`popup__item ${ss.item}`}>
-                  <Link href={`/questions/edit/${questionId}`}>Редактировать</Link>
+                  <Link href={`/questions/edit/${questionId}`}>
+                    Редактировать
+                  </Link>
                 </div>
               ) : (
                 <div onClick={onChange} className={`popup__item ${ss.item}`}>
                   Редактировать
                 </div>
               )}
+
               <div onClick={onRemove} className={`popup__item ${ss.item}`}>
                 Удалить
               </div>

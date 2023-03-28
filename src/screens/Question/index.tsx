@@ -1,3 +1,4 @@
+import { OutputBlockData } from '@editorjs/editorjs';
 import React from 'react';
 
 import {
@@ -34,7 +35,13 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
   const [answers, setAnswers] = React.useState<TAnswer[]>(answerList || []);
   const [option, setOption] = React.useState(options[0]);
   const { data: userData } = useSelectors((state) => state.user);
-  const [solvedAnswerId, setSolvedAnswerId] = React.useState<number | null>(null);
+  const [solvedAnswerId, setSolvedAnswerId] = React.useState<number | null>(
+    null,
+  );
+  const [answerBodyToReply, setAnswerBodyToReply] = React.useState<
+    OutputBlockData[]
+  >([]);
+  const refReply = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     if (option.value === 'rating') {
@@ -61,6 +68,11 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
     } else {
       setSolvedAnswerId(id);
     }
+  };
+
+  const onUpdateAnswer = (value: OutputBlockData[]) => {
+    setAnswerBodyToReply(value);
+    refReply.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -92,11 +104,18 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
                 changeIsAnswer={changeIsAnswer}
                 solvedAnswerId={solvedAnswerId}
                 setSolvedAnswerId={setSolvedAnswerId}
+                setUpdadeAnswer={onUpdateAnswer}
               />
             ))
           )}
           {userData?.id !== question.user.id && (
-            <Reply questionId={question.id} setAnswers={setAnswers} />
+            <div ref={refReply}>
+              <Reply
+                questionId={question.id}
+                setAnswers={setAnswers}
+                answerBody={answerBodyToReply}
+              />
+            </div>
           )}
           {!userData && (
             <div className={ss.noreply}>

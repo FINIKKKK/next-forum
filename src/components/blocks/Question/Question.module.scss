@@ -5,14 +5,17 @@
   justify-content: space-between;
   position: relative;
   padding: 24px 32px;
-  min-height: 135px;
+  height: 155px;
   &:not(:last-child) {
     margin-bottom: 55px;
   }
   .left {
     position: relative;
+    max-width: 80%;
   }
   .title {
+    word-wrap: break-word;
+    word-break: break-all;
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;

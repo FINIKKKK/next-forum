@@ -1,3 +1,4 @@
+import { OutputBlockData } from '@editorjs/editorjs';
 import classNames from 'classnames';
 import React from 'react';
 
@@ -20,6 +21,7 @@ interface AnswerProps {
   changeIsAnswer: (value: number) => void;
   solvedAnswerId: number | null;
   setSolvedAnswerId: (value: number) => void;
+  setUpdadeAnswer: (value: OutputBlockData[]) => void;
 }
 
 export const Answer: React.FC<AnswerProps> = ({
@@ -29,6 +31,7 @@ export const Answer: React.FC<AnswerProps> = ({
   changeIsAnswer,
   solvedAnswerId,
   setSolvedAnswerId,
+  setUpdadeAnswer,
 }) => {
   const [visiblePopup, setVisiblePopup] = React.useState(false);
   const [openInput, setOpenInput] = React.useState(false);
@@ -70,7 +73,6 @@ export const Answer: React.FC<AnswerProps> = ({
 
   const onSetIsAnswer = async () => {
     try {
-      console.log(isSolved);
       setIsSolved(false);
       changeIsAnswer(answer.id);
       if (solvedAnswerId === answer.id) {
@@ -94,6 +96,10 @@ export const Answer: React.FC<AnswerProps> = ({
     setOpenInput(!openInput);
     setCommentValue('');
   };
+
+  const onChange = () => {
+    setUpdadeAnswer(answer.body)
+  }
 
   return (
     <div className={ss.answer}>
@@ -120,6 +126,7 @@ export const Answer: React.FC<AnswerProps> = ({
           isVisible={visiblePopup}
           setIsVisible={setVisiblePopup}
           onRemove={onRemoveAnswer}
+          onChange={onChange}
           userId={answer.user.id}
         />
 

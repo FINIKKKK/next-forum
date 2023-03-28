@@ -20,7 +20,8 @@ interface EditorProps {
   isAnswer?: boolean;
   placeholder: string;
   className?: string;
-  refEditor?: any;
+  editorRef?: any;
+  isClear?: any;
 }
 
 class MyImage extends Image {
@@ -37,19 +38,21 @@ const Editor: React.FC<EditorProps> = ({
   isAnswer,
   placeholder,
   className,
+  isClear,
 }) => {
+  const editor = React.useRef<EditorJS | null>(null);
   const isReady = React.useRef(false);
 
   React.useEffect(() => {
     if (!isReady.current) {
-      const editor = new EditorJS({
+      editor.current = new EditorJS({
         holder: 'editorjs',
         placeholder: placeholder,
         data: {
           blocks: initialValue ? initialValue : [],
         },
         async onChange() {
-          const { blocks } = await editor.save();
+          const { blocks } = await editor.current.save();
           onChange(blocks);
         },
         tools: {
@@ -95,8 +98,17 @@ const Editor: React.FC<EditorProps> = ({
       });
 
       isReady.current = true;
+      return () => {
+        editor.current?.destroy();
+      };
     }
   }, []);
+
+  React.useEffect(() => {
+    if (editor.current && isClear) {
+      editor.current.blocks.clear();
+    }
+  }, [isClear]);
 
   return <div className={`${className} ${ss.editor}`} id="editorjs"></div>;
 };

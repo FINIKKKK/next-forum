@@ -14,7 +14,7 @@ export type TAnswer = TBase & {
 export type AnswerDto = {
   questionId: number;
   body: OutputBlockData[];
-  isAnswer: boolean;
+  isAnswer?: boolean;
 };
 export type UpdateAnswerDto = Partial<AnswerDto>;
 

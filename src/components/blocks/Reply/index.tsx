@@ -1,30 +1,41 @@
-import React from "react";
-import dynamic from "next/dynamic";
+import { OutputBlockData } from '@editorjs/editorjs';
+import classNames from 'classnames';
+import dynamic from 'next/dynamic';
+import React from 'react';
 
-import { UserBox } from "@/components";
-import { Api } from "@/utils/api";
-1;
-import ss from "./Reply.module.scss";
-import { TAnswer } from "@/utils/api/models/answer/types";
-import { useSelectors } from "@/hooks/useSelectors";
-import { AnswerScheme } from "@/utils/validation";
-import { TError } from "@/pages/create";
-import classNames from "classnames";
+import { UserBox } from '@/components';
+import { useSelectors } from '@/hooks/useSelectors';
+import { TError } from '@/layouts/CreateQuestionLayout';
+import { Api } from '@/utils/api';
+import { TAnswer } from '@/utils/api/models/answer/types';
+import { AnswerScheme } from '@/utils/validation';
 
-let Editor = dynamic(() => import("@/components/blocks/Editor"), {
+import ss from './Reply.module.scss';
+
+let Editor = dynamic(() => import('@/components/blocks/Editor'), {
   ssr: false,
 });
 
 interface ReplyProps {
   questionId: number;
-  setAnswers: React.Dispatch<React.SetStateAction<TAnswer[]>>;
+  setAnswers: any;
+  answerBody: OutputBlockData[];
 }
 
-export const Reply: React.FC<ReplyProps> = ({ questionId, setAnswers }) => {
-  const [body, setBody] = React.useState([]);
+export const Reply: React.FC<ReplyProps> = ({
+  questionId,
+  setAnswers,
+  answerBody,
+}) => {
+  const [body, setBody] = React.useState<OutputBlockData[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [errors, setErrors] = React.useState<TError | null>([]);
   const { data: userData } = useSelectors((state) => state.user);
+  const [isClear, setIsClear] = React.useState(false);
+
+  // React.useEffect(() => {
+  //   setBody(answerBody);
+  // }, [answerBody]);
 
   const onSumbit = async () => {
     try {
@@ -41,6 +52,7 @@ export const Reply: React.FC<ReplyProps> = ({ questionId, setAnswers }) => {
               ...prev,
               { ...answer, user: userData },
             ]);
+            setIsClear(true);
           })();
         })
         .catch((errors) => {
@@ -52,7 +64,10 @@ export const Reply: React.FC<ReplyProps> = ({ questionId, setAnswers }) => {
         });
     } catch (err) {
       console.warn(err);
-      alert("Ошибка при публикации ответа");
+      alert('Ошибка при публикации ответа');
+    } finally {
+      setIsClear(false);
+      setIsLoading(false);
     }
   };
 
@@ -71,6 +86,7 @@ export const Reply: React.FC<ReplyProps> = ({ questionId, setAnswers }) => {
               onChange={(blocks: any) => setBody(blocks)}
               isAnswer={true}
               placeholder="Введите текст"
+              isClear={isClear}
             />
           </div>
           {errors?.body && <div className={ss.error}>{errors?.body}</div>}
@@ -78,8 +94,8 @@ export const Reply: React.FC<ReplyProps> = ({ questionId, setAnswers }) => {
 
         <button
           onClick={onSumbit}
-          className={classNames("btn", ss.btn, {
-            disabled: isLoading,
+          className={classNames('btn', ss.btn, {
+            disabled: isLoading || !body.length,
           })}
         >
           Опубликовать
