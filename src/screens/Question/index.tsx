@@ -9,6 +9,7 @@ import {
   SelectComponent,
 } from '@/components';
 import { useSelectors } from '@/hooks/useSelectors';
+import { useWordEnding } from '@/hooks/useWordEnding';
 import { ForumLayout } from '@/layouts/ForumLayout';
 import { TAnswer } from '@/utils/api/models/answer/types';
 import { TQuestion } from '@/utils/api/models/question/types';
@@ -17,13 +18,12 @@ import ss from './Question.module.scss';
 
 const options = [
   {
+    id: 1,
     value: 'rating',
     label: 'По рейтингу',
   },
-  {
-    value: 'date',
-    label: 'По дате',
-  },
+  { id: 2, value: 'date1', label: 'По дате (новые)' },
+  { id: 3, value: 'date2', label: 'По дате (старые)' },
 ];
 
 interface QuestionProps {
@@ -43,21 +43,28 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
   >([]);
   const refReply = React.useRef<HTMLDivElement>(null);
 
+  console.log('option', option);
+
   React.useEffect(() => {
     if (option.value === 'rating') {
       answers.sort((a, b) => {
-        if (a.isAnswer && !b.isAnswer) {
-          return -1;
-        } else if (!a.isAnswer && b.isAnswer) {
+        if (b.isAnswer && !a.isAnswer) {
           return 1;
+        } else if (a.isAnswer && !b.isAnswer) {
+          return -1;
         } else {
           return b.rating - a.rating;
         }
       });
-    } else if (option.value === 'date') {
+    } else if (option.value === 'date1') {
       answers.sort(
         (a, b) =>
           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
+      );
+    } else if (option.value === 'date2') {
+      answers.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
       );
     }
   }, [option]);
@@ -85,7 +92,6 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
             <h2 className={ss.answers__title}>Ответы</h2>
             {answers.length !== 0 && (
               <SelectComponent
-                className={ss.answers__select}
                 value={option}
                 options={options}
                 setValue={setOption}

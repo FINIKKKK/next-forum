@@ -9,6 +9,7 @@ import {
   Rating,
   UserBox,
 } from '@/components';
+import { useTimeNow } from '@/hooks/useTimeNow';
 import { Api } from '@/utils/api';
 import { TAnswer } from '@/utils/api/models/answer/types';
 
@@ -39,6 +40,7 @@ export const Answer: React.FC<AnswerProps> = ({
   const [isSolved, setIsSolved] = React.useState(
     solvedAnswerId === answer.id ? true : false,
   );
+  const date = useTimeNow(answer.createdAt);
 
   React.useEffect(() => {
     if (answer.isAnswer) {
@@ -80,9 +82,15 @@ export const Answer: React.FC<AnswerProps> = ({
           questionId: answer.question.id,
           isAnswer: false,
         });
+        await Api().question.update(answer.question.id, {
+          isAnswer: false,
+        });
       } else {
         await Api().answer.updateIsAnswer(answer.id, {
           questionId: answer.question.id,
+          isAnswer: true,
+        });
+        await Api().question.update(answer.question.id, {
           isAnswer: true,
         });
       }
@@ -98,8 +106,8 @@ export const Answer: React.FC<AnswerProps> = ({
   };
 
   const onChange = () => {
-    setUpdadeAnswer(answer.body)
-  }
+    setUpdadeAnswer(answer.body);
+  };
 
   return (
     <div className={ss.answer}>
@@ -131,15 +139,22 @@ export const Answer: React.FC<AnswerProps> = ({
         />
 
         <div className={ss.header}>
-          <UserBox className={ss.user} user={answer.user} />
-          {isSolved && (
-            <div className={`bb ${ss.isAnswer}`}>
-              <p>Ответ</p>
-              <svg width="20" height="20">
-                <use xlinkHref="../img/icons/icons.svg#check" />
-              </svg>
-            </div>
-          )}
+          <div className={ss.header__info}>
+            <UserBox className={ss.user} user={answer.user} />
+            {isSolved && (
+              <div className={`bb ${ss.isAnswer}`}>
+                <p>Ответ</p>
+                <svg width="20" height="20">
+                  <use xlinkHref="../img/icons/icons.svg#check" />
+                </svg>
+              </div>
+            )}
+          </div>
+          <div className={ss.date}>
+            {answer.updatedAt !== answer.createdAt
+              ? `Изменен (${useTimeNow(answer.updatedAt)})`
+              : date}
+          </div>
         </div>
 
         <QuestionBody body={answer.body} />

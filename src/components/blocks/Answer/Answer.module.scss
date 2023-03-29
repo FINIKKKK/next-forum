@@ -6,13 +6,17 @@
   display: flex;
   justify-content: space-between;
   &:not(:last-child) {
-    margin-bottom: 90px;
+    margin-bottom: 50px;
+    .footer {
+      padding-bottom: 30px;
+      border-bottom: 2px solid $gray2;
+    }
   }
   .side {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-right: 45px;
+    margin-right: 35px;
   }
   .content {
     width: 100%;
@@ -20,7 +24,16 @@
   .header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 25px;
+  }
+  .header__info {
+    display: flex;
+    align-items: center;
+  }
+  .date {
+    color: $gray;
+    font-weight: 700;
   }
   .user {
     margin-right: 20px;

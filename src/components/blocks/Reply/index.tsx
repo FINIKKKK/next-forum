@@ -84,7 +84,7 @@ export const Reply: React.FC<ReplyProps> = ({
               className="editor--answer"
               initialValue={body}
               onChange={(blocks: any) => setBody(blocks)}
-              isAnswer={true}
+              type="answer"
               placeholder="Введите текст"
               isClear={isClear}
             />

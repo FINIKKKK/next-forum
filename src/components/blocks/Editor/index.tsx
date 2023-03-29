@@ -9,7 +9,6 @@ import List from '@editorjs/list';
 import Quote from '@editorjs/quote';
 import React from 'react';
 
-import { useErrorMessage } from '@/hooks/useErrorMessage';
 import { Api } from '@/utils/api';
 
 import ss from './Editor.module.scss';
@@ -17,9 +16,9 @@ import ss from './Editor.module.scss';
 interface EditorProps {
   initialValue?: OutputData['blocks'];
   onChange: (blocks: OutputData['blocks']) => void;
-  isAnswer?: boolean;
   placeholder: string;
   className?: string;
+  type: string;
   editorRef?: any;
   isClear?: any;
 }
@@ -35,9 +34,9 @@ class MyImage extends Image {
 const Editor: React.FC<EditorProps> = ({
   initialValue,
   onChange,
-  isAnswer,
   placeholder,
   className,
+  type,
   isClear,
 }) => {
   const editor = React.useRef<EditorJS | null>(null);
@@ -56,7 +55,7 @@ const Editor: React.FC<EditorProps> = ({
           onChange(blocks);
         },
         tools: {
-          ...(!isAnswer && {
+          ...(type !== 'answer' && {
             image: {
               class: MyImage,
               config: {
@@ -78,18 +77,19 @@ const Editor: React.FC<EditorProps> = ({
               },
             },
           }),
-          ...(!isAnswer && { header: Header }),
-          ...(!isAnswer && {
-            quote: {
-              class: Quote,
-              inlineToolbar: true,
-              config: {
-                quotePlaceholder: 'Введите цитату',
-                captionPlaceholder: 'Введите автора',
+          ...(type !== 'answer' && type !== 'question' && { header: Header }),
+          ...(type !== 'answer' &&
+            type !== 'question' && {
+              quote: {
+                class: Quote,
+                inlineToolbar: true,
+                config: {
+                  quotePlaceholder: 'Введите цитату',
+                  captionPlaceholder: 'Введите автора',
+                },
               },
-            },
-          }),
-          ...(!isAnswer && { delimiter: Delimiter }),
+            }),
+          ...(type !== 'answer' && { delimiter: Delimiter }),
           embed: Embed,
           list: List,
           codeBox: CodeBox,

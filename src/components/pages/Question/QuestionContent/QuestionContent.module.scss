@@ -1,19 +1,36 @@
 @import '@/styles/assets/variables';
 
 .question {
+  padding-top: 10px;
   .header {
     display: flex;
     align-items: center;
     color: $gray;
     font-size: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     svg {
       fill: $gray;
       width: 25px;
     }
     .header__item {
+      &:nth-child(1) {
+        color: $white;
+      }
       &:not(:last-child) {
-        margin-right: 25px;
+        margin-right: 15px;
+        padding-right: 25px;
+        position: relative;
+        &::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 0px;
+          transform: translateY(-50%);
+          width: 6px;
+          height: 6px;
+          background-color: rgba($white, 0.1);
+          border-radius: 50%;
+        }
       }
       display: flex;
       align-items: center;
@@ -32,31 +49,43 @@
       }
     }
   }
-  .user {
-    margin-bottom: 20px;
-  }
   .title {
     font-weight: 700;
     font-size: 40px;
     line-height: 50px;
-    margin-bottom: 15px;
+    margin-bottom: 35px;
+    word-wrap: break-word;
   }
-  .tagList {
-    margin-bottom: 30px;
+  .underTitle {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin-bottom: 35px;
+    padding-bottom: 35px;
+    border-bottom: 2px solid rgba($gray, 0.4);
+  }
+  .tagList {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     flex-wrap: wrap;
     .tag:not(:last-child) {
       margin-right: 15px;
     }
   }
+  .updatedAt {
+    margin-top: 10px;
+    font-size: 14px;
+    color: $gray;
+    text-align: right;
+  }
   .footer {
-    margin-top: 35px;
+    margin-top: 55px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgba(242, 236, 248, 0.27);
+    padding-top: 15px;
+    border-top: 2px solid rgba($white, 0.1);
     .item {
       color: $gray;
       font-weight: 700;
@@ -66,7 +95,7 @@
       padding-right: 7px;
       position: relative;
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         right: 0;
         top: 50%;
@@ -95,12 +124,20 @@
       fill: $gray;
       width: 17px;
     }
+    &.active {
+      color: $main;
+    }
   }
   .popup {
-    top: 35px;
+    top: 45px;
     right: 40px;
   }
-  .comments {
+  .comments__wrapper {
     margin-top: 20px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    textarea {
+      background-color: $purple2;
+    }
   }
 }

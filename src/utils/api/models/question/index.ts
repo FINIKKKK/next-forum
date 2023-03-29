@@ -1,4 +1,4 @@
-import { TQuestion, QuestionDto, TQuestions, ParamsQuestionDto } from "./types";
+import { TQuestion, QuestionDto, TQuestions, ParamsQuestionDto, UpdateQuestionDto } from "./types";
 import { AxiosInstance } from "axios";
 
 export const QuestionApi = (instance: AxiosInstance) => ({
@@ -30,8 +30,8 @@ export const QuestionApi = (instance: AxiosInstance) => ({
     );
     return data;
   },
-  async update(id: number, dto: QuestionDto) {
-    const { data } = await instance.patch<QuestionDto, { data: TQuestion }>(
+  async update(id: number, dto: UpdateQuestionDto) {
+    const { data } = await instance.patch<UpdateQuestionDto, { data: TQuestion }>(
       `/questions/${id}`,
       dto
     );

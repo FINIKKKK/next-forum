@@ -8,28 +8,28 @@
 }
 
 .answers {
-  margin-top: 75px;
+  margin-top: 125px;
+  margin-bottom: 55px;
   .answers__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 45px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid $gray2;
   }
   .answers__title {
     font-weight: 700;
     font-size: 24px;
   }
-  .asnwers__select {
-    .select__control {
-      min-height: 30px;
-    }
-    .select__value-container {
-      padding: 0;
-      font-size: 12px;
-      margin-right: 10px;
-    }
-    .select__indicator {
-      padding: 0;
+  :global {
+    .select {
+      .select__control {
+        height: 30px !important;
+      }
+      .select__value-container {
+        font-size: 14px;
+      }
     }
   }
 }

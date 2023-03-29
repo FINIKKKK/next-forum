@@ -9,10 +9,10 @@
   }
   .name {
     margin-bottom: 5px;
+    font-weight: 700;
   }
   .login {
     color: $gray;
-    font-weight: 700;
     transition: 0.2s;
     &:hover {
       color: $white;

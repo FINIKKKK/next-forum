@@ -123,6 +123,7 @@ export const CreateQuestionLayout: React.FC<CreateQuestionLayoutsProps> = ({
                   initialValue={body}
                   onChange={(blocks: any) => setBody(blocks)}
                   placeholder="Введите текст"
+                  type="question"
                 />
               </div>
               {errors?.body && <div className="error">{errors?.body}</div>}
