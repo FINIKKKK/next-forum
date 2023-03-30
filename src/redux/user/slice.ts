@@ -7,7 +7,7 @@ import { Theme, TUserSlice } from './types';
 
 const initialState: TUserSlice = {
   data: null,
-  theme: Theme.dark,
+  theme: Theme.light,
 };
 
 const userSlice = createSlice({
