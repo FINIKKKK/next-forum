@@ -9,6 +9,7 @@ export type TAnswer = TBase & {
   question: TQuestion;
   isAnswer: boolean;
   rating: number;
+  updated: string;
 };
 
 export type AnswerDto = {

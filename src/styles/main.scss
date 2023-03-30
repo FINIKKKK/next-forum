@@ -300,59 +300,6 @@
   }
 }
 
-// --------- edit ----------
-.create {
-  margin: 100px 0;
-  background-color: $purple2;
-  .inner {
-    padding: 70px 0;
-    width: 80%;
-    margin: 0 auto;
-  }
-  .title {
-    font-size: 30px;
-    line-height: 40px;
-    font-weight: 700;
-    margin-bottom: 25px;
-  }
-  .inputBlock {
-    margin-bottom: 25px;
-    .error {
-      font-size: 12px;
-      margin-top: 8px;
-      margin-left: 5px;
-    }
-  }
-  .buttons {
-    display: flex;
-    align-items: center;
-    margin-bottom: 25px;
-    .item:not(:last-child) {
-      margin-right: 30px;
-    }
-    .item {
-      cursor: pointer;
-      width: 20px;
-    }
-    .item:nth-child(1) {
-      width: 15px;
-    }
-    .item:nth-child(2) {
-      width: 15px;
-    }
-  }
-  .add {
-    margin-left: 15px;
-    color: $white;
-    font-size: 18px;
-  }
-  .submit {
-    padding: 10px 50px;
-    font-size: 16px;
-    line-height: 22px;
-  }
-}
-
 // --------- editor ----------
 .editor {
   margin-bottom: 25px;

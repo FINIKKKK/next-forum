@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
 import React from 'react';
 
-import { CreateQuestionLayout } from '@/layouts/CreateQuestionLayout';
 import { wrapper } from '@/redux/store';
+import { CreateQuestion } from '@/screens/CreateQuestion';
 import { Api } from '@/utils/api';
 import { TQuestion } from '@/utils/api/models/question/types';
 
@@ -11,7 +11,7 @@ interface EditQuestionPageProps {
 }
 
 const EditQuestionPage: NextPage<EditQuestionPageProps> = ({ question }) => {
-  return <CreateQuestionLayout questionData={question} />;
+  return <CreateQuestion questionData={question} />;
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(

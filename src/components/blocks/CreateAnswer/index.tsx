@@ -10,26 +10,26 @@ import { Api } from '@/utils/api';
 import { TAnswer } from '@/utils/api/models/answer/types';
 import { AnswerScheme } from '@/utils/validation';
 
-import ss from './Reply.module.scss';
+import ss from './CreateAnswer.module.scss';
 
 let Editor = dynamic(() => import('@/components/blocks/Editor'), {
   ssr: false,
 });
 
-interface ReplyProps {
+interface CreateAnswerProps {
   questionId: number;
   setAnswers: any;
   answerBody: OutputBlockData[];
 }
 
-export const Reply: React.FC<ReplyProps> = ({
+export const CreateAnswer: React.FC<CreateAnswerProps> = ({
   questionId,
   setAnswers,
   answerBody,
 }) => {
   const [body, setBody] = React.useState<OutputBlockData[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [errors, setErrors] = React.useState<TError | null>([]);
+  const [errors, setErrors] = React.useState<TError | null>(null);
   const { data: userData } = useSelectors((state) => state.user);
   const [isClear, setIsClear] = React.useState(false);
 

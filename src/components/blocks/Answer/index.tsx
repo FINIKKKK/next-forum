@@ -151,8 +151,8 @@ export const Answer: React.FC<AnswerProps> = ({
             )}
           </div>
           <div className={ss.date}>
-            {answer.updatedAt !== answer.createdAt
-              ? `Изменен (${useTimeNow(answer.updatedAt)})`
+            {answer.updated !== answer.createdAt
+              ? `Изменен (${useTimeNow(answer.updated)})`
               : date}
           </div>
         </div>

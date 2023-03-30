@@ -65,8 +65,8 @@ export const QuestionContent: React.FC<QuestionContentProps> = ({
     <div className={ss.question}>
       <div className={ss.header}>
         <div className={ss.header__item}>
-          {question.updatedAt !== question.createdAt
-            ? `Изменен (${useTimeNow(question.updatedAt)})`
+          {question.updated !== question.createdAt
+            ? `Изменен (${useTimeNow(question.updated)})`
             : useTimeNow(question.createdAt)}
         </div>
         <div className={`${ss.header__item} ${ss.eye}`}>
@@ -86,7 +86,13 @@ export const QuestionContent: React.FC<QuestionContentProps> = ({
         questionId={question.id}
       />
 
-      <h1 className={ss.title}>{question.title}</h1>
+      <h1
+        className={classNames(ss.title, {
+          [ss.long]: question.title.length > 100,
+        })}
+      >
+        {question.title}
+      </h1>
 
       <div className={ss.underTitle}>
         <UserBox user={question.user} className={ss.user} />

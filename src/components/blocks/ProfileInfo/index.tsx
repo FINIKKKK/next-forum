@@ -4,13 +4,12 @@ import Sticky from 'react-stickynode';
 import { Avatar, Warning } from '@/components';
 import { useActions } from '@/hooks/useActions';
 import { useErrorMessage } from '@/hooks/useErrorMessage';
-import { useSelectors } from '@/hooks/useSelectors';
 import { Api } from '@/utils/api';
 import { TUser } from '@/utils/api/models/user/types';
 
-import ss from './UserInfo.module.scss';
+import ss from './ProfileInfo.module.scss';
 
-interface UserInfoProps {
+interface ProfileInfoProps {
   isAuthor: boolean;
   isEdit: boolean;
   user: TUser;
@@ -23,7 +22,7 @@ interface UserInfoProps {
   setShowEmail: (value: boolean) => void;
 }
 
-export const UserInfo: React.FC<UserInfoProps> = ({
+export const ProfileInfo: React.FC<ProfileInfoProps> = ({
   isAuthor,
   isEdit,
   user,

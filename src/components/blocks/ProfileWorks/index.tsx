@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  Filters,
+  IsAnswers,
   NotFound,
   options,
   options2,
@@ -42,8 +42,8 @@ export const ProfileWorks: React.FC<ProfileWorksProps> = ({
     (async () => {
       try {
         setIsLoading(true);
-        setPage(1)
-        setQuestions([])
+        setPage(1);
+        setQuestions([]);
         const params = {
           limit,
           page: 1,
@@ -71,7 +71,7 @@ export const ProfileWorks: React.FC<ProfileWorksProps> = ({
       try {
         if (isFetching) {
           setIsLoading(true);
-          setQuestions([])
+          setQuestions([]);
           const params = {
             limit,
             page,
@@ -138,7 +138,7 @@ export const ProfileWorks: React.FC<ProfileWorksProps> = ({
               setOption2={setOption2}
             />
 
-            <Filters
+            <IsAnswers
               activeFilter={activeFilter}
               setActiveFilter={setActiveFilter}
             />

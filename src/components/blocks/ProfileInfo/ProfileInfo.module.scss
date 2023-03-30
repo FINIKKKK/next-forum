@@ -179,7 +179,7 @@
     .checkbox:checked + label::after {
       border-color:  $main;
       background-color:  $main;
-      background-image: url('../../../../../public/img/check.svg');
+      background-image: url('~public/img/check.svg');
     }
   }
 }
@@ -212,7 +212,7 @@
     .checkbox:checked + label::after {
       border-color:  $light-main;
       background-color:  $light-main;
-      background-image: url('../../../../../public/img/check.svg');
+      background-image: url('~public/img/check.svg');
     }
   }
 }

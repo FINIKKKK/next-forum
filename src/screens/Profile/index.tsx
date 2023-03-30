@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ProfileWorks, UserAbout, UserInfo } from '@/components';
+import { ProfileWorks, ProfileAbout, ProfileInfo } from '@/components';
 import { useSelectors } from '@/hooks/useSelectors';
 import { MainLayout } from '@/layouts/MainLayout';
 import { Api } from '@/utils/api';
@@ -46,7 +46,7 @@ export const Profile: React.FC<ProfileProps> = ({ user }) => {
       <div className={ss.profile}>
         <div className="container">
           <div className={ss.inner}>
-            <UserInfo
+            <ProfileInfo
               isAuthor={isAuthor}
               isEdit={isEdit}
               user={user}
@@ -60,7 +60,7 @@ export const Profile: React.FC<ProfileProps> = ({ user }) => {
             />
 
             <div className={ss.leftSide}>
-              <UserAbout
+              <ProfileAbout
                 isEdit={isEdit}
                 questionCount={user.questionCount}
                 answerCount={user.answerCount}

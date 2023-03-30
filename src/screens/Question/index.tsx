@@ -5,11 +5,10 @@ import {
   Answer,
   NotFound,
   QuestionContent,
-  Reply,
+  CreateAnswer,
   SelectComponent,
 } from '@/components';
 import { useSelectors } from '@/hooks/useSelectors';
-import { useWordEnding } from '@/hooks/useWordEnding';
 import { ForumLayout } from '@/layouts/ForumLayout';
 import { TAnswer } from '@/utils/api/models/answer/types';
 import { TQuestion } from '@/utils/api/models/question/types';
@@ -38,10 +37,9 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
   const [solvedAnswerId, setSolvedAnswerId] = React.useState<number | null>(
     null,
   );
-  const [answerBodyToReply, setAnswerBodyToReply] = React.useState<
-    OutputBlockData[]
-  >([]);
-  const refReply = React.useRef<HTMLDivElement>(null);
+  const [answerBodyToCreateAnswer, setAnswerBodyToCreateAnswer] =
+    React.useState<OutputBlockData[]>([]);
+  const refCreateAnswer = React.useRef<HTMLDivElement>(null);
 
   console.log('option', option);
 
@@ -78,8 +76,8 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
   };
 
   const onUpdateAnswer = (value: OutputBlockData[]) => {
-    setAnswerBodyToReply(value);
-    refReply.current?.scrollIntoView({ behavior: 'smooth' });
+    setAnswerBodyToCreateAnswer(value);
+    refCreateAnswer.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -115,16 +113,16 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
             ))
           )}
           {userData?.id !== question.user.id && (
-            <div ref={refReply}>
-              <Reply
+            <div ref={refCreateAnswer}>
+              <CreateAnswer
                 questionId={question.id}
                 setAnswers={setAnswers}
-                answerBody={answerBodyToReply}
+                answerBody={answerBodyToCreateAnswer}
               />
             </div>
           )}
           {!userData && (
-            <div className={ss.noreply}>
+            <div className={ss.noCreateAnswer}>
               <h3>
                 Войдите в аккаунт или зарегистрируйтесь, чтобы ответить на
                 вопрос

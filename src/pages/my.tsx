@@ -1,6 +1,7 @@
-import { QuestionsLayout } from '@/layouts/QuestionsLayout';
 import { NextPage } from 'next';
+
 import { useSelectors } from '@/hooks/useSelectors';
+import { QuestionsLayout } from '@/layouts/QuestionsLayout';
 
 interface MyQuestionsPageProps {}
 

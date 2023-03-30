@@ -1,41 +1,39 @@
-import React from "react";
-import { NextPage } from "next";
-import Link from "next/link";
-import { FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { setCookie } from "nookies";
-import { useRouter } from "next/router";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { NextPage } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { setCookie } from 'nookies';
+import React from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 
-import { AuthInput } from "@/components";
-import { AuthLayout } from "@/layouts/AuthLayout";
-import { RegisterScheme } from "@/utils/validation";
-import { Api } from "@/utils/api";
-import { useActions } from "@/hooks/useActions";
-import { RegisterUserDto } from "@/utils/api/models/auth/types";
+import { AuthInput } from '@/components';
+import { useActions } from '@/hooks/useActions';
+import { AuthLayout } from '@/layouts/AuthLayout';
+import { Api } from '@/utils/api';
+import { RegisterUserDto } from '@/utils/api/models/auth/types';
+import { RegisterScheme } from '@/utils/validation';
 
 interface RegisterPageProps {}
 
 const RegisterPage: NextPage<RegisterPageProps> = ({}) => {
   const form = useForm({
-    mode: "onChange",
+    mode: 'onChange',
     resolver: yupResolver(RegisterScheme),
   });
-  const [error, setError] = React.useState("");
+  const [error, setError] = React.useState('');
   const router = useRouter();
   const { setUserData } = useActions();
-
-  
 
   const onSubmit = async (dto: RegisterUserDto) => {
     try {
       const user = await Api().auth.register(dto);
-      setCookie(null, "token", user.token, {
+      setCookie(null, 'token', user.token, {
         maxAge: 30 * 60 * 24 * 60,
-        path: "/",
+        path: '/',
       });
       setUserData(user.token);
-      setError("");
-      router.push("/");
+      setError('');
+      router.push('/');
     } catch (err) {
       setError(err?.response?.data?.message);
     }

@@ -3,9 +3,9 @@ import React from 'react';
 
 import { usePressKey } from '@/hooks/usePressKey';
 
-import ss from './UserAbout.module.scss';
+import ss from './ProfileAbout.module.scss';
 
-interface UserAboutProps {
+interface ProfileAboutProps {
   isEdit: boolean;
   questionCount: number;
   answerCount: number;
@@ -13,7 +13,7 @@ interface UserAboutProps {
   about: any;
 }
 
-export const UserAbout: React.FC<UserAboutProps> = ({
+export const ProfileAbout: React.FC<ProfileAboutProps> = ({
   isEdit,
   questionCount,
   answerCount,

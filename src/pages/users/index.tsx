@@ -1,8 +1,9 @@
-import { LoadingElement, NotFound, User } from "@/components";
-import { FiltersLayout } from "@/layouts/FiltersLayout";
-import { TUser } from "@/utils/api/models/user/types";
-import { NextPage } from "next";
-import React from "react";
+import { NextPage } from 'next';
+import React from 'react';
+
+import { LoadingElem, NotFound, User } from '@/components';
+import { FiltersLayout } from '@/layouts/FiltersLayout';
+import { TUser } from '@/utils/api/models/user/types';
 
 interface UsersPageProps {}
 
@@ -25,7 +26,7 @@ const UsersPage: NextPage<UsersPageProps> = ({}) => {
           Array(limit)
             .fill(0)
             .map((_, index) => (
-              <LoadingElement className="loading__user" key={index} />
+              <LoadingElem className="loading__user" key={index} />
             ))
         ) : users.length ? (
           users.map((obj: TUser) => <User key={obj.id} {...obj} />)

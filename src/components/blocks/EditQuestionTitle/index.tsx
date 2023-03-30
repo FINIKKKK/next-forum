@@ -2,15 +2,15 @@ import React from 'react';
 
 import { usePressKey } from '@/hooks/usePressKey';
 
-import ss from './InputTitle.module.scss';
+import ss from './EditQuestionTitle.module.scss';
 
-interface InputTitleProps {
+interface EditQuestionTitleProps {
   value: string;
   setValue: (e: any) => void;
   error?: string;
 }
 
-export const InputTitle: React.FC<InputTitleProps> = ({
+export const EditQuestionTitle: React.FC<EditQuestionTitleProps> = ({
   error,
   value,
   setValue,

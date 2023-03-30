@@ -55,6 +55,10 @@
     line-height: 50px;
     margin-bottom: 35px;
     word-wrap: break-word;
+    &.long {
+      font-size: 28px;
+      line-height: 40px;
+    }
   }
   .underTitle {
     display: flex;

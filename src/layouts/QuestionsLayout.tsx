@@ -1,15 +1,17 @@
-import { FiltersLayout } from "./FiltersLayout";
+import React from 'react';
+
 import {
-  Filters,
-  LoadingElement,
+  IsAnswers,
+  LoadingElem,
   NotFound,
   options,
   options2,
   Question,
   Selects,
-} from "@/components";
-import { TQuestion } from "@/utils/api/models/question/types";
-import React from "react";
+} from '@/components';
+import { TQuestion } from '@/utils/api/models/question/types';
+
+import { FiltersLayout } from './FiltersLayout';
 
 type QuestionsLayoutsProps = {
   limit: number;
@@ -53,7 +55,7 @@ export const QuestionsLayout: React.FC<QuestionsLayoutsProps> = ({
           setOption2={setOption2}
         />
 
-        <Filters
+        <IsAnswers
           activeFilter={activeFilter}
           setActiveFilter={setActiveFilter}
         />
@@ -63,7 +65,7 @@ export const QuestionsLayout: React.FC<QuestionsLayoutsProps> = ({
         {isLoading ? (
           Array(limit)
             .fill(0)
-            .map((_, index) => <LoadingElement key={index} />)
+            .map((_, index) => <LoadingElem key={index} />)
         ) : questions.length ? (
           questions.map((obj: TQuestion) => <Question key={obj.id} {...obj} />)
         ) : (

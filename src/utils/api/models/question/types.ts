@@ -16,6 +16,7 @@ export type TQuestion = TBase & {
   views: number;
   isAnswer: boolean;
   answerCount: number;
+  updated: string;
 };
 
 export type QuestionDto = {

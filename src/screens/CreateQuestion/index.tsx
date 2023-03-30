@@ -2,11 +2,13 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { InputTags, InputTitle } from '@/components';
+import { EditQuestionTags, EditQuestionTitle } from '@/components';
 import { MainLayout } from '@/layouts/MainLayout';
 import { Api } from '@/utils/api';
 import { TQuestion } from '@/utils/api/models/question/types';
 import { QuestionScheme } from '@/utils/validation';
+
+import ss from './CreateQuestion.module.scss';
 
 let Editor = dynamic(() => import('@/components/blocks/Editor'), {
   ssr: false,
@@ -18,11 +20,11 @@ export type TError = {
   body: string;
 };
 
-type CreateQuestionLayoutsProps = {
+interface CreateQuestionProps {
   questionData?: TQuestion;
-};
+}
 
-export const CreateQuestionLayout: React.FC<CreateQuestionLayoutsProps> = ({
+export const CreateQuestion: React.FC<CreateQuestionProps> = ({
   questionData,
 }) => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -101,17 +103,17 @@ export const CreateQuestionLayout: React.FC<CreateQuestionLayoutsProps> = ({
   return (
     <MainLayout>
       <div className="container">
-        <div className="block create">
-          <div className="inner">
-            <h2 className="title">Задать вопрос</h2>
+        <div className={`block ${ss.create}`}>
+          <div className={ss.inner}>
+            <h2 className={ss.title}>Задать вопрос</h2>
 
-            <InputTitle
+            <EditQuestionTitle
               value={title}
               setValue={setTitle}
               error={errors?.title}
             />
 
-            <InputTags
+            <EditQuestionTags
               selectedTags={selectedTags}
               setSelectedTags={setSelectedTags}
               error={errors?.tags}
@@ -131,7 +133,7 @@ export const CreateQuestionLayout: React.FC<CreateQuestionLayoutsProps> = ({
 
             <button
               onClick={onSubmit}
-              className={`btn submit ${isLoading ? 'disabled' : ''}`}
+              className={`btn ${ss.btn} ${isLoading ? 'disabled' : ''}`}
             >
               {questionData ? 'Изменить' : 'Создать'}
             </button>

@@ -3,17 +3,17 @@ import React from 'react';
 
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { Api } from '@/utils/api';
-import { TTag, TTags } from '@/utils/api/models/tag/types';
+import { TTag } from '@/utils/api/models/tag/types';
 
-import ss from './InputTags.module.scss';
+import ss from './EditQuestionTags.module.scss';
 
-interface InputTagsProps {
+interface EditQuestionTagsProps {
   selectedTags: TTag[];
   setSelectedTags: any;
   error?: string;
 }
 
-export const InputTags: React.FC<InputTagsProps> = ({
+export const EditQuestionTags: React.FC<EditQuestionTagsProps> = ({
   selectedTags,
   setSelectedTags,
   error,

@@ -1,9 +1,11 @@
-import { ForumLayout } from "./ForumLayout";
-import { NotFound, options, Pagination, Search, TOption } from "@/components";
-import { Api } from "@/utils/api";
-import { useRouter } from "next/router";
-import qs from "qs";
-import React from "react";
+import { useRouter } from 'next/router';
+import qs from 'qs';
+import React from 'react';
+
+import { options, Pagination, Search, TOption } from '@/components';
+import { Api } from '@/utils/api';
+
+import { ForumLayout } from './ForumLayout';
 
 type FiltersLayoutsProps = {
   children: any;
@@ -16,8 +18,8 @@ type FiltersLayoutsProps = {
   userId?: number;
   setIsLoading: (value: boolean) => void;
   itemsLength: number;
-  activeFilter: string | null;
-  setActiveFilter: (value: string | null) => void;
+  activeFilter?: string | null;
+  setActiveFilter?: (value: string | null) => void;
   favorites?: boolean;
 };
 
@@ -31,7 +33,6 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
   setOption,
   userId,
   activeFilter,
-  setActiveFilter,
   setIsLoading,
   itemsLength,
   favorites,
@@ -40,8 +41,8 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
   const [total, setTotal] = React.useState(0);
   const [page, setPage] = React.useState(1);
   const isMounted = React.useRef(false);
-  const [searchValue, setSearchValue] = React.useState("");
-  const [searchValue2, setSearchValue2] = React.useState("");
+  const [searchValue, setSearchValue] = React.useState('');
+  const [searchValue2, setSearchValue2] = React.useState('');
   const [tag, setTag] = React.useState<string | undefined>(undefined);
 
   React.useEffect(() => {
@@ -58,11 +59,11 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
           ...(favorites && { favorites }),
         };
         let data;
-        if (type === "tag") {
+        if (type === 'tag') {
           data = await Api().tag.getAll(params);
-        } else if (type === "user") {
+        } else if (type === 'user') {
           data = await Api().user.getAll(params);
-        } else if (type === "question") {
+        } else if (type === 'question') {
           data = await Api().question.getAll(params);
         }
 
@@ -75,7 +76,7 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
         setIsLoading(false);
       } catch (err) {
         console.warn(err);
-        alert("Ошибка при получении");
+        alert('Ошибка при получении');
       }
     })();
   }, [page, searchValue2, option, tag, activeFilter]);
@@ -122,11 +123,11 @@ export const FiltersLayout: React.FC<FiltersLayoutsProps> = ({
       <div className="content block">
         <h1 className="title">{tag ? `Поиск по метке "${tag}"` : label}</h1>
 
-          <Search
-            value={searchValue}
-            setValue={setSearchValue}
-            setSearchValue={setSearchValue2}
-          />
+        <Search
+          value={searchValue}
+          setValue={setSearchValue}
+          setSearchValue={setSearchValue2}
+        />
 
         {children}
 
