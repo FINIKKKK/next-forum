@@ -92,7 +92,9 @@ const Editor: React.FC<EditorProps> = ({
           ...(type !== 'answer' && { delimiter: Delimiter }),
           embed: Embed,
           list: List,
-          codeBox: CodeBox,
+          codeBox: {
+            class: CodeBox,
+          },
           inlineCode: InlineCode,
         },
       });

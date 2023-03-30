@@ -22,7 +22,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
       if (id) {
         const question = await Api().question.getOne(+id);
-        console.log(question);
         if (state?.user?.data?.id !== question.user.id) {
           return {
             redirect: {

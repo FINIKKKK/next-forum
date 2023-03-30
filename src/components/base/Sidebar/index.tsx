@@ -1,20 +1,24 @@
-import ss from "./Sidebar.module.scss";
-import { Api } from "@/utils/api";
-import { TTag } from "@/utils/api/models/tag/types";
-import classNames from "classnames";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React from "react";
-import Sticky from "react-stickynode";
+import classNames from 'classnames';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React from 'react';
+import Sticky from 'react-stickynode';
+
+import { useSelectors } from '@/hooks/useSelectors';
+import { Api } from '@/utils/api';
+import { TTag } from '@/utils/api/models/tag/types';
+
+import ss from './Sidebar.module.scss';
 
 interface SidebarProps {}
 
 export const Sidebar: React.FC<SidebarProps> = ({}) => {
   const [tags, setTags] = React.useState<TTag[]>([]);
   const [bottomBoundary, setBottomBoundary] = React.useState<number | null>(
-    null
+    null,
   );
   const router = useRouter();
+  const { data: userData } = useSelectors((state) => state.user);
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -22,9 +26,9 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
       setBottomBoundary(boundary);
     };
     handleResize();
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -39,7 +43,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
         setTags(tags.items);
       } catch (err) {
         console.warn(err);
-        alert("Ошибка при получении меток");
+        alert('Ошибка при получении меток');
       }
     })();
   }, []);
@@ -47,18 +51,20 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
   return (
     <Sticky
       top={25}
-      bottomBoundary={bottomBoundary ? bottomBoundary : "window"}
+      bottomBoundary={bottomBoundary ? bottomBoundary : 'window'}
       className={`sidebar ${ss.sidebar}`}
     >
-      <Link href="/create" className={`btn ${ss.btn}`}>
-        Задать вопрос
-      </Link>
+      {userData && (
+        <Link href="/create" className={`btn ${ss.btn}`}>
+          Задать вопрос
+        </Link>
+      )}
       <div className={ss.block}>
         <h5>Меню</h5>
         <ul className={ss.nav}>
           <li
-            className={classNames("hover", ss.item, {
-              [ss.active]: router.pathname === "/",
+            className={classNames('hover', ss.item, {
+              [ss.active]: router.pathname === '/',
             })}
           >
             <Link href="/">
@@ -77,8 +83,8 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             </Link>
           </li>
           <li
-            className={classNames("hover", ss.item, {
-              [ss.active]: router.pathname === "/my",
+            className={classNames('hover', ss.item, {
+              [ss.active]: router.pathname === '/my',
             })}
           >
             <Link href="/my">
@@ -89,8 +95,8 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             </Link>
           </li>
           <li
-            className={classNames("hover", ss.item, {
-              [ss.active]: router.pathname === "/favorites",
+            className={classNames('hover', ss.item, {
+              [ss.active]: router.pathname === '/favorites',
             })}
           >
             <Link href="/favorites">
@@ -109,8 +115,8 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             </Link>
           </li>
           <li
-            className={classNames("hover", ss.item, {
-              [ss.active]: router.pathname === "/tags",
+            className={classNames('hover', ss.item, {
+              [ss.active]: router.pathname === '/tags',
             })}
           >
             <Link href="/tags">
@@ -121,8 +127,8 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             </Link>
           </li>
           <li
-            className={classNames("hover", ss.item, {
-              [ss.active]: router.pathname === "/users",
+            className={classNames('hover', ss.item, {
+              [ss.active]: router.pathname === '/users',
             })}
           >
             <Link href="/users">

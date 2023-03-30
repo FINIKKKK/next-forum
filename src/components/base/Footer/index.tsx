@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import ss from "./Footer.module.scss";
+import ss from './Footer.module.scss';
 
 interface FooterProps {}
 

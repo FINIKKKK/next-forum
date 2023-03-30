@@ -97,7 +97,7 @@ body.light {
   &::-webkit-scrollbar-track {
     background-color: $light-block2;
   }
-  &::selection {
+  *::selection {
     background: rgba($light-main, 0.2) !important;
   }
 }

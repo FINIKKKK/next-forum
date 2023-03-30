@@ -32,7 +32,7 @@
       padding-left: 40px;
       position: relative;
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         width: 6px;
         height: 6px;
@@ -49,7 +49,7 @@
       li {
         &::before {
           counter-increment: list;
-          content: counter(list) ".";
+          content: counter(list) '.';
           width: auto;
           height: auto;
           background: none;
@@ -149,7 +149,7 @@
     overflow: auto !important;
     border-radius: 10px;
     padding: 10px 15px !important;
-    font-family: "Consolas";
+    font-family: 'Consolas';
     &::-webkit-scrollbar {
       display: block !important;
       height: 5px;
