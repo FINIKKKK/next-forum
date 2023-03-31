@@ -15,12 +15,7 @@ interface AppComponentProps {
   props: any;
 }
 
-export const AppComponent: React.FC<AppComponentProps> = ({
-  Component,
-  props,
-}) => {
-  const { theme } = useSelectors((state) => state.user);
-
+function useTheme(theme: Theme) {
   React.useEffect(() => {
     document.body.classList.add(theme.toLowerCase());
     document.documentElement.classList.add(theme.toLowerCase());
@@ -29,6 +24,15 @@ export const AppComponent: React.FC<AppComponentProps> = ({
       document.documentElement.classList.remove(theme.toLowerCase());
     };
   }, [theme]);
+}
+
+export const AppComponent: React.FC<AppComponentProps> = ({
+  Component,
+  props,
+}) => {
+  const { theme } = useSelectors((state) => state.user);
+
+  useTheme(theme);
 
   return (
     <>

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { useActions } from '@/hooks/useActions';
 import { useSelectors } from '@/hooks/useSelectors';
@@ -19,7 +20,7 @@ export const Header: React.FC<HeaderProps> = ({}) => {
   const onChangeTheme = () => {
     const newTheme = theme === Theme.dark ? Theme.light : Theme.dark;
     setTheme(newTheme);
-    window.localStorage.setItem('theme', theme);
+    window.localStorage.setItem('theme', newTheme);
   };
 
   return (

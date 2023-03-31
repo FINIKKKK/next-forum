@@ -1,6 +1,9 @@
-import ss from "./Select.module.scss";
-import React from "react";
-import Select from "react-select";
+import React from 'react';
+import Select from 'react-select';
+
+import ss from './Select.module.scss';
+
+const MY_SELECT_ID = 'my-select-id';
 
 export type TOption = {
   value: string;
@@ -24,6 +27,8 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({
     <Select
       className={`block hover select ${className} ${ss.select}`}
       classNamePrefix="select"
+      inputId={MY_SELECT_ID}
+      instanceId={MY_SELECT_ID}
       value={value}
       onChange={(value: any) => setValue(value)}
       options={options}

@@ -41,8 +41,6 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
     React.useState<OutputBlockData[]>([]);
   const refCreateAnswer = React.useRef<HTMLDivElement>(null);
 
-  console.log('option', option);
-
   React.useEffect(() => {
     if (option.value === 'rating') {
       answers.sort((a, b) => {
