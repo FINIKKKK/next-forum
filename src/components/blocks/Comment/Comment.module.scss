@@ -1,4 +1,4 @@
-@import "@/styles/assets/variables";
+@import '@/styles/assets/variables';
 
 .comment {
   display: flex;
@@ -46,6 +46,30 @@
     margin-right: 20px;
     margin-top: 0;
     textarea {
+    }
+  }
+}
+
+:global(.light) {
+  .comment {
+    .text {
+      b {
+        color: $light-main;
+        font-weight: 700;
+      }
+    }
+    .icons {
+      svg {
+        fill: $light-gray;
+        &:hover {
+          fill: $light-main;
+        }
+      }
+    }
+    .input {
+      textarea {
+        background-color: $light-hover;
+      }
     }
   }
 }

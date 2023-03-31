@@ -37,6 +37,7 @@ export const Answer: React.FC<AnswerProps> = ({
   const [visiblePopup, setVisiblePopup] = React.useState(false);
   const [openInput, setOpenInput] = React.useState(false);
   const [commentValue, setCommentValue] = React.useState('');
+  const [openComments, setOpenComments] = React.useState(false);
   const [isSolved, setIsSolved] = React.useState(
     solvedAnswerId === answer.id ? true : false,
   );
@@ -103,6 +104,7 @@ export const Answer: React.FC<AnswerProps> = ({
   const onOpenInput = () => {
     setOpenInput(!openInput);
     setCommentValue('');
+    setOpenComments(true);
   };
 
   const onChange = () => {
@@ -169,6 +171,8 @@ export const Answer: React.FC<AnswerProps> = ({
             setOpenInput={setOpenInput}
             commentValue={commentValue}
             setCommentValue={setCommentValue}
+            openComments={openComments}
+            setOpenComments={setOpenComments}
           />
         </div>
       </div>

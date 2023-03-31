@@ -173,3 +173,45 @@
     line-height: 16px !important;
   }
 }
+
+:global(.light) {
+  .body {
+    color: $light-main;
+    a {
+      color: $light-main;
+      text-decoration: underline;
+      &:hover {
+        color: darken($light-main, 20%);
+      }
+    }
+    .code {
+      background-color: $purple;
+    }
+    .list {
+      li {
+        &::before {
+          content: '';
+          background-color: $light-main;
+        }
+      }
+      &.ordered {
+        li {
+          &::before {
+            counter-increment: list;
+            content: counter(list) '.';
+            background: none;
+          }
+        }
+      }
+    }
+    .quote {
+      background-color: $light-hover;
+      svg {
+        fill: $light-gray;
+      }
+      p {
+        color: $light-gray;
+      }
+    }
+  }
+}

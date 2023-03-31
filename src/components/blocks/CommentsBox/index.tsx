@@ -1,9 +1,11 @@
-import ss from "./CommentsBox.module.scss";
-import { Comments, Textarea } from "@/components";
-import { useSelectors } from "@/hooks/useSelectors";
-import { Api } from "@/utils/api";
-import { TComment } from "@/utils/api/models/comments/types";
-import React from "react";
+import React from 'react';
+
+import { Comments, Textarea } from '@/components';
+import { useSelectors } from '@/hooks/useSelectors';
+import { Api } from '@/utils/api';
+import { TComment } from '@/utils/api/models/comments/types';
+
+import ss from './CommentsBox.module.scss';
 
 interface CommentsBoxProps {
   questionId?: number;
@@ -14,6 +16,8 @@ interface CommentsBoxProps {
   onOpenInput?: () => void;
   setOpenInput?: (value: boolean) => void;
   className?: string;
+  openComments?: boolean;
+  setOpenComments?: (value: boolean) => void;
 }
 
 export const CommentsBox: React.FC<CommentsBoxProps> = ({
@@ -22,13 +26,13 @@ export const CommentsBox: React.FC<CommentsBoxProps> = ({
   commentValue,
   setCommentValue,
   openInput,
-  onOpenInput,
   setOpenInput,
   className,
+  openComments,
+  setOpenComments,
 }) => {
   const { data: userData } = useSelectors((state) => state.user);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [openComments, setOpenComments] = React.useState(false);
   const [comments, setComments] = React.useState<TComment[]>([]);
 
   React.useEffect(() => {
@@ -42,7 +46,7 @@ export const CommentsBox: React.FC<CommentsBoxProps> = ({
         setComments(comments.items);
       } catch (err) {
         console.warn(err);
-        alert("Ошибка при получении комментариев");
+        alert('Ошибка при получении комментариев');
       }
     })();
   }, []);
@@ -59,17 +63,13 @@ export const CommentsBox: React.FC<CommentsBoxProps> = ({
       setOpenInput && setOpenInput(false);
       setComments([{ ...comment, user: userData! }, ...comments]);
       setOpenComments && setOpenComments(true);
-      setCommentValue && setCommentValue('')
+      setCommentValue && setCommentValue('');
     } catch (err) {
       console.warn(err);
-      alert("Ошибка при создании комментария");
+      alert('Ошибка при создании комментария');
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const onChangeComment = async (commentId: number, value: string) => {
-    setCommentValue(value);
   };
 
   if ((!!questionId && openInput) || !!answerId) {
@@ -80,8 +80,9 @@ export const CommentsBox: React.FC<CommentsBoxProps> = ({
           setComments={setComments}
           isOpen={openComments}
           setIsOpen={setOpenComments}
-          onChangeComment={onChangeComment}
+          onChangeComment={(value: string) => setCommentValue(value)}
           isQuestion={!!questionId}
+          setVisibleTextarea={setOpenInput}
         />
         {(openInput || !!questionId) && (
           <Textarea

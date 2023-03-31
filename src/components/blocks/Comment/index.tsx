@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import { TUser } from "@/utils/api/models/user/types";
+import { Textarea } from '@/components';
+import { useSelectors } from '@/hooks/useSelectors';
+import { Api } from '@/utils/api';
+import { TComment } from '@/utils/api/models/comments/types';
+import { TUser } from '@/utils/api/models/user/types';
 
-import ss from "./Comment.module.scss";
-import { Api } from "@/utils/api";
-import { TComment } from "@/utils/api/models/comments/types";
-import { useSelectors } from "@/hooks/useSelectors";
-import { Textarea } from "@/components";
+import ss from './Comment.module.scss';
 
 interface CommentProps {
   id: number;
@@ -14,6 +14,7 @@ interface CommentProps {
   user: TUser;
   comments: TComment[];
   setComments: (value: TComment) => TComment[];
+  setVisibleTextarea?: (value: boolean) => void;
 }
 
 export const Comment: React.FC<CommentProps> = ({
@@ -22,19 +23,20 @@ export const Comment: React.FC<CommentProps> = ({
   user,
   comments,
   setComments,
+  setVisibleTextarea,
 }) => {
   const { data: userData } = useSelectors((state) => state.user);
   const [openInput, setOpenInput] = React.useState(false);
   const [value, setValue] = React.useState(text);
 
   const onRemoveComment = async () => {
-    if (window.confirm("Вы действительно хотите удалить комментарий")) {
+    if (window.confirm('Вы действительно хотите удалить комментарий')) {
       try {
         await Api().comment.remove(id);
         setComments((prev: TComment[]) => prev.filter((obj) => obj.id !== id));
       } catch (err) {
         console.warn(err);
-        alert("Ошибка при удалении комментария");
+        alert('Ошибка при удалении комментария');
       }
     }
   };
@@ -55,13 +57,14 @@ export const Comment: React.FC<CommentProps> = ({
       setComments(newItems);
     } catch (err) {
       console.warn(err);
-      alert("Ошибка при изменении комментария");
+      alert('Ошибка при изменении комментария');
     }
   };
 
   const onOpenInput = () => {
     setOpenInput(!openInput);
     setValue(text);
+    setVisibleTextarea && setVisibleTextarea(false);
   };
 
   return (

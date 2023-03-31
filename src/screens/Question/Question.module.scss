@@ -33,3 +33,12 @@
     }
   }
 }
+
+:global(.light) {
+  .answers {
+    .answers__header {
+      padding-bottom: 30px;
+      border-bottom: 2px solid $light-gray2;
+    }
+  }
+}

@@ -112,7 +112,7 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
               />
             ))
           )}
-          {userData?.id !== question.user.id && (
+          {userData?.id && userData?.id !== question.user.id && (
             <div ref={refCreateAnswer}>
               <CreateAnswer
                 questionId={question.id}
@@ -122,12 +122,10 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
             </div>
           )}
           {!userData && (
-            <div className={ss.noCreateAnswer}>
-              <h3>
-                Войдите в аккаунт или зарегистрируйтесь, чтобы ответить на
-                вопрос
-              </h3>
-            </div>
+            <NotFound
+              label="Войдите в аккаунт или зарегистрируйтесь, чтобы ответить на
+            вопрос"
+            />
           )}
         </div>
       </div>

@@ -1,3 +1,14 @@
+@import '@/styles/assets/variables';
+
 .comments {
   width: 100%;
+}
+
+:global(.light) {
+  .comments textarea {
+    background-color: $light-hover;
+  }
+  .comments svg {
+    fill: $light-main;
+  }
 }

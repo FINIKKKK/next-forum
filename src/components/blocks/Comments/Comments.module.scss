@@ -12,3 +12,14 @@
     }
   }
 }
+
+:global(.light) {
+  .comments {
+    .btn {
+      color: $light-gray;
+      &:hover {
+        color: $light-main;
+      }
+    }
+  }
+}

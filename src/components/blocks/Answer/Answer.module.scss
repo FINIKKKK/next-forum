@@ -1,4 +1,4 @@
-@import "@/styles/assets/variables";
+@import '@/styles/assets/variables';
 
 .answer {
   padding-top: 30px;
@@ -77,5 +77,36 @@
   }
   .comments {
     width: 100%;
+  }
+}
+
+:global(.light) {
+  .answer {
+    &:not(:last-child) {
+      .footer {
+        border-bottom: 2px solid $light-gray2;
+      }
+    }
+    .date {
+      color: $light-gray;
+    }
+    .user {
+      margin-right: 20px;
+    }
+    .isAnswer {
+      display: inline-flex;
+      background-color: $light-main;
+      p {
+        color: $light-white;
+      }
+      svg {
+        fill: $light-white;
+      }
+    }
+    .isAnswer__icon {
+      &.active {
+        fill: $light-main;
+      }
+    }
   }
 }

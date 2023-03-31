@@ -94,6 +94,12 @@ const Editor: React.FC<EditorProps> = ({
           list: List,
           codeBox: {
             class: CodeBox,
+            config: {
+              // themeURL:
+              //   'https://jmblog.github.io/color-themes-for-highlightjs/css/themes/tomorrow.css',
+              // themeName: 'atom-one-dark',
+              // useDefaultTheme: 'light',
+            },
           },
           inlineCode: InlineCode,
         },

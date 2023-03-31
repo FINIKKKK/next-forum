@@ -20,3 +20,12 @@
     }
   }
 }
+
+:global(.light) {
+  .login {
+    color: $light-gray;
+    &:hover {
+      color: $light-main;
+    }
+  }
+}

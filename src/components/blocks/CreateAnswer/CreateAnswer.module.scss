@@ -1,4 +1,4 @@
-@import "@/styles/assets/variables";
+@import '@/styles/assets/variables';
 
 .reply {
   margin-bottom: 70px;
@@ -13,5 +13,11 @@
   }
   .user {
     margin-bottom: 20px;
+  }
+}
+
+:global(.light) {
+  .reply .input {
+    background-color: $light-hover;
   }
 }
