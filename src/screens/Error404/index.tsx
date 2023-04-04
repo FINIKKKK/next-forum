@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -19,9 +20,19 @@ export const Error404: React.FC<Error404Props> = ({ title, text }) => {
       <div className={ss.inner}>
         <h1>{title}</h1>
         {theme !== Theme.light ? (
-          <img src="./img/error404.svg" alt="error404" />
+          <Image
+            src="./img/error404.svg"
+            alt="error404"
+            width={400}
+            height={400}
+          />
         ) : (
-          <img src="./img/error404(2).svg" alt="error404" />
+          <Image
+            src="./img/error404(2).svg"
+            alt="error404"
+            width={400}
+            height={400}
+          />
         )}
         <h3>{text}</h3>
         <Link href="/" className={ss.btn}>

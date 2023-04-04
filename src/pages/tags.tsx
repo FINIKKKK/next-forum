@@ -4,6 +4,7 @@ import React from 'react';
 import { LoadingElem, NotFound, Tag } from '@/components';
 import { FiltersLayout } from '@/layouts/FiltersLayout';
 import { TTag } from '@/utils/api/models/tag/types';
+import { MetaLayout } from '@/layouts/MetaLayout';
 
 interface TagsPageProps {}
 
@@ -13,28 +14,30 @@ const TagsPage: NextPage<TagsPageProps> = ({}) => {
   const limit = 6;
 
   return (
-    <FiltersLayout
-      type="tag"
-      limit={limit}
-      label="Все метки"
-      setItems={setTags}
-      setIsLoading={setIsLoading}
-      itemsLength={tags.length}
-    >
-      <div className="list">
-        {isLoading ? (
-          Array(limit)
-            .fill(0)
-            .map((_, index) => (
-              <LoadingElem className="loading__tag" key={index} />
-            ))
-        ) : tags.length ? (
-          tags.map((obj: TTag) => <Tag key={obj.id} {...obj} />)
-        ) : (
-          <NotFound />
-        )}
-      </div>
-    </FiltersLayout>
+    <MetaLayout title="Все метки">
+      <FiltersLayout
+        type="tag"
+        limit={limit}
+        label="Все метки"
+        setItems={setTags}
+        setIsLoading={setIsLoading}
+        itemsLength={tags.length}
+      >
+        <div className="list">
+          {isLoading ? (
+            Array(limit)
+              .fill(0)
+              .map((_, index) => (
+                <LoadingElem className="loading__tag" key={index} />
+              ))
+          ) : tags.length ? (
+            tags.map((obj: TTag) => <Tag key={obj.id} {...obj} />)
+          ) : (
+            <NotFound />
+          )}
+        </div>
+      </FiltersLayout>
+    </MetaLayout>
   );
 };
 

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -19,7 +20,13 @@ export const Avatar: React.FC<AvatarProps> = ({
   return isAnother ? (
     <div onClick={onHandleClick} className={`avatar block ${className}`}>
       {avatar ? (
-        <img className="avatar" src={avatar} alt="avatar" />
+        <Image
+          className="avatar"
+          src={avatar}
+          alt="avatar"
+          width={45}
+          height={45}
+        />
       ) : (
         <svg
           width="164"
@@ -43,7 +50,13 @@ export const Avatar: React.FC<AvatarProps> = ({
   ) : (
     <Link className={`avatar block ${className}`} href={`/users/${login}`}>
       {avatar ? (
-        <img className="avatar" src={avatar} alt="avatar" />
+        <Image
+          className="avatar"
+          src={avatar}
+          alt="avatar"
+          width={45}
+          height={45}
+        />
       ) : (
         <svg
           width="164"

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ProfileWorks, ProfileAbout, ProfileInfo } from '@/components';
 import { useSelectors } from '@/hooks/useSelectors';
+import { MetaLayout } from '@/layouts/MetaLayout';
 import { MainLayout } from '@/layouts/MainLayout';
 import { Api } from '@/utils/api';
 import { TUser } from '@/utils/api/models/user/types';
@@ -42,37 +43,45 @@ export const Profile: React.FC<ProfileProps> = ({ user }) => {
   };
 
   return (
-    <MainLayout>
-      <div className={ss.profile}>
-        <div className="container">
-          <div className={ss.inner}>
-            <ProfileInfo
-              isAuthor={isAuthor}
-              isEdit={isEdit}
-              user={user}
-              onUpdateUserData={onUpdateUserData}
-              name={name}
-              setName={setName}
-              location={location}
-              setLocation={setLocation}
-              showEmail={showEmail}
-              setShowEmail={setShowEmail}
-            />
-
-            <div className={ss.leftSide}>
-              <ProfileAbout
+    <MetaLayout
+      title={`${user.login} ${user.name ? '(' + user.name + ')' : ''}`}
+      description={`${
+        user.about ? user.about : `Профиль пользователя @${user.login}`
+      }`}
+      noTitle
+    >
+      <MainLayout>
+        <div className={ss.profile}>
+          <div className="container">
+            <div className={ss.inner}>
+              <ProfileInfo
+                isAuthor={isAuthor}
                 isEdit={isEdit}
-                questionCount={user.questionCount}
-                answerCount={user.answerCount}
-                setAbout={setAbout}
-                about={about}
+                user={user}
+                onUpdateUserData={onUpdateUserData}
+                name={name}
+                setName={setName}
+                location={location}
+                setLocation={setLocation}
+                showEmail={showEmail}
+                setShowEmail={setShowEmail}
               />
 
-              <ProfileWorks isAuthor={isAuthor} userId={user.id} />
+              <div className={ss.leftSide}>
+                <ProfileAbout
+                  isEdit={isEdit}
+                  questionCount={user.questionCount}
+                  answerCount={user.answerCount}
+                  setAbout={setAbout}
+                  about={about}
+                />
+
+                <ProfileWorks isAuthor={isAuthor} userId={user.id} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </MainLayout>
+      </MainLayout>
+    </MetaLayout>
   );
 };

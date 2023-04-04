@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 
 import { useSelectors } from '@/hooks/useSelectors';
+import { MetaLayout } from '@/layouts/MetaLayout';
 import { QuestionsLayout } from '@/layouts/QuestionsLayout';
 
 interface MyQuestionsPageProps {}
@@ -9,11 +10,13 @@ const MyQuestionsPage: NextPage<MyQuestionsPageProps> = ({}) => {
   const { data: userData } = useSelectors((state) => state.user);
 
   return (
-    <QuestionsLayout
-      limit={4}
-      label="Мои вопросы"
-      userId={userData?.id}
-    ></QuestionsLayout>
+    <MetaLayout title="Мои вопросы">
+      <QuestionsLayout
+        limit={4}
+        label="Мои вопросы"
+        userId={userData?.id}
+      ></QuestionsLayout>
+    </MetaLayout>
   );
 };
 

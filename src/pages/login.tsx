@@ -8,6 +8,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { AuthInput } from '@/components';
 import { useActions } from '@/hooks/useActions';
 import { AuthLayout } from '@/layouts/AuthLayout';
+import { MetaLayout } from '@/layouts/MetaLayout';
 import { Api } from '@/utils/api';
 import { LoginUserDto } from '@/utils/api/models/auth/types';
 
@@ -35,48 +36,52 @@ const LoginPage: NextPage<LoginPageProps> = ({}) => {
   };
 
   return (
-    <AuthLayout>
-      <FormProvider {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <h1 className="title">Вход</h1>
-          <ul className="socNav">
-            <li className="item">
-              <a href="#" title="Войти с помощью Github">
-                <svg width="20" height="20">
-                  <use xlinkHref="../img/icons/icons.svg#github" />
-                </svg>
-              </a>
-            </li>
-            <li className="item">
-              <a href="#" title="Войти с помощью Google">
-                <svg width="20" height="20">
-                  <use xlinkHref="../img/icons/icons.svg#google" />
-                </svg>
-              </a>
-            </li>
-          </ul>
-          <p className="text">
-            Пожалуйста, заполните данные, чтобы войти в аккаунт
-          </p>
-          <div className="errorMessage">{error}</div>
+    <MetaLayout
+      title="Войти в аккаунт"
+    >
+      <AuthLayout>
+        <FormProvider {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <h1 className="title">Вход</h1>
+            <ul className="socNav">
+              <li className="item">
+                <a href="#" title="Войти с помощью Github">
+                  <svg width="20" height="20">
+                    <use xlinkHref="../img/icons/icons.svg#github" />
+                  </svg>
+                </a>
+              </li>
+              <li className="item">
+                <a href="#" title="Войти с помощью Google">
+                  <svg width="20" height="20">
+                    <use xlinkHref="../img/icons/icons.svg#google" />
+                  </svg>
+                </a>
+              </li>
+            </ul>
+            <p className="text">
+              Пожалуйста, заполните данные, чтобы войти в аккаунт
+            </p>
+            <div className="errorMessage">{error}</div>
 
-          <div className="inputs">
-            <AuthInput name="email" icon="email" label="Email" />
-            <AuthInput
-              name="password"
-              icon="lock"
-              label="Пароль"
-              isPassword={true}
-            />
-          </div>
+            <div className="inputs">
+              <AuthInput name="email" icon="email" label="Email" />
+              <AuthInput
+                name="password"
+                icon="lock"
+                label="Пароль"
+                isPassword={true}
+              />
+            </div>
 
-          <button className="btn">Вход</button>
-          <div className="copy">
-            Уже есть аккаунт? <Link href="/register">Зарегестрироваться</Link>
-          </div>
-        </form>
-      </FormProvider>
-    </AuthLayout>
+            <button className="btn">Вход</button>
+            <div className="copy">
+              Уже есть аккаунт? <Link href="/register">Зарегестрироваться</Link>
+            </div>
+          </form>
+        </FormProvider>
+      </AuthLayout>
+    </MetaLayout>
   );
 };
 

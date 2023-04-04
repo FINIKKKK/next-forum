@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import React from 'react';
 
+import { MetaLayout } from '@/layouts/MetaLayout';
 import { wrapper } from '@/redux/store';
 import { CreateQuestion } from '@/screens/CreateQuestion';
 import { Api } from '@/utils/api';
@@ -11,7 +12,11 @@ interface EditQuestionPageProps {
 }
 
 const EditQuestionPage: NextPage<EditQuestionPageProps> = ({ question }) => {
-  return <CreateQuestion questionData={question} />;
+  return (
+    <MetaLayout title="Редактировать вопрос">
+      <CreateQuestion questionData={question} />
+    </MetaLayout>
+  );
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(

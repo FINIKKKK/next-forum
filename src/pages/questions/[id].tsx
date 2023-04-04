@@ -1,6 +1,8 @@
 import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
 
+import { MainLayout } from '@/layouts/MainLayout';
+import { MetaLayout } from '@/layouts/MetaLayout';
 import { Question } from '@/screens/Question';
 import { Api } from '@/utils/api';
 import { TAnswer } from '@/utils/api/models/answer/types';
@@ -12,7 +14,14 @@ interface QuestionPageProps {
 }
 
 const QuestionPage: NextPage<QuestionPageProps> = ({ question, answers }) => {
-  return <Question question={question} answerList={answers} />;
+  const description = question.body.find((obj) => obj.type === 'paragraph')
+    ?.data?.text;
+
+  return (
+    <MetaLayout title={`${question.title}`} description={description} noTitle>
+      <Question question={question} answerList={answers} />)
+    </MetaLayout>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
