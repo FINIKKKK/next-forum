@@ -1,12 +1,7 @@
 @import '@/styles/assets/variables';
 
-.inputBlock {
-  &:not(:last-child) {
-    margin-bottom: 30px;
-  }
-  &.password {
-    margin-top: 60px;
-  }
+.login {
+  margin-bottom: 70px !important;
 }
 
 .footer {

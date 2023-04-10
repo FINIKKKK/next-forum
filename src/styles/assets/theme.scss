@@ -103,37 +103,3 @@ body.light {
     background: rgba($light-main, 0.2) !important;
   }
 }
-
-.light {
-  .inputBlock {
-    label {
-      color: $light-gray;
-    }
-    input,
-    textarea {
-      color: $light-main;
-    }
-    &.checkbox {
-      &:hover {
-        input + label::after {
-          border-color: $light-main;
-        }
-        label {
-          color: $light-main;
-        }
-      }
-      input + label::after {
-        border: 1px solid $light-gray;
-      }
-      input:checked + label {
-        color: $light-main;
-      }
-      input:checked + label::after {
-        border-color: $light-main;
-        background-color: $light-main;
-        background-position: 3.5px;
-        background-image: url('~public/img/check2.svg');
-      }
-    }
-  }
-}

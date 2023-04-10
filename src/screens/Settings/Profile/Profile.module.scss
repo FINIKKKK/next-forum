@@ -41,21 +41,12 @@
   }
 }
 
-.inputBlock {
-  &:not(:last-child) {
-    margin-bottom: 30px;
-  }
+.name {
+  margin-bottom: 15px !important;
+}
+.textarea {
   textarea {
-    margin-top: 12px;
-  }
-  &:global(.checkbox) {
-    margin-top: -15px;
-    label {
-      &::after {
-        margin-left: 25px;
-      }
-      width: auto;
-    }
+    height: 175px;
   }
 }
 

@@ -11,6 +11,11 @@
     word-wrap: break-word;
     word-break: break-all;
   }
+  .text p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px !important;
+  }
   .statistic {
     height: 100%;
     border-left: 2px solid rgba(#fff, 0.1);

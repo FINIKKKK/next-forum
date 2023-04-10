@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
 
+import { Input } from '@/components';
 import { useErrorMessage } from '@/hooks/useErrorMessage';
 import { useSelectors } from '@/hooks/useSelectors';
 import { SettingsLayout } from '@/layouts/SettingsLayout';
@@ -39,47 +40,28 @@ export const Account: React.FC<AccountProps> = ({}) => {
   useErrorMessage(message, setMessage, 5000);
 
   return (
-    <>
-      <div className={`inputBlock ${ss.inputBlock}`}>
-        <label>Email</label>
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="text"
-        />
-      </div>
-      <div className={`inputBlock ${ss.inputBlock}`}>
-        <label>Логин</label>
-        <input
-          value={login}
-          onChange={(e) => setLogin(e.target.value)}
-          type="text"
-        />
-      </div>
-      <div className={`inputBlock password ${ss.password} ${ss.inputBlock}`}>
-        <label>Старый пароль</label>
-        <input
-          value={oldPassword}
-          onChange={(e) => setOldPassword(e.target.value)}
-          type="text"
-        />
-      </div>
-      <div className={`inputBlock password ${ss.inputBlock}`}>
-        <label>Новый пароль</label>
-        <input
-          value={password1}
-          onChange={(e) => setPassword1(e.target.value)}
-          type="text"
-        />
-      </div>
-      <div className={`inputBlock password ${ss.inputBlock}`}>
-        <label>Подтвердите пароль</label>
-        <input
-          value={password2}
-          onChange={(e) => setPassword2(e.target.value)}
-          type="text"
-        />
-      </div>
+    <form>
+      <Input label="Email" value={email} setValue={setEmail} />
+      <Input label="Логин" value={login} setValue={setLogin} className={ss.login} />
+      <Input
+        type="password"
+        label="Старый пароль"
+        value={oldPassword}
+        setValue={setOldPassword}
+      />
+      <Input
+        type="password"
+        label="Новый пароль"
+        value={password1}
+        setValue={setPassword1}
+      />
+      <Input
+        type="password"
+        label="Подтвердите пароль"
+        value={password2}
+        setValue={setPassword2}
+      />
+
       <div className={ss.footer}>
         <button
           onClick={onUpdate}
@@ -93,6 +75,6 @@ export const Account: React.FC<AccountProps> = ({}) => {
           Забыли пароль?
         </Link>
       </div>
-    </>
+    </form>
   );
 };

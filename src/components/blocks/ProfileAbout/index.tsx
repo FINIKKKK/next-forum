@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
+import { Input } from '@/components';
 import { usePressKey } from '@/hooks/usePressKey';
 
 import ss from './ProfileAbout.module.scss';
@@ -29,23 +30,14 @@ export const ProfileAbout: React.FC<ProfileAboutProps> = ({
     >
       <div className={ss.about}>
         {isEdit ? (
-          <div className={`inputBlock ${ss.box}`}>
-            <label>О себе:</label>
-            <textarea
-              maxLength={900}
-              value={about}
-              onChange={(e) => setAbout(e.target.value)}
-              onKeyPress={(e: any) => usePressKey(e, 'Enter')}
-              className="input block"
-            ></textarea>
-          </div>
+          <Input
+            type="textarea"
+            label="О себе"
+            value={about}
+            setValue={setAbout}
+          />
         ) : (
-          about && (
-            <div className={`inputBlock ${ss.box}`}>
-              <label>О себе:</label>
-              <p className={ss.item}>{about}</p>
-            </div>
-          )
+          about && <Input type="text" label="О себе" text={about} className={ss.text} />
         )}
       </div>
       <div className={ss.statistic}>

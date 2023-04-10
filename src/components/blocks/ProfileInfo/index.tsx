@@ -1,7 +1,7 @@
 import React from 'react';
 import Sticky from 'react-stickynode';
 
-import { Avatar, Warning } from '@/components';
+import { Avatar, Input, Warning } from '@/components';
 import { useActions } from '@/hooks/useActions';
 import { useErrorMessage } from '@/hooks/useErrorMessage';
 import { Api } from '@/utils/api';
@@ -79,54 +79,32 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = ({
             {!isEdit ? (
               user.name && <div className={ss.name}>{name}</div>
             ) : (
-              <div className={`inputBlock ${ss.box}`}>
-                <label>Имя:</label>
-                <input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className={`block ${ss.input}`}
-                  type="text"
-                />
-              </div>
+              <Input label="Имя" value={name} setValue={setName} />
             )}
             {!isEdit && <h6 className={ss.login}>@{user.login}</h6>}
           </div>
           <div className={ss.extra}>
             {isEdit ? (
-              <div className={`inputBlock ${ss.box}`}>
-                <label>Местоположение:</label>
-                <input
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  className={`block ${ss.input}`}
-                  type="text"
-                />
-              </div>
+              <Input
+                label="Местоположение"
+                value={location}
+                setValue={setLocation}
+              />
             ) : (
               location && (
-                <div className={`inputBlock ${ss.box}`}>
-                  <label>Местоположение</label>
-                  <p className={`text ${ss.text}`}>{location}</p>
-                </div>
+                <Input type="text" label="Местоположение" text={location} />
               )
             )}
             {!isEdit && showEmail && (
-              <div className={`inputBlock ${ss.box}`}>
-                <label>Email</label>
-                <p className={`text ${ss.text}`}>{user.email}</p>
-              </div>
+              <Input type="text" label="Email" text={user.email} />
             )}
             {isEdit && (
-              <div className={`checkbox inputBlock ${ss.box} ${ss.showEmail}`}>
-                <input
-                  checked={showEmail}
-                  onChange={(e) => setShowEmail(e.target.checked)}
-                  type="checkbox"
-                  id="checkbox"
-                  name="checkbox"
-                />
-                <label htmlFor="checkbox">Показывать email</label>
-              </div>
+              <Input
+                type="checkbox"
+                label="Показывать email"
+                value={showEmail}
+                setValue={setShowEmail}
+              />
             )}
           </div>
           <div className={ss.footer}>

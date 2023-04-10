@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { Avatar, Warning } from '@/components';
+import { Avatar, Input, Warning } from '@/components';
 import { useActions } from '@/hooks/useActions';
 import { useErrorMessage } from '@/hooks/useErrorMessage';
 import { usePressKey } from '@/hooks/usePressKey';
@@ -109,54 +109,32 @@ export const Profile: React.FC<ProfileProps> = ({}) => {
         </div>
       </div>
 
-      <div className={`inputBlock ${ss.inputBlock}`}>
-        <label>Имя и фамилия</label>
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          type="text"
-        />
-      </div>
-
-      <div className={`inputBlock checkbox ${ss.inputBlock}`}>
-        <input
-          checked={showEmail}
-          onChange={(e) => setShowEmail(e.target.checked)}
+      <form>
+        <Input label="Имя и фамилия" value={name} setValue={setName} className={ss.name} />
+        <Input
           type="checkbox"
-          id="checkbox"
-          name="checkbox"
+          label="Показывать email"
+          value={showEmail}
+          setValue={setShowEmail}
         />
-        <label htmlFor="checkbox">Показывать email</label>
-      </div>
-
-      <div className={`inputBlock ${ss.inputBlock}`}>
-        <label>Местоположение</label>
-        <input
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          type="text"
-        />
-      </div>
-
-      <div className={`inputBlock ${ss.inputBlock}`}>
-        <label>О себе:</label>
-        <textarea
-          maxLength={900}
+        <Input label="Местоположение" value={location} setValue={setLocation} />
+        <Input
+          type="textarea"
+          label="О себе"
           value={about}
-          onChange={(e) => setAbout(e.target.value)}
-          onKeyPress={(e: any) => usePressKey(e, 'Enter')}
-          className="input block"
-        ></textarea>
-      </div>
+          setValue={setAbout}
+          className={ss.textarea}
+        />
 
-      <button
-        onClick={onUpdate}
-        className={classNames('btn', ss.btn, {
-          disabled: isLoading,
-        })}
-      >
-        Обновить
-      </button>
+        <button
+          onClick={onUpdate}
+          className={classNames('btn', ss.btn, {
+            disabled: isLoading,
+          })}
+        >
+          Обновить
+        </button>
+      </form>
 
       <Warning message={message} isActive={!!message} />
     </>

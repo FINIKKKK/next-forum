@@ -62,7 +62,7 @@ export const AuthInput: React.FC<AuthInputProps> = ({
               >
                 <use
                   xlinkHref={`../img/icons/icons.svg#${
-                    !showPassword ? "eye" : "fire"
+                    !showPassword ? "eye" : "noeye"
                   }`}
                 />
               </svg>

@@ -15,6 +15,7 @@ export * from './UI/Warning';
 export * from './UI/NotFound';
 export * from './UI/IsAnswers';
 export * from './UI/Rating';
+export * from './UI/Input';
 
 export * from './blocks/Question';
 export * from './blocks/Answer';
