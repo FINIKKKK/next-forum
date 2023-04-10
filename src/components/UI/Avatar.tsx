@@ -6,7 +6,7 @@ interface AvatarProps {
   avatar?: string | null;
   login?: string;
   className?: string;
-  isAnother?: boolean;
+  type?: string;
   onHandleClick?: () => void;
 }
 
@@ -14,18 +14,18 @@ export const Avatar: React.FC<AvatarProps> = ({
   avatar,
   login,
   className,
-  isAnother,
+  type,
   onHandleClick,
 }) => {
-  return isAnother ? (
+  return type ? (
     <div onClick={onHandleClick} className={`avatar block ${className}`}>
       {avatar ? (
         <Image
           className="avatar"
           src={avatar}
           alt="avatar"
-          width={45}
-          height={45}
+          width={type === "header" ? 100 : 400}
+          height={type === "header" ? 100 : 400}
         />
       ) : (
         <svg
@@ -54,8 +54,8 @@ export const Avatar: React.FC<AvatarProps> = ({
           className="avatar"
           src={avatar}
           alt="avatar"
-          width={45}
-          height={45}
+          width={100}
+          height={100}
         />
       ) : (
         <svg

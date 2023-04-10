@@ -77,10 +77,13 @@ export const EditQuestionTags: React.FC<EditQuestionTagsProps> = ({
             {selectedTags.map((obj) => (
               <li
                 key={obj.id}
-                className={ss.item}
+                className={`hover ${ss.item}`}
                 onClick={() => onRemoveTag(obj)}
               >
                 <p>{obj.name}</p>
+                <svg width="20" height="20">
+                  <use xlinkHref="../img/icons/icons.svg#close"/>
+                </svg>
               </li>
             ))}
           </ul>

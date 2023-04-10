@@ -35,7 +35,7 @@ export const User: React.FC<UserProps> = ({ avatar, userLogin }) => {
         avatar={avatar}
         login={userLogin}
         className={ss.avatar}
-        isAnother
+        type="header"
         onHandleClick={() => setShowPopup(!showPopup)}
       />
       {showPopup && (
@@ -46,7 +46,7 @@ export const User: React.FC<UserProps> = ({ avatar, userLogin }) => {
           >
             Профиль
           </Link>
-          <Link className={`popup__item ${ss.popup__item}`} href="/options">
+          <Link className={`popup__item ${ss.popup__item}`} href="/settings/profile">
             Настройки
           </Link>
           <button

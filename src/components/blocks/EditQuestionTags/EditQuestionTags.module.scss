@@ -45,9 +45,10 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    &::after {
-      content: url('~/public/img/close.svg');
-      margin-left: 7px;
+    svg {
+      width: 10px;
+      fill: $bg;
+      margin-left: 10px;
     }
   }
 
@@ -146,8 +147,8 @@
   .item {
     background-color: $light-main;
     color: $light-white;
-    &::after {
-      content: url('~/public/img/close-light.svg');
+    svg {
+      fill: $light-white;
     }
   }
 }

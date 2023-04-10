@@ -65,7 +65,7 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = ({
               avatar={avatar}
               login={user.login}
               className={ss.avatar}
-              isAnother
+              type="profile"
             />
             {isAuthor && (
               <div className={ss.avatar__edit}>

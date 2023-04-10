@@ -61,84 +61,85 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
       )}
       <div className={ss.block}>
         <h5>Меню</h5>
-        <ul className={ss.nav}>
-          <li
-            className={classNames('hover', ss.item, {
-              [ss.active]: router.pathname === '/',
+        <div className={`sidebar ${ss.nav}`}>
+          <Link
+            href="/"
+            className={classNames('hover item', ss.item, {
+              active: router.pathname === '/',
             })}
           >
-            <Link href="/">
-              <svg width="20" height="20">
-                <use xlinkHref="../img/icons/icons.svg#questions2" />
-              </svg>
-              <p>Все вопросы</p>
-            </Link>
-          </li>
-          <li className={`hover ${ss.item}`}>
-            <Link href="#">
-              <svg width="20" height="20">
-                <use xlinkHref="../img/icons/icons.svg#fire" />
-              </svg>
-              <p>Мои предпочтения</p>
-            </Link>
-          </li>
-          <li
-            className={classNames('hover', ss.item, {
-              [ss.active]: router.pathname === '/my',
+            <svg width="20" height="20">
+              <use xlinkHref="../img/icons/icons.svg#questions2" />
+            </svg>
+            <p>Все вопросы</p>
+          </Link>
+          <Link
+            href="/recomended"
+            className={classNames('hover item', ss.item, {
+              active: router.pathname === '/recomended',
             })}
           >
-            <Link href="/my">
-              <svg width="20" height="20">
-                <use xlinkHref="../img/icons/icons.svg#questions" />
-              </svg>
-              <p>Мои вопросы</p>
-            </Link>
-          </li>
-          <li
-            className={classNames('hover', ss.item, {
-              [ss.active]: router.pathname === '/favorites',
+            <svg width="20" height="20">
+              <use xlinkHref="../img/icons/icons.svg#fire" />
+            </svg>
+            <p>Мои предпочтения</p>
+          </Link>
+          <Link
+            href="/my"
+            className={classNames('hover item', ss.item, {
+              active: router.pathname === '/my',
             })}
           >
-            <Link href="/favorites">
-              <svg width="20" height="20">
-                <use xlinkHref="../img/icons/icons.svg#favorite" />
-              </svg>
-              <p>Мое избранное</p>
-            </Link>
-          </li>
-          <li className={`hover ${ss.item}`}>
-            <Link href="#">
-              <svg width="20" height="20">
-                <use xlinkHref="../img/icons/icons.svg#subcribe" />
-              </svg>
-              <p>Отслеживаемое</p>
-            </Link>
-          </li>
-          <li
-            className={classNames('hover', ss.item, {
-              [ss.active]: router.pathname === '/tags',
+            <svg width="20" height="20">
+              <use xlinkHref="../img/icons/icons.svg#questions" />
+            </svg>
+            <p>Мои вопросы</p>
+          </Link>
+          <Link
+            href="/favorites"
+            className={classNames('hover item', ss.item, {
+              active: router.pathname === '/favorites',
             })}
           >
-            <Link href="/tags">
-              <svg width="20" height="20">
-                <use xlinkHref="../img/icons/icons.svg#tags" />
-              </svg>
-              <p>Все метки</p>
-            </Link>
-          </li>
-          <li
-            className={classNames('hover', ss.item, {
-              [ss.active]: router.pathname === '/users',
+            <svg width="20" height="20">
+              <use xlinkHref="../img/icons/icons.svg#favorite" />
+            </svg>
+            <p>Мое избранное</p>
+          </Link>
+          <Link
+            href="/subscribe"
+            className={classNames('hover item', ss.item, {
+              active: router.pathname === '/subscribe',
             })}
           >
-            <Link href="/users">
-              <svg width="20" height="20">
-                <use xlinkHref="../img/icons/icons.svg#users" />
-              </svg>
-              <p>Все пользователи</p>
-            </Link>
-          </li>
-        </ul>
+            <svg width="20" height="20">
+              <use xlinkHref="../img/icons/icons.svg#subcribe" />
+            </svg>
+            <p>Отслеживаемое</p>
+          </Link>
+          <Link
+            href="/tags"
+            className={classNames('hover item', ss.item, {
+              active: router.pathname === '/tags',
+            })}
+          >
+            <svg width="20" height="20">
+              <use xlinkHref="../img/icons/icons.svg#tags" />
+            </svg>
+            <p>Все метки</p>
+          </Link>
+          <Link
+            href="/users"
+            className={classNames('hover item', ss.item, {
+              active: router.pathname === '/users',
+            })}
+          >
+            <svg width="20" height="20">
+              <use xlinkHref="../img/icons/icons.svg#users" />
+            </svg>
+            <p>Все пользователи</p>
+          </Link>
+        </div>
       </div>
 
       <div className={ss.block}>

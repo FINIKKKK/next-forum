@@ -19,7 +19,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ question, answers }) => {
 
   return (
     <MetaLayout title={`${question.title}`} description={description} noTitle>
-      <Question question={question} answerList={answers} />)
+      <Question question={question} answerList={answers} />
     </MetaLayout>
   );
 };

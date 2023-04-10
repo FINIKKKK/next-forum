@@ -1,12 +1,33 @@
+.sidebar {
+  .item {
+    display: inline-flex;
+    align-items: center;
+    &.active {
+      pointer-events: none;
+      color: $main;
+    }
+    &:not(:last-child) {
+      margin-bottom: 24px;
+    }
+    svg {
+      fill: $main;
+      width: 18px;
+      margin-right: 25px;
+    }
+    p {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 22px;
+    }
+  }
+}
+
 // --------- main ----------
 .main__inner {
   margin: 85px 0 150px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  .sidebar {
-    margin-right: 75px;
-  }
   .content {
     width: 75%;
   }

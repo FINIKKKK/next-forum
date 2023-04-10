@@ -77,7 +77,7 @@ export const Rating: React.FC<RatingProps> = ({ id, rating: ratingValue }) => {
         width="20"
         height="20"
       >
-        <use xlinkHref="../img/icons/icons.svg#arrow-up" />
+        <use xlinkHref="../img/icons/icons.svg#arrow2" />
       </svg>
       <div className={ss.number}>{rating}</div>
       <svg
@@ -86,7 +86,7 @@ export const Rating: React.FC<RatingProps> = ({ id, rating: ratingValue }) => {
         width="20"
         height="20"
       >
-        <use xlinkHref="../img/icons/icons.svg#arrow-down" />
+        <use xlinkHref="../img/icons/icons.svg#arrow1" />
       </svg>
     </div>
   );

@@ -95,12 +95,11 @@
       font-weight: 700;
       word-wrap: break-word;
       word-break: break-all;
+      padding-top: 12px;
     }
-    .item,
     .input {
       padding: 15px;
-    }
-    .input {
+      background-color: $purple;
       margin-top: 10px;
     }
   }

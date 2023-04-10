@@ -1,0 +1,33 @@
+@import '@/styles/assets/variables';
+
+.settings {
+  margin-top: 70px;
+  margin-bottom: 120px;
+  .title {
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 32px;
+  }
+  .inner {
+    display: flex;
+    justify-content: space-between;
+  }
+  .title {
+    margin-bottom: 30px;
+    text-align: right;
+  }
+  .main {
+    width: 100%;
+  }
+  .main__inner {
+    padding: 45px;
+  }
+  .main__title {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    width: 100%;
+    border-bottom: 2px solid $gray2;
+    margin-bottom: 45px;
+  }
+}

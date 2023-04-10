@@ -1,0 +1,9 @@
+@import '@/styles/assets/variables';
+
+.sidebar {
+  margin-top: 60px;
+  width: 25%;
+  .item {
+    display: flex !important;
+  }
+}

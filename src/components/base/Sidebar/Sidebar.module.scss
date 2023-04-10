@@ -2,6 +2,7 @@
 
 .sidebar {
   width: 25% !important;
+  margin-right: 75px;
   .btn {
     width: 100%;
     margin-bottom: 50px;
@@ -22,33 +23,6 @@
       font-size: 14px;
       margin-bottom: 20px;
       color: $gray;
-    }
-  }
-  .nav {
-    .item {
-      &.active {
-        pointer-events: none;
-        a {
-          color: $main;
-        }
-      }
-      &:not(:last-child) {
-        margin-bottom: 24px;
-      }
-      a {
-        display: inline-flex;
-        align-items: center;
-      }
-      svg {
-        fill: $main;
-        width: 18px;
-        margin-right: 25px;
-      }
-      p {
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 22px;
-      }
     }
   }
   .tagList {

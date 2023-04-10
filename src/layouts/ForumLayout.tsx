@@ -1,4 +1,4 @@
-import { Footer, Header, Sidebar } from "@/components";
+import { Footer, Header, Sidebar } from '@/components';
 
 type ForumLayoutsProps = {
   children: any;
