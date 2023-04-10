@@ -53,7 +53,6 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = ({
       }
     }
   };
-
   useErrorMessage(error, setError, 5000);
 
   return (
@@ -126,9 +125,7 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = ({
                   id="checkbox"
                   name="checkbox"
                 />
-                <label htmlFor="checkbox">
-                  Показывать email
-                </label>
+                <label htmlFor="checkbox">Показывать email</label>
               </div>
             )}
           </div>

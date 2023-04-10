@@ -28,7 +28,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
 
   return (
     <Sticky
-      top={25}
+      top={45}
       bottomBoundary={bottomBoundary ? bottomBoundary : 'window'}
       className={`sidebar ${ss.sidebar}`}
     >

@@ -7,15 +7,15 @@ export type TUsers = TTotal & {
 export type TUser = TBase & {
   login: string;
   email: string;
-  password: string;
-  name?: string;
-  avatar?: string;
+  password: string | null;
+  name: string | null;
+  avatar: string | null;
   token: string;
   questionCount: number;
   answerCount: number;
-  location?: string;
+  location: string | null;
   favorites: Number[];
-  about?: string;
+  about: string | null;
   showEmail: boolean;
 };
 

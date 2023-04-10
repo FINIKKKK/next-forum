@@ -17,7 +17,7 @@ const userSlice = createSlice({
     setUserData(state, { payload }: PayloadAction<TUser | null>) {
       state.data = payload;
     },
-    setUserAvatar(state, { payload }: PayloadAction<string>) {
+    setUserAvatar(state, { payload }: PayloadAction<string | null>) {
       if (state.data) {
         state.data.avatar = payload;
       }
