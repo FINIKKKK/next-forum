@@ -5,15 +5,20 @@ const nextConfig = {
     domains: ['localhost'],
   },
   // basePath: '/forum',
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/',
-  //       destination: '/forum',
-  //       permanent: true,
-  //     },
-  //   ];
-  // },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/forum',
+        permanent: true,
+      },
+      {
+        source: '/settings',
+        destination: '/settings/profile',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

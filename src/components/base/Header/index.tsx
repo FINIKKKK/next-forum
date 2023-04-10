@@ -28,7 +28,7 @@ export const Header: React.FC<HeaderProps> = ({}) => {
       <div className="container">
         <nav className={ss.nav}>
           <div className={ss.box}>
-            <Link href="/" className={ss.logo}>
+            <Link href="/forum" className={ss.logo}>
               <svg
                 className={ss.logo}
                 width="149"

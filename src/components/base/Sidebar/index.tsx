@@ -55,7 +55,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
       className={`sidebar ${ss.sidebar}`}
     >
       {userData && (
-        <Link href="/create" className={`btn ${ss.btn}`}>
+        <Link href="/questions/create" className={`btn ${ss.btn}`}>
           Задать вопрос
         </Link>
       )}
@@ -63,9 +63,9 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
         <h5>Меню</h5>
         <div className={`sidebar ${ss.nav}`}>
           <Link
-            href="/"
+            href="/forum"
             className={classNames('hover item', ss.item, {
-              active: router.pathname === '/',
+              active: router.pathname === '/forum',
             })}
           >
             <svg width="20" height="20">
@@ -74,9 +74,9 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             <p>Все вопросы</p>
           </Link>
           <Link
-            href="/recomended"
+            href="/forum/recomended"
             className={classNames('hover item', ss.item, {
-              active: router.pathname === '/recomended',
+              active: router.pathname === '/forum/recomended',
             })}
           >
             <svg width="20" height="20">
@@ -85,9 +85,9 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             <p>Мои предпочтения</p>
           </Link>
           <Link
-            href="/my"
+            href="/forum/my"
             className={classNames('hover item', ss.item, {
-              active: router.pathname === '/my',
+              active: router.pathname === '/forum/my',
             })}
           >
             <svg width="20" height="20">
@@ -96,9 +96,9 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             <p>Мои вопросы</p>
           </Link>
           <Link
-            href="/favorites"
+            href="/forum/favorites"
             className={classNames('hover item', ss.item, {
-              active: router.pathname === '/favorites',
+              active: router.pathname === '/forum/favorites',
             })}
           >
             <svg width="20" height="20">
@@ -107,9 +107,9 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             <p>Мое избранное</p>
           </Link>
           <Link
-            href="/subscribe"
+            href="/forum/subscribe"
             className={classNames('hover item', ss.item, {
-              active: router.pathname === '/subscribe',
+              active: router.pathname === '/forum/subscribe',
             })}
           >
             <svg width="20" height="20">
@@ -118,9 +118,9 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             <p>Отслеживаемое</p>
           </Link>
           <Link
-            href="/tags"
+            href="/forum/tags"
             className={classNames('hover item', ss.item, {
-              active: router.pathname === '/tags',
+              active: router.pathname === '/forum/tags',
             })}
           >
             <svg width="20" height="20">
@@ -129,9 +129,9 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             <p>Все метки</p>
           </Link>
           <Link
-            href="/users"
+            href="/forum/users"
             className={classNames('hover item', ss.item, {
-              active: router.pathname === '/users',
+              active: router.pathname === '/forum/users',
             })}
           >
             <svg width="20" height="20">
@@ -147,7 +147,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
         <ul className={ss.tagList}>
           {tags.map((obj) => (
             <li key={obj.id} className={`hover tag ${ss.tag}`}>
-              <Link href={`/?tagBy=${obj.name}`}>{obj.name}</Link>
+              <Link href={`/forum/?tagBy=${obj.name}`}>{obj.name}</Link>
             </li>
           ))}
         </ul>

@@ -13,7 +13,7 @@ export const SettingsLayout: React.FC<SettingsLayoutsProps> = ({
   title,
 }) => {
   return (
-    <MetaLayout title="Настройки профиля" description="Настройки профиля">
+    <MetaLayout title="Настройки аккаунта" description="Настройки аккаунта">
       <MainLayout>
         <div className={ss.settings}>
           <div className="container">
