@@ -80,8 +80,8 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = ({
             {!isEdit ? (
               user.name && <div className={ss.name}>{name}</div>
             ) : (
-              <div className={ss.box}>
-                <label className={ss.label}>Имя:</label>
+              <div className={`inputBlock ${ss.box}`}>
+                <label>Имя:</label>
                 <input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -94,8 +94,8 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = ({
           </div>
           <div className={ss.extra}>
             {isEdit ? (
-              <div className={ss.box}>
-                <label className={ss.label}>Местоположение:</label>
+              <div className={`inputBlock ${ss.box}`}>
+                <label>Местоположение:</label>
                 <input
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
@@ -105,29 +105,28 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = ({
               </div>
             ) : (
               location && (
-                <div className={ss.box}>
-                  <div className={ss.label}>Местоположение</div>
-                  <p className={ss.item}>{location}</p>
+                <div className={`inputBlock ${ss.box}`}>
+                  <label>Местоположение</label>
+                  <p className={`text ${ss.text}`}>{location}</p>
                 </div>
               )
             )}
             {!isEdit && showEmail && (
-              <div className={ss.box}>
-                <div className={ss.label}>Email</div>
-                <p className={ss.item}>{user.email}</p>
+              <div className={`inputBlock ${ss.box}`}>
+                <label>Email</label>
+                <p className={`text ${ss.text}`}>{user.email}</p>
               </div>
             )}
             {isEdit && (
-              <div className={`${ss.box} ${ss.showEmail}`}>
+              <div className={`checkbox inputBlock ${ss.box} ${ss.showEmail}`}>
                 <input
                   checked={showEmail}
                   onChange={(e) => setShowEmail(e.target.checked)}
                   type="checkbox"
-                  className={ss.checkbox}
                   id="checkbox"
                   name="checkbox"
                 />
-                <label className={ss.label} htmlFor="checkbox">
+                <label htmlFor="checkbox">
                   Показывать email
                 </label>
               </div>

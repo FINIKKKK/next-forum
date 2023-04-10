@@ -29,8 +29,8 @@ export const ProfileAbout: React.FC<ProfileAboutProps> = ({
     >
       <div className={ss.about}>
         {isEdit ? (
-          <div className={ss.box}>
-            <label className={ss.label}>О себе:</label>
+          <div className={`inputBlock ${ss.box}`}>
+            <label>О себе:</label>
             <textarea
               maxLength={900}
               value={about}
@@ -41,8 +41,8 @@ export const ProfileAbout: React.FC<ProfileAboutProps> = ({
           </div>
         ) : (
           about && (
-            <div className={ss.box}>
-              <label className={ss.label}>О себе:</label>
+            <div className={`inputBlock ${ss.box}`}>
+              <label>О себе:</label>
               <p className={ss.item}>{about}</p>
             </div>
           )

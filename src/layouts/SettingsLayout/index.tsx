@@ -1,3 +1,5 @@
+import { useSelectors } from '@/hooks/useSelectors';
+
 import { MainLayout } from '../MainLayout';
 import { MetaLayout } from '../MetaLayout';
 import ss from './SettingsLayout.module.scss';
@@ -13,7 +15,7 @@ export const SettingsLayout: React.FC<SettingsLayoutsProps> = ({
   title,
 }) => {
   return (
-    <MetaLayout title="Настройки аккаунта" description="Настройки аккаунта">
+    <MetaLayout title="Настройки аккаунта">
       <MainLayout>
         <div className={ss.settings}>
           <div className="container">

@@ -24,7 +24,7 @@
       }
     }
   }
-  
+
   .avatar {
     width: 100%;
     height: 100%;
@@ -82,28 +82,6 @@
     }
   }
 
-  .box {
-    .label {
-      font-weight: 700;
-      font-size: 14px;
-      line-height: 16px;
-      color: $gray;
-    }
-    .item {
-      font-size: 16px;
-      line-height: 20px;
-      font-weight: 700;
-      word-wrap: break-word;
-      word-break: break-all;
-      padding-top: 12px;
-    }
-    .input {
-      padding: 15px;
-      background-color: $purple;
-      margin-top: 10px;
-    }
-  }
-
   .footer {
     margin-top: 35px;
     display: flex;
@@ -118,100 +96,11 @@
     display: flex;
     margin: 0 auto;
   }
-
-  .input {
-    width: 100%;
-    background-color: $purple;
-    color: $white;
-    padding: 15px;
-    border-radius: 15px;
-    font-size: 14px;
-    &::placeholder {
-      color: rgba($white, 0.5);
-    }
-  }
-
-  .showEmail {
-    .label {
-      cursor: pointer;
-      width: 100%;
-      margin-bottom: 0;
-      transition: 0.3s;
-    }
-    &:hover {
-      .checkbox + label::after {
-        border-color: $white;
-      }
-      label {
-        color: $white;
-      }
-    }
-    .checkbox {
-      position: absolute;
-      z-index: -1;
-      opacity: 0;
-    }
-    .checkbox + label {
-      display: inline-flex;
-      align-items: center;
-      user-select: none;
-      justify-content: space-between;
-    }
-    .checkbox + label::after {
-      transition: 0.3s;
-      content: '';
-      display: inline-block;
-      width: 15px;
-      height: 15px;
-      flex-shrink: 0;
-      flex-grow: 0;
-      border: 1px solid $gray;
-      border-radius: 4px;
-      margin-right: 0.5em;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: 50% 50%;
-    }
-    .checkbox:checked + label {
-      color: $main;
-    }
-    .checkbox:checked + label::after {
-      border-color:  $main;
-      background-color:  $main;
-      background-image: url('~public/img/check.svg');
-    }
-  }
 }
 
 :global(.light) {
   .avatar__wrapper {
     border-color: $light-main;
   }
-  .box .label {
-    color: $light-gray;
-  }
-  .input {
-    color: $light-main;
-  }
-  .showEmail {
-    &:hover {
-      .checkbox + label::after {
-        border-color: $light-main;
-      }
-      label {
-        color: $light-main;
-      }
-    }
-    .checkbox + label::after {
-      border: 1px solid $light-gray;
-    }
-    .checkbox:checked + label {
-      color: $light-main;
-    }
-    .checkbox:checked + label::after {
-      border-color:  $light-main;
-      background-color:  $light-main;
-      background-image: url('~public/img/check.svg');
-    }
-  }
+  
 }

@@ -10,16 +10,6 @@
     position: relative;
     word-wrap: break-word;
     word-break: break-all;
-    textarea {
-      position: relative;
-      width: 100%;
-      height: 200px;
-      border-radius: 15px;
-      background-color: $purple;
-      color: $white;
-      padding: 15px 15px;
-      font-size: 14px;
-    }
   }
   .statistic {
     height: 100%;
@@ -104,12 +94,6 @@
 }
 
 :global(.light) {
-  .box .label {
-    color: $light-gray;
-  }
-  .about textarea {
-    color: $light-main;
-  }
   .statistic {
     border-color: $light-gray2 !important;
     .item {
