@@ -14,14 +14,13 @@ interface ProfileProps {}
 
 export const Profile: React.FC<ProfileProps> = ({}) => {
   const { data: user } = useSelectors((state) => state.user);
-  const [name, setName] = React.useState(user?.name);
-  const [location, setLocation] = React.useState(user?.location);
-  const [about, setAbout] = React.useState(user?.about);
+  const [name, setName] = React.useState(user?.name || '');
+  const [location, setLocation] = React.useState(user?.location || '');
+  const [about, setAbout] = React.useState(user?.about || '');
   const [showEmail, setShowEmail] = React.useState(user?.showEmail);
   const [message, setMessage] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
   const { setUserAvatar } = useActions();
-  const [file, setFile] = React.useState(null);
 
   const onUpdate = async () => {
     try {

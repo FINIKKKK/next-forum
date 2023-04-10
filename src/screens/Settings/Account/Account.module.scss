@@ -1,0 +1,27 @@
+@import '@/styles/assets/variables';
+
+.inputBlock {
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
+  &.password {
+    margin-top: 60px;
+  }
+}
+
+.footer {
+  margin-top: 50px;
+}
+.btn {
+  padding: 9px 40px;
+  font-size: 14px;
+}
+.link {
+  margin-left: 25px;
+  font-weight: 700;
+  color: $gray;
+  font-size: 14px;
+  &:hover {
+    color: $white;
+  }
+}
