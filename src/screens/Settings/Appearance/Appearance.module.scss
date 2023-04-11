@@ -65,7 +65,7 @@
       height: 170px;
       border-radius: 15px;
       overflow: hidden;
-      border: 1px solid $white;
+      border: 2px solid $white;
     }
   }
   .input {
@@ -73,5 +73,38 @@
     border-radius: 0 0 15px 15px;
     padding: 30px 20px 10px;
     margin-top: -20px;
+  }
+}
+
+:global(.light) {
+  .radio {
+    span {
+      color: $light-gray;
+    }
+    &:hover {
+      & > input:not(:disabled):not(:checked) + span:hover::before {
+        border-color: $light-main;
+      }
+      span {
+        color: $light-main;
+      }
+    }
+    & > span::before {
+      border: 2px solid $light-gray;
+    }
+    & > input:checked + span {
+      color: $light-main;
+    }
+    & > input:checked + span::before {
+      border-color: $light-main;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3.5' fill='%230b828c'/%3e%3c/svg%3e");
+    }
+  }
+  .item img {
+    border: 2px solid $light-main;
+  }
+  .input {
+    background-color: $light-hover;
+
   }
 }

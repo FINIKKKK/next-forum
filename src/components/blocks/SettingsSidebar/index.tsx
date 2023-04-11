@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import Sticky from 'react-stickynode';
 
-import ss from './Sidebar.module.scss';
+import ss from './SettingsSidebar.module.scss';
 
-interface SidebarProps {}
+interface SettingsSidebarProps {}
 
-export const Sidebar: React.FC<SidebarProps> = ({}) => {
+export const SettingsSidebar: React.FC<SettingsSidebarProps> = ({}) => {
   const router = useRouter();
   const [bottomBoundary, setBottomBoundary] = React.useState<number | null>(
     null,

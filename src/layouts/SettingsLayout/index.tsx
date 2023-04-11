@@ -1,9 +1,7 @@
-import { useSelectors } from '@/hooks/useSelectors';
-
+import { SettingsSidebar } from '@/components';
 import { MainLayout } from '../MainLayout';
 import { MetaLayout } from '../MetaLayout';
 import ss from './SettingsLayout.module.scss';
-import { Sidebar } from './Sidebar';
 
 type SettingsLayoutsProps = {
   children: React.ReactNode;
@@ -20,7 +18,7 @@ export const SettingsLayout: React.FC<SettingsLayoutsProps> = ({
         <div className={ss.settings}>
           <div className="container">
             <div className={ss.inner}>
-              <Sidebar />
+              <SettingsSidebar />
 
               <main className={ss.main}>
                 <h2 className={ss.title}>Настройки аккаунта</h2>

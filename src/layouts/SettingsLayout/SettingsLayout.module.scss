@@ -22,7 +22,6 @@
   .main__inner {
     padding: 45px;
     background-color: $purple2;
-
   }
   .main__title {
     font-weight: 700;
@@ -32,5 +31,11 @@
     border-bottom: 2px solid $gray2;
     margin-bottom: 45px;
     padding-bottom: 17px;
+  }
+}
+
+:global(.light) {
+  .main__title {
+    border-bottom: 2px solid $light-gray2;
   }
 }
