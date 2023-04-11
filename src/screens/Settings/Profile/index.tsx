@@ -109,32 +109,35 @@ export const Profile: React.FC<ProfileProps> = ({}) => {
         </div>
       </div>
 
-      <form>
-        <Input label="Имя и фамилия" value={name} setValue={setName} className={ss.name} />
-        <Input
-          type="checkbox"
-          label="Показывать email"
-          value={showEmail}
-          setValue={setShowEmail}
-        />
-        <Input label="Местоположение" value={location} setValue={setLocation} />
-        <Input
-          type="textarea"
-          label="О себе"
-          value={about}
-          setValue={setAbout}
-          className={ss.textarea}
-        />
+      <Input
+        label="Имя и фамилия"
+        value={name}
+        setValue={setName}
+        className={ss.name}
+      />
+      <Input
+        type="checkbox"
+        label="Показывать email"
+        value={showEmail}
+        setValue={setShowEmail}
+      />
+      <Input label="Местоположение" value={location} setValue={setLocation} />
+      <Input
+        type="textarea"
+        label="О себе"
+        value={about}
+        setValue={setAbout}
+        className={ss.textarea}
+      />
 
-        <button
-          onClick={onUpdate}
-          className={classNames('btn', ss.btn, {
-            disabled: isLoading,
-          })}
-        >
-          Обновить
-        </button>
-      </form>
+      <button
+        onClick={onUpdate}
+        className={classNames('btn', ss.btn, {
+          disabled: isLoading,
+        })}
+      >
+        Обновить
+      </button>
 
       <Warning message={message} isActive={!!message} />
     </>

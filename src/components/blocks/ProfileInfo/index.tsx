@@ -48,7 +48,6 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = ({
         setAvatar(avatar);
         setUserAvatar(avatar);
       } catch (err) {
-        console.log(err.response.data.message);
         setError(err.response.data.message);
       }
     }

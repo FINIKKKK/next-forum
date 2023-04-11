@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 
 import { usePressKey } from '@/hooks/usePressKey';
 
@@ -12,6 +13,7 @@ interface InputProps {
   setValue?: (value: any) => void;
   text?: string;
   className?: string;
+  name?: string;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -21,18 +23,23 @@ export const Input: React.FC<InputProps> = ({
   setValue,
   text,
   className,
+  name,
 }) => {
   const [showPassword, setShowPassword] = React.useState(false);
+  const { register, formState } = useFormContext() || {};
 
   if (type === 'password') {
     return (
       <div className={`${className} ${ss.input} ${ss.password}`}>
         <label>{label}</label>
         <input
+          {...(name && register(name))}
+          name={name}
           value={value}
           onChange={(e) => setValue && setValue(e.target.value)}
           type={type === 'password' && !showPassword ? 'password' : 'text'}
         />
+        <div className="error">{formState?.errors[name]?.message}</div>
         {value && type === 'password' && (
           <svg
             onClick={() => setShowPassword(!showPassword)}
@@ -89,10 +96,13 @@ export const Input: React.FC<InputProps> = ({
       <div className={`${className} ${ss.input}`}>
         <label>{label}</label>
         <input
+          {...(name && register(name))}
+          name={name}
           value={value}
           onChange={(e) => setValue && setValue(e.target.value)}
           type="text"
         />
+        <div className={ss.error}>{formState?.errors[name]?.message}</div>
       </div>
     );
   }
