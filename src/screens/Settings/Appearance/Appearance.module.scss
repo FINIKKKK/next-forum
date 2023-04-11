@@ -1,0 +1,77 @@
+@import '@/styles/assets/variables';
+
+.radio {
+  cursor: pointer;
+  span {
+    font-weight: 700;
+    font-size: 16px;
+    transition: 0.3s;
+    color: $gray;
+  }
+  &:hover {
+    & > input:not(:disabled):not(:checked) + span:hover::before {
+      border-color: $white;
+    }
+    span {
+      color: $white;
+    }
+  }
+  & > input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+  /* for the label element associated with & */
+  & > span {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+  }
+  /* creating a pseudo-element in label before with the following styles */
+  & > span::before {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 2px solid $gray;
+    border-radius: 50%;
+    margin-right: 20px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+    transition: 0.3s;
+  }
+  /* styles for a radio button in the checked state */
+  & > input:checked + span {
+    color: $main;
+  }
+  & > input:checked + span::before {
+    border-color: $main;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3.5' fill='%230df6e3'/%3e%3c/svg%3e");
+  }
+}
+
+.list {
+  margin-bottom: 55px;
+  display: flex;
+  .item {
+    &:not(:last-child) {
+      margin-right: 35px;
+    }
+    img {
+      width: 280px;
+      height: 170px;
+      border-radius: 15px;
+      overflow: hidden;
+      border: 1px solid $white;
+    }
+  }
+  .input {
+    background-color: $purple;
+    border-radius: 0 0 15px 15px;
+    padding: 30px 20px 10px;
+    margin-top: -20px;
+  }
+}
