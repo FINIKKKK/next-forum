@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
+import Placeholder from 'react-select/dist/declarations/src/components/Placeholder';
 
 import ss from './Select.module.scss';
 
@@ -15,6 +16,7 @@ interface SelectComponentProps {
   value: TOption;
   options: TOption[];
   setValue: (value: any) => void;
+  placeholder?: string;
 }
 
 export const SelectComponent: React.FC<SelectComponentProps> = ({
@@ -22,6 +24,7 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({
   value,
   options,
   setValue,
+  placeholder,
 }) => {
   return (
     <Select
@@ -33,6 +36,7 @@ export const SelectComponent: React.FC<SelectComponentProps> = ({
       onChange={(value: any) => setValue(value)}
       options={options}
       isSearchable={false}
+      placeholder={placeholder}
       // menuIsOpen={true}
     />
   );

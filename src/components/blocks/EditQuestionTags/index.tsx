@@ -11,12 +11,14 @@ interface EditQuestionTagsProps {
   selectedTags: TTag[];
   setSelectedTags: any;
   error?: string;
+  className?: string;
 }
 
 export const EditQuestionTags: React.FC<EditQuestionTagsProps> = ({
   selectedTags,
   setSelectedTags,
   error,
+  className
 }) => {
   const [isVisible, setIsVisible] = React.useState(false);
   const [tagsValue, setTagsValue] = React.useState('');
@@ -69,7 +71,7 @@ export const EditQuestionTags: React.FC<EditQuestionTagsProps> = ({
     <div
       ref={refTags}
       onClick={() => setIsVisible(true)}
-      className={`inputBlock ${ss.tags}`}
+      className={`inputBlock ${className} ${ss.tags}`}
     >
       <div className={ss.input}>
         {selectedTags.length > 0 && (

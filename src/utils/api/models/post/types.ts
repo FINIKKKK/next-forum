@@ -12,6 +12,8 @@ export type TPosts = TTotal & {
 export type TPost = TBase & {
   title: string;
   body: OutputBlockData[];
+  image: string;
+  description: string;
   user: TUser;
   category: TCategory;
   tags: TTag[];

@@ -14,7 +14,7 @@ interface EditQuestionPageProps {
 const EditQuestionPage: NextPage<EditQuestionPageProps> = ({ question }) => {
   return (
     <MetaLayout title="Редактировать вопрос">
-      <CreateQuestion questionData={question} />
+      <CreateQuestion label="Редактировать вопрос" questionData={question} />
     </MetaLayout>
   );
 };

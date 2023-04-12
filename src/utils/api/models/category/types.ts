@@ -1,7 +1,8 @@
 import { TBase } from '../../types';
 
 export type TCategory = TBase & {
-  name: string;
+  value: string;
+  label: string;
   description: string;
   postsCount: number;
 };
