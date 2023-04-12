@@ -53,3 +53,17 @@ export const UpdateUserPasswordScheme = yup.object().shape({
     .oneOf([yup.ref('password1')], 'Пароли должны совпадать')
     .required('Поле является обязательным'),
 });
+
+export const PostScheme = yup.object().shape({
+  title: yup
+    .string()
+    .min(20, 'Заголовок должен состоять минимум из 20 символов')
+    .max(200, 'Заголовок должен состоять максимум из 200 символов'),
+  tags: yup
+    .array()
+    .min(1, 'Пост должен иметь минимум 1 метку')
+    .max(6, 'Пост должен иметь максимум 6 меток'),
+  body: yup.array().min(1, 'Вы должны хоть что-то написать'),
+  category: yup.mixed().required('Поле является обязательным'),
+  image: yup.string().required('Поле является обязательным'),
+});

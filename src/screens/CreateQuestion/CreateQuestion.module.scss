@@ -58,7 +58,12 @@
     margin-bottom: 30px;
     .select {
       width: 220px;
+      height: 50px;
       margin-right: 35px;
+      &:hover {
+        transform: none;
+        box-shadow: 0px 4px 8px #2e2443;
+      }
       :global {
         .select__control {
           width: 100%;
@@ -77,6 +82,21 @@
       width: 80%;
       margin-bottom: 0;
     }
+    .select__wrapper {
+      :global {
+        .error {
+          margin-top: 8px;
+        }
+      }
+    }
+  }
+  .image__wrapper {
+    margin-bottom: 30px;
+    :global {
+      .error {
+        margin-top: 8px;
+      }
+    }
   }
   .image {
     position: relative;
@@ -84,7 +104,6 @@
     height: 450px;
     background-color: $purple;
     border-radius: 10px;
-    margin-bottom: 30px;
     overflow: hidden;
     input {
       cursor: pointer;
@@ -115,14 +134,43 @@
       top: 50%;
       transform: translate(-50%, -50%);
       svg {
-        fill: $gray;
-        margin-bottom: 25px;
-        width: 150px;
+        path {
+          fill: $gray;
+        }
+        margin-bottom: 35px;
+        width: 135px;
       }
       p {
         font-size: 18px;
         font-weight: 700;
         color: $gray;
+      }
+    }
+  }
+}
+
+:global(.light) {
+  .extra {
+    .select {
+      &:hover {
+        transform: none;
+        box-shadow: -5px -5px 20px rgba(255, 255, 255, 0.53),
+          13px 14px 12px -6px rgba(166, 180, 200, 0.57);
+      }
+      :global {
+        .select__placeholder {
+          color: $light-gray;
+        }
+      }
+    }
+  }
+  .image {
+    .content {
+      svg path {
+        fill: $light-gray;
+      }
+      p {
+        color: $light-gray;
       }
     }
   }

@@ -14,6 +14,7 @@ export type TPost = TBase & {
   body: OutputBlockData[];
   image: string;
   description: string;
+  slug: string;
   user: TUser;
   category: TCategory;
   tags: TTag[];
