@@ -1,7 +1,8 @@
-import { OutputBlockData } from "@editorjs/editorjs";
-import { TBase } from "../../types";
-import { TQuestion } from "../question/types";
-import { TUser } from "../user/types";
+import { OutputBlockData } from '@editorjs/editorjs';
+
+import { TBase } from '../../types';
+import { TQuestion } from '../question/types';
+import { TUser } from '../user/types';
 
 export type TAnswer = TBase & {
   body: OutputBlockData[];
@@ -21,4 +22,5 @@ export type UpdateAnswerDto = Partial<AnswerDto>;
 
 export type ParamsAnswerDto = {
   questionId: number;
+  orderBy: string;
 };

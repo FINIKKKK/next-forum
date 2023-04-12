@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -16,6 +17,7 @@ interface HeaderProps {}
 export const Header: React.FC<HeaderProps> = ({}) => {
   const { data: userData, theme } = useSelectors((state) => state.user);
   const { setTheme } = useActions();
+  const router = useRouter();
 
   const onChangeTheme = () => {
     const newTheme = theme === Theme.dark ? Theme.light : Theme.dark;
@@ -173,37 +175,46 @@ export const Header: React.FC<HeaderProps> = ({}) => {
                 />
               </svg>
             </Link>
-            {/* <ul className={ss.menu}>
-              <li className={`${ss.item} ${ss.active}`}>
-                <a href="#">Форум</a>
+            <ul className={ss.menu}>
+              <li
+                className={classNames(ss.item, {
+                  [ss.active]: router.pathname.startsWith('/forum'),
+                })}
+              >
+                <Link href="/forum">Форум</Link>
               </li>
-              <li className={ss.item}>
-                <a href="#">Лента</a>
+              <li
+                className={classNames(ss.item, {
+                  [ss.active]: router.pathname === '/feed',
+                })}
+              >
+                <Link href="/feed">Лента</Link>
               </li>
-              <li className={ss.item}>
-                <a href="#">Вакансии</a>
-              </li>
-            </ul> */}
+            </ul>
           </div>
 
           <div className={ss.options}>
-            <button onClick={onChangeTheme} className={ss.btn__theme}>
-              <span
-                className={classNames(ss.shape, {
-                  [ss.dark]: theme === Theme.light,
-                  [ss.light]: theme === Theme.dark,
-                })}
-              ></span>
-              <span className={ss.rays}>
-                <span className={ss.ray}></span>
-                <span className={ss.ray}></span>
-                <span className={ss.ray}></span>
-                <span className={ss.ray}></span>
-              </span>
-            </button>
+            <div className={ss.theme}>
+              <input
+                onClick={onChangeTheme}
+                type="checkbox"
+                className={ss.checkbox}
+                id="checkbox"
+              />
+              <label htmlFor="checkbox" className={ss.label}>
+                <svg className={ss.moon} width="20" height="20">
+                  <use xlinkHref="../img/icons/icons.svg#moon" />
+                </svg>
+                <svg className={ss.sun} width="20" height="20">
+                  <use xlinkHref="../img/icons/icons.svg#sun" />
+                </svg>
+                <div className={ss.ball}></div>
+              </label>
+            </div>
+
             {userData && (
               <>
-                <Notices />
+                {/* <Notices /> */}
                 <User userLogin={userData?.login} avatar={userData?.avatar} />
               </>
             )}

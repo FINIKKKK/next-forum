@@ -10,6 +10,7 @@ import {
 } from '@/components';
 import { useSelectors } from '@/hooks/useSelectors';
 import { ForumLayout } from '@/layouts/ForumLayout';
+import { Api } from '@/utils/api';
 import { TAnswer } from '@/utils/api/models/answer/types';
 import { TQuestion } from '@/utils/api/models/question/types';
 
@@ -42,27 +43,21 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
   const refCreateAnswer = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    if (option.value === 'rating') {
-      answers.sort((a, b) => {
-        if (b.isAnswer && !a.isAnswer) {
-          return 1;
-        } else if (a.isAnswer && !b.isAnswer) {
-          return -1;
-        } else {
-          return b.rating - a.rating;
-        }
-      });
-    } else if (option.value === 'date1') {
-      answers.sort(
-        (a, b) =>
-          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
-      );
-    } else if (option.value === 'date2') {
-      answers.sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-      );
-    }
+    (async () => {
+      try {
+        console.log(option.value);
+        const params = {
+          questionId: question.id,
+          orderBy: option.value,
+        };
+        const answers = await Api().answer.getAll(params);
+        console.log("answers", answers);
+        setAnswers(answers);
+      } catch (err) {
+        console.warn(err);
+        alert('Ошибка при получении ответов');
+      }
+    })();
   }, [option]);
 
   const changeIsAnswer = (id: number) => {
@@ -80,7 +75,7 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
 
   return (
     <ForumLayout>
-      <div className={`block ${ss.question}`}>
+      <div className={`block content ${ss.question}`}>
         <QuestionContent question={question} />
 
         <div className={ss.answers}>

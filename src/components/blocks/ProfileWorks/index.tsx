@@ -2,9 +2,11 @@ import React from 'react';
 
 import {
   IsAnswers,
+  LoadingElem,
   NotFound,
   options,
   options2,
+  Pagination,
   ProfileNav,
   Question,
   Search,
@@ -26,11 +28,9 @@ export const ProfileWorks: React.FC<ProfileWorksProps> = ({
 }) => {
   const [questions, setQuestions] = React.useState<TQuestion[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [isFetching, setIsFetching] = React.useState(true);
   const limit = 4;
   const [page, setPage] = React.useState(1);
   const [total, setTotal] = React.useState(0);
-
   const [searchValue, setSearchValue] = React.useState('');
   const [searchValue2, setSearchValue2] = React.useState('');
   const [option, setOption] = React.useState(options[0]);
@@ -42,11 +42,9 @@ export const ProfileWorks: React.FC<ProfileWorksProps> = ({
     (async () => {
       try {
         setIsLoading(true);
-        setPage(1);
-        setQuestions([]);
         const params = {
           limit,
-          page: 1,
+          page,
           search: searchValue2,
           ...(option && { orderBy: option.value }),
           ...(userId && { userId }),
@@ -59,60 +57,12 @@ export const ProfileWorks: React.FC<ProfileWorksProps> = ({
         setIsLoading(false);
       } catch (err) {
         console.warn(err);
-        alert('Ошибка при получении');
+        alert('Ошибка при получении вопросов');
       } finally {
         setIsLoading(false);
       }
     })();
-  }, [searchValue2, option, activeFilter, activeLabel]);
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        if (isFetching) {
-          setIsLoading(true);
-          setQuestions([]);
-          const params = {
-            limit,
-            page,
-            search: searchValue2,
-            ...(option && { orderBy: option.value }),
-            ...(userId && { userId }),
-            ...(activeFilter && { isAnswer: activeFilter }),
-            ...(activeLabel === 1 && { favorites: true }),
-          };
-          const { items, total } = await Api().question.getAll(params);
-          setQuestions([...questions, ...items]);
-          setTotal(total);
-          setPage((prev) => prev + 1);
-          setIsLoading(false);
-        }
-      } catch (err) {
-        console.warn(err);
-        alert('Ошибка при получении');
-      } finally {
-        setIsLoading(false);
-        setIsFetching(false);
-      }
-    })();
-  }, [isFetching]);
-
-  const scrollHandler = (e: any) => {
-    if (
-      e.target.documentElement.scrollHeight -
-        (e.target.documentElement.scrollTop + window.innerHeight) <
-      100
-      // && questions.length !== total
-    ) {
-      setIsFetching(true);
-    }
-  };
-  React.useEffect(() => {
-    document.addEventListener('scroll', scrollHandler);
-    return () => {
-      document.removeEventListener('scroll', scrollHandler);
-    };
-  }, []);
+  }, [searchValue2, page, option, activeFilter, activeLabel]);
 
   return (
     <div className={ss.works}>
@@ -146,11 +96,11 @@ export const ProfileWorks: React.FC<ProfileWorksProps> = ({
         </div>
 
         <div className={ss.items}>
-          {/* {isLoading ? (
-                    Array(limit)
-                      .fill(0)
-                      .map((_, index) => <LoadingElement key={index} />) */}
-          {questions.length > 0 ? (
+          {isLoading ? (
+            Array(limit)
+              .fill(0)
+              .map((_, index) => <LoadingElem key={index} />)
+          ) : questions.length > 0 ? (
             questions.map((obj) => (
               <Question className={ss.question} key={obj.id} {...obj} />
             ))
@@ -158,6 +108,8 @@ export const ProfileWorks: React.FC<ProfileWorksProps> = ({
             <NotFound label="Здесь пока ничего нет :(" />
           )}
         </div>
+
+        <Pagination limit={limit} page={page} setPage={setPage} total={total} />
       </div>
     </div>
   );

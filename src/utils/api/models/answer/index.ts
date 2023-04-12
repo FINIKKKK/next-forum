@@ -1,10 +1,11 @@
-import { AxiosInstance } from "axios";
-import { TAnswer, AnswerDto, ParamsAnswerDto, UpdateAnswerDto } from "./types";
+import { AxiosInstance } from 'axios';
+
+import { TAnswer, AnswerDto, ParamsAnswerDto, UpdateAnswerDto } from './types';
 
 export const AnswerApi = (instance: AxiosInstance) => ({
   async getAll(params: ParamsAnswerDto) {
-    const { data } = await instance.get<TAnswer[]>(
-      `/answers?questionId=${params.questionId}`
+    const { data } = await instance.get<ParamsAnswerDto, { data: TAnswer[] }>(
+      `/answers?questionId=${params.questionId}&orderBy=${params.orderBy}`,
     );
     return data;
   },
@@ -14,22 +15,22 @@ export const AnswerApi = (instance: AxiosInstance) => ({
   },
   async create(dto: AnswerDto) {
     const { data } = await instance.post<AnswerDto, { data: TAnswer }>(
-      "/answers",
-      dto
+      '/answers',
+      dto,
     );
     return data;
   },
   async updateIsAnswer(id: number, dto: UpdateAnswerDto) {
     const { data } = await instance.patch<UpdateAnswerDto, { data: TAnswer }>(
       `/answers/isAnswer/${id}`,
-      dto
+      dto,
     );
     return data;
   },
   async update(id: number, dto: UpdateAnswerDto) {
     const { data } = await instance.patch<UpdateAnswerDto, { data: TAnswer }>(
       `/answers/${id}`,
-      dto
+      dto,
     );
     return data;
   },

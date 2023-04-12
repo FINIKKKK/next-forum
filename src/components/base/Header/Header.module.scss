@@ -1,4 +1,4 @@
-@import "@/styles/assets/variables";
+@import '@/styles/assets/variables';
 
 .header {
   padding: 20px 0;
@@ -27,7 +27,7 @@
     padding-bottom: 7px;
     &::after {
       transition: 0.2s;
-      content: "";
+      content: '';
       position: absolute;
       background-color: $main;
       height: 1.5px;
@@ -134,71 +134,51 @@
   }
 }
 
-.btn__theme {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  font-size: 10px;
-  transition: box-shadow 500ms;
-  margin-right: 23px;
-  span {
-    display: inline-block;
-  }
-  .rays {
-    width: 100%;
-    height: 100%;
+
+.theme {
+  cursor: pointer;
+  margin-right: 25px;
+  .label {
+    z-index: 0;
+    cursor: pointer;
+    background-color: $purple;
+    width: 58px;
+    height: 27px;
+    padding: 5px;
+    border-radius: 50px;
+    position: relative;
     display: flex;
-    position: absolute;
+    transition: background 0.2s linear;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
   }
-  .rays .ray {
-    position: absolute;
+  .ball {
+    background-color: $bg;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
-    transition: all 500ms;
-  }
-  .rays .ray:nth-child(2) {
-    transform: rotate(45deg);
-  }
-  .rays .ray:nth-child(3) {
-    transform: rotate(90deg);
-  }
-  .rays .ray:nth-child(4) {
-    transform: rotate(-45deg);
-  }
-  .shape {
-    z-index: 1;
     position: absolute;
-    border-radius: 50%;
-    border: 2px solid $bg;
-    transition: all 500ms;
+    top: 3px;
+    left: 4px;
+    transition: transform 0.3s ;
   }
-  .shape.dark {
-    width: 2em;
-    height: 2em;
-    box-shadow: inset -0.5em -0.5em $light-main;
+  .moon,
+  .sun {
+    width: 15px;
   }
-  .shape.dark ~ .rays .ray {
-    width: 0;
-    height: 0;
+  .sun {
+    margin-right: 2px;
   }
-  .shape.light {
-    width: 1.25em;
-    height: 1.25em;
-    box-shadow: inset -0.7em -0.7em $white;
+  .moon {
+    margin-left: 2px;
+    width: 13px;
   }
-  .shape.light ~ .rays {
-    transform: rotate(90deg);
-    transition: transform 750ms 400ms;
+  .checkbox {
+    opacity: 0;
+    position: absolute;
   }
-  .shape.light ~ .rays .ray {
-    width: 0.4em;
-    height: 2.1em;
-    background-color: $white;
+  .checkbox:checked + .label .ball {
+    transform: translateX(30px);
   }
 }
 
@@ -212,12 +192,20 @@
       fill: $light-gray !important;
     }
   }
-  .item.active {
+  .item {
     a {
+      color: $light-gray;
+    }
+    &:hover a {
       color: $light-main;
     }
-    &::after {
-      background-color: $light-main;
+    &.active {
+      a {
+        color: $light-main;
+      }
+      &::after {
+        background-color: $light-main;
+      }
     }
   }
   .avatar {
@@ -240,10 +228,24 @@
     }
     .has {
       background-color: $light-main;
-      border-color: #D0E4E5;
+      border-color: #d0e4e5;
     }
   }
-  .shape {
-    border: 2px solid #D0E4E5;
+  .theme {
+    .label {
+      @include border-shadow;
+      background-color: $light-block2;
+    }
+    .ball {
+      top: 2.5px;
+      background-color: $light-main;
+    }
+    .moon,
+    .sun {
+      path {
+        fill: $light-main;
+      }
+    }
   }
+  
 }

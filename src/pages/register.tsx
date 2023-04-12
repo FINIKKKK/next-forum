@@ -68,7 +68,7 @@ const RegisterPage: NextPage<RegisterPageProps> = ({}) => {
             <div className="errorMessage">{error}</div>
 
             <div className="inputs">
-              <AuthInput name="login" icon="person" label="Имя" />
+              <AuthInput name="login" icon="user2" label="Имя" />
               <AuthInput name="email" icon="email" label="Email" />
               <AuthInput
                 name="password"

@@ -81,7 +81,7 @@ export const Comment: React.FC<CommentProps> = ({
           onSubmit={onChangeComment}
         />
       )}
-      {userData?.id === user.id && (
+      {(userData?.id === user.id || userData?.isAdmin) && (
         <div className={ss.icons}>
           <svg onClick={onOpenInput} className={ss.edit} width="20" height="20">
             <use xlinkHref="../img/icons/icons.svg#edit" />

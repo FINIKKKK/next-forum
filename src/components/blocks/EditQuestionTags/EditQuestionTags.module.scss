@@ -47,8 +47,10 @@
     cursor: pointer;
     svg {
       width: 10px;
-      fill: $bg;
       margin-left: 10px;
+      path {
+        fill: $bg;
+      }
     }
   }
 
@@ -147,7 +149,7 @@
   .item {
     background-color: $light-main;
     color: $light-white;
-    svg {
+    svg path {
       fill: $light-white;
     }
   }

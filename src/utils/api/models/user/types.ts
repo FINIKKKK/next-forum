@@ -17,6 +17,7 @@ export type TUser = TBase & {
   favorites: Number[];
   about: string | null;
   showEmail: boolean;
+  isAdmin: boolean;
 };
 
 export type UpdateUserDto = Partial<TUser>;

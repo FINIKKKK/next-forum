@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const id = ctx?.params?.id;
     if (id) {
       const question = await Api().question.getOne(+id);
-      const answers = await Api().answer.getAll({ questionId: question.id });
+      const answers = await Api().answer.getAll({ questionId: question.id, orderBy: 'rating' });
       return {
         props: {
           question,

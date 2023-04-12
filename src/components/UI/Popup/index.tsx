@@ -29,7 +29,6 @@ export const Popup: React.FC<PopupProps> = ({
 }) => {
   const refPopup = React.useRef<HTMLDivElement>(null);
   const { data: userData } = useSelectors((state) => state.user);
-
   useOutsideClick(refPopup, setIsVisible);
 
   return (
@@ -44,7 +43,7 @@ export const Popup: React.FC<PopupProps> = ({
       </svg>
       {isVisible && (
         <div className={`block popup ${ss.box}`}>
-          {userData?.id !== userId ? (
+          {userData?.id !== userId && !userData?.isAdmin ? (
             <>
               <div className={`popup__item ${ss.item}`}>Пожаловаться</div>
             </>

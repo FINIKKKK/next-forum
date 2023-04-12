@@ -54,7 +54,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
       bottomBoundary={bottomBoundary ? bottomBoundary : 'window'}
       className={`sidebar ${ss.sidebar}`}
     >
-      {userData && (
+      {userData && !userData?.isAdmin && (
         <Link href="/questions/create" className={`btn ${ss.btn}`}>
           Задать вопрос
         </Link>
@@ -73,50 +73,55 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             </svg>
             <p>Все вопросы</p>
           </Link>
-          <Link
-            href="/forum/recomended"
-            className={classNames('hover item', ss.item, {
-              active: router.pathname === '/forum/recomended',
-            })}
-          >
-            <svg width="20" height="20">
-              <use xlinkHref="../img/icons/icons.svg#fire" />
-            </svg>
-            <p>Мои предпочтения</p>
-          </Link>
-          <Link
-            href="/forum/my"
-            className={classNames('hover item', ss.item, {
-              active: router.pathname === '/forum/my',
-            })}
-          >
-            <svg width="20" height="20">
-              <use xlinkHref="../img/icons/icons.svg#questions" />
-            </svg>
-            <p>Мои вопросы</p>
-          </Link>
-          <Link
-            href="/forum/favorites"
-            className={classNames('hover item', ss.item, {
-              active: router.pathname === '/forum/favorites',
-            })}
-          >
-            <svg width="20" height="20">
-              <use xlinkHref="../img/icons/icons.svg#favorite" />
-            </svg>
-            <p>Мое избранное</p>
-          </Link>
-          <Link
-            href="/forum/subscribe"
-            className={classNames('hover item', ss.item, {
-              active: router.pathname === '/forum/subscribe',
-            })}
-          >
-            <svg width="20" height="20">
-              <use xlinkHref="../img/icons/icons.svg#subcribe" />
-            </svg>
-            <p>Отслеживаемое</p>
-          </Link>
+          {!userData?.isAdmin && (
+            <>
+              <Link
+                href="/forum/recomended"
+                className={classNames('hover item', ss.item, {
+                  active: router.pathname === '/forum/recomended',
+                })}
+              >
+                <svg width="20" height="20">
+                  <use xlinkHref="../img/icons/icons.svg#fire" />
+                </svg>
+                <p>Мои предпочтения</p>
+              </Link>
+              <Link
+                href="/forum/my"
+                className={classNames('hover item', ss.item, {
+                  active: router.pathname === '/forum/my',
+                })}
+              >
+                <svg width="20" height="20">
+                  <use xlinkHref="../img/icons/icons.svg#questions" />
+                </svg>
+                <p>Мои вопросы</p>
+              </Link>
+
+              <Link
+                href="/forum/favorites"
+                className={classNames('hover item', ss.item, {
+                  active: router.pathname === '/forum/favorites',
+                })}
+              >
+                <svg width="20" height="20">
+                  <use xlinkHref="../img/icons/icons.svg#favorite" />
+                </svg>
+                <p>Мое избранное</p>
+              </Link>
+              <Link
+                href="/forum/subscribe"
+                className={classNames('hover item', ss.item, {
+                  active: router.pathname === '/forum/subscribe',
+                })}
+              >
+                <svg width="20" height="20">
+                  <use xlinkHref="../img/icons/icons.svg#subcribe" />
+                </svg>
+                <p>Отслеживаемое</p>
+              </Link>
+            </>
+          )}
           <Link
             href="/forum/tags"
             className={classNames('hover item', ss.item, {
