@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import React from 'react';
 
-import { Pagination, Post } from '@/components';
+import { NotFound, Pagination, Post, PostLoading } from '@/components';
 import { MetaLayout } from '@/layouts/MetaLayout';
 import { PostsLayout } from '@/layouts/PostsLayout';
 import { Api } from '@/utils/api';
@@ -14,6 +14,7 @@ const FeedPage: NextPage<FeedPageProps> = ({}) => {
   const [posts, setPosts] = React.useState<TPost[]>([]);
   const [page, setPage] = React.useState(1);
   const [total, setTotal] = React.useState(0);
+  const [isLoading, setisLoading] = React.useState(true);
 
   React.useEffect(() => {
     (async () => {
@@ -29,6 +30,8 @@ const FeedPage: NextPage<FeedPageProps> = ({}) => {
       } catch (err) {
         console.warn(err);
         alert('Ошибка при получении постов');
+      } finally {
+        setisLoading(false);
       }
     })();
   }, [page]);
@@ -37,9 +40,15 @@ const FeedPage: NextPage<FeedPageProps> = ({}) => {
     <MetaLayout title="Лента">
       <PostsLayout>
         <div className="posts">
-          {posts.map((obj) => (
-            <Post key={obj.id} post={obj} />
-          ))}
+          {isLoading ? (
+            Array(limit)
+              .fill(0)
+              .map((_, index) => <PostLoading key={index} />)
+          ) : posts.length ? (
+            posts.map((obj) => <Post key={obj.id} post={obj} />)
+          ) : (
+            <NotFound />
+          )}
 
           <Pagination
             className="pagination"

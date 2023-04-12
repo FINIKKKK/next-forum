@@ -46,6 +46,20 @@ export const QuestionContent: React.FC<QuestionContentProps> = ({
     setCommentValue('');
   };
 
+  const onShare = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: 'NeoCode',
+          text: question.title,
+          url: `http://localhost:3000/questions/${question.id}`,
+        });
+      }
+    } catch (error) {
+      console.log('Ошибка шаринга:', error);
+    }
+  };
+
   React.useEffect(() => {
     (async () => {
       try {
@@ -111,7 +125,12 @@ export const QuestionContent: React.FC<QuestionContentProps> = ({
       <QuestionBody body={question.body} />
 
       <div className={ss.footer}>
-        <div className={`inline ${ss.footer__btn}`}>Подписаться</div>
+        <div onClick={onShare} className={`inline ${ss.footer__btn}`}>
+          <p>Поделиться</p>
+          <svg width="20" height="20">
+            <use xlinkHref="../img/icons/icons.svg#share" />
+          </svg>
+        </div>
         <div
           onClick={onOpenInput}
           className={classNames('inline', ss.footer__btn, {

@@ -37,3 +37,5 @@ export * from './blocks/EditQuestionTitle';
 export * from './blocks/SettingsSidebar';
 export * from './blocks/PostsSidebar';
 export * from './blocks/Post';
+export * from './blocks/LoadingElem/PostLoading';
+export * from './blocks/LoadingElem/PostSidebarLoading';

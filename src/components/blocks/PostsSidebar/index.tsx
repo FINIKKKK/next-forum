@@ -1,12 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
-import Sticky from 'react-stickynode';
 
-import { NotFound } from '@/components/UI/NotFound';
-import { useBottomBoundary } from '@/hooks/useBottomBoundary';
 import { Api } from '@/utils/api';
 import { TPost } from '@/utils/api/models/post/types';
 
+import { PostSidebarLoading } from '../LoadingElem/PostSidebarLoading';
 import { PostSidebar } from './PostSidebar';
 import ss from './PostsSidebar.module.scss';
 
@@ -15,8 +13,6 @@ interface PostsSidebarProps {}
 export const PostsSidebar: React.FC<PostsSidebarProps> = ({}) => {
   const [posts, setPosts] = React.useState<TPost[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [bottomBord, setBottomBord] = React.useState<number | null>(null);
-  useBottomBoundary(setBottomBord);
 
   React.useEffect(() => {
     (async () => {
@@ -39,11 +35,7 @@ export const PostsSidebar: React.FC<PostsSidebarProps> = ({}) => {
   }, []);
 
   return (
-    <Sticky
-      top={45}
-      bottomBoundary={bottomBord ? bottomBord : 'window'}
-      className={ss.sidebar}
-    >
+    <aside className={ss.sidebar}>
       <Link href="/posts/create" className={`btn ${ss.btn}`}>
         Создать пост
       </Link>
@@ -51,12 +43,12 @@ export const PostsSidebar: React.FC<PostsSidebarProps> = ({}) => {
       <div className={ss.title}>Популярные посты за сегодня</div>
 
       <ul className={ss.post__list}>
-        {posts.length > 0 ? (
-          posts.map((obj) => <PostSidebar key={obj.id} post={obj} />)
-        ) : (
-          <NotFound />
-        )}
+        {isLoading
+          ? Array(4)
+              .fill(0)
+              .map((_, index) => <PostSidebarLoading key={index} />)
+          : posts.map((obj) => <PostSidebar key={obj.id} post={obj} />)}
       </ul>
-    </Sticky>
+    </aside>
   );
 };

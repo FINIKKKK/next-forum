@@ -5,6 +5,7 @@ import React from 'react';
 import { useTimeNow } from '@/hooks/useTimeNow';
 import { TPost } from '@/utils/api/models/post/types';
 
+import { PostLoading } from '../LoadingElem/PostLoading';
 import ss from './Post.module.scss';
 
 interface PostProps {
@@ -13,6 +14,20 @@ interface PostProps {
 
 export const Post: React.FC<PostProps> = ({ post }) => {
   const date = useTimeNow(post.createdAt);
+
+  const onShare = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: 'NeoCode',
+          text: post.title,
+          url: `http://localhost:3000/posts/${post.slug}`,
+        });
+      }
+    } catch (error) {
+      console.log('Ошибка шаринга:', error);
+    }
+  };
 
   return (
     <div className={ss.post}>
@@ -69,7 +84,7 @@ export const Post: React.FC<PostProps> = ({ post }) => {
             </svg>
             <p>{post.commentsCount}</p>
           </li>
-          <li className={`${ss.item__hover} ${ss.item}`}>
+          <li onClick={onShare} className={`${ss.item__hover} ${ss.item}`}>
             <svg width="20" height="20">
               <use xlinkHref="../img/icons/icons.svg#share" />
             </svg>

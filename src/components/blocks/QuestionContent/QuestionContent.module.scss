@@ -88,6 +88,17 @@
     display: flex;
     align-items: center;
     user-select: none;
+    svg {
+      fill: $gray;
+      width: 14px;
+      margin-left: 15px;
+    }
+    &:hover {
+      color: $white;
+      svg {
+        fill: $white;
+      }
+    }
     &.active {
       color: $main;
     }
@@ -135,8 +146,14 @@
     }
     .footer__btn {
       color: $light-gray;
+      svg {
+        fill: $light-gray;
+      }
       &:hover {
         color: $light-main;
+        svg {
+          fill: $light-main;
+        }
       }
       &.active {
         color: $light-main;
