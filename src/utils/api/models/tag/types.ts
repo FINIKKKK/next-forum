@@ -8,6 +8,7 @@ export type TTag = TBase & {
   name: string;
   description: string;
   questionCount: number;
+  postCount: number;
 };
 
 export type TagDto = {

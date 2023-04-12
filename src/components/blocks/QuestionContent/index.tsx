@@ -7,7 +7,7 @@ import { useFormatNumber } from '@/hooks/useFormatNumber';
 import { useTimeNow } from '@/hooks/useTimeNow';
 import { useWordEnding } from '@/hooks/useWordEnding';
 import { Api } from '@/utils/api';
-import { TComment } from '@/utils/api/models/comments/types';
+import { TComment } from '@/utils/api/models/comment/types';
 import { TQuestion } from '@/utils/api/models/question/types';
 
 import ss from './QuestionContent.module.scss';

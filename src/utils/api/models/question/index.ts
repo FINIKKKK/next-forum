@@ -19,10 +19,12 @@ export const QuestionApi = (instance: AxiosInstance) => ({
     );
     return data;
   },
+  
   async getOne(id: number) {
     const { data } = await instance.get<TQuestion>(`/questions/${id}`);
     return data;
   },
+
   async create(dto: QuestionDto) {
     const { data } = await instance.post<QuestionDto, { data: TQuestion }>(
       "/questions",
@@ -30,6 +32,7 @@ export const QuestionApi = (instance: AxiosInstance) => ({
     );
     return data;
   },
+
   async update(id: number, dto: UpdateQuestionDto) {
     const { data } = await instance.patch<UpdateQuestionDto, { data: TQuestion }>(
       `/questions/${id}`,
@@ -37,6 +40,7 @@ export const QuestionApi = (instance: AxiosInstance) => ({
     );
     return data;
   },
+
   async remove(id: number) {
     const { data } = await instance.delete<TQuestion>(`/questions/${id}`);
     return data;

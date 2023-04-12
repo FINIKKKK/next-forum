@@ -3,7 +3,7 @@ import React from 'react';
 import { Textarea } from '@/components';
 import { useSelectors } from '@/hooks/useSelectors';
 import { Api } from '@/utils/api';
-import { TComment } from '@/utils/api/models/comments/types';
+import { TComment } from '@/utils/api/models/comment/types';
 import { TUser } from '@/utils/api/models/user/types';
 
 import ss from './Comment.module.scss';
