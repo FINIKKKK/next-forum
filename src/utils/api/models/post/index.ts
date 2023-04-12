@@ -18,7 +18,7 @@ export const PostApi = (instance: AxiosInstance) => ({
       : undefined;
 
     const { data } = await instance.get<TPosts>(
-      `/questions?limit=${params.limit}&page=${params.page}&orderBy=${
+      `/posts?limit=${params.limit}&page=${params.page}&orderBy=${
         params.orderBy
       }${tag ? tag : ''}${search ? search : ''}${user ? user : ''}${
         category ? category : ''

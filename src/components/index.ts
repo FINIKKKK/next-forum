@@ -35,3 +35,4 @@ export * from './blocks/ProfileWorks';
 export * from './blocks/EditQuestionTags';
 export * from './blocks/EditQuestionTitle';
 export * from './blocks/SettingsSidebar';
+export * from './blocks/PostsSidebar';

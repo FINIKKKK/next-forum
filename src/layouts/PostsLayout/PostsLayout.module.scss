@@ -1,0 +1,14 @@
+@import '@/styles/assets/variables';
+
+.posts {
+  margin: 85px 0 150px;
+  .inner {
+    display: flex;
+    justify-content: space-between;
+  }
+  .main {
+    width: 75%;
+    margin-right: 75px;
+  }
+}
+
