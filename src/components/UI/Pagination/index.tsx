@@ -9,6 +9,7 @@ interface PaginationProps {
   total: number;
   page: number;
   setPage: (e: any) => void;
+  className?: string;
 }
 
 export const Pagination: React.FC<PaginationProps> = ({
@@ -16,6 +17,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   total,
   page,
   setPage,
+  className
 }) => {
   const [value, setValue] = React.useState(page);
   const [error, setError] = React.useState(false);
@@ -32,7 +34,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div className={ss.pagination}>
+    <div className={`${className} ${ss.pagination}`}>
       <ReactPagination
         className={ss.list}
         forcePage={page - 1}

@@ -4,32 +4,21 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import Sticky from 'react-stickynode';
 
+import { useBottomBoundary } from '@/hooks/useBottomBoundary';
+
 import ss from './SettingsSidebar.module.scss';
 
 interface SettingsSidebarProps {}
 
 export const SettingsSidebar: React.FC<SettingsSidebarProps> = ({}) => {
   const router = useRouter();
-  const [bottomBoundary, setBottomBoundary] = React.useState<number | null>(
-    null,
-  );
-
-  React.useEffect(() => {
-    const handleResize = () => {
-      const boundary = document.documentElement.scrollHeight - 200;
-      setBottomBoundary(boundary);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const [bottomBord, setBottomBord] = React.useState<number | null>(null);
+  useBottomBoundary(setBottomBord);
 
   return (
     <Sticky
       top={45}
-      bottomBoundary={bottomBoundary ? bottomBoundary : 'window'}
+      bottomBoundary={bottomBord ? bottomBord : 'window'}
       className={`sidebar ${ss.sidebar}`}
     >
       <Link

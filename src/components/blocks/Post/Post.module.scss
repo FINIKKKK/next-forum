@@ -1,0 +1,147 @@
+@import '@/styles/assets/variables';
+
+.post {
+  &:not(:last-child) {
+    margin-bottom: 120px;
+  }
+  .image {
+    width: 100%;
+    height: 350px;
+    margin-bottom: 30px;
+    img {
+      border-radius: 10px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    margin-bottom: 35px;
+  }
+  .category {
+    position: relative;
+    padding-right: 50px;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 1px;
+      background-color: $white;
+      top: 55%;
+      transform: translateY(-50%);
+      left: 80%;
+      transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    &:hover {
+      color: $main;
+      &::after {
+        width: 50px;
+        background-color: $main;
+      }
+    }
+  }
+  .info__extra {
+    color: $gray;
+    display: flex;
+  }
+  .userName {
+    position: relative;
+    padding-right: 15px;
+    margin-right: 10px;
+    color: $gray;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: $gray;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0;
+      border-radius: 50%;
+    }
+    &:hover {
+      color: $white;
+    }
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    word-break: break-all;
+    &:hover a {
+      color: $main;
+    }
+  }
+  .text {
+    color: $gray;
+    font-size: 16px;
+    line-height: 26px;
+    margin-bottom: 40px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow-y: hidden;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .tags {
+    display: flex;
+    li:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+  .statistic {
+    display: flex;
+    align-items: center;
+    .item {
+      display: flex;
+      align-items: center;
+      &:not(:last-child) {
+        margin-right: 25px;
+      }
+      svg {
+        fill: $gray;
+        width: 18px;
+        margin-right: 10px;
+      }
+      p {
+        font-weight: 700;
+        font-size: 14px;
+        color: $gray;
+        transition: 0.2s;
+      }
+      .views__icon {
+        width: 24px;
+      }
+      .favorites__icon {
+        width: 16px;
+      }
+      .comments__icon {
+        width: 22px;
+      }
+    }
+    .item__hover {
+      cursor: pointer;
+      &:hover {
+        svg {
+          fill: $white;
+        }
+        p {
+          color: $white;
+        }
+      }
+    }
+  }
+}

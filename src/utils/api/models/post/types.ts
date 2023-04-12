@@ -39,4 +39,5 @@ export type ParamsPostDto = ParamsDto & {
   userId?: number;
   searchBy?: string;
   favorites?: boolean;
+  isShort?: boolean;
 };

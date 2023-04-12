@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import Sticky from 'react-stickynode';
 
+import { useBottomBoundary } from '@/hooks/useBottomBoundary';
 import { useSelectors } from '@/hooks/useSelectors';
 import { Api } from '@/utils/api';
 import { TTag } from '@/utils/api/models/tag/types';
@@ -14,23 +15,10 @@ interface SidebarProps {}
 
 export const Sidebar: React.FC<SidebarProps> = ({}) => {
   const [tags, setTags] = React.useState<TTag[]>([]);
-  const [bottomBoundary, setBottomBoundary] = React.useState<number | null>(
-    null,
-  );
   const router = useRouter();
   const { data: userData } = useSelectors((state) => state.user);
-
-  React.useEffect(() => {
-    const handleResize = () => {
-      const boundary = document.documentElement.scrollHeight - 200;
-      setBottomBoundary(boundary);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const [bottomBord, setBottomBord] = React.useState<number | null>(null);
+  useBottomBoundary(setBottomBord);
 
   React.useEffect(() => {
     (async () => {
@@ -51,7 +39,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
   return (
     <Sticky
       top={25}
-      bottomBoundary={bottomBoundary ? bottomBoundary : 'window'}
+      bottomBoundary={bottomBord ? bottomBord : 'window'}
       className={`sidebar ${ss.sidebar}`}
     >
       {userData && !userData?.isAdmin && (
@@ -147,16 +135,18 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
         </div>
       </div>
 
-      <div className={ss.block}>
-        <h5>Топ меток</h5>
-        <ul className={ss.tagList}>
-          {tags.map((obj) => (
-            <li key={obj.id} className={`hover tag ${ss.tag}`}>
-              <Link href={`/forum/?tagBy=${obj.name}`}>{obj.name}</Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {tags.length > 0 && (
+        <div className={ss.block}>
+          <h5>Топ меток</h5>
+          <ul className={ss.tagList}>
+            {tags.map((obj) => (
+              <li key={obj.id} className={`hover tag ${ss.tag}`}>
+                <Link href={`/forum/?tagBy=${obj.name}`}>{obj.name}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </Sticky>
   );
 };

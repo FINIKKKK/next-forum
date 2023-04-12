@@ -36,3 +36,4 @@ export * from './blocks/EditQuestionTags';
 export * from './blocks/EditQuestionTitle';
 export * from './blocks/SettingsSidebar';
 export * from './blocks/PostsSidebar';
+export * from './blocks/Post';

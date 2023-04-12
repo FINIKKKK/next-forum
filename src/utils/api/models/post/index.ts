@@ -16,13 +16,14 @@ export const PostApi = (instance: AxiosInstance) => ({
     const favorites = params.favorites
       ? `&favorites=${params.favorites}`
       : undefined;
+    const isShort = params.isShort ? `&isShort=${params.isShort}` : undefined;
 
     const { data } = await instance.get<TPosts>(
       `/posts?limit=${params.limit}&page=${params.page}&orderBy=${
         params.orderBy
       }${tag ? tag : ''}${search ? search : ''}${user ? user : ''}${
         category ? category : ''
-      }${favorites ? favorites : ''}`,
+      }${favorites ? favorites : ''}${isShort ? isShort : ''}`,
     );
     return data;
   },
