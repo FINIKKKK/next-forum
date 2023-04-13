@@ -1,7 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
 
-import { MainLayout } from '@/layouts/MainLayout';
 import { MetaLayout } from '@/layouts/MetaLayout';
 import { Question } from '@/screens/Question';
 import { Api } from '@/utils/api';

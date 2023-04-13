@@ -97,7 +97,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
                 </svg>
                 <p>Мое избранное</p>
               </Link>
-              <Link
+              {/* <Link
                 href="/forum/subscribe"
                 className={classNames('hover item', ss.item, {
                   active: router.pathname === '/forum/subscribe',
@@ -107,7 +107,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
                   <use xlinkHref="../img/icons/icons.svg#subcribe" />
                 </svg>
                 <p>Отслеживаемое</p>
-              </Link>
+              </Link> */}
             </>
           )}
           <Link

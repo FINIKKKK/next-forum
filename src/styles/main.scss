@@ -365,9 +365,35 @@
   }
 }
 
-
 // --------- posts ----------
 .posts {
+  .title {
+    margin-bottom: 25px;
+    margin-bottom: 25px;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+  }
+  .posts__header {
+    margin-bottom: 60px;
+  }
+  .posts__filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .search {
+    margin-bottom: 0;
+    width: 72%;
+    margin-right: 35px;
+    padding: 10px 25px;
+  }
+  .select {
+    width: 170px;
+    .select__control {
+      width: 100%;
+    }
+  }
   .pagination {
     padding-top: 35px;
     margin-top: 65px;

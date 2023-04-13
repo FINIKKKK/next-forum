@@ -1,0 +1,44 @@
+@import '@/styles/assets/variables';
+
+.question {
+  width: 71.5% !important;
+  position: relative;
+  padding: 35px 45px;
+  background-color: $purple2;
+}
+
+.answers {
+  margin-top: 125px;
+  margin-bottom: 55px;
+  .answers__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid $gray2;
+  }
+  .answers__title {
+    font-weight: 700;
+    font-size: 24px;
+  }
+  :global {
+    .select {
+      .select__control {
+        height: 30px !important;
+      }
+      .select__value-container {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+:global(.light) {
+  .answers {
+    .answers__header {
+      padding-bottom: 30px;
+      border-bottom: 2px solid $light-gray2;
+    }
+  }
+}

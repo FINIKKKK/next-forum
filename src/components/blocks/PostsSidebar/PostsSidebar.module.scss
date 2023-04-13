@@ -3,6 +3,11 @@
 .sidebar {
   width: 25%;
 }
+.block {
+  &:not(:last-child) {
+    margin-bottom: 50px;
+  }
+}
 .btn {
   width: 100%;
   margin-bottom: 50px;
@@ -16,8 +21,8 @@
   text-transform: uppercase;
   font-weight: 700;
   font-size: 14px;
-  margin-bottom: 40px;
-  padding-bottom: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
   border-bottom: 2px solid $gray2;
 }
 

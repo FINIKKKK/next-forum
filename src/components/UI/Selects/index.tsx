@@ -20,6 +20,7 @@ interface SelectsProps {
   setOption: (value: any) => void;
   option2: TOption;
   setOption2: (value: any) => void;
+  className?: string;
 }
 
 export const Selects: React.FC<SelectsProps> = ({
@@ -27,6 +28,7 @@ export const Selects: React.FC<SelectsProps> = ({
   setOption,
   option2,
   setOption2,
+  className
 }) => {
   return (
     <div className="selects">

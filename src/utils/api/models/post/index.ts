@@ -28,8 +28,8 @@ export const PostApi = (instance: AxiosInstance) => ({
     return data;
   },
 
-  async getOne(id: number) {
-    const { data } = await instance.get<TPost>(`/posts/${id}`);
+  async getOne(slug: string) {
+    const { data } = await instance.get<TPost>(`/posts/${slug}`);
     return data;
   },
 
