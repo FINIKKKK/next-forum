@@ -215,7 +215,7 @@ export const Header: React.FC<HeaderProps> = ({}) => {
             {userData && (
               <>
                 {/* <Notices /> */}
-                <User userLogin={userData?.login} avatar={userData?.avatar} />
+                <User userLogin={userData?.login} avatar={userData?.avatar || ""} />
               </>
             )}
             {!userData && (

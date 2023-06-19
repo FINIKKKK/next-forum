@@ -13,7 +13,7 @@ interface CommentProps {
   text: string;
   user: TUser;
   comments: TComment[];
-  setComments: (value: TComment) => TComment[];
+  setComments: (value: (prev: TComment[]) => TComment[]) => void;
   setVisibleTextarea?: (value: boolean) => void;
 }
 
@@ -54,7 +54,7 @@ export const Comment: React.FC<CommentProps> = ({
         }
         return obj;
       });
-      setComments(newItems);
+      setComments(() => newItems);
     } catch (err) {
       console.warn(err);
       alert('Ошибка при изменении комментария');
