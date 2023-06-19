@@ -95,7 +95,6 @@ export const CreateAnswer: React.FC<CreateAnswerProps> = ({
         <button
           onClick={onSumbit}
           className={classNames('btn', ss.btn, {
-            disabled: isLoading || !body.length,
           })}
         >
           Опубликовать

@@ -114,7 +114,7 @@ export const Answer: React.FC<AnswerProps> = ({
   return (
     <div className={ss.answer}>
       <div className={ss.side}>
-        <Rating id={answer.id} rating={answer.rating} />
+        {/*<Rating id={answer.id} rating={answer.rating} />*/}
         {(isSolved || isAuthor) && (
           <svg
             onClick={onSetIsAnswer}

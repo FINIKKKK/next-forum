@@ -81,13 +81,13 @@ export const Question: React.FC<QuestionProps> = ({ question, answerList }) => {
         <div className={ss.answers}>
           <div className={ss.answers__header}>
             <h2 className={ss.answers__title}>Ответы</h2>
-            {answers.length !== 0 && (
-              <SelectComponent
-                value={option}
-                options={options}
-                setValue={setOption}
-              />
-            )}
+            {/*{answers.length !== 0 && (*/}
+            {/*  <SelectComponent*/}
+            {/*    value={option}*/}
+            {/*    options={options}*/}
+            {/*    setValue={setOption}*/}
+            {/*  />*/}
+            {/*)}*/}
           </div>
           {userData?.id === question.user.id && answers.length === 0 ? (
             <NotFound label="На данный вопрос пока никто не ответил :(" />
