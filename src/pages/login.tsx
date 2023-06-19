@@ -43,22 +43,22 @@ const LoginPage: NextPage<LoginPageProps> = ({}) => {
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <h1 className="title">Вход</h1>
-            <ul className="socNav">
-              <li className="item">
-                <a href="#" title="Войти с помощью Github">
-                  <svg width="20" height="20">
-                    <use xlinkHref="../img/icons/icons.svg#github" />
-                  </svg>
-                </a>
-              </li>
-              <li className="item">
-                <a href="#" title="Войти с помощью Google">
-                  <svg width="20" height="20">
-                    <use xlinkHref="../img/icons/icons.svg#google" />
-                  </svg>
-                </a>
-              </li>
-            </ul>
+            {/*<ul className="socNav">*/}
+            {/*  <li className="item">*/}
+            {/*    <a href="#" title="Войти с помощью Github">*/}
+            {/*      <svg width="20" height="20">*/}
+            {/*        <use xlinkHref="../img/icons/icons.svg#github" />*/}
+            {/*      </svg>*/}
+            {/*    </a>*/}
+            {/*  </li>*/}
+            {/*  <li className="item">*/}
+            {/*    <a href="#" title="Войти с помощью Google">*/}
+            {/*      <svg width="20" height="20">*/}
+            {/*        <use xlinkHref="../img/icons/icons.svg#google" />*/}
+            {/*      </svg>*/}
+            {/*    </a>*/}
+            {/*  </li>*/}
+            {/*</ul>*/}
             <p className="text">
               Пожалуйста, заполните данные, чтобы войти в аккаунт
             </p>

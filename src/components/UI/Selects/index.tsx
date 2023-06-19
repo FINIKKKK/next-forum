@@ -39,14 +39,14 @@ export const Selects: React.FC<SelectsProps> = ({
         setValue={setOption}
       />
 
-      {option === options[1] && (
-        <SelectComponent
-          inputId="select2"
-          value={option2}
-          options={options2}
-          setValue={setOption2}
-        />
-      )}
+      {/*{option === options[1] && (*/}
+      {/*  <SelectComponent*/}
+      {/*    inputId="select2"*/}
+      {/*    value={option2}*/}
+      {/*    options={options2}*/}
+      {/*    setValue={setOption2}*/}
+      {/*  />*/}
+      {/*)}*/}
     </div>
   );
 };

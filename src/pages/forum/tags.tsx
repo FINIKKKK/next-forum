@@ -11,7 +11,7 @@ interface TagsPageProps {}
 const TagsPage: NextPage<TagsPageProps> = ({}) => {
   const [tags, setTags] = React.useState<TTag[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const limit = 6;
+  const limit = 9;
 
   return (
     <MetaLayout title="Все метки">

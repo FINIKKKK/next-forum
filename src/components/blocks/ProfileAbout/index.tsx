@@ -41,10 +41,10 @@ export const ProfileAbout: React.FC<ProfileAboutProps> = ({
         )}
       </div>
       <div className={ss.statistic}>
-        <p className={ss.item}>
-          <b>117</b>
-          Подписчики
-        </p>
+        {/*<p className={ss.item}>*/}
+        {/*  <b>117</b>*/}
+        {/*  Подписчики*/}
+        {/*</p>*/}
         <p className={ss.item}>
           <b>{questionCount}</b>
           Вопросы

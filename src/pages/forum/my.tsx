@@ -12,7 +12,7 @@ const MyQuestionsPage: NextPage<MyQuestionsPageProps> = ({}) => {
   return (
     <MetaLayout title="Мои вопросы">
       <QuestionsLayout
-        limit={4}
+        limit={15}
         label="Мои вопросы"
         userId={userData?.id}
       ></QuestionsLayout>

@@ -95,7 +95,7 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
                 image,
               };
               const post = await Api().post.create(dto);
-              await router.push(`/posts/${post.slug}`);
+              await router.push(`/feed`);
             })();
           })
           .catch((errors) => {

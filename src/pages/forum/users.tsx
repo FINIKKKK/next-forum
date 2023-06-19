@@ -11,7 +11,7 @@ interface UsersPageProps {}
 const UsersPage: NextPage<UsersPageProps> = ({}) => {
   const [users, setUsers] = React.useState<TUser[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const limit = 6;
+  const limit = 9;
 
   return (
     <MetaLayout title="Все пользователи">

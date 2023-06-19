@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../nest-forum/.idea/nest-forum.iml" filepath="$PROJECT_DIR$/../nest-forum/.idea/nest-forum.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/next-forum.iml" filepath="$PROJECT_DIR$/.idea/next-forum.iml" />
+    </modules>
+  </component>
+</project>

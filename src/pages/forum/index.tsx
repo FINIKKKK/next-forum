@@ -9,7 +9,7 @@ interface ForumPageProps {}
 const ForumPage: NextPage<ForumPageProps> = ({}) => {
   return (
     <MetaLayout title="Форум">
-      <QuestionsLayout limit={4} label="Все вопросы"></QuestionsLayout>
+      <QuestionsLayout limit={15} label="Все вопросы"></QuestionsLayout>
     </MetaLayout>
   );
 };

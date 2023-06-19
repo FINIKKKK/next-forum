@@ -1,6 +1,6 @@
 // ---- Global-Tags ----
 html {
-  overflow-x: hidden;
+  //overflow-x: hidden;
   box-sizing: border-box;
   background-color: #231d35 !important;
   &.fixed {
@@ -14,8 +14,8 @@ html {
 }
 body {
   position: relative;
-  overflow-x: hidden;
-  min-width: 320px;
+  //overflow-x: hidden;
+  //min-width: 320px;
   font-family: $font;
   font-weight: 400;
   font-size: 12px;
@@ -53,6 +53,7 @@ svg {
   margin: 0 auto;
   padding: 0 15px;
   max-width: 1170px;
+  min-width: 900px;
 }
 
 .btn {
@@ -198,6 +199,7 @@ svg {
 // ScrollBar
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: $main;

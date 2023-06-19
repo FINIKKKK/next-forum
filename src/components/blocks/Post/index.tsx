@@ -16,22 +16,22 @@ export const Post: React.FC<PostProps> = ({ post }) => {
   const date = useTimeNow(post.createdAt);
 
   const onShare = async () => {
-    try {
-      if (navigator.share) {
-        await navigator.share({
-          title: 'NeoCode',
-          text: post.title,
-          url: `http://localhost:3000/posts/${post.slug}`,
-        });
-      }
-    } catch (error) {
-      console.log('Ошибка шаринга:', error);
-    }
+    // try {
+    //   if (navigator.share) {
+    //     await navigator.share({
+    //       title: 'NeoCode',
+    //       text: post.title,
+    //       url: `http://localhost:3000/posts/${post.slug}`,
+    //     });
+    //   }
+    // } catch (error) {
+    //   console.log('Ошибка шаринга:', error);
+    // }
   };
 
   return (
     <div className={ss.post}>
-      <Link className={ss.image} href={`/posts/${post.slug}`}>
+      <Link className={ss.image} href='#'>
         <Image src={post.image} alt="image" width={1150} height={650} />
       </Link>
 
@@ -52,7 +52,7 @@ export const Post: React.FC<PostProps> = ({ post }) => {
       </div>
 
       <h2 className={ss.title}>
-        <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+        <Link href={`#`}>{post.title}</Link>
       </h2>
 
       <p className={ss.text}>{post.description}</p>
@@ -65,31 +65,31 @@ export const Post: React.FC<PostProps> = ({ post }) => {
             </li>
           ))}
         </ul>
-        <ul className={ss.statistic}>
-          <li className={ss.item}>
-            <svg className={ss.views__icon} width="20" height="20">
-              <use xlinkHref="../img/icons/icons.svg#eye" />
-            </svg>
-            <p>{post.views}</p>
-          </li>
-          <li className={`${ss.item__hover} ${ss.item}`}>
-            <svg className={ss.favorites__icon} width="20" height="20">
-              <use xlinkHref="../img/icons/icons.svg#favorite2" />
-            </svg>
-            <p>0</p>
-          </li>
-          <li className={ss.item}>
-            <svg className={ss.comments__icon} width="20" height="20">
-              <use xlinkHref="../img/icons/icons.svg#comments" />
-            </svg>
-            <p>{post.commentsCount}</p>
-          </li>
-          <li onClick={onShare} className={`${ss.item__hover} ${ss.item}`}>
-            <svg width="20" height="20">
-              <use xlinkHref="../img/icons/icons.svg#share" />
-            </svg>
-          </li>
-        </ul>
+        {/*<ul className={ss.statistic}>*/}
+        {/*  <li className={ss.item}>*/}
+        {/*    <svg className={ss.views__icon} width="20" height="20">*/}
+        {/*      <use xlinkHref="../img/icons/icons.svg#eye" />*/}
+        {/*    </svg>*/}
+        {/*    <p>{post.views}</p>*/}
+        {/*  </li>*/}
+        {/*  <li className={`${ss.item__hover} ${ss.item}`}>*/}
+        {/*    <svg className={ss.favorites__icon} width="20" height="20">*/}
+        {/*      <use xlinkHref="../img/icons/icons.svg#favorite2" />*/}
+        {/*    </svg>*/}
+        {/*    <p>0</p>*/}
+        {/*  </li>*/}
+        {/*  <li className={ss.item}>*/}
+        {/*    <svg className={ss.comments__icon} width="20" height="20">*/}
+        {/*      <use xlinkHref="../img/icons/icons.svg#comments" />*/}
+        {/*    </svg>*/}
+        {/*    <p>{post.commentsCount}</p>*/}
+        {/*  </li>*/}
+        {/*  <li onClick={onShare} className={`${ss.item__hover} ${ss.item}`}>*/}
+        {/*    <svg width="20" height="20">*/}
+        {/*      <use xlinkHref="../img/icons/icons.svg#share" />*/}
+        {/*    </svg>*/}
+        {/*  </li>*/}
+        {/*</ul>*/}
       </div>
     </div>
   );

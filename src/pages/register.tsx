@@ -46,22 +46,22 @@ const RegisterPage: NextPage<RegisterPageProps> = ({}) => {
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <h1 className="title">Регистрация</h1>
-            <ul className="socNav">
-              <li className="item">
-                <a href="#">
-                  <svg width="20" height="20">
-                    <use xlinkHref="../img/icons/icons.svg#github" />
-                  </svg>
-                </a>
-              </li>
-              <li className="item">
-                <a href="#">
-                  <svg width="20" height="20">
-                    <use xlinkHref="../img/icons/icons.svg#google" />
-                  </svg>
-                </a>
-              </li>
-            </ul>
+            {/*<ul className="socNav">*/}
+            {/*  <li className="item">*/}
+            {/*    <a href="#">*/}
+            {/*      <svg width="20" height="20">*/}
+            {/*        <use xlinkHref="../img/icons/icons.svg#github" />*/}
+            {/*      </svg>*/}
+            {/*    </a>*/}
+            {/*  </li>*/}
+            {/*  <li className="item">*/}
+            {/*    <a href="#">*/}
+            {/*      <svg width="20" height="20">*/}
+            {/*        <use xlinkHref="../img/icons/icons.svg#google" />*/}
+            {/*      </svg>*/}
+            {/*    </a>*/}
+            {/*  </li>*/}
+            {/*</ul>*/}
             <p className="text">
               Пожалуйста, заполните данные, чтобы создать аккаунт
             </p>

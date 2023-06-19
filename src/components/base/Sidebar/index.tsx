@@ -63,17 +63,17 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
           </Link>
           {!userData?.isAdmin && (
             <>
-              <Link
-                href="/forum/recomended"
-                className={classNames('hover item', ss.item, {
-                  active: router.pathname === '/forum/recomended',
-                })}
-              >
-                <svg width="20" height="20">
-                  <use xlinkHref="../img/icons/icons.svg#fire" />
-                </svg>
-                <p>Мои предпочтения</p>
-              </Link>
+              {/*<Link*/}
+              {/*  href="/forum/recomended"*/}
+              {/*  className={classNames('hover item', ss.item, {*/}
+              {/*    active: router.pathname === '/forum/recomended',*/}
+              {/*  })}*/}
+              {/*>*/}
+              {/*  <svg width="20" height="20">*/}
+              {/*    <use xlinkHref="../img/icons/icons.svg#fire" />*/}
+              {/*  </svg>*/}
+              {/*  <p>Мои предпочтения</p>*/}
+              {/*</Link>*/}
               <Link
                 href="/forum/my"
                 className={classNames('hover item', ss.item, {

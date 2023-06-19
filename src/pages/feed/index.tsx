@@ -22,7 +22,7 @@ import { TPost } from '@/utils/api/models/post/types';
 interface FeedPageProps {}
 
 const FeedPage: NextPage<FeedPageProps> = ({}) => {
-  const limit = 2;
+  const limit = 5;
   const [posts, setPosts] = React.useState<TPost[]>([]);
   const [isLoading, setisLoading] = React.useState(true);
   const [total, setTotal] = React.useState(0);

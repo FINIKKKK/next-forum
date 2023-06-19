@@ -134,9 +134,9 @@ export const Account: React.FC<AccountProps> = ({}) => {
             >
               Обновить пароль
             </button>
-            <Link className={ss.link} href="/forgot">
-              Забыли пароль?
-            </Link>
+            {/*<Link className={ss.link} href="/forgot">*/}
+            {/*  Забыли пароль?*/}
+            {/*</Link>*/}
           </div>
         </form>
       </FormProvider>
